@@ -20,6 +20,7 @@ class CreateTicketsTable extends Migration
             $table->string("title");
             $table->text('body');
             $table->unsignedInteger("team_id")->nullable();
+            $table->unsignedInteger("user_id")->nullable();
             $table->tinyInteger("status")->default(Ticket::STATUS_NEW);
             $table->timestamps();
         });

@@ -22,7 +22,7 @@ class ApiController extends Controller
         try {
             return parent::callAction($method, $parameters);
         }catch(\Exception $e){
-            dd($e->getMessage());
+//            dd("Api exception debug message", $e->getMessage());
             return $this->respondError( $e->getMessage() );
         }
     }

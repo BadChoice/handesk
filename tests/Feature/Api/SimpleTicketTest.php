@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Ticket;
 use App\User;
@@ -100,5 +101,27 @@ class SimpleTicketTest extends TestCase
 
         $this->assertCount  (2, $ticket->comments);
         $this->assertEquals ($ticket->comments[1]->body, "this is a comment");
+    }
+
+    /** @test */
+    public function can_assign_ticket_to_user(){
+        Notification::fake();
+
+        $user   = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create();
+
+        $this->assertNull( $ticket->user );
+        $response = $this->post("api/tickets/{$ticket->id}/assign", ["user" => $user->id]);
+
+        $response->assertStatus ( Response::HTTP_CREATED );
+        $this->assertEquals($ticket->fresh()->user->id, $user->id);
+
+        Notification::assertSentTo(
+            [$user],
+            TicketAssigned::class,
+            function ($notification, $channels) use ($ticket) {
+                return $notification->ticket->id === $ticket->id;
+            }
+        );
     }
 }
