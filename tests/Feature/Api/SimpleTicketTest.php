@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Notifications\TicketCreated;
 use App\Ticket;
+use App\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -23,6 +26,10 @@ class SimpleTicketTest extends TestCase
     /** @test */
     public function can_create_a_ticket(){
 
+        Notification::fake();
+        $admin      = factory(User::class)->create(["admin" => 1]);
+        $nonAdmin   = factory(User::class)->create(["admin" => 0]);
+
         $response = $this->post('api/tickets',[
             "requester"     => "johndoe",
             "title"         => "App is not working",
@@ -33,13 +40,26 @@ class SimpleTicketTest extends TestCase
         $response->assertStatus( Response::HTTP_CREATED );
         $response->assertJson(["data" => ["id" => 1]]);
 
-        tap( Ticket::first(), function($ticket){
+        tap( Ticket::first(), function($ticket) use($admin) {
             $this->assertEquals ( $ticket->requester, "johndoe");
             $this->assertEquals ( $ticket->title, "App is not working");
             $this->assertEquals ( $ticket->body, "I can't log in into the application");
             $this->assertTrue   ( $ticket->tags->pluck('name')->contains("xef") );
             $this->assertEquals( Ticket::STATUS_NEW, $ticket->status);
+
+            Notification::assertSentTo(
+                [$admin],
+                TicketCreated::class,
+                function ($notification, $channels) use ($ticket) {
+                    return $notification->ticket->id === $ticket->id;
+                }
+            );
         });
+
+
+        Notification::assertNotSentTo(
+            [$nonAdmin], TicketCreated::class
+        );
     }
 
     /** @test */

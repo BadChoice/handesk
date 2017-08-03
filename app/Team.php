@@ -2,8 +2,12 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
+
 class Team extends BaseModel
 {
+    //use Notifiable;   //TODO:
+
     public function members(){
         return $this->hasManyThrough(User::class, Membership::class);
     }
