@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(["namespace" => "api"], function(){
     Route::post('tickets',                      "TicketsController@store");
+    Route::put ('tickets/{ticket}',             "TicketsController@update");
     Route::post('tickets/{ticket}/comments',    "CommentsController@store");
     Route::post('tickets/{ticket}/assign',      "TicketAssignController@store");
 });

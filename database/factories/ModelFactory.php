@@ -31,6 +31,7 @@ $factory->define(Ticket::class, function(Faker\Generator $faker){
         "requester" => $faker->word,
         "title" => $faker->sentence,
         "body" => $faker->paragraph(4),
+        "status" => Ticket::STATUS_NEW,
     ];
 });
 

@@ -124,4 +124,14 @@ class SimpleTicketTest extends TestCase
             }
         );
     }
+
+    /** @test */
+    public function a_ticket_can_be_updated(){
+        $ticket = factory(Ticket::class)->create();
+        $this->assertEquals($ticket->status, Ticket::STATUS_NEW);
+
+        $this->put("api/tickets/{$ticket->id}", ["status" => Ticket::STATUS_PENDING]);
+
+        $this->assertEquals($ticket->fresh()->status, Ticket::STATUS_PENDING);
+    }
 }

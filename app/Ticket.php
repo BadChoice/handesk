@@ -71,4 +71,8 @@ class Ticket extends BaseModel
         });
         return $this;
     }
+
+    public function updateStatus($status){
+        $this->update(["status" => $status]);
+    }
 }

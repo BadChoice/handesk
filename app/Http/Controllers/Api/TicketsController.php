@@ -27,4 +27,9 @@ class TicketsController extends ApiController
         }
         return $this->respond(["id" => $ticket->id ], Response::HTTP_CREATED);
     }
+
+    public function update(Ticket $ticket){
+        $ticket->updateStatus( request('status') );
+        return $this->respond(["id" => $ticket->id ], Response::HTTP_OK);
+    }
 }
