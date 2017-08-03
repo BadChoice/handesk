@@ -1,11 +1,10 @@
 <?php
 
-use App\Ticket;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTicketsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +13,10 @@ class CreateTicketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tickets', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('requester');
-            $table->string("title");
+            $table->unsignedInteger('ticket_id');
             $table->text('body');
-            $table->tinyInteger("status")->default(Ticket::STATUS_NEW);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateTicketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tickets');
+        Schema::dropIfExists('comments');
     }
 }
