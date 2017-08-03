@@ -12,6 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Team;
 use App\Ticket;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
@@ -30,5 +31,11 @@ $factory->define(Ticket::class, function(Faker\Generator $faker){
         "requester" => $faker->word,
         "title" => $faker->sentence,
         "body" => $faker->paragraph(4),
+    ];
+});
+
+$factory->define(Team::class, function(Faker\Generator $faker){
+    return [
+        "name" => $faker->word,
     ];
 });

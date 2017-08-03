@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ApiTest extends TestCase
+class SimpleTicketTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -75,8 +75,8 @@ class ApiTest extends TestCase
               "body" => "this is a comment"
           ]);
 
-        $response->assertStatus( Response::HTTP_CREATED );
-        $response->assertJson(["data" => ["id" => 2]]);
+        $response->assertStatus ( Response::HTTP_CREATED );
+        $response->assertJson   (["data" => ["id" => 2]]);
 
         $this->assertCount  (2, $ticket->comments);
         $this->assertEquals ($ticket->comments[1]->body, "this is a comment");
