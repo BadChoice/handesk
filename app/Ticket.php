@@ -35,6 +35,10 @@ class Ticket extends BaseModel
         return $this->belongsTo(User::class);
     }
 
+    public function team(){
+        return $this->belongsTo(Team::class);
+    }
+
     public function comments(){
         return $this->hasMany(Comment::class);
     }
@@ -49,6 +53,14 @@ class Ticket extends BaseModel
         }
         $this->user()->associate($user)->save();
         $user->notify( new TicketAssigned($this) );
+    }
+
+    public function assignToTeam($team){
+        if( ! $team instanceof Team){
+            $team = Team::findOrFail( $team );
+        }
+        $this->team()->associate($team)->save();
+        $team->notify( new TicketAssigned($this) );
     }
 
     public function attachTags($tagNames){

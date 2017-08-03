@@ -17,8 +17,7 @@ class ApiController extends Controller
         return response(["error" => $error], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    public function callAction($method, $parameters)
-    {
+    public function callAction($method, $parameters) {
         try {
             return parent::callAction($method, $parameters);
         }catch(\Exception $e){

@@ -2,9 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Notifications\TicketAssigned;
+use App\Notifications\TicketCreated;
 use App\Team;
 use App\Ticket;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -24,6 +27,7 @@ class TeamTicketTest extends TestCase
     /** @test */
     public function can_create_a_ticket(){
 
+        Notification::fake();
         $team = factory(Team::class)->create();
 
         $response = $this->post('api/tickets',[
@@ -43,9 +47,15 @@ class TeamTicketTest extends TestCase
             $this->assertEquals ( $ticket->body, "I can't log in into the application");
             $this->assertTrue   ( $ticket->tags->pluck('name')->contains("xef") );
             $this->assertEquals( Ticket::STATUS_NEW, $ticket->status);
-            $team->tickets->contains($ticket);
+            $this->assertTrue( $team->tickets->contains($ticket) );
+
+            Notification::assertSentTo(
+                [$team],
+                TicketAssigned::class,
+                function ($notification, $channels) use ($ticket) {
+                    return $notification->ticket->id === $ticket->id;
+                }
+            );
         });
     }
-
-
 }

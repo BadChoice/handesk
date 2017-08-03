@@ -21,6 +21,10 @@ class TicketsController extends ApiController
             request('body'),
             request('tags')
         );
+
+        if( request('team_id') ){
+            $ticket->assignToTeam( request('team_id') );
+        }
         return $this->respond(["id" => $ticket->id ], Response::HTTP_CREATED);
     }
 }
