@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 
     /**
@@ -23,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Blade::directive("icon", function ($icon) {
+            return icon($icon);
+        });
+
+        Blade::directive("paginator", function ($data) {
+            return "<?php  if ( method_exists({$data}, 'links') ) {
+                    echo {$data}->appends(array_except(request()->query(),['page']))->links();
+                } ?>";
+        });
     }
 }

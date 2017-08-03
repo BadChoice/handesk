@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::group(["middlware" => "auth"], function(){
+    Route::get('/home'                  , 'HomeController@index')->name('home');
+    Route::get('/tickets/{ticket}'      , 'TicketsController@show')->name('tickets.show');
+});
+

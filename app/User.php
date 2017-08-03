@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function scopeAdmin($query){
         return $query->whereAdmin(true);
     }
+
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
+    }
 }
