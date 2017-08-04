@@ -52,3 +52,7 @@
     background-color: red;
 }
 
+.comment{
+    padding:20px;
+    border-bottom:solid 1px #ddd;
+}
