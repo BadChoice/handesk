@@ -9,20 +9,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'email', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -35,18 +25,12 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class);
     }
 
-    public function teamsTickets(){
-        try{
-            //dd($this->teams->flatten('tickets')->toArray());
-            return $this->teams->flatten('tickets');
-        }catch(\Exception $e){
-            dd($e->getMessage());
-        }
-        return $this->teams->pluck('tickets');
-    }
-
     public function teams(){
         return $this->belongsToMany(Team::class, "memberships");
+    }
+
+    public function teamsTickets(){
+        return $this->hasManyThrough(Ticket::class, Membership::class, "user_id","team_id");
     }
 
     public static function notifyAdmins( $notification ){

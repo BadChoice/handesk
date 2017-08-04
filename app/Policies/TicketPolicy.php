@@ -21,7 +21,7 @@ class TicketPolicy
     {
         return  $user->admin ||
                 $ticket->user_id == $user->id ||
-                $user->teamsTickets()->pluck('id')->contains($ticket->id);
+                $user->teamsTickets->pluck('id')->contains($ticket->id);
     }
 
     /**
