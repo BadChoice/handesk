@@ -19,12 +19,15 @@ class Ticket extends BaseModel
         $ticket     = $requester->tickets()->create([
             "title"     => $title,
             "body"      => $body,
+            "public_token" => str_random(24),
         ])->attachTags( request('tags') );
         User::notifyAdmins( new TicketCreated($ticket) );
         return $ticket;
     }
 
-
+    public static function findWithPublicToken($public_token){
+        return Ticket::where("public_token",$public_token)->firstOrFail();
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -39,7 +42,7 @@ class Ticket extends BaseModel
     }
 
     public function comments(){
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->latest();
     }
 
     public function tags(){

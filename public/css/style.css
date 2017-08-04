@@ -1,0 +1,133 @@
+body{
+    margin:0;
+    font-family: Lato,sans-serif;
+    font-size: 15px;
+    line-height: 1.42857143;
+    font-weight: 100;
+    color: #7c8287;
+}
+/* accent color:#4DBD74 */
+
+.sidebar{
+    position: absolute;
+    height: 100%;
+    float: left;
+    background-color:#32393F;
+    width: 300px;
+    color: white;
+    padding-top:20px;
+}
+
+.sidebar h4{
+    margin-left:20px;
+}
+
+.sidebar li{
+    list-style: none;
+    padding-left:20px;
+    margin-left:-40px;
+    color: hsla(0,0%,100%,.58);
+    padding-top:12px;
+    height:32px;
+}
+
+.sidebar li.active{
+    background-color:#282E32;
+    color:white;
+}
+
+.content{
+    padding-top:20px;
+    margin-left: 300px;
+}
+
+.navbar{
+    margin-bottom: 0px;
+}
+
+.comment{
+    padding:10px 20px;
+    border-bottom:1px solid #F0F0F0;
+    min-height:50px;
+}
+
+.new-comment textarea{
+    width:100%;
+    height:60px;
+    border:1px solid #F0F0F0;
+}
+
+table{
+    border-collapse: collapse;
+    width:100%;
+}
+
+table tr{
+    height:48px;
+}
+
+thead{
+    border-bottom:1px solid #F0F0F0;
+}
+
+table th{
+    color: #8e8e8e;
+    font-weight:100;
+}
+
+table.striped tr:nth-child(even){
+    background-color:#FAFAFA;
+}
+
+table td,th:first-child{
+    padding-left:20px;
+}
+table td,th:last-child{
+    padding-right:20px;
+}
+
+.description{
+    padding:0 20px 20px 20px;
+}
+
+.description h3{
+    font-weight:100;
+}
+.label{
+    padding:2px 5px;
+    border-radius: 4px;
+    font-size:10px;
+    text-transform: uppercase;
+}
+
+.ticket-status-new{
+    background-color:red;
+    color:white;
+}
+
+.ticket-status-open{
+    background-color:pink;
+}
+
+.ticket-status-pending{
+    background-color:orange;
+    color:white;
+}
+
+.ticket-status-solved{
+    background-color:green;
+    color:white;
+}
+
+.ticket-status-closed{
+    background-color:gray;
+}
+
+button{
+    padding:8px;
+    background-color:#46A5E0;
+    color:white;
+    border:none;
+    border-radius: 4px;
+    cursor: pointer;
+}

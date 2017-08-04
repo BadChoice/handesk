@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(["prefix" => "requester"], function(){
+    Route::get('/tickets/{token}'                  , 'RequesterTicketsController@show')->name('requester.tickets.show');
+});
+
 Route::group(["middlware" => "auth"], function(){
     Route::get('/home'                              , 'HomeController@index')->name('home');
     Route::get('/tickets/{ticket}'                  , 'TicketsController@show')->name('tickets.show');

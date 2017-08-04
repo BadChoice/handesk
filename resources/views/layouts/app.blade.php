@@ -11,12 +11,13 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">--}}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
 
-        @include('layouts.header')
+{{--        @include('layouts.header')--}}
         @include('layouts.sidebar')
         <div class="content container-fluid">
             @yield('content')

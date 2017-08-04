@@ -18,6 +18,7 @@ class CreateTicketsTable extends Migration
             $table->increments('id');
             $table->string("title");
             $table->text('body');
+            $table->string('public_token',24)->unique();
             $table->unsignedInteger('requester_id');
             $table->unsignedInteger("team_id")->nullable();
             $table->unsignedInteger("user_id")->nullable();
