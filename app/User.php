@@ -48,4 +48,10 @@ class User extends Authenticatable
     public function teams(){
         return $this->belongsToMany(Team::class, "memberships");
     }
+
+    public static function notifyAdmins( $notification ){
+        User::admin()->get()->each(function($admin) use($notification){
+            $admin->notify( $notification );
+        });
+    }
 }

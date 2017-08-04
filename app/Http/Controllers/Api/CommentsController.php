@@ -8,9 +8,7 @@ use Illuminate\Http\Response;
 class CommentsController extends ApiController
 {
     public function store(Ticket $ticket){
-        $comment = $ticket->comments()->create([
-            "body" => request('body')
-        ]);
+        $comment = $ticket->addComment(null, request('body'));
         return $this->respond(["id" => $comment->id], Response::HTTP_CREATED);
     }
 }

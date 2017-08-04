@@ -2,14 +2,15 @@
 
 namespace App;
 
+use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 
 class Ticket extends BaseModel
 {
     const STATUS_NEW                = 1;
-    const STATUS_PENDING            = 2;
-    const STATUS_PENDING_CUSTOMER   = 3;
+    const STATUS_OPEN               = 2;
+    const STATUS_PENDING            = 3;
     const STATUS_SOLVED             = 4;
     const STATUS_CLOSED             = 5;
 
@@ -19,16 +20,11 @@ class Ticket extends BaseModel
             "title"     => $title,
             "body"      => $body,
         ])->attachTags( request('tags') );
-        $ticket->notifyCreated();
-
+        User::notifyAdmins( new TicketCreated($ticket) );
         return $ticket;
     }
 
-    public function notifyCreated(){
-        User::admin()->get()->each(function($admin){
-            $admin->notify( new TicketCreated($this) );
-        });
-    }
+
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -75,6 +71,22 @@ class Ticket extends BaseModel
         return $this;
     }
 
+    public function addComment($user, $body, $newStatus = null){
+        if($newStatus) $this->updateStatus($newStatus);
+        $comment = $this->comments()->create([
+            "body"          => $body,
+            "user_id"       => $user ? $user->id : null,
+            "new_status"    => $newStatus ?: $this->status,
+        ]);
+
+        tap(new NewComment($this, $comment), function($newCommentNotification) {
+            if( $this->team )  $this->team->notify( $newCommentNotification );
+            if( $this->user )  $this->user->notify( $newCommentNotification );
+            User::notifyAdmins( $newCommentNotification );
+        });
+        return $comment;
+    }
+
     public function updateStatus($status){
         $this->update(["status" => $status]);
     }
@@ -82,8 +94,8 @@ class Ticket extends BaseModel
     public function statusName(){
         switch ($this->status){
             case static::STATUS_NEW                 : return "new";
+            case static::STATUS_OPEN                : return "open";
             case static::STATUS_PENDING             : return "pending";
-            case static::STATUS_PENDING_CUSTOMER    : return "pending-customer";
             case static::STATUS_SOLVED              : return "solved";
             case static::STATUS_CLOSED              : return "closed";
         }
