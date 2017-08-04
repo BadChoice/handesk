@@ -28,7 +28,7 @@ class BackTest extends TestCase
     }
 
     /** @test */
-    public function can_see_a_ticket(){
+    public function can_show_a_ticket_assigned_to_me(){
         $user = factory(User::class)->create();
         $user->tickets()->create(factory(Ticket::class)->make()->toArray());
         $ticket = $user->tickets->first();
@@ -63,7 +63,7 @@ class BackTest extends TestCase
 
         $response = $this->actingAs($user)->get("tickets/{$ticket->id}");
 
-        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */

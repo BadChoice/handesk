@@ -15,7 +15,7 @@ class TicketsController extends ApiController
             "title"         => "required|min:3",
         ]);
 
-        $ticket = Ticket::make(
+        $ticket = Ticket::createAndNotify(
             request('requester'),
             request('title'),
             request('body'),

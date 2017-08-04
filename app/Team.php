@@ -9,7 +9,7 @@ class Team extends BaseModel
     use Notifiable;
 
     public function members(){
-        return $this->hasManyThrough(User::class, Membership::class);
+        return $this->belongsToMany(User::class, "memberships");
     }
 
     public function memberships(){

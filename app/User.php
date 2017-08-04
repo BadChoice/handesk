@@ -34,4 +34,18 @@ class User extends Authenticatable
     public function tickets(){
         return $this->hasMany(Ticket::class);
     }
+
+    public function teamsTickets(){
+        try{
+            //dd($this->teams->flatten('tickets')->toArray());
+            return $this->teams->flatten('tickets');
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
+        return $this->teams->pluck('tickets');
+    }
+
+    public function teams(){
+        return $this->belongsToMany(Team::class, "memberships");
+    }
 }

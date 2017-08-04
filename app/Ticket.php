@@ -13,7 +13,7 @@ class Ticket extends BaseModel
     const STATUS_SOLVED             = 4;
     const STATUS_CLOSED             = 5;
 
-    public static function make($requester, $title, $body, $tags){
+    public static function createAndNotify($requester, $title, $body, $tags){
         $ticket = Ticket::create([
             "requester" => $requester,
             "title"     => $title,

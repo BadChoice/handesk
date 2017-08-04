@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Ticket' => 'App\Policies\TicketPolicy',
     ];
 
     /**
@@ -25,6 +25,5 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::resource('tickets', 'TicketsPolicy');
     }
 }
