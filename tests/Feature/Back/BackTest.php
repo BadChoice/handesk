@@ -24,7 +24,7 @@ class BackTest extends TestCase
         $response = $this->actingAs($user)->get('home');
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertSee( $user->tickets->first()->requester);
+        $response->assertSee( $user->tickets->first()->requester->name);
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class BackTest extends TestCase
         $response = $this->actingAs($user)->get("tickets/{$ticket->id}");
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertSee( $ticket->requester);
+        $response->assertSee( $ticket->requester->name);
     }
 
     /** @test */
@@ -53,7 +53,7 @@ class BackTest extends TestCase
         $response = $this->actingAs($user)->get("tickets/{$ticket->id}");
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertSee( $ticket->requester);
+        $response->assertSee( $ticket->requester->name);
     }
 
     /** @test */
@@ -74,6 +74,6 @@ class BackTest extends TestCase
         $response = $this->actingAs($user)->get("tickets/{$ticket->id}");
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertSee( $ticket->requester);
+        $response->assertSee( $ticket->requester->name);
     }
 }

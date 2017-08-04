@@ -145,4 +145,24 @@ class SimpleTicketTest extends TestCase
 
         $this->assertEquals($ticket->fresh()->status, Ticket::STATUS_PENDING);
     }
+
+    /** @test */
+    public function a_ticket_created_by_the_same_requester_is_added_to_him(){
+        $requester = factory(Requester::class)->create([
+            "name"  => "Bruce Wayne",
+            "email" => "bruce@wayne.com"
+        ]);
+        $this->assertCount(0, $requester->tickets );
+
+        $response = $this->post('api/tickets',$this->validParams([
+            "requester" => [
+                "name"  => "Bruce Wayne",
+                "email" => "bruce@wayne.com"
+            ]
+        ]));
+
+        $response->assertStatus ( Response::HTTP_CREATED );
+        $this->assertEquals(1, Requester::count());
+        $this->assertCount(1, $requester->fresh()->tickets);
+    }
 }

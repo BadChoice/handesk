@@ -16,7 +16,7 @@ class CreateRequesterTable extends Migration
         Schema::create('requesters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamps();
         });
     }
