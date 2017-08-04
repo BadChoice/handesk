@@ -11,7 +11,7 @@ class TicketsController extends ApiController
 {
     public function store(){
         $this->validate( request(), [
-            "requester"     => "required|min:3",
+            "requester"     => "required|array",
             "title"         => "required|min:3",
         ]);
 

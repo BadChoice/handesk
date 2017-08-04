@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
+use App\Requester;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
@@ -17,7 +18,10 @@ class SimpleTicketTest extends TestCase
 
     private function validParams($overrides = []){
         return array_merge([
-            "requester"     => "johndoe",
+            "requester" => [
+                "name"  => "johndoe",
+                "email" => "john@doe.com"
+            ],
             "title"         => "App is not working",
             "body"          => "I can't log in into the application",
             "tags"          => ["xef"]
@@ -32,7 +36,10 @@ class SimpleTicketTest extends TestCase
         $nonAdmin   = factory(User::class)->create(["admin" => 0]);
 
         $response = $this->post('api/tickets',[
-            "requester"     => "johndoe",
+            "requester" => [
+                "name"  => "johndoe",
+                "email" => "john@doe.com"
+            ],
             "title"         => "App is not working",
             "body"          => "I can't log in into the application",
             "tags"          => ["xef"]
@@ -42,7 +49,11 @@ class SimpleTicketTest extends TestCase
         $response->assertJson(["data" => ["id" => 1]]);
 
         tap( Ticket::first(), function($ticket) use($admin) {
-            $this->assertEquals ( $ticket->requester, "johndoe");
+            tap( Requester::first(), function($requester) use ($ticket){
+                $this->assertEquals($requester->name, "johndoe");
+                $this->assertEquals($requester->email, "john@doe.com");
+                $this->assertEquals( $ticket->requester_id, $requester->id);
+            });
             $this->assertEquals ( $ticket->title, "App is not working");
             $this->assertEquals ( $ticket->body, "I can't log in into the application");
             $this->assertTrue   ( $ticket->tags->pluck('name')->contains("xef") );

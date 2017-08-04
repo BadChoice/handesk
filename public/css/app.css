@@ -27,6 +27,7 @@
 }
 
 .ticket-header{
+
     padding:5px 10px;
     border:1px solid #efefef;
     height:70px;
@@ -46,3 +47,8 @@
     float:right;
     color:#999;
 }
+.ticket-status-new {
+    width: 20px;
+    background-color: red;
+}
+

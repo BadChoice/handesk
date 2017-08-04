@@ -12,8 +12,10 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Requester;
 use App\Team;
 use App\Ticket;
+use function foo\func;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -28,13 +30,21 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(Ticket::class, function(Faker\Generator $faker){
     return [
-        "requester" => $faker->word,
+        "requester_id" => function(){
+            return factory(Requester::class)->create()->id;
+        },
         "title"     => $faker->sentence,
         "body"      => $faker->paragraph(4),
         "status"    => Ticket::STATUS_NEW,
     ];
 });
 
+$factory->define(Requester::class, function(Faker\Generator $faker){
+    return [
+        "name" => $faker->name,
+        "email" => $faker->safeEmail,
+    ];
+});
 $factory->define(Team::class, function(Faker\Generator $faker){
     return [
         "name" => $faker->word,

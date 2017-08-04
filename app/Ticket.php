@@ -14,12 +14,11 @@ class Ticket extends BaseModel
     const STATUS_CLOSED             = 5;
 
     public static function createAndNotify($requester, $title, $body, $tags){
-        $ticket = Ticket::create([
-            "requester" => $requester,
+        $requester  = Requester::firstOrCreate($requester);
+        $ticket     = $requester->tickets()->create([
             "title"     => $title,
             "body"      => $body,
         ])->attachTags( request('tags') );
-
         $ticket->notifyCreated();
 
         return $ticket;
@@ -33,6 +32,10 @@ class Ticket extends BaseModel
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function requester(){
+        return $this->belongsTo(Requester::class);
     }
 
     public function team(){
@@ -74,5 +77,15 @@ class Ticket extends BaseModel
 
     public function updateStatus($status){
         $this->update(["status" => $status]);
+    }
+
+    public function statusName(){
+        switch ($this->status){
+            case static::STATUS_NEW                 : return "new";
+            case static::STATUS_PENDING             : return "pending";
+            case static::STATUS_PENDING_CUSTOMER    : return "pending-customer";
+            case static::STATUS_SOLVED              : return "solved";
+            case static::STATUS_CLOSED              : return "closed";
+        }
     }
 }
