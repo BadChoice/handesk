@@ -17,11 +17,16 @@ class Ticket extends BaseModel
     public static function createAndNotify($requester, $title, $body, $tags){
         $requester  = Requester::firstOrCreate($requester);
         $ticket     = $requester->tickets()->create([
-            "title"     => $title,
-            "body"      => $body,
-            "public_token" => str_random(24),
+            "title"         => $title,
+            "body"          => $body,
+            "public_token"  => str_random(24),
         ])->attachTags( request('tags') );
-        User::notifyAdmins( new TicketCreated($ticket) );
+
+        tap(new TicketCreated($ticket), function($newTicketNotification) use($requester) {
+            User::notifyAdmins( $newTicketNotification );
+            $requester->notify( $newTicketNotification );
+        });
+
         return $ticket;
     }
 

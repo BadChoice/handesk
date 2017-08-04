@@ -33,10 +33,10 @@ $factory->define(Ticket::class, function(Faker\Generator $faker){
         "requester_id" => function(){
             return factory(Requester::class)->create()->id;
         },
-        "title"     => $faker->sentence,
-        "body"      => $faker->paragraph(4),
-        "status"    => Ticket::STATUS_NEW,
-        "public_token" => str_random(24),
+        "title"         => $faker->sentence,
+        "body"          => $faker->paragraph(4),
+        "status"        => Ticket::STATUS_NEW,
+        "public_token"  => str_random(24),
     ];
 });
 
