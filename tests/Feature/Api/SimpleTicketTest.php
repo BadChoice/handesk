@@ -100,18 +100,21 @@ class SimpleTicketTest extends TestCase
 
     /** @test */
     public function requester_can_comment_the_ticket(){
-          $ticket = factory(Ticket::class)->create();
-          $ticket->comments()->create(["body" => "first comment", "new_status" => 1]);
+        Notification::fake();
+        $ticket = factory(Ticket::class)->create();
+        $ticket->comments()->create(["body" => "first comment", "new_status" => 1]);
 
-          $response = $this->post("api/tickets/{$ticket->id}/comments", [
-              "body" => "this is a comment"
-          ]);
+        $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "body" => "this is a comment"
+        ]);
 
         $response->assertStatus ( Response::HTTP_CREATED );
         $response->assertJson   (["data" => ["id" => 2]]);
 
         $this->assertCount  (2, $ticket->comments);
         $this->assertEquals ($ticket->comments[1]->body, "this is a comment");
+
+        //TODO: assert notifications
     }
 
     /** @test */

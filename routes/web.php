@@ -18,7 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(["middlware" => "auth"], function(){
-    Route::get('/home'                  , 'HomeController@index')->name('home');
-    Route::get('/tickets/{ticket}'      , 'TicketsController@show')->name('tickets.show');
+    Route::get('/home'                              , 'HomeController@index')->name('home');
+    Route::get('/tickets/{ticket}'                  , 'TicketsController@show')->name('tickets.show');
+    Route::post('/tickets/{ticket}/comments'        , 'CommentsController@store')->name('comments.store');
 });
 

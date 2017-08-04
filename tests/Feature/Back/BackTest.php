@@ -76,4 +76,22 @@ class BackTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
         $response->assertSee( $ticket->requester->name);
     }
+
+    /** @test */
+    public function can_add_a_comment(){
+        Notification::fake();
+        $user   = factory(User::class)->create(["admin" => true]);
+        $ticket = factory(Ticket::class)->create();
+        $this->assertCount(0, $ticket->comments);
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/comments",["body" => "This is my comment"]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertCount(1, $ticket->fresh()->comments);
+        tap($ticket->fresh()->comments->first(), function($comment) use($user){
+            $this->assertEquals("This is my comment", $comment->body);
+            $this->assertEquals($user->id, $comment->user_id);
+        });
+        //TODO: assert notifications
+    }
 }
