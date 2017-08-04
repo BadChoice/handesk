@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::group(["prefix" => "requester"], function(){
     Route::get('/tickets/{token}'                  , 'RequesterTicketsController@show')->name('requester.tickets.show');
+    Route::post('/tickets/{token}/comments'        , 'RequesterCommentsController@store')->name('requester.comments.store');
 });
 
 Route::group(["middlware" => "auth"], function(){

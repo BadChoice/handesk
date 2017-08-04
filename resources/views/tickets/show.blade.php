@@ -10,7 +10,6 @@
           <br>
           {{  $ticket->user ? $ticket->user->name : "--" }}
     </div>
-
     <div class="comment new-comment">
         {{ Form::open(["url" => route("comments.store",$ticket)]) }}
         <textarea name="body"></textarea>
@@ -25,25 +24,5 @@
         <button>Comment</button>
         {{ Form::close() }}
     </div>
-    <div>
-        @foreach($ticket->comments as $comment)
-            <div class="comment">
-                {{ $comment->created_at->diffForHumans() }}
-                ·
-                @if($comment->user)
-                    {{ $comment->user->name }}
-                @else
-                    {{ $ticket->requester->name }}
-                @endif
-                <br>
-                {{ $comment->body }}
-
-            </div>
-        @endforeach
-        <div class="comment">
-            {{ $ticket->created_at->diffForHumans() }} · {{ $ticket->requester->name }}
-            <br>
-            {{ $ticket->body }}
-        </div>
-    </div>
+    @include('components.ticketComments')
 @endsection

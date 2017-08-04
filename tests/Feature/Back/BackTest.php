@@ -95,13 +95,4 @@ class BackTest extends TestCase
         //TODO: assert notifications
     }
 
-    /** @test */
-    public function a_ticket_can_be_accessed_by_the_requester_without_auth(){
-           factory(Ticket::class)->create(["title" => "A public request", "public_token" => "A_PUBLIC_TOKEN"]);
-
-           $response = $this->get("requester/tickets/A_PUBLIC_TOKEN");
-
-           $response->assertStatus(Response::HTTP_OK);
-           $response->assertSee("A public request");
-    }
 }
