@@ -47,4 +47,15 @@ class RequesterTicketTest extends TestCase
         $this->assertCount(1, $ticket->fresh()->comments);
         $this->assertEquals(Ticket::STATUS_SOLVED, $ticket->fresh()->status);
     }
+
+    /** @test */
+    public function a_requester_can_comment_and_reopen_a_ticket(){
+        $ticket = factory(Ticket::class)->create(["public_token" => "A_PUBLIC_TOKEN", "status" => Ticket::STATUS_SOLVED]);
+
+        $response = $this->post("requester/tickets/A_PUBLIC_TOKEN/comments", ["body" => "new comment", "reopen" => true]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertCount(1, $ticket->fresh()->comments);
+        $this->assertEquals(Ticket::STATUS_OPEN, $ticket->fresh()->status);
+    }
 }

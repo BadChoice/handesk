@@ -14,7 +14,11 @@
         {{ Form::open(["url" => route("requester.comments.store",$ticket->public_token)]) }}
         <textarea name="body"></textarea>
         <br>
-        Is Solved ? {{ Form::checkbox('solved') }}
+        @if($ticket->status == App\Ticket::STATUS_SOLVED)
+            Reopen ? {{ Form::checkbox('reopen') }}
+        @else
+            Is Solved ? {{ Form::checkbox('solved') }}
+        @endif
         <br><br>
         <button>Comment</button>
         {{ Form::close() }}
