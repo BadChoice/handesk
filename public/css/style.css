@@ -21,7 +21,7 @@ a{
 }
 
 .sidebar{
-    position: absolute;
+    position: fixed;
     height: 100%;
     float: left;
     background-color:#32393F;
@@ -70,6 +70,7 @@ a{
 .content{
     padding-top:20px;
     margin-left: 300px;
+    overflow:scroll;
 }
 
 .navbar{
@@ -139,6 +140,7 @@ table td:last-child,th:last-child{
 }
 
 .ticket-status-open{
+    color:white;
     background-color:pink;
 }
 
