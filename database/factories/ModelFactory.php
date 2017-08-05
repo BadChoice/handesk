@@ -42,7 +42,7 @@ $factory->define(Ticket::class, function(Faker\Generator $faker){
 
 $factory->define(Requester::class, function(Faker\Generator $faker){
     return [
-        "name" => $faker->name,
+        "name" => $faker->word,
         "email" => $faker->safeEmail,
     ];
 });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="description comment">
-        <a href="{{route("home")}}">Tickets</a>
+        <a href="{{route("tickets.index")}}">Tickets</a>
           <h3>{{ $ticket->title }}</h3>
           <span class="label ticket-status-{{ $ticket->statusName() }}">{{ $ticket->statusName() }}</span>
           <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>

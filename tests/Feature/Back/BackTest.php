@@ -15,11 +15,11 @@ class BackTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function can_see_tickets_in_home(){
-        $user = factory(User::class)->create();
+    public function can_see_tickets(){
+        $user = factory(User::class)->create(["admin" => true]);
         $user->tickets()->create(factory(Ticket::class)->make()->toArray());
 
-        $response = $this->actingAs($user)->get('home');
+        $response = $this->actingAs($user)->get('tickets');
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertSee( $user->tickets->first()->requester->name);
