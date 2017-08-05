@@ -1,3 +1,11 @@
+/* Colors:
+  Green:    #33BC8C
+  Blue:     #46A5E0
+  Orange:   #E85B5E
+  Blue2 :   #30B2F4
+  Accent color:#4DBD74
+  */
+
 body{
     margin:0;
     font-family: Lato,sans-serif;
@@ -6,7 +14,11 @@ body{
     font-weight: 100;
     color: #7c8287;
 }
-/* accent color:#4DBD74 */
+
+a{
+    text-decoration:none;
+    color:#46A5E0;
+}
 
 .sidebar{
     position: absolute;
@@ -31,8 +43,19 @@ body{
     height:32px;
 }
 
+.sidebar li a{
+    color: #cecece;
+    text-decoration: none;
+}
+
 .sidebar li.active{
     background-color:#282E32;
+    border-left:solid 4px #46A5E0;
+    padding-left: 15px;
+    color:white;
+}
+
+.sidebar li.active a{
     color:white;
 }
 
@@ -68,6 +91,7 @@ body{
 table{
     border-collapse: collapse;
     width:100%;
+    text-align:left;
 }
 
 table tr{
@@ -81,16 +105,17 @@ thead{
 table th{
     color: #8e8e8e;
     font-weight:100;
+    text-align:left;
 }
 
 table.striped tr:nth-child(even){
     background-color:#FAFAFA;
 }
 
-table td,th:first-child{
+table td:first-child,th:first-child{
     padding-left:35px;
 }
-table td,th:last-child{
+table td:last-child,th:last-child{
     padding-right:20px;
 }
 
@@ -129,6 +154,7 @@ table td,th:last-child{
 
 .ticket-status-closed{
     background-color:gray;
+    color:white;
 }
 
 button{

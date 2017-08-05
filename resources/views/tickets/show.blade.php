@@ -9,21 +9,23 @@
          {{  implode($ticket->tags->pluck('name')->toArray(), " ") }}
     </div>
 
-    @include('components.ticketActions')
+    @if($ticket->status != App\Ticket::STATUS_CLOSED)
+        @include('components.ticketActions')
 
-    <div class="comment new-comment">
-        {{ Form::open(["url" => route("comments.store",$ticket)]) }}
-        <textarea name="body"></textarea>
-        <br>
-        {{ Form::select("new_status", [
-            App\Ticket::STATUS_NEW      => "new",
-            App\Ticket::STATUS_OPEN     => "open",
-            App\Ticket::STATUS_PENDING  => "pending",
-            App\Ticket::STATUS_SOLVED   => "solved",
-        ], $ticket->status) }}
-        <br><br>
-        <button>Comment</button>
-        {{ Form::close() }}
-    </div>
+        <div class="comment new-comment">
+            {{ Form::open(["url" => route("comments.store",$ticket)]) }}
+            <textarea name="body"></textarea>
+            <br>
+            {{ Form::select("new_status", [
+                App\Ticket::STATUS_NEW      => "new",
+                App\Ticket::STATUS_OPEN     => "open",
+                App\Ticket::STATUS_PENDING  => "pending",
+                App\Ticket::STATUS_SOLVED   => "solved",
+            ], $ticket->status) }}
+            <br><br>
+            <button>Comment</button>
+            {{ Form::close() }}
+        </div>
+    @endif
     @include('components.ticketComments')
 @endsection

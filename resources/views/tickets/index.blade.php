@@ -6,12 +6,11 @@
     <table class="striped">
         <thead>
             <tr>
-                <th> {{ __('text.requester') }}</th>
-                <th> {{ __('text.subject') }}</th>
-                <th> {{ __('text.message') }}</th>
-                <th> {{ __('text.team') }}</th>
-                <th> {{ __('text.user') }}</th>
-                <th> {{ __('text.date') }}</th>
+                <th> {{ __('ticket.subject') }}</th>
+                <th> {{ __('ticket.requester') }}</th>
+                <th> {{ __('ticket.team') }}</th>
+                <th> {{ __('ticket.user') }}</th>
+                <th> {{ __('ticket.date') }}</th>
             </tr>
         </thead>
         <tbody>

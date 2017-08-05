@@ -7,7 +7,7 @@ use App\Ticket;
 class TicketsRepository{
 
     public function assignedToMe(){
-        return auth()->user()->tickets()->where('status','<',Ticket::STATUS_CLOSED);
+        return auth()->user()->tickets()->where('status','<',Ticket::STATUS_CLOSED)->get();
     }
 
     public function unassigned(){
