@@ -36,6 +36,14 @@ body{
     color:white;
 }
 
+.sidebar .label{
+    float:right;
+    margin-right:10px;
+    font-size:12px;
+    background-color:#46A5E0;
+    color:white;
+}
+
 .content{
     padding-top:20px;
     margin-left: 300px;
@@ -46,7 +54,7 @@ body{
 }
 
 .comment{
-    padding:10px 20px;
+    padding:10px 35px;
     border-bottom:1px solid #F0F0F0;
     min-height:50px;
 }
@@ -80,14 +88,14 @@ table.striped tr:nth-child(even){
 }
 
 table td,th:first-child{
-    padding-left:20px;
+    padding-left:35px;
 }
 table td,th:last-child{
     padding-right:20px;
 }
 
 .description{
-    padding:0 20px 20px 20px;
+    padding:0 20px 20px 35px;
 }
 
 .description h3{
@@ -130,4 +138,15 @@ button{
     border:none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.actions{
+    float: right;
+    text-align: right;
+    margin-right:35px;
+    margin-top:-130px;
+}
+
+.date{
+    color: #b4b4b4;
 }

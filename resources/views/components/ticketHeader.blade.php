@@ -6,5 +6,7 @@
             <a href="{{route('tickets.show',$ticket)}}"> {{  str_limit($ticket->title,35)  }}</a>
         </td>
         <td> {{  str_limit($ticket->body , 35) }}           </td>
+        <td> {{  nameOrDash($ticket->team) }}               </td>
+        <td> {{  nameOrDash($ticket->user) }}               </td>
         <td> {{  $ticket->created_at->diffForHumans() }}    </td>
 </tr>

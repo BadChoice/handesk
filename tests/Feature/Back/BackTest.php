@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Notifications\TicketAssigned;
-use App\Notifications\TicketCreated;
 use App\Team;
 use App\Ticket;
 use App\User;
@@ -95,4 +93,47 @@ class BackTest extends TestCase
         //TODO: assert notifications
     }
 
+    /** @test */
+    public function can_assign_a_ticket_to_a_team(){
+        Notification::fake();
+        $user   = factory(User::class)->create(["admin" => true]);
+        $team   = factory(Team::class)->create();
+        $ticket = factory(Ticket::class)->create();
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/assign",["team_id" => $team->id]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals($team->id, $ticket->fresh()->team_id);
+    }
+
+    /** @test */
+    public function can_assign_a_ticket_to_a_user(){
+        Notification::fake();
+        $user   = factory(User::class)->create(["admin" => true]);
+        $user2  = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create();
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/assign",["user_id" => $user2->id]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals($user2->id, $ticket->fresh()->user_id);
+    }
+
+    /** @test */
+    public function can_assign_a_ticket_to_a_user_and_team(){
+        Notification::fake();
+        $user   = factory(User::class)->create(["admin" => true]);
+        $user2  = factory(User::class)->create();
+        $team   = factory(Team::class)->create();
+        $ticket = factory(Ticket::class)->create();
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/assign",[
+            "user_id" => $user2->id,
+            "team_id" => $team->id,
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals($user2->id, $ticket->fresh()->user_id);
+        $this->assertEquals($team->id, $ticket->fresh()->team_id);
+    }
 }

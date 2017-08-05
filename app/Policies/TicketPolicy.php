@@ -54,8 +54,11 @@ class TicketPolicy
      * @param  \App\Ticket  $ticket
      * @return mixed
      */
-    public function delete(User $user, Ticket $ticket)
-    {
-        //
+    public function delete(User $user, Ticket $ticket) {
+        return $user->admin;
+    }
+
+    public function assignToTeam(User $user, Ticket $ticket){
+        return $user->admin;
     }
 }

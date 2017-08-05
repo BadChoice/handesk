@@ -22,7 +22,7 @@ class User extends Authenticatable
     }
 
     public function tickets(){
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class)->with('requester','user','team');
     }
 
     public function teams(){
@@ -30,7 +30,7 @@ class User extends Authenticatable
     }
 
     public function teamsTickets(){
-        return $this->hasManyThrough(Ticket::class, Membership::class, "user_id","team_id");
+        return $this->hasManyThrough(Ticket::class, Membership::class, "user_id","team_id")->with('requester','user','team');
     }
 
     public static function notifyAdmins( $notification ){

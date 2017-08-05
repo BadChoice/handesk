@@ -2,12 +2,8 @@
 @section('content')
     <div class="description comment">
         <h3>{{ $ticket->title }}</h3>
-        <span class="label ticket-status-{{ $ticket->statusName() }}">{{ str_limit($ticket->statusName(),1,'') }}</span>
-        {{  $ticket->created_at->diffForHumans() }}
-        ·
-        {{  $ticket->requester->name }}
-        <br>
-        {{  $ticket->user ? $ticket->user->name : "--" }}
+        <span class="label ticket-status-{{ $ticket->statusName() }}">{{ $ticket->statusName() }}</span>
+        <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>
     </div>
 
     <div class="comment new-comment">
