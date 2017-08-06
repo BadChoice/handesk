@@ -7,4 +7,5 @@
         <td> {{  nameOrDash($ticket->team) }}                   </td>
         <td> {{  nameOrDash($ticket->user) }}                   </td>
         <td> {{  $ticket->created_at->diffForHumans() }}        </td>
+        <td> {{  $ticket->updated_at->diffForHumans() }}        </td>
 </tr>

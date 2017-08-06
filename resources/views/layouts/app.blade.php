@@ -23,7 +23,7 @@
         <div class="content container-fluid">
             @yield('content')
         </div>
-        @include('layouts.footer')
+        {{--@include('layouts.footer')--}}
     </div>
 
     <!-- Scripts -->

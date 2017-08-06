@@ -41,4 +41,9 @@ class TicketsRepositoryTest extends TestCase
     public function can_get_archived_tickets(){
 
     }
+    
+    /** @test */
+    public function can_get_recently_updated_tickets(){
+                
+    }
 }

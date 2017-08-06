@@ -10,6 +10,7 @@ class TicketsController extends Controller
     public function index(TicketsRepository $repository){
         if(request('assigned') )            $tickets = $repository->assignedToMe();
         else if(request('unsassigned') )    $tickets = $repository->unassigned();
+        else if(request('recent'))          $tickets = $repository->recentlyUpdated();
         else if(request('closed'))          $tickets = $repository->closed();
         else                                $tickets = $repository->all();
         return view('tickets.index', ["tickets" => $tickets->paginate(25) ]);

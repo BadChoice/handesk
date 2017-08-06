@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Ticket;
+use Carbon\Carbon;
 
 class TicketsRepository{
 
@@ -21,6 +22,10 @@ class TicketsRepository{
             return Ticket::where('status','<',Ticket::STATUS_CLOSED);
         }
         return auth()->user()->teamsTickets()->where('status','<',Ticket::STATUS_CLOSED);
+    }
+
+    public function recentlyUpdated(){
+        return $this->all()->where('updated_at','>', Carbon::parse("-1 days"));
     }
 
     public function closed(){

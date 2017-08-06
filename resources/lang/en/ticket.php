@@ -12,4 +12,7 @@ return [
     "date"          => "Date",
     "team"          => "Team",
     "user"          => "Agent",
+    "recent"        => "Recently updated",
+    "requested"     => "Requested",
+    "updated"       => "Updated",
 ];

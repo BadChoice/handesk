@@ -83,6 +83,8 @@ class Ticket extends BaseModel
 
     public function addComment($user, $body, $newStatus = null){
         if($newStatus) $this->updateStatus($newStatus);
+        else           $this->touch();
+
         if(! $this->user && $user) $this->user()->associate($user);
         if( ! $body) return;
         $comment = $this->comments()->create([

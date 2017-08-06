@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Ticket;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -34,6 +35,16 @@ class TicketTest extends TestCase
        $ticket->addComment($user2, "A comment");
 
        $this->assertEquals($ticket->user->id, $user->id);
+   }
+
+   /** @test */
+   public function adding_a_comment_updates_ticket_timestamp(){
+       Notification::fake();
+       $ticket  = factory(Ticket::class)->create(["updated_at" => Carbon::parse("-5 days")]);
+
+       $ticket->addComment(null, "A comment");
+
+       $this->assertEquals(Carbon::now()->toDateString(), $ticket->fresh()->updated_at->toDateString());
    }
 
    /** @test */
