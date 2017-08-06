@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Notification;
 
 class User extends Authenticatable
 {
@@ -34,8 +35,6 @@ class User extends Authenticatable
     }
 
     public static function notifyAdmins( $notification ){
-        User::admin()->get()->each(function($admin) use($notification){
-            $admin->notify( $notification );
-        });
+        Notification::send( User::admin()->get() , $notification);
     }
 }

@@ -10,4 +10,13 @@
     <h4>Reports</h4>
     <h4>Leads</h4>
     <h4>Points</h4>
+
+    @if(auth()->user()->admin)
+        <br>
+        <h4> {{ trans_choice('ticket.admin',2) }}</h4>
+        <ul>
+            <li><a href="">Teams</a></li>
+            <li><a href="">Users</a></li>
+        </ul>
+    @endif
 </div>

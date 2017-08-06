@@ -20,6 +20,12 @@ a{
     color:#46A5E0;
 }
 
+.tinyHeader{
+    position: absolute;
+    right: 35px;
+    top: 20px;
+}
+
 .sidebar{
     position: fixed;
     height: 100%;
@@ -32,19 +38,19 @@ a{
 
 .sidebar h4{
     margin-left:20px;
+    color:#8E8E8E;
 }
 
 .sidebar li{
     list-style: none;
     padding-left:20px;
     margin-left:-40px;
-    color: hsla(0,0%,100%,.58);
     padding-top:12px;
     height:32px;
 }
 
 .sidebar li a{
-    color: #cecece;
+    color: #8E8E8E;
     text-decoration: none;
 }
 

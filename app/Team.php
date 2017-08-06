@@ -19,4 +19,8 @@ class Team extends BaseModel
     public function tickets(){
         return $this->hasMany(Ticket::class);
     }
+
+    public function routeNotificationForSlack() {
+        return $this->slack_webhook_url;
+    }
 }

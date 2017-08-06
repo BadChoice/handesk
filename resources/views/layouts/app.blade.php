@@ -18,6 +18,7 @@
     <div id="app">
 
 {{--        @include('layouts.header')--}}
+        @include('layouts.tinyHeader')
         @include('layouts.sidebar')
         <div class="content container-fluid">
             @yield('content')

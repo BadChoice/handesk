@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -23,9 +24,8 @@ class TicketCreated extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
-    {
-        return ['mail'];
+    public function via($notifiable){
+        return (isset($notifiable->slack_webhook_url) && $notifiable->slack_webhook_url != null) ? ['slack'] : ['mail'];
     }
 
     /**
@@ -42,6 +42,11 @@ class TicketCreated extends Notification
                     ->line('Thank you for using our application!');
     }
 
+    public function toSlack($notifiable)
+    {
+        return (new SlackMessage)
+            ->content('Ticket created');
+    }
     /**
      * Get the array representation of the notification.
      *

@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -23,9 +24,8 @@ class TicketAssigned extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
-    {
-        return ['mail'];
+    public function via($notifiable) {
+        return (isset($notifiable->slack_webhook_url) && $notifiable->slack_webhook_url != null) ? ['slack'] : ['mail'];
     }
 
     /**
@@ -40,6 +40,15 @@ class TicketAssigned extends Notification
                     ->line('The ticket has been assigned to you.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
+    }
+
+    public function toSlack($notifiable) {
+        return (new BaseSlackMessage)
+            ->content('Ticket assigned')
+            ->attachment(function ($attachment)  {
+                $attachment->title($this->ticket->requester->name . " : " . $this->ticket->title, route("tickets.show", $this->ticket))
+                            ->content($this->ticket->body);
+            });
     }
 
     /**
