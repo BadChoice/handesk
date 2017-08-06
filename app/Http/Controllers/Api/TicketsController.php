@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Notifications\TicketCreated;
+use App\Requester;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
 
 class TicketsController extends ApiController
 {
+    public function index(){
+        $requester = Requester::whereName( request('requester'))->firstOrFail();
+        if      ( request('status') == 'solved') $tickets = $requester->solvedTickets;
+        else if ( request('status') == 'closed') $tickets = $requester->closedTickets;
+        else                                     $tickets = $requester->openTickets;
+        return $this->respond( $tickets );
+    }
+
     public function store(){
         $this->validate( request(), [
             "requester"     => "required|array",

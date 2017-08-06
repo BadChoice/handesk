@@ -8,7 +8,6 @@ use App\Ticket;
 class TicketsController extends Controller
 {
     public function index(TicketsRepository $repository){
-        //TODO: Create a class to get those tickets filtered
         if(request('assigned') )            $tickets = $repository->assignedToMe();
         else if(request('unsassigned') )    $tickets = $repository->unassigned();
         else if(request('closed'))          $tickets = $repository->closed();
