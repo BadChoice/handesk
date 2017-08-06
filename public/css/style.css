@@ -177,10 +177,15 @@ button{
 .actions{
     float: right;
     text-align: right;
-    margin-right:35px;
+    margin-right: 300px;
     margin-top:-130px;
 }
 
 .date{
     color: #b4b4b4;
+}
+
+.pagination li{
+    list-style: none;
+    display: inline-block;
 }

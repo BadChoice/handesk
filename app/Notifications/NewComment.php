@@ -51,7 +51,7 @@ class NewComment extends Notification
                 ->content('Ticket updated')
                 ->attachment(function ($attachment)  {
                     $attachment->title($this->ticket->requester->name . " : " . $this->ticket->title, route("tickets.show", $this->ticket))
-                        ->content($this->comment->body);
+                               ->content("Status: " . $this->ticket->statusName() . "\n\n" . $this->comment->body);
                 });
     }
     /**

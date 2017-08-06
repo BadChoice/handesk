@@ -12,7 +12,7 @@ class TicketsController extends Controller
         else if(request('unsassigned') )    $tickets = $repository->unassigned();
         else if(request('closed'))          $tickets = $repository->closed();
         else                                $tickets = $repository->all();
-        return view('tickets.index', ["tickets" => $tickets ]);
+        return view('tickets.index', ["tickets" => $tickets->paginate(25) ]);
     }
 
     public function show(Ticket $ticket) {

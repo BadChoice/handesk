@@ -13,7 +13,7 @@ class CloseSolvedTicketsTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function a_ticket_solved_before_treshold_is_closed(){
+    public function a_ticket_solved_before_threshold_is_closed(){
         $ticket1 = factory(Ticket::class)->create([
             "created_at" => Carbon::parse("-1 days"),
             "status"     => Ticket::STATUS_SOLVED

@@ -3,6 +3,7 @@
     <div class="description">
         <h3>Tickets ( {{ $tickets->count() }} )</h3>
     </div>
+    @paginator($tickets)
     <table class="striped">
         <thead>
             <tr>
@@ -19,4 +20,5 @@
             @endforeach
         </tbody>
     </table>
+    @paginator($tickets)
 @endsection
