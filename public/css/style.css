@@ -36,6 +36,11 @@ a{
     padding-top:20px;
 }
 
+.sidebar img{
+    height:50px;
+    margin-left:120px;
+}
+
 .sidebar h4{
     margin-left:20px;
     color:#8E8E8E;

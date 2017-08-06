@@ -14,6 +14,10 @@ class Ticket extends BaseModel
     const STATUS_SOLVED             = 4;
     const STATUS_CLOSED             = 5;
 
+    const PRIORITY_LOW              = 1;
+    const PRIORITY_NORMAL           = 2;
+    const PRIORITY_HIGH             = 3;
+
     public static function createAndNotify($requester, $title, $body, $tags){
         $requester  = Requester::firstOrCreate($requester);
         $ticket     = $requester->tickets()->create([

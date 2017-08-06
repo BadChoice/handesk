@@ -1,4 +1,5 @@
 <div class="sidebar">
+    <img src="/images/handesk.png">
     <h4> {{ trans_choice('ticket.ticket',2) }}</h4>
     <ul>
         @php $repository = new App\Repositories\TicketsRepository @endphp
