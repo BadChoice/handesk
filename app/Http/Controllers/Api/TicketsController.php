@@ -18,6 +18,10 @@ class TicketsController extends ApiController
         return $this->respond( $tickets );
     }
 
+    public function show(Ticket $ticket){
+        return $this->respond( $ticket->load('comments') );
+    }
+
     public function store(){
         $this->validate( request(), [
             "requester"     => "required|array",

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Comment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Requester;
@@ -76,4 +77,20 @@ class GetTicketsTest extends TestCase
         $this->assertEquals(4, $responseJson->data[0]->id);
     }
 
+    /** @test */
+    public function can_get_a_ticket(){
+        $ticket = factory(Ticket::class)->create();
+        $ticket->comments()->createMany(
+          factory(Comment::class,5)->make()->toArray()
+        );
+
+        $response = $this->get("api/tickets/{$ticket->id}");
+        $response->assertJsonStructure([
+            "data" => [
+                 "title", "body", "status", "created_at", "updated_at", "comments" => [
+                    "*" => ["body", "created_at", "user_id"]
+                ]
+            ]
+        ]);
+    }
 }

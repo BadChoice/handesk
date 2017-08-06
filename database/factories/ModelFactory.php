@@ -12,6 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Comment;
 use App\Requester;
 use App\Team;
 use App\Ticket;
@@ -49,5 +50,12 @@ $factory->define(Requester::class, function(Faker\Generator $faker){
 $factory->define(Team::class, function(Faker\Generator $faker){
     return [
         "name" => $faker->word,
+    ];
+});
+
+$factory->define(Comment::class, function(Faker\Generator $faker){
+    return [
+        "body" => $faker->paragraph,
+        "new_status" => Ticket::STATUS_OPEN
     ];
 });
