@@ -25,7 +25,7 @@ class TicketCreated extends Notification
      * @return array
      */
     public function via($notifiable){
-        return (isset($notifiable->slack_webhook_url) && $notifiable->slack_webhook_url != null) ? ['slack'] : ['mail'];
+        return ( method_exists($notifiable, 'routeNotificationForSlack' )) ? ['slack'] : ['mail'];
     }
 
     /**
@@ -37,15 +37,17 @@ class TicketCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject("Ticket created: {$this->ticket->requester->name}")
                     ->line('A new ticket has been created.')
-                    ->action('Notification Action', url('/'))
+                    ->line($this->ticket->body)
+                    ->action('See the ticket', route("tickets.show", $this->ticket))
                     ->line('Thank you for using our application!');
     }
 
     public function toSlack($notifiable)
     {
-        return (new SlackMessage)
-            ->content('Ticket created');
+        return (new BaseTicketSlackMessage($this->ticket))
+                ->content('Ticket created');
     }
     /**
      * Get the array representation of the notification.

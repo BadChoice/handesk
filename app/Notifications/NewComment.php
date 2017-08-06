@@ -27,7 +27,7 @@ class NewComment extends Notification
      * @return array
      */
     public function via($notifiable) {
-        return (isset($notifiable->slack_webhook_url) && $notifiable->slack_webhook_url != null) ? ['slack'] : ['mail'];
+        return ( method_exists($notifiable, 'routeNotificationForSlack' )) ? ['slack'] : ['mail'];
     }
 
     /**
@@ -39,15 +39,20 @@ class NewComment extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject("Ticket updated: {$this->ticket->requester->name}")
                     ->line('A new comment for the ticket')
-                    ->action('Notification Action', url('/'))
+                    ->line($this->comment->body)
+                    ->action('See the ticket', route("tickets.show", $this->ticket))
                     ->line('Thank you for using our application!');
     }
 
-    public function toSlack($notifiable)
-    {
-        return (new SlackMessage)
-            ->content('Ticket updated');
+    public function toSlack($notifiable) {
+        return (new BaseTicketSlackMessage)
+                ->content('Ticket updated')
+                ->attachment(function ($attachment)  {
+                    $attachment->title($this->ticket->requester->name . " : " . $this->ticket->title, route("tickets.show", $this->ticket))
+                        ->content($this->comment->body);
+                });
     }
     /**
      * Get the array representation of the notification.
