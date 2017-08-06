@@ -92,8 +92,9 @@ class Ticket extends BaseModel
         ]);
 
         tap(new NewComment($this, $comment), function($newCommentNotification) {
-            if( $this->team )  $this->team->notify( $newCommentNotification );
-            if( $this->user )  $this->user->notify( $newCommentNotification );
+            if( $this->team )                                                                   $this->team->notify( $newCommentNotification );
+            if( $this->user && (! auth()->user() || auth()->user()->id != $this->user->id))     $this->user->notify( $newCommentNotification );
+            if( $this->requester && auth()->user() )                                            $this->requester->notify( $newCommentNotification );
             User::notifyAdmins( $newCommentNotification );
         });
         return $comment;

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Notifications\NewComment;
 use App\Team;
 use App\Ticket;
 use App\User;
@@ -78,18 +79,30 @@ class BackTest extends TestCase
     /** @test */
     public function can_add_a_comment(){
         Notification::fake();
-        $user   = factory(User::class)->create(["admin" => true]);
-        $ticket = factory(Ticket::class)->create();
+        $user   = factory(User::class)->create();
+        $team   = factory(Team::class)->create();
+        $ticket = factory(Ticket::class)->create(["user_id" => $user->id, "team_id" => $team->id]);
         $this->assertCount(0, $ticket->comments);
 
         $response = $this->actingAs($user)->post("tickets/{$ticket->id}/comments",["body" => "This is my comment"]);
 
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertCount(1, $ticket->fresh()->comments);
-        tap($ticket->fresh()->comments->first(), function($comment) use($user){
+        tap($ticket->fresh()->comments->first(), function($comment) use($user, $ticket){
             $this->assertEquals("This is my comment", $comment->body);
             $this->assertEquals($user->id, $comment->user_id);
+
+            Notification::assertNotSentTo($user, NewComment::class);
+            Notification::assertSentTo(
+                [$ticket->requester, $ticket->team],
+                NewComment::class,
+                function ($notification, $channels) use ($ticket, $comment) {
+                    return $notification->ticket->id === $ticket->id && $notification->comment->id === $comment->id;
+                }
+            );
         });
+
+        // assert notification sent to requester, team, but not sent to user
         //TODO: assert notifications
     }
 

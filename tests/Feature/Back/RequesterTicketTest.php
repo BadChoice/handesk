@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Notifications\TicketAssigned;
-use App\Notifications\TicketCreated;
+use App\Notifications\NewComment;
 use App\Team;
 use App\Ticket;
 use App\User;
@@ -28,13 +27,27 @@ class RequesterTicketTest extends TestCase
 
     /** @test */
     public function a_requester_can_comment_a_ticket(){
-        $ticket = factory(Ticket::class)->create(["public_token" => "A_PUBLIC_TOKEN"]);
+        Notification::fake();
+        $team = factory(Team::class)->create();
+        $user = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create(["public_token" => "A_PUBLIC_TOKEN", "team_id" => $team->id, "user_id" => $user->id]);
 
         $response = $this->post("requester/tickets/A_PUBLIC_TOKEN/comments", ["body" => "new comment"]);
 
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertCount(1, $ticket->fresh()->comments);
         $this->assertEquals(Ticket::STATUS_NEW, $ticket->fresh()->status);
+
+        tap($ticket->fresh()->comments->first(), function($comment) use($ticket){
+            Notification::assertNotSentTo($ticket->requester, NewComment::class);
+            Notification::assertSentTo(
+                [$ticket->user, $ticket->team],
+                NewComment::class,
+                function ($notification, $channels) use ($ticket, $comment) {
+                    return $notification->ticket->id === $ticket->id && $notification->comment->id === $comment->id;
+                }
+            );
+        });
     }
 
     /** @test */

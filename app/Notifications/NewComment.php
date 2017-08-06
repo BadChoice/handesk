@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Requester;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -16,8 +17,8 @@ class NewComment extends Notification
     public $comment;
 
     public function __construct($ticket, $comment) {
-        $this->ticket = $ticket;
-        $this->comment = $comment;
+        $this->ticket   = $ticket;
+        $this->comment  = $comment;
     }
 
     /**
@@ -36,13 +37,12 @@ class NewComment extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
-    {
+    public function toMail($notifiable) {
         return (new MailMessage)
                     ->subject("Ticket updated: {$this->ticket->requester->name}")
                     ->line('A new comment for the ticket')
                     ->line($this->comment->body)
-                    ->action('See the ticket', route("tickets.show", $this->ticket))
+                    ->action('See the ticket', $notifiable instanceof Requester ? route("requester.tickets.show", $this->ticket->public_token) : route("tickets.show", $this->ticket))
                     ->line('Thank you for using our application!');
     }
 
