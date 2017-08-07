@@ -25,7 +25,7 @@ class TicketsRepository{
     }
 
     public function recentlyUpdated(){
-        return $this->all()->where('updated_at','>', Carbon::parse("-1 days"));
+        return $this->all()->whereRaw("tickets.updated_at > '" . Carbon::parse("-1 days")->toDateTimeString() ."'" );
     }
 
     public function closed(){
