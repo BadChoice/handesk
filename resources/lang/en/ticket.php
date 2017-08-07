@@ -15,4 +15,10 @@ return [
     "recent"        => "Recently updated",
     "requested"     => "Requested",
     "updated"       => "Updated",
+
+    "new"           => "New",
+    "open"          => "Open",
+    "pending"       => "Pending",
+    "solved"        => "Solved",
+    "closed"        => "Closed",
 ];
