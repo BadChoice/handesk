@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
     <div class="description comment">
-        {{--<a href="{{route("tickets.index")}}">Tickets</a>--}}
-          <h3>{{ $ticket->title }}</h3>
-          <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span>
-          <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>
-          <br>
-         {{  implode($ticket->tags->pluck('name')->toArray(), " ") }}
+        <a href="{{ url()->previous() }}">Tickets</a>
+        <h3>#{{ $ticket->id }}. {{ $ticket->title }}</h3>
+        <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span>
+        <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>
+        <br>
+        {{  implode($ticket->tags->pluck('name')->toArray(), " ") }}
     </div>
 
     @if($ticket->status != App\Ticket::STATUS_CLOSED)
