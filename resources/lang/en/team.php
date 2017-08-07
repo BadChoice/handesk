@@ -7,4 +7,8 @@ return [
     "join"              => "Join",
     "invitedTitle"      => "You are invited to join the :team team",
     "invitedDesc"       => "By joining this team, you will be able to see and update its support tickets, as well as assign them to other team members",
+    "new"               => "New",
+    "name"              => "Name",
+    "email"             => "Email",
+    "slack_webhook_url" => "Slack webhook url",
 ];

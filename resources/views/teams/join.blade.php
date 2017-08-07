@@ -6,7 +6,7 @@
         <h3 class="fs4"> {{ __('team.invitedTitle', ["team" => strtoupper($team->name)] ) }}</h3>
         <p> {{ __('team.invitedDesc') }}</p>
         {{ Form::open(["url" => route('membership.store', $team->token)]) }}
-        <button class="uppercase fs2 p3 mv3">{{ __('team.join') }} #{{ $team->name }} {{ __('team.team') }}</button>
+        <button class="uppercase fs2 p3 mv3">{{ __('team.join') }} {{ $team->name }} {{ __('team.team') }}</button>
         {{ Form::close() }}
     </div>
 @endsection

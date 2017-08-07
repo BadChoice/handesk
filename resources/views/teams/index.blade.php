@@ -3,6 +3,13 @@
     <div class="description">
         <h3>Teams ( {{ $teams->count() }} )</h3>
     </div>
+
+    @if(auth()->user()->admin)
+        <div class="m4">
+            <a class="button " href="{{ route("teams.create") }}">@icon(plus) New Team</a>
+        </div>
+    @endif
+
     @paginator($teams)
     <table class="striped">
         <thead>
