@@ -12,3 +12,7 @@ function createSelectArray($array, $withNull = false){
 function nameOrDash($object){
     return ($object && $object->name) ? $object->name : "--";
 }
+
+function icon($icon) {
+    return FA::icon($icon);
+}

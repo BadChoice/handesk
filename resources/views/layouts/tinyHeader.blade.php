@@ -1,5 +1,4 @@
 <div class="tinyHeader">
-    {{ auth()->user()->name }} :
-    Config /
-    Logout
+    <a href="">{{ auth()->user()->name }}</a>
+    <a href="">@icon(sign-out)</a>
 </div>

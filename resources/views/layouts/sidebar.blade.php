@@ -1,6 +1,6 @@
 <div class="sidebar">
     <img src="/images/handesk.png">
-    <h4> {{ trans_choice('ticket.ticket',2) }}</h4>
+    <h4> @icon(inbox) {{ trans_choice('ticket.ticket',2) }}</h4>
     <ul>
         @php $repository = new App\Repositories\TicketsRepository @endphp
         <li class="active"><a href="{{route('tickets.index')}}">    {{ __('ticket.all') }}     </a> <span class="label">{{ $repository->all()->count() }}           </span></li>
@@ -9,13 +9,16 @@
         <li><a href="{{route('tickets.index')}}?recent=true">       {{ __('ticket.recent') }}  </a> <span class="label">{{ $repository->recentlyUpdated()->count() }}  </span> </li>
         <li><a href="{{route('tickets.index')}}?closed=true">       {{ __('ticket.archive') }}     </a></li>
     </ul>
-    <h4>Reports</h4>
-    <h4>Leads</h4>
-    <h4>Points</h4>
+    <h4> @icon(dot-circle-o) Leads</h4>
+    <ul>
+        <li><a href="{{route('tickets.index')}}?recent=true">       {{ __('lead.all') }}  </a> <span class="label">{{ $repository->recentlyUpdated()->count() }}  </span> </li>
+        <li><a href="{{route('tickets.index')}}?closed=true">       {{ __('lead.mine') }}  </a></li>
+    </ul>
+    <h4> @icon(bar-chart) Reports</h4>
 
     @if(auth()->user()->admin)
         <br>
-        <h4> {{ trans_choice('ticket.admin',2) }}</h4>
+        <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
         <ul>
             <li><a href="">Teams</a></li>
             <li><a href="">Users</a></li>
