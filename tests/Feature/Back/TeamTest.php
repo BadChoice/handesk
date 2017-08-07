@@ -58,6 +58,23 @@ class TeamTest extends TestCase
 
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertCount(1, $team->fresh()->members);
+    }
 
+    /** @test */
+    public function admin_can_create_teams(){
+        $user = factory(User::class)->states('admin')->create();
+
+        $response = $this->actingAs($user)->post('teams', [
+            "name" => "Awesome team",
+            "email" => "awesome@email.com",
+            "slack_webhook_url" => "http://slack.com/webhook"
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        tap(Team::first(), function($team){
+           $this->assertEquals("Awesome team", $team->name);
+           $this->assertEquals("awesome@email.com", $team->email);
+           $this->assertEquals("http://slack.com/webhook", $team->slack_webhook_url);
+        });
     }
 }
