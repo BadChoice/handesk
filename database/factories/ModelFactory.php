@@ -28,6 +28,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->state(App\User::class, 'admin', function ($faker) {
+    return [
+        'admin' => 'true',
+    ];
+});
 
 $factory->define(Ticket::class, function(Faker\Generator $faker){
     return [
@@ -50,6 +55,7 @@ $factory->define(Requester::class, function(Faker\Generator $faker){
 $factory->define(Team::class, function(Faker\Generator $faker){
     return [
         "name" => $faker->word,
+        "token" => str_random(24),
     ];
 });
 

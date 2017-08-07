@@ -8,6 +8,10 @@ class Team extends BaseModel
 {
     use Notifiable;
 
+    public static function findByToken($token){
+        return Team::where('token',$token)->firstOrFail();
+    }
+
     public function members(){
         return $this->belongsToMany(User::class, "memberships");
     }
