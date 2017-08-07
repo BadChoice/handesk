@@ -18,14 +18,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(["prefix" => "requester"], function(){
-    Route::get('/tickets/{token}'                  , 'RequesterTicketsController@show')     ->name('requester.tickets.show');
-    Route::post('/tickets/{token}/comments'        , 'RequesterCommentsController@store')   ->name('requester.comments.store');
+    Route::get ('tickets/{token}'                  , 'RequesterTicketsController@show')     ->name('requester.tickets.show');
+    Route::post('tickets/{token}/comments'        , 'RequesterCommentsController@store')    ->name('requester.comments.store');
 });
 
 Route::group(["middlware" => "auth"], function(){
-    Route::get('/tickets'                           , 'TicketsController@index')         ->name('tickets.index');
-    Route::get('/tickets/{ticket}'                  , 'TicketsController@show')             ->name('tickets.show');
-    Route::post('/tickets/{ticket}/assign'          , 'TicketsAssignController@store')      ->name('tickets.assign');
-    Route::post('/tickets/{ticket}/comments'        , 'CommentsController@store')           ->name('comments.store');
+    Route::get ('tickets'                           , 'TicketsController@index')            ->name('tickets.index');
+    Route::get ('tickets/{ticket}'                  , 'TicketsController@show')             ->name('tickets.show');
+    Route::post('tickets/{ticket}/assign'           , 'TicketsAssignController@store')      ->name('tickets.assign');
+    Route::post('tickets/{ticket}/comments'         , 'CommentsController@store')           ->name('comments.store');
+
+    Route::group(["can:see-admin"], function(){
+       Route::resource('teams'                      ,'TeamsController');
+    });
 });
 

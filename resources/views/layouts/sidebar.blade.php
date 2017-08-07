@@ -20,7 +20,7 @@
         <br>
         <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
         <ul>
-            <li><a href="">Teams</a></li>
+            <li><a href="{{ route('teams.index') }}">Teams</a></li>
             <li><a href="">Users</a></li>
         </ul>
     @endif
