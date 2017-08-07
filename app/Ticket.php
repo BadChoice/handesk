@@ -6,8 +6,7 @@ use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 
-class Ticket extends BaseModel
-{
+class Ticket extends BaseModel{
     const STATUS_NEW                = 1;
     const STATUS_OPEN               = 2;
     const STATUS_PENDING            = 3;

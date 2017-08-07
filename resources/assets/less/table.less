@@ -1,0 +1,36 @@
+@import "Hurricane";
+
+table{
+  border-collapse: collapse;
+  width:100%;
+  .text-left;
+}
+
+table tr{
+  height:@size5;
+}
+
+table.condensed tr{
+  height:@size4;
+}
+
+thead{
+  border-bottom:1px solid #F0F0F0;
+}
+
+table th{
+  color: @light-gray;
+  font-weight:100;
+  .text-left;
+}
+
+table.striped tr:nth-child(even){
+  background-color:@broken-white;
+}
+
+table td:first-child,th:first-child{
+  .pl4;
+}
+table td:last-child,th:last-child{
+  .pr3;
+}

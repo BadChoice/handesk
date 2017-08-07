@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="description comment">
-        <a href="{{route("tickets.index")}}">Tickets</a>
+        {{--<a href="{{route("tickets.index")}}">Tickets</a>--}}
           <h3>{{ $ticket->title }}</h3>
           <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span>
           <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>
@@ -22,7 +22,7 @@
                 App\Ticket::STATUS_SOLVED   => __("ticket.solved"),
             ], $ticket->status) }}
             <br><br>
-            <button>Comment</button>
+            <button class="uppercase"> {{ __('ticket.comment') }}</button>
             {{ Form::close() }}
         </div>
     @endif

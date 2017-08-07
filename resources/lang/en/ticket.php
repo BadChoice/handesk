@@ -15,6 +15,9 @@ return [
     "recent"        => "Recently updated",
     "requested"     => "Requested",
     "updated"       => "Updated",
+    "update"        => "Update",
+    "comment"       => "Comment",
+    "assign"        => "Assign",
 
     "new"           => "New",
     "open"          => "Open",

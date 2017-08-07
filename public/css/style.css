@@ -305,7 +305,10 @@
   width: 40%;
 }
 .w-20 {
-  width: 40%;
+  width: 20%;
+}
+.w-10 {
+  width: 10%;
 }
 .hidden {
   display: none;
@@ -326,7 +329,8 @@
   text-transform: capitalize;
 }
 .center {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .text-center {
   text-align: center;
@@ -372,22 +376,41 @@
 .br3 {
   border-radius: 16px;
 }
-body {
-  margin: 0;
-  font-family: Lato, sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
+table tr {
+  height: 48px;
+}
+table.condensed tr {
+  height: 24px;
+}
+thead {
+  border-bottom: 1px solid #F0F0F0;
+}
+table th {
+  color: #8E8E8E;
   font-weight: 100;
-  color: #7c8287;
+  text-align: left;
 }
-a {
-  text-decoration: none ;
-  color: #46A5E0;
+table.striped tr:nth-child(even) {
+  background-color: #FAFAFA;
 }
-.tinyHeader {
-  position: absolute;
-  right: 35px;
-  top: 20px;
+table td:first-child,
+th:first-child {
+  padding-left: 24px;
+}
+table td:last-child,
+th:last-child {
+  padding-right: 12px;
 }
 .sidebar {
   padding-top: 24px;
@@ -433,6 +456,33 @@ a {
   background-color: #46A5E0;
   color: white;
 }
+input {
+  border: 1px solid #c8c8c8;
+  color: #7c8287;
+  height: 4px;
+  border-radius: 4px;
+  padding: 12px;
+}
+input[type=checkbox] {
+  vertical-align: super;
+}
+body {
+  margin: 0;
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  font-weight: 100;
+  color: #7c8287;
+}
+a {
+  text-decoration: none ;
+  color: #46A5E0;
+}
+.tinyHeader {
+  position: absolute;
+  right: 35px;
+  top: 20px;
+}
 .content {
   padding-top: 24px;
   margin-left: 300px;
@@ -451,36 +501,6 @@ a {
   height: 60px;
   border: 1px solid #F0F0F0;
 }
-table {
-  border-collapse: collapse;
-  width: 100%;
-  text-align: left;
-}
-table tr {
-  height: 48px;
-}
-table.condensed tr {
-  height: 24px;
-}
-thead {
-  border-bottom: 1px solid #F0F0F0;
-}
-table th {
-  color: #8E8E8E;
-  font-weight: 100;
-  text-align: left;
-}
-table.striped tr:nth-child(even) {
-  background-color: #FAFAFA;
-}
-table td:first-child,
-th:first-child {
-  padding-left: 24px;
-}
-table td:last-child,
-th:last-child {
-  padding-right: 12px;
-}
 .description {
   padding-top: 4px;
   padding-right: 12px;
@@ -489,6 +509,7 @@ th:last-child {
 }
 .description h3 {
   font-weight: 100;
+  font-size: 18px;
 }
 .label {
   border-radius: 4px;
@@ -528,10 +549,8 @@ button {
   cursor: pointer;
 }
 .actions {
-  float: right;
-  text-align: right;
-  margin-right: 300px;
-  margin-top: -130px;
+  padding-top: 12px;
+  background-color: #FAFAFA;
 }
 .date {
   color: #c8c8c8;
