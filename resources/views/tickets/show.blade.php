@@ -27,3 +27,13 @@
     @endif
     @include('components.ticketComments')
 @endsection
+
+
+@section('scripts')
+    <script>
+        $('#tags').tagsInput({
+            'height':'10px',
+            'width':'100%'
+        });
+    </script>
+@endsection

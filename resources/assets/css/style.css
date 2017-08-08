@@ -481,6 +481,20 @@ select {
 .busy {
   display: none;
 }
+div.tagsinput {
+  border: 1px solid #c8c8c8;
+  color: #7c8287;
+  height: 4px;
+  border-radius: 4px;
+}
+div.tagsinput span.tag {
+  font-family: Lato, sans-serif;
+  padding: 0px 2px;
+  background-color: #FAFAFA;
+  border-color: #c8c8c8;
+  font-size: 12px;
+  border-radius: 4px;
+}
 body {
   margin: 0;
   font-family: Lato, sans-serif;
@@ -517,6 +531,7 @@ a {
 .new-comment textarea {
   border-radius: 8px;
   margin-bottom: 8px;
+  padding: 8px;
   width: 100%;
   height: 60px;
   border: 1px solid #c8c8c8;

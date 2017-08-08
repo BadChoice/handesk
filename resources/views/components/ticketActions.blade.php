@@ -4,7 +4,9 @@
     @can("assignToTeam", $ticket)
         <tr><td>Team:</td><td>{{ Form::select('team_id', createSelectArray( App\Team::all(),true), $ticket->team_id ) }}</td><td></td></tr>
     @endcan
-
+    <tr>
+        <td colspan="3"> <input id="tags" name="tags" value="hello,world"></td>
+    </tr>
     <tr>
         @can("assignToTeam", $ticket)
             <td>Assigned:</td><td>{{ Form::select('user_id', createSelectArray( App\User::all(),true), $ticket->user_id ) }}</td>

@@ -29,12 +29,12 @@ class TicketTest extends TestCase
        $user2   = factory(User::class)->create();
 
        $ticket  = factory(Ticket::class)->create();
-       $this->assertNull($ticket->user);
+       $this->assertNull($ticket->fresh()->user);
 
        $ticket->addComment($user, "A comment");
        $ticket->addComment($user2, "A comment");
 
-       $this->assertEquals($ticket->user->id, $user->id);
+       $this->assertEquals($ticket->fresh()->user->id, $user->id);
    }
 
    /** @test */

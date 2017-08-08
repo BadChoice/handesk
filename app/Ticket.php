@@ -88,7 +88,7 @@ class Ticket extends BaseModel{
         if($newStatus) $this->updateStatus($newStatus);
         else           $this->touch();
 
-        if( ! $this->user && $user) $this->user()->associate($user);
+        if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
         if( ! $body) return;
         $comment = $this->comments()->create([
             "body"          => $body,
