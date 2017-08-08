@@ -2,12 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Notifications\NewComment;
 use App\Team;
-use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -16,14 +13,29 @@ class TeamTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function can_see_teams(){
+    public function admin_can_see_all_teams(){
         $user = factory(User::class)->states("admin")->create();
-        factory(Team::class)->create(["name" => "Awesome team"]);
+        $user->teams()->attach( factory(Team::class)->create(["name" => "Awesome team"]) );
+        factory(Team::class)->create(["name" => "Impressive team"]);
 
         $response = $this->actingAs($user)->get('teams');
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertSee("Awesome team");
+        $response->assertSee("Impressive team");
+    }
+
+    /** @test */
+    public function non_admin_can_see_only_his_teams(){
+        $user = factory(User::class)->create();
+        $user->teams()->attach( factory(Team::class)->create(["name" => "Awesome team"]) );
+        factory(Team::class)->create(["name" => "Impressive team"]);
+
+        $response = $this->actingAs($user)->get('teams');
+
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertSee("Awesome team");
+        $response->assertDontSee("Impressive team");
     }
 
     /** @test */
@@ -72,9 +84,23 @@ class TeamTest extends TestCase
 
         $response->assertStatus(Response::HTTP_FOUND);
         tap(Team::first(), function($team){
-           $this->assertEquals("Awesome team", $team->name);
-           $this->assertEquals("awesome@email.com", $team->email);
-           $this->assertEquals("http://slack.com/webhook", $team->slack_webhook_url);
+            $this->assertEquals("Awesome team", $team->name);
+            $this->assertEquals("awesome@email.com", $team->email);
+            $this->assertEquals("http://slack.com/webhook", $team->slack_webhook_url);
         });
+    }
+
+    /** @test */
+    public function non_admin_can_not_create_teams(){
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->post('teams', [
+            "name" => "Awesome team",
+            "email" => "awesome@email.com",
+            "slack_webhook_url" => "http://slack.com/webhook"
+        ]);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+        $this->assertNull( Team::first() );
     }
 }

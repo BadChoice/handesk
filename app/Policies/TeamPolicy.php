@@ -9,7 +9,11 @@ class TeamPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability){
+        if($user->admin) return true;
+    }
+
     public function administrate($user, $team){
-        return $user->admin || $team->pivot->admin;
+        return $team->pivot->admin;
     }
 }

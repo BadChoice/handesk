@@ -10,6 +10,10 @@ class TicketPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user, $ability){
+        if($user->admin) return true;
+    }
+
     /**
      * Determine whether the user can view the ticket.
      *
@@ -19,8 +23,7 @@ class TicketPolicy
      */
     public function view(User $user, Ticket $ticket)
     {
-        return  $user->admin ||
-                $ticket->user_id == $user->id ||
+        return  $ticket->user_id == $user->id ||
                 $user->teamsTickets->pluck('id')->contains($ticket->id);
     }
 
@@ -55,10 +58,10 @@ class TicketPolicy
      * @return mixed
      */
     public function delete(User $user, Ticket $ticket) {
-        return $user->admin;
+
     }
 
     public function assignToTeam(User $user, Ticket $ticket){
-        return $user->admin;
+
     }
 }
