@@ -17,7 +17,7 @@
                 Is Solved ? {{ Form::checkbox('solved') }}
             @endif
             <br><br>
-            <button class="uppercase"> @busy {{ __('ticket.comment') }}</button>
+            <button class="uppercase"> @busy @icon(comment) {{ __('ticket.comment') }}</button>
             {{ Form::close() }}
         </div>
     @endif

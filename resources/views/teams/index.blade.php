@@ -27,9 +27,15 @@
                 <td class="small"> @gravatar($team->email) </td>
                 <td> {{ $team->name }}</td>
                 <td> {{ $team->members->count() }}</td>
-                <td> <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a></td>
+                @can('administrate', $team)
+                    <td> <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a></td>
+                @else
+                    <td></td>
+                @endcan
                 <th> <a href="{{route('tickets.index')}}?team={{$team->id}}"> @icon(inbox) </a></th>
-                <th> <a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a></th>
+                @can('administrate', $team)
+                    <th> <a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a></th>
+                @endcan
             </tr>
         @endforeach
         </tbody>

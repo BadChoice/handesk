@@ -13,7 +13,7 @@ class Team extends BaseModel
     }
 
     public function members(){
-        return $this->belongsToMany(User::class, "memberships");
+        return $this->belongsToMany(User::class, "memberships")->withPivot('admin');
     }
 
     public function memberships(){

@@ -27,7 +27,7 @@ class User extends Authenticatable
     }
 
     public function teams(){
-        return $this->belongsToMany(Team::class, "memberships");
+        return $this->belongsToMany(Team::class, "memberships")->withPivot('admin');
     }
 
     public function teamsTickets(){

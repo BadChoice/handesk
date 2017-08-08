@@ -28,9 +28,7 @@ Route::group(["middlware" => "auth"], function(){
     Route::post('tickets/{ticket}/assign'           , 'TicketsAssignController@store')      ->name('tickets.assign');
     Route::post('tickets/{ticket}/comments'         , 'CommentsController@store')           ->name('comments.store');
 
-    Route::group(["can:see-admin"], function(){
-       Route::resource('teams'                      ,'TeamsController');
-    });
+    Route::resource('teams'                      ,'TeamsController');
     Route::get ('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
     Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
 });

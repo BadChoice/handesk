@@ -1,4 +1,8 @@
 <div class="tinyHeader">
-    <a href="">{{ auth()->user()->name }}</a>
-    <a href="">@icon(sign-out)</a>
+    <a href=""><button class="secondary">{{ auth()->user()->name }}</button></a>
+    <div class="float-right ml3">
+        {{ Form::open(["url" => route('logout')]) }}
+        <button>@icon(sign-out)</button>
+        {{ Form::close() }}
+    </div>
 </div>

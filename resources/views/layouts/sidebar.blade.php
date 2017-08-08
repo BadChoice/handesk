@@ -16,12 +16,12 @@
     </ul>
     <h4> @icon(bar-chart) Reports</h4>
 
-    @if(auth()->user()->admin)
-        <br>
-        <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
-        <ul>
-            <li><a href="{{ route('teams.index') }}">Teams</a></li>
+    <br>
+    <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
+    <ul>
+        <li><a href="{{ route('teams.index') }}">Teams</a></li>
+        @if(auth()->user()->admin)
             <li><a href="">Users</a></li>
-        </ul>
-    @endif
+        @endif
+    </ul>
 </div>

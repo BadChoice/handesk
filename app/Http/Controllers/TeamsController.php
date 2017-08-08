@@ -7,7 +7,8 @@ use App\Team;
 class TeamsController extends Controller
 {
     public function index(){
-        return view('teams.index', ["teams" => Team::all()] );
+        $teams = auth()->user()->admin ? Team::all() : auth()->user()->teams;
+        return view('teams.index', ["teams" => $teams] );
     }
 
     public function create(){

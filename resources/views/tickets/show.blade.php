@@ -21,7 +21,7 @@
                 App\Ticket::STATUS_PENDING  => __("ticket.pending"),
                 App\Ticket::STATUS_SOLVED   => __("ticket.solved"),
             ], $ticket->status) }}
-            <button class="uppercase"> {{ __('ticket.comment') }}</button>
+            <button class="uppercase"> @icon(comment) {{ __('ticket.comment') }}</button>
             {{ Form::close() }}
         </div>
     @endif

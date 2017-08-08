@@ -474,11 +474,9 @@ input[type=checkbox] {
 }
 select {
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 0 1px rgba(89, 105, 128, 0.1), 0 1px 3px 0 rgba(89, 105, 128, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-          box-shadow: 0 0 0 1px rgba(89, 105, 128, 0.1), 0 1px 3px 0 rgba(89, 105, 128, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   height: 24px;
   background-color: white;
-  border-color: #8E8E8E;
+  border-color: #c8c8c8;
 }
 .busy {
   display: none;
@@ -569,6 +567,11 @@ a {
   cursor: pointer;
   padding: 8px;
   border-radius: 4px;
+}
+.secondary {
+  background-color: transparent;
+  color: #46A5E0;
+  font-weight: 100;
 }
 button {
   background-color: #33BC8C;
