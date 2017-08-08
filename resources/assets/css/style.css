@@ -487,6 +487,9 @@ div.tagsinput {
   height: 4px;
   border-radius: 4px;
 }
+div.tagsinput input {
+  font-size: 12px;
+}
 div.tagsinput span.tag {
   font-family: Lato, sans-serif;
   padding: 0px 2px;

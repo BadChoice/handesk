@@ -23,6 +23,20 @@ class TicketTest extends TestCase
    }
 
    /** @test */
+   public function can_attach_tags_as_string(){
+       $ticket = factory(Ticket::class)->create();
+       $ticket->attachTags("hello,world,world");
+       $this->assertCount(2, $ticket->tags);
+   }
+
+   /** @test */
+   public function can_get_tags_string(){
+       $ticket = factory(Ticket::class)->create();
+       $ticket->attachTags(["hello","world"]);
+       $this->assertEquals("hello,world", $ticket->tagsString());
+   }
+
+   /** @test */
    public function adding_the_first_comment_assigns_the_ticket_to_the_user(){
        Notification::fake();
        $user    = factory(User::class)->create();

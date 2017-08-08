@@ -32,7 +32,7 @@
 @section('scripts')
     <script>
         $('#tags').tagsInput({
-            'height':'10px',
+            'height':'20px',
             'width':'100%'
         });
     </script>

@@ -57,6 +57,10 @@ class Ticket extends BaseModel{
         return $this->belongsToMany(Tag::class);
     }
 
+    public function tagsString(){
+        return implode(',', $this->tags->pluck('name')->toArray() );
+    }
+
     public function assignTo($user){
         if( ! $user instanceof User){
             $user = User::findOrFail( $user );
@@ -76,6 +80,7 @@ class Ticket extends BaseModel{
     }
 
     public function attachTags($tagNames){
+        if(!is_array($tagNames)) $tagNames = explode(",",$tagNames);
         collect($tagNames)->map(function($tagName){
             return Tag::firstOrCreate(["name" => $tagName]);
         })->unique('id')->each(function($tag){
