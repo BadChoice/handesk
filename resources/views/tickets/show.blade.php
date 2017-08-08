@@ -6,7 +6,6 @@
         @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span>
         <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>
         <br>
-        {{  implode($ticket->tags->pluck('name')->toArray(), " ") }}
     </div>
 
     @if($ticket->status != App\Ticket::STATUS_CLOSED)
@@ -21,7 +20,7 @@
                 App\Ticket::STATUS_PENDING  => __("ticket.pending"),
                 App\Ticket::STATUS_SOLVED   => __("ticket.solved"),
             ], $ticket->status) }}
-            <button class="uppercase"> @icon(comment) {{ __('ticket.comment') }}</button>
+            <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.comment') }}</button>
             {{ Form::close() }}
         </div>
     @endif
@@ -32,19 +31,20 @@
 @section('scripts')
     <script>
         $('#tags').tagsInput({
-            'height':'20px',
-            'width':'100%',
-            'onAddTag':onAddTag,
-            'onRemoveTag':onRemoveTag,
+            'height': '20px',
+            'width': '100%',
+            'onAddTag': onAddTag,
+            'onRemoveTag': onRemoveTag,
+            'placeholderColor': '#bbb',
+            'defaultText': "Add...",
         });
 
         function onAddTag(tag){
-            $.ajax({
+            $.post({
                 url: "{{route("tickets.tags.store",$ticket)}}",
-                method : "POST",
-                data:{
-                    "_token" : "{{ csrf_token() }}",
-                    "tag" : tag
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "tag": tag
                 }
             });
         }

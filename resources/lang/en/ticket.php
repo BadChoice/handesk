@@ -19,6 +19,7 @@ return [
     "comment"       => "Comment",
     "assign"        => "Assign",
     "status"        => "Status",
+    "tag"           => "Tag|Tags",
 
     "new"           => "New",
     "open"          => "Open",
