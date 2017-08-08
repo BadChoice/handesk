@@ -16,7 +16,9 @@ class TicketsController extends Controller
 
         if( request('team'))                $tickets = $tickets->where('team_id', request('team'));
 
-        return view('tickets.index', ["tickets" => $tickets->paginate(25) ]);
+        $tickets = $tickets->select('tickets.*');
+
+        return view('tickets.index', ["tickets" => $tickets->paginate(25, ['tickets.user_id']) ]);
     }
 
     public function show(Ticket $ticket) {

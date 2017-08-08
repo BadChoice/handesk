@@ -9,8 +9,8 @@
         @can("assignToTeam", $ticket)
             <td>Assigned:</td><td>{{ Form::select('user_id', createSelectArray( App\User::all(),true), $ticket->user_id ) }}</td>
         @else
-            @if($ticket->team)
-                <td>Assigned:</td><td>{{ Form::select('user_id', createSelectArray( $ticket->team->users, true), $ticket->user_id ) }}</td>
+            @if( $ticket->team )
+                <td>Assigned:</td><td>{{ Form::select('user_id', createSelectArray( $ticket->team->members, true), $ticket->user_id ) }}</td>
             @endif
             @endcan
         <td> <button class="uppercase"> {{ __('ticket.assign') }}</button></td>

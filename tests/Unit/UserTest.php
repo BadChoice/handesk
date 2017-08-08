@@ -28,7 +28,6 @@ class UserTest extends TestCase
         $this->assertTrue(  $user->teamsTickets->contains($ticket1) );
         $this->assertTrue(  $user->teamsTickets->contains($ticket2) );
         $this->assertFalse( $user->teamsTickets->contains($ticket3) );
-
     }
 
 }

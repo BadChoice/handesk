@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Ticket;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class TicketsRepository{
 
