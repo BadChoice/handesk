@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -22,7 +22,7 @@ Route::group(["prefix" => "requester"], function(){
     Route::post('tickets/{token}/comments'        , 'RequesterCommentsController@store')    ->name('requester.comments.store');
 });
 
-Route::group(["middlware" => "auth"], function(){
+Route::group(["middleware" => "auth"], function(){
     Route::get ('tickets'                           , 'TicketsController@index')            ->name('tickets.index');
     Route::get ('tickets/{ticket}'                  , 'TicketsController@show')             ->name('tickets.show');
     Route::post('tickets/{ticket}/assign'           , 'TicketsAssignController@store')      ->name('tickets.assign');
