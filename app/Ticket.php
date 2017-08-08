@@ -89,6 +89,10 @@ class Ticket extends BaseModel{
         return $this;
     }
 
+    public function detachTag($tagName){
+        $this->tags()->detach( Tag::whereName($tagName)->get() );
+    }
+
     public function addComment($user, $body, $newStatus = null){
         if($newStatus) $this->updateStatus($newStatus);
         else           $this->touch();

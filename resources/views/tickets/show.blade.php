@@ -33,7 +33,30 @@
     <script>
         $('#tags').tagsInput({
             'height':'20px',
-            'width':'100%'
+            'width':'100%',
+            'onAddTag':onAddTag,
+            'onRemoveTag':onRemoveTag,
         });
+
+        function onAddTag(tag){
+            $.ajax({
+                url: "{{route("tickets.tags.store",$ticket)}}",
+                method : "POST",
+                data:{
+                    "_token" : "{{ csrf_token() }}",
+                    "tag" : tag
+                }
+            });
+        }
+
+        function onRemoveTag(tag){
+            $.ajax({
+                url: "{{ route("tickets.tags.store",$ticket)}}" + "/" + tag,
+                method : "DELETE",
+                data:{
+                    "_token" : "{{ csrf_token() }}",
+                }
+            });
+        }
     </script>
 @endsection

@@ -37,6 +37,16 @@ class TicketTest extends TestCase
    }
 
    /** @test */
+   public function can_detach_a_tag(){
+       $ticket = factory(Ticket::class)->create();
+       $ticket->attachTags(["hello","world"]);
+
+       $ticket->detachTag("world");
+
+       $this->assertEquals("hello",$ticket->tags[0]->name);
+       $this->assertCount(1,$ticket->tags);
+   }
+   /** @test */
    public function adding_the_first_comment_assigns_the_ticket_to_the_user(){
        Notification::fake();
        $user    = factory(User::class)->create();

@@ -27,6 +27,7 @@ Route::group(["middlware" => "auth"], function(){
     Route::get ('tickets/{ticket}'                  , 'TicketsController@show')             ->name('tickets.show');
     Route::post('tickets/{ticket}/assign'           , 'TicketsAssignController@store')      ->name('tickets.assign');
     Route::post('tickets/{ticket}/comments'         , 'CommentsController@store')           ->name('comments.store');
+    Route::resource('tickets/{ticket}/tags'         , 'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
 
     Route::resource('teams'                      ,'TeamsController');
     Route::get ('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');

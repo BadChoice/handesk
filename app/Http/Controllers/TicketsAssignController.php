@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 
-class TicketsAssignController extends Controller
-{
+class TicketsAssignController extends Controller{
     public function store(Ticket $ticket) {
         if( request('team_id') ) {
             $this->authorize('assignToTeam', $ticket);
@@ -14,7 +13,6 @@ class TicketsAssignController extends Controller
         if( request('user_id') ){
             $ticket->assignTo( request('user_id') );
         }
-        $ticket->attachTags( request('tags') );
         return back();
     }
 }

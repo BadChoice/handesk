@@ -149,4 +149,28 @@ class BackTest extends TestCase
         $this->assertEquals($user2->id, $ticket->fresh()->user_id);
         $this->assertEquals($team->id, $ticket->fresh()->team_id);
     }
+
+    /** @test */
+    public function can_add_a_tag(){
+        $user   = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create();
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/tags", ["tag" => "Hello world"]);
+
+        $response->assertStatus(Response::HTTP_OK);
+        $this->assertCount(1, $ticket->fresh()->tags);
+    }
+
+    /** @test */
+    public function can_detach_a_tag(){
+        $user   = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create();
+        $ticket->attachTags(["hello","world"]);
+        $this->assertCount(2, $ticket->tags);
+
+        $response = $this->actingAs($user)->delete("tickets/{$ticket->id}/tags/hello");
+
+        $response->assertStatus(Response::HTTP_OK);
+        $this->assertCount(1, $ticket->fresh()->tags);
+    }
 }
