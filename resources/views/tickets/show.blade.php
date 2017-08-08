@@ -2,8 +2,8 @@
 @section('content')
     <div class="description comment">
         <a href="{{ url()->previous() }}">Tickets</a>
-        <h3>#{{ $ticket->id }}. {{ $ticket->title }}</h3>
-        <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span>
+        <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
+        @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span>
         <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>
         <br>
         {{  implode($ticket->tags->pluck('name')->toArray(), " ") }}
@@ -21,7 +21,6 @@
                 App\Ticket::STATUS_PENDING  => __("ticket.pending"),
                 App\Ticket::STATUS_SOLVED   => __("ticket.solved"),
             ], $ticket->status) }}
-            <br><br>
             <button class="uppercase"> {{ __('ticket.comment') }}</button>
             {{ Form::close() }}
         </div>

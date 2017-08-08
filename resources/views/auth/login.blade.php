@@ -18,7 +18,7 @@
 
 <body>
     <div class="center text-center mt5 w-20">
-            <img src="{{url("images/handesk.png")}}">
+            <img src="{{url("images/handesk_full.png")}}">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 

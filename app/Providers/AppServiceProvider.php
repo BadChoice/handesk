@@ -30,6 +30,16 @@ class AppServiceProvider extends ServiceProvider
             return icon($icon);
         });
 
+        Blade::directive("busy", function(){
+                return  "<span class='busy'>" . \FA::spin('circle-o-notch') . "</span>";
+        });
+
+        Blade::directive("gravatar", function($email, $size = 30){
+            $email = md5(strtolower(trim($email)));
+            $gravatarURL = "https://www.gravatar.com/avatar/" . $email."?s=".$size."&d=mm";
+            return '<img id = '.$email.''.$size.' class="gravatar" src="'.$gravatarURL.'" width="'.$size.'">';
+        });
+
         Blade::directive("paginator", function ($data) {
             return "<?php  if ( method_exists({$data}, 'links') ) {
                     echo {$data}->appends(array_except(request()->query(),['page']))->links();

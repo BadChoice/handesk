@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <img src="{{url("/images/handesk.png")}}">
+    <img src="{{url("/images/handesk_full.png")}}">
     <h4> @icon(inbox) {{ trans_choice('ticket.ticket',2) }}</h4>
     <ul>
         @php $repository = new App\Repositories\TicketsRepository @endphp

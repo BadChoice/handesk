@@ -11,21 +11,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    {{--<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">--}}
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,500" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <style>
-        .content{
-            margin:0 auto;
-            width:1024px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     <div id="app">
-        <div class="content container-fluid">
+        <div class="center w-80">
             @yield('content')
         </div>
-        @include('layouts.footer')
     </div>
 
     <!-- Scripts -->

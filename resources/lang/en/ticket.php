@@ -18,6 +18,7 @@ return [
     "update"        => "Update",
     "comment"       => "Comment",
     "assign"        => "Assign",
+    "status"        => "Status",
 
     "new"           => "New",
     "open"          => "Open",

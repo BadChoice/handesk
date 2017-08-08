@@ -13,6 +13,9 @@ class TicketsController extends Controller
         else if(request('recent'))          $tickets = $repository->recentlyUpdated();
         else if(request('closed'))          $tickets = $repository->closed();
         else                                $tickets = $repository->all();
+
+        if( request('team'))                $tickets = $tickets->where('team_id', request('team'));
+
         return view('tickets.index', ["tickets" => $tickets->paginate(25) ]);
     }
 
