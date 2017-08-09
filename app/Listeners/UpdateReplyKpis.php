@@ -22,7 +22,6 @@ class UpdateReplyKpis
     public function handle(TicketCommented $event) {
         $this->calculateFirstReplyKpi($event);
         $this->calculateOneTouchResolutionKpi($event);
-        $this->calculateReopenedKpi($event);
     }
 
     private function calculateFirstReplyKpi($event){
@@ -35,7 +34,6 @@ class UpdateReplyKpis
     }
 
 
-
     private function calculateOneTouchResolutionKpi($event){
         if( ! FirstReplyKpi::doesApply($event->ticket, $event->comment) ) return;
         $score = OneTouchResolutionKpi::doesApply($event->ticket, $event->comment);
@@ -46,13 +44,4 @@ class UpdateReplyKpis
         OneTouchResolutionKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $score );
     }
 
-    private function calculateReopenedKpi($event){
-        $score = ReopenedKpi::score($event->ticket, $event->comment, $event->previousStatus);
-        if( $score == 0) return;
-
-        ReopenedKpi::obtain ( $event->ticket->created_at, $event->ticket->user_id, Kpi::TYPE_USER )->addValue( $score );
-
-        if( ! $event->ticket->team_id) return;
-        ReopenedKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $score );
-    }
 }

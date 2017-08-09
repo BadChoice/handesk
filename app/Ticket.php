@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Events\TicketCommented;
-use App\Events\TicketSolved;
+use App\Events\TicketStatusUpdated;
 use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
@@ -84,11 +84,10 @@ class Ticket extends BaseModel{
         if($newStatus) $this->updateStatus($newStatus);
         else           $this->touch();
 
-        if($newStatus == Ticket::STATUS_SOLVED){
-            event( new TicketSolved($this, $user,  $previousStatus));
-        }
-
         if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
+
+        event( new TicketStatusUpdated($this, $user,  $previousStatus) );
+
         if( ! $body) return;
 
         $comment = $this->comments()->create([

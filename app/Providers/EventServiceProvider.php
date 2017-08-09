@@ -19,8 +19,8 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\TicketCommented' => [
             'App\Listeners\UpdateReplyKpis',
         ],
-        'App\Events\TicketSolved' => [
-            'App\Listeners\UpdateSolvedKpis',
+        'App\Events\TicketStatusUpdated' => [
+            'App\Listeners\UpdateStatusKpis',
         ]
     ];
 
