@@ -12,9 +12,9 @@ class Kpi extends BaseModel {
     const TYPE_TEAM = 3;
 
     const KPI_FIRST_REPLY           = 1;
-    const KPI_ONE_TOUCH_RESOLUTION  = 2;
-    const KPI_REOPENED              = 3;
-    const KPI_SOLVED                = 4;
+    const KPI_SOLVED                = 2;
+    const KPI_ONE_TOUCH_RESOLUTION  = 3;
+    const KPI_REOPENED              = 4;
 
     public $incrementing    = false;
     public $timestamps      = false;
@@ -45,21 +45,21 @@ class Kpi extends BaseModel {
 
     public static function forUser($user){
         $result =  static::where(['relation_id' => $user->id, 'type' => Kpi::TYPE_USER, "kpi" => static::KPI])
-                         ->select(DB::raw('sum(total)/cast(sum(count) as float) as avg'))
+                         ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
         return $result->avg ?? null;
     }
 
     public static function forTeam($team){
         $result =  static::where(['relation_id' => $team->id, 'type' => Kpi::TYPE_TEAM, "kpi" => static::KPI])
-                         ->select(DB::raw('sum(total)/cast(sum(count) as float) as avg'))
+                         ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
         return $result->avg ?? null;
     }
 
     public static function forType($type){
         $result =  static::where(['type' => $type, "kpi" => static::KPI])
-                         ->select(DB::raw(' sum(total)/cast(sum(count) as float) as avg'))
+                         ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
         return $result->avg ?? null;
     }

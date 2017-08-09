@@ -99,6 +99,16 @@ class KpisTest extends TestCase
     }
 
     /** @test */
+    public function solve_time_is_calculated_when_only_updating_the_status(){
+        $user   = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create(["created_at" => Carbon::parse("-5 minutes")]);
+
+        $ticket->addComment($user, null, Ticket::STATUS_SOLVED);
+
+        $this->assertEquals(5, SolveKpi::forUser($user) );
+    }
+
+    /** @test */
     public function average_solve_time_is_calculated_for_team(){
         $user   = factory(User::class)->create();
         $team   = factory(Team::class)->create();
