@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\TicketCommented;
 use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
@@ -95,6 +96,7 @@ class Ticket extends BaseModel{
             if( $this->requester && auth()->user() )                                            $this->requester->notify( $newCommentNotification );
             User::notifyAdmins( $newCommentNotification );
         });
+        event( new TicketCommented($this, $comment) );
         return $comment;
     }
 
