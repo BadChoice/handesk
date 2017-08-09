@@ -23,7 +23,7 @@ class Ticket extends BaseModel{
             "title"         => $title,
             "body"          => $body,
             "public_token"  => str_random(24),
-        ])->attachTags( request('tags') );
+        ])->attachTags( $tags );
 
         tap(new TicketCreated($ticket), function($newTicketNotification) use($requester) {
             User::notifyAdmins( $newTicketNotification );

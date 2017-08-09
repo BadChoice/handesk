@@ -31,6 +31,7 @@ class CreateTicketsFromNewEmailsTest extends TestCase
             $this->assertEquals("bruce@wayne.com", $ticket->requester->email);
             $this->assertEquals("I'm batman", $ticket->title);
             $this->assertEquals("Why so serious", $ticket->body);
+            $this->assertEquals("email", $ticket->tags->first()->name);
         });
     }
 

@@ -14,7 +14,7 @@ class Pop3Message{
     }
 
     public function subject(){
-        return mb_decode_mimeheader($this->attributes->subject);
+        return iconv_mime_decode($this->attributes->subject);
     }
 
     public function from(){
