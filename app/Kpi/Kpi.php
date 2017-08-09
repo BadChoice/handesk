@@ -20,7 +20,7 @@ class Kpi extends BaseModel {
     public $timestamps      = false;
     protected $table        = 'kpis';
 
-    const KPI          = null;
+    const KPI               = null;
 
     public static function obtain(Carbon $date,$relation_id,$type){
         return static::firstOrCreate([
@@ -45,21 +45,21 @@ class Kpi extends BaseModel {
 
     public static function forUser($user){
         $result =  static::where(['relation_id' => $user->id, 'type' => Kpi::TYPE_USER, "kpi" => static::KPI])
-                         ->select(DB::raw('sum(total)/CAST(sum(count) as float) as avg'))
+                         ->select(DB::raw('sum(total)/cast(sum(count) as float) as avg'))
                          ->first();
         return $result->avg ?? null;
     }
 
     public static function forTeam($team){
         $result =  static::where(['relation_id' => $team->id, 'type' => Kpi::TYPE_TEAM, "kpi" => static::KPI])
-                         ->select(DB::raw('sum(total)/CAST(sum(count) as float) as avg'))
+                         ->select(DB::raw('sum(total)/cast(sum(count) as float) as avg'))
                          ->first();
         return $result->avg ?? null;
     }
 
     public static function forType($type){
         $result =  static::where(['type' => $type, "kpi" => static::KPI])
-                         ->select(DB::raw(' sum(total)/CAST(sum(count) as float) as avg'))
+                         ->select(DB::raw(' sum(total)/cast(sum(count) as float) as avg'))
                          ->first();
         return $result->avg ?? null;
     }

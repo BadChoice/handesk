@@ -32,5 +32,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::resource('teams'                      ,'TeamsController');
     Route::get ('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
     Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
+
+    Route::get('reports',               'ReportsController@index')->name('reports.index');
 });
 

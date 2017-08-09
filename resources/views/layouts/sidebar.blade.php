@@ -15,7 +15,9 @@
         <li><a href="{{route('tickets.index')}}?closed=true">       {{ __('lead.mine') }}  </a></li>
     </ul>
     <h4> @icon(bar-chart) Reports</h4>
-
+    <ul>
+        <li><a href="{{route('reports.index')}}">       {{ __('reports.report') }}  </a> </li>
+    </ul>
     <br>
     <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
     <ul>

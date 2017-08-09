@@ -7,7 +7,6 @@ use App\Ticket;
 
 class SolveKpi extends Kpi
 {
-
     const KPI          = Kpi::KPI_SOLVED;
 
     public static function doesApply($ticket, $comment, $previousStatus){
