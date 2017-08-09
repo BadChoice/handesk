@@ -7,6 +7,8 @@ use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 
 class Ticket extends BaseModel{
+    use Taggable;
+
     const STATUS_NEW                = 1;
     const STATUS_OPEN               = 2;
     const STATUS_PENDING            = 3;
@@ -57,10 +59,6 @@ class Ticket extends BaseModel{
         return $this->belongsToMany(Tag::class);
     }
 
-    public function tagsString(){
-        return implode(',', $this->tags->pluck('name')->toArray() );
-    }
-
     public function assignTo($user){
         if( ! $user instanceof User){
             $user = User::findOrFail( $user );
@@ -77,20 +75,6 @@ class Ticket extends BaseModel{
         if($this->team && $this->team->id == $team->id) return;
         $this->team()->associate($team)->save();
         $team->notify( new TicketAssigned($this) );
-    }
-
-    public function attachTags($tagNames){
-        if(!is_array($tagNames)) $tagNames = explode(",",$tagNames);
-        collect($tagNames)->map(function($tagName){
-            return Tag::firstOrCreate(["name" => $tagName]);
-        })->unique('id')->each(function($tag){
-            $this->tags()->attach($tag);
-        });
-        return $this;
-    }
-
-    public function detachTag($tagName){
-        $this->tags()->detach( Tag::whereName($tagName)->get() );
     }
 
     public function addComment($user, $body, $newStatus = null){

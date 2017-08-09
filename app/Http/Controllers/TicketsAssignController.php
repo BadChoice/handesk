@@ -13,6 +13,6 @@ class TicketsAssignController extends Controller{
         if( request('user_id') ){
             $ticket->assignTo( request('user_id') );
         }
-        return back();
+        return redirect()->route('tickets.index');
     }
 }
