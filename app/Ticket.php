@@ -18,7 +18,7 @@ class Ticket extends BaseModel{
     const PRIORITY_HIGH             = 3;
 
     public static function createAndNotify($requester, $title, $body, $tags){
-        $requester  = Requester::firstOrCreate($requester);
+        $requester  = Requester::firstOrCreate( ["email" => $requester["email"]], ["name" => $requester["name"]]);
         $ticket     = $requester->tickets()->create([
             "title"         => $title,
             "body"          => $body,

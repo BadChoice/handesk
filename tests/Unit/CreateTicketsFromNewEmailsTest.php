@@ -7,6 +7,7 @@ use App\Services\Pop3\FakePop3;
 use App\Services\Pop3\FakePop3Message;
 use App\Services\Pop3\Pop3;
 use App\Ticket;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -16,6 +17,7 @@ class CreateTicketsFromNewEmailsTest extends TestCase
 
     /** @test */
     public function does_create_tickets_from_new_emails(){
+        Notification::fake();
         $fakePop = new FakePop3();
         $fakePop->messages = [
             new FakePop3Message(["name" => "Bruce Wayne", "email" => "bruce@wayne.com"], "I'm batman", "Why so serious"),
