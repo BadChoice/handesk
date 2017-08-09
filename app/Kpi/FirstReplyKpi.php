@@ -3,13 +3,13 @@
 namespace App\Kpi;
 
 
-use Illuminate\Support\Facades\DB;
+class FirstReplyKpi extends Kpi{
 
-class FirstReplyKpi extends Kpi
-{
-    public static function forUser($user){
-        return static::where(['relation_id' => $user->id, 'type' => Kpi::TYPE_USER])
-                        ->select(DB::raw('avg(avg) as avg'))
-                        ->first()->avg ;
+    const KPI = Kpi::KPI_FIRST_REPLY;
+
+    public static function doesApply($ticket, $comment){
+        if( ! $comment->user) return false;
+        if ( $ticket->comments()->whereNotNull('user_id')->count() > 1 ) return false;
+        return true;
     }
 }

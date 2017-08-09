@@ -79,6 +79,7 @@ class Ticket extends BaseModel{
     }
 
     public function addComment($user, $body, $newStatus = null){
+        $previousStatus = $this->status;
         if($newStatus) $this->updateStatus($newStatus);
         else           $this->touch();
 
@@ -96,7 +97,7 @@ class Ticket extends BaseModel{
             if( $this->requester && auth()->user() )                                            $this->requester->notify( $newCommentNotification );
             User::notifyAdmins( $newCommentNotification );
         });
-        event( new TicketCommented($this, $comment) );
+        event( new TicketCommented($this, $comment, $previousStatus) );
         return $comment;
     }
 

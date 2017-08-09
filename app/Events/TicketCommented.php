@@ -16,10 +16,12 @@ class TicketCommented
 
     public $ticket;
     public $comment;
+    public $previousStatus;
 
-    public function __construct($ticket, $comment) {
+    public function __construct($ticket, $comment, $previousStatus) {
         $this->ticket = $ticket;
         $this->comment = $comment;
+        $this->previousStatus = $previousStatus;
     }
 
     /**

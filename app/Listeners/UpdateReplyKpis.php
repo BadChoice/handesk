@@ -5,18 +5,13 @@ namespace App\Listeners;
 use App\Events\TicketCommented;
 use App\Kpi\FirstReplyKpi;
 use App\Kpi\Kpi;
+use App\Kpi\OneTouchResolutionKpi;
+use App\Kpi\ReopenedKpi;
+use App\Kpi\SolveKpi;
+use App\Ticket;
 
 class UpdateReplyKpis
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Handle the event.
@@ -25,18 +20,48 @@ class UpdateReplyKpis
      * @return void
      */
     public function handle(TicketCommented $event) {
-        if( ! $this->doesApply($event)) return;
         $this->calculateFirstReplyKpi($event);
+        $this->calculateSolvedKpi($event);
+        $this->calculateOneTouchResolutionKpi($event);
+        $this->calculateReopenedKpi($event);
     }
 
-    private function doesApply($event){
-        if( ! $event->comment->user) return false;
-        if ( $event->ticket->comments()->whereNotNull('user_id')->count() > 1 ) return false;
-        return true;
-    }
+
     private function calculateFirstReplyKpi($event){
+        if( ! FirstReplyKpi::doesApply($event->ticket, $event->comment) ) return;
+        $time = $event->ticket->created_at->diffInMinutes($event->comment->created_at);
+        FirstReplyKpi::obtain ( $event->ticket->created_at, $event->comment->user_id, Kpi::TYPE_USER )->addValue( $time );
 
-        FirstReplyKpi::obtain ( $event->ticket->created_at, $event->comment->user_id, Kpi::TYPE_USER )
-                    ->addValue( $event->ticket->created_at->diffInMinutes($event->comment->created_at));
+        if( ! $event->ticket->team_id) return;
+        FirstReplyKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $time );
+    }
+
+    private function calculateSolvedKpi($event) {
+        if( ! SolveKpi::doesApply($event->ticket, $event->comment, $event->previousStatus) ) return;
+        $time = $event->ticket->created_at->diffInMinutes($event->comment->created_at);
+        SolveKpi::obtain ( $event->ticket->created_at, $event->comment->user_id, Kpi::TYPE_USER )->addValue( $time );
+
+        if( ! $event->ticket->team_id) return;
+        SolveKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $time );
+    }
+
+    private function calculateOneTouchResolutionKpi($event){
+        if( ! FirstReplyKpi::doesApply($event->ticket, $event->comment) ) return;
+        $score = OneTouchResolutionKpi::doesApply($event->ticket, $event->comment);
+
+        OneTouchResolutionKpi::obtain ( $event->ticket->created_at, $event->comment->user_id, Kpi::TYPE_USER )->addValue( $score );
+
+        if( ! $event->ticket->team_id) return;
+        OneTouchResolutionKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $score );
+    }
+
+    private function calculateReopenedKpi($event){
+        $score = ReopenedKpi::score($event->ticket, $event->comment, $event->previousStatus);
+        if( $score == 0) return;
+
+        ReopenedKpi::obtain ( $event->ticket->created_at, $event->ticket->user_id, Kpi::TYPE_USER )->addValue( $score );
+
+        if( ! $event->ticket->team_id) return;
+        ReopenedKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $score );
     }
 }

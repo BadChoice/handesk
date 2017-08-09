@@ -26,7 +26,13 @@ php artisan migrate --seed
 ```
 
 > The default admin user is admin@handesk.com / admin
-> If you want email pulling, you need to enable the `imap` extension on php
+> If you want email pulling, you need to enable the `imap` extension on php (note that on mac the php-cli runs very slow, you need to update your /etc/hosts file 
+
+```
+::1         localhost YourMac.local
+127.0.0.1   localhost YourMac.local
+```
+
 Open your `app/Console/Kernel.php` to update the schedulers as you want (event comment them if not needed)
 Add the cron job `* * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1`
 
@@ -35,11 +41,6 @@ We try to follow a TDD approach as well as some mixed functional CSS for the fro
 
 TODOS:
 2. Reports by (all, teams, user) 
- // To those with events (Ticket created event, Ticket Updated Event, Ticket Solved Event, Ticket Reopened)
- - Avg Time to first reply
- - Avg Time to solve
- - One touch solve ratio
- - Reopened ratio
  - Satisfaction ratio
  
 3. Leads

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFirstReplyKpisTable extends Migration
+class CreateKpisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,14 @@ class CreateFirstReplyKpisTable extends Migration
      * @return void
      */
     public function up() {
-        Schema::create('first_reply_kpis', function (Blueprint $table) {
-            $table->primary(["date","type","relation_id"]);
+        Schema::create('kpis', function (Blueprint $table) {
+            $table->primary(["date","type","relation_id","kpi"]);
             $table->date('date');
             $table->tinyInteger('type');
+            $table->tinyInteger('kpi');
             $table->unsignedInteger('relation_id');
-            $table->unsignedInteger('avg')->default(0);
+            $table->unsignedInteger('total')->default(0);
+            $table->unsignedInteger('count')->default(0);
         });
     }
 
@@ -28,6 +30,6 @@ class CreateFirstReplyKpisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('first_reply_kpis');
+        Schema::dropIfExists('kpis');
     }
 }
