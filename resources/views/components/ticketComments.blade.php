@@ -13,5 +13,5 @@
             <div class="float-left mr3">@gravatar($ticket->requester->email) </div>
             <div class="pt1">{{ $ticket->requester->name }} · {{ $ticket->created_at->diffForHumans() }}</div>
         </div>
-        <div>{!! nl2br( strip_tags($comment->body)) !!} </div>
+        <div>{!! nl2br( strip_tags($ticket->body)) !!} </div>
     </div>

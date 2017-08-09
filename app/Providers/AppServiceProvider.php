@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Pop3\Pop3;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;

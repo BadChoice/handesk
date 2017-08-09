@@ -13,7 +13,7 @@ let mix = require('laravel-mix');
 
 mix.js([
         'resources/assets/js/app.js',
-        'resources/assets/js/libs/jquery.tagsinput.min.js'
+        'resources/assets/js/libs/jquery.tagsinput.min.js'  //http://xoxco.com/projects/code/tagsinput/
     ], 'public/js')
     .less('resources/assets/less/style.less',                   '../resources/assets/css/style.css')
     .styles([

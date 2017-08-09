@@ -120,4 +120,11 @@ return [
         ],
     ],
 
+    "fetch" => [
+        "host" => env('MAIL_FETCH_HOST'),
+        "port" => env('MAIL_FETCH_PORT',110),
+        "username" => env('MAIL_FETCH_USERNAME','hi'),
+        "password" => env('MAIL_FETCH_PASSWORD'),
+    ]
+
 ];

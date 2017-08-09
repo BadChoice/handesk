@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CloseSolvedTickets::class,
+        Commands\CreateTicketsFromNewEmails::class,
     ];
 
     /**
@@ -27,7 +28,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('handesk:kpi')               ->dailyAt('23:55'); //TODO:
-        $schedule->command('handesk:closeSolvedTickets')->dailyAt('23:55'); //TODO:
+        $schedule->command('handesk:closeSolvedTickets')->dailyAt('23:55');
+        $schedule->command('handesk:createTicketsFromNewEmails')->everyMinute();
     }
 
     /**
