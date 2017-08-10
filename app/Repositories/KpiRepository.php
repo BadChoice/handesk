@@ -12,13 +12,18 @@ use App\User;
 use Carbon\Carbon;
 
 class KpiRepository{
-
-    protected $startDate;
-    protected $endDate;
+    public $startDate;
+    public $endDate;
 
     public function __construct($startDate = null, $endDate = null){
         $this->startDate    = $startDate ? : Carbon::today()->firstOfMonth() ;
         $this->endDate      = $endDate   ? : Carbon::tomorrow() ;
+    }
+
+    public function forDates($start, $end){
+        $this->startDate    = $start;
+        $this->endDate      = $end;
+        return $this;
     }
 
     private function ticketsQuery($agent = null){

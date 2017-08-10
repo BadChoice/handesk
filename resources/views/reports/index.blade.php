@@ -4,6 +4,14 @@
         <h3>Reports</h3>
     </div>
 
+    <div class="description">
+        {{ Form::open( ["url" => route('reports.index'), 'method' => 'GET'] ) }}
+        {{ Form::date('startDate', $repository->startDate) }}
+        {{ Form::date('endDate', $repository->startDate) }}
+        <button class="ph4">Filter</button>
+        {{ Form::close() }}
+    </div>
+
     <table class="striped">
         <thead>
             <tr>
@@ -33,11 +41,11 @@
                 @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, auth()->user()) ])
             </td>
             <td>
-                {{ $repository->oneTouchResolutionKpi( auth()->user() ) }}
+                {{ $repository->oneTouchResolutionKpi( auth()->user() ) }} %
                 @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, auth()->user()) ])
             </td>
             <td>
-                {{ $repository->reopenedKpi( auth()->user() ) }}
+                {{ $repository->reopenedKpi( auth()->user() ) }} %
                 @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_REOPENED, auth()->user()) ])
             </td>
         </tr>
@@ -58,11 +66,11 @@
                 @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, $team) ])
             </td>
             <td>
-                {{ $repository->oneTouchResolutionKpi( $team ) }}
+                {{ $repository->oneTouchResolutionKpi( $team ) }} %
                 @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, $team) ])
             </td>
             <td>
-                {{ $repository->reopenedKpi( $team ) }}
+                {{ $repository->reopenedKpi( $team ) }} %
                 @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_REOPENED, $team) ])
             </td>
         </tr>
@@ -75,8 +83,8 @@
             <td>  @if(auth()->user()->admin ){{ $repository->solvedTickets( ) }}  @endif </td>
             <td>  {{$repository->firstReplyKpi() }}</td>
             <td>  {{ $repository->solveKpi() }}     </td>
-            <td>  {{ $repository->oneTouchResolutionKpi( ) }}         </td>
-            <td>  {{ $repository->reopenedKpi(  ) }}         </td>
+            <td>  {{ $repository->oneTouchResolutionKpi( ) }} %        </td>
+            <td>  {{ $repository->reopenedKpi(  ) }} %        </td>
         </tr>
     </table>
 
