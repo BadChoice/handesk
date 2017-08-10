@@ -7,31 +7,39 @@ use App\Kpi\Kpi;
 use App\Kpi\OneTouchResolutionKpi;
 use App\Kpi\ReopenedKpi;
 use App\Kpi\SolveKpi;
+use App\Ticket;
 use App\User;
 
 class KpiRepository{
-    public function firstReplyKpi( $kpiAgent = null ){
-        if( ! $kpiAgent)                    return $this->toTime( FirstReplyKpi::forType( Kpi::TYPE_USER ) );
-        if( $kpiAgent instanceof User )     return $this->toTime( FirstReplyKpi::forUser( auth()->user() ) );
-        return $this->toTime( FirstReplyKpi::forTeam( $kpiAgent ) );
+
+    public function tickets($agent = null){
+        if(! $agent) return Ticket::count();
+        if( $agent instanceof User )     return Ticket::where(["user_id" => $agent->id])->count();
+        return Ticket::where(["team_id" => $agent->id])->count();
     }
 
-    public function solveKpi( $kpiAgent = null ){
-        if( ! $kpiAgent)                    return $this->toTime( SolveKpi::forType( Kpi::TYPE_USER ) );
-        if( $kpiAgent instanceof User )     return $this->toTime( SolveKpi::forUser( auth()->user() ) );
-        return $this->toTime( SolveKpi::forTeam( $kpiAgent ) );
+    public function firstReplyKpi( $agent = null ){
+        if( ! $agent)                    return $this->toTime( FirstReplyKpi::forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )     return $this->toTime( FirstReplyKpi::forUser( auth()->user() ) );
+        return $this->toTime( FirstReplyKpi::forTeam( $agent ) );
     }
 
-    public function oneTouchResolutionKpi( $kpiAgent = null ){
-        if( ! $kpiAgent)                    return $this->toPercentage(OneTouchResolutionKpi::forType( Kpi::TYPE_USER ) );
-        if( $kpiAgent instanceof User )     return $this->toPercentage(OneTouchResolutionKpi::forUser( auth()->user() ) );
-        return $this->toPercentage(OneTouchResolutionKpi::forTeam( $kpiAgent ) );
+    public function solveKpi( $agent = null ){
+        if( ! $agent)                    return $this->toTime( SolveKpi::forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )     return $this->toTime( SolveKpi::forUser( auth()->user() ) );
+        return $this->toTime( SolveKpi::forTeam( $agent ) );
     }
 
-    public function reopenedKpi( $kpiAgent = null ){
-        if( ! $kpiAgent)                    return $this->toPercentage(ReopenedKpi::forType( Kpi::TYPE_USER ), true );
-        if( $kpiAgent instanceof User )     return $this->toPercentage(ReopenedKpi::forUser( auth()->user() ), true );
-        return $this->toPercentage(ReopenedKpi::forTeam( $kpiAgent ), true );
+    public function oneTouchResolutionKpi( $agent = null ){
+        if( ! $agent)                    return $this->toPercentage(OneTouchResolutionKpi::forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )     return $this->toPercentage(OneTouchResolutionKpi::forUser( auth()->user() ) );
+        return $this->toPercentage(OneTouchResolutionKpi::forTeam( $agent ) );
+    }
+
+    public function reopenedKpi( $agent = null ){
+        if( ! $agent)                    return $this->toPercentage(ReopenedKpi::forType( Kpi::TYPE_USER ), true );
+        if( $agent instanceof User )     return $this->toPercentage(ReopenedKpi::forUser( auth()->user() ), true );
+        return $this->toPercentage(ReopenedKpi::forTeam( $agent ), true );
     }
 
     public function average($kpi, $agent){
@@ -50,6 +58,10 @@ class KpiRepository{
         else if($kpi == Kpi::KPI_REOPENED){
             $agentValue     = $this->reopenedKpi($agent);
             $overallValue   = $this->reopenedKpi();
+        }
+        else{
+            $agentValue     = $this->tickets($agent);
+            $overallValue   = $this->tickets();
         }
         return $this->toPercentage(  - 1 + ($agentValue / $overallValue) );
     }
