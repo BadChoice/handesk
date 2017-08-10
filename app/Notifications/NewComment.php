@@ -40,10 +40,13 @@ class NewComment extends Notification
     public function toMail($notifiable) {
         return (new MailMessage)
                     ->subject("Ticket updated: {$this->ticket->requester->name}")
+                    ->greeting(" ")
+                    ->line(":: Reply above this line ::")
                     ->line('A new comment for the ticket')
                     ->line($this->comment->body)
                     ->action('See the ticket', $notifiable instanceof Requester ? route("requester.tickets.show", $this->ticket->public_token) : route("tickets.show", $this->ticket))
-                    ->line('Thank you for using our application!');
+                    ->line('Thank you for using our application!')
+                    ->line("ticket-id:{$this->ticket->id}.");
     }
 
     public function toSlack($notifiable) {

@@ -8,7 +8,7 @@ Check out the screenshots to see how nice it looks, and feel fee to contribute b
 We will keep adding features as we need them, but our basic workflow is totally covered :D
 
 ## Features
-· Email polling
+· Email polling (new tickets and tickets updates)
 · API for creating/updating/fetching tickets/leads so you can display them into your main app
 · Instant email/slack notifications when tickets are created/updated
 · Everything is unlimited 
