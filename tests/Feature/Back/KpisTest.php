@@ -29,28 +29,30 @@ class KpisTest extends TestCase
         $user   = factory(User::class)->create();
         $ticket = factory(Ticket::class)->create(["created_at" => Carbon::parse("-5 minutes")]);
 
+        $firstReplyKpi = new FirstReplyKpi;
+
         $ticket->addComment(null, "A requester comment");   //A requester comment should not apply
-        $this->assertEquals(null, FirstReplyKpi::forUser($user) );
+        $this->assertEquals(null, $firstReplyKpi->forUser($user) );
 
         $ticket->addComment($user, "", Ticket::STATUS_OPEN);   //A status only
-        $this->assertEquals(null, FirstReplyKpi::forUser($user) );
+        $this->assertEquals(null, $firstReplyKpi->forUser($user) );
 
         $ticket->addComment($user, "A test comment");
-        $this->assertEquals(5, FirstReplyKpi::forUser($user) );
+        $this->assertEquals(5, $firstReplyKpi->forUser($user) );
 
         $ticket->addComment($user, "A second comment"); //Second comment should not count for the KPI
-        $this->assertEquals(5, FirstReplyKpi::forUser($user) );
+        $this->assertEquals(5, $firstReplyKpi->forUser($user) );
 
         $ticket = factory(Ticket::class)->create(["created_at" => Carbon::parse("-10 minutes")]);
         $ticket->addComment($user, "Another comment");
 
-        $this->assertEquals(7.5, FirstReplyKpi::forUser($user) );
+        $this->assertEquals(7.5, $firstReplyKpi->forUser($user) );
 
         $user2   = factory(User::class)->create();
         $ticket2 = factory(Ticket::class)->create(["created_at" => Carbon::parse("-15 minutes")]);
         $ticket2->addComment($user2, "Another comment");
 
-        $this->assertEquals(15, FirstReplyKpi::forUser($user2) );
+        $this->assertEquals(15, $firstReplyKpi->forUser($user2) );
     }
 
     /** @test */
@@ -62,7 +64,7 @@ class KpisTest extends TestCase
         );
 
         $ticket->addComment($user, "A second comment"); //Second comment should not count for the KPI
-        $this->assertEquals(5, FirstReplyKpi::forTeam($team) );
+        $this->assertEquals(5, (new FirstReplyKpi)->forTeam($team) );
     }
 
     /** @test */
@@ -77,22 +79,23 @@ class KpisTest extends TestCase
         FirstReplyKpi::obtain( Carbon::today(),       $user2->id, Kpi::TYPE_USER )->addValue( 30 );
         FirstReplyKpi::obtain( Carbon::yesterday(),   $user2->id, Kpi::TYPE_USER )->addValue( 40 );
 
-        $this->assertEquals( (5 + 10 + 20 + 20 + 30 + 40) / 6, FirstReplyKpi::forType(Kpi::TYPE_USER));
+        $this->assertEquals( (5 + 10 + 20 + 20 + 30 + 40) / 6, (new FirstReplyKpi)->forType(Kpi::TYPE_USER));
     }
 
     /** @test */
     public function average_solve_time_is_calculated_for_user(){
         $user   = factory(User::class)->create();
         $ticket = factory(Ticket::class)->create(["created_at" => Carbon::parse("-5 minutes")]);
+        $solveKpi = new SolveKpi;
 
         $ticket->addComment(null, "A requester comment");   //A requester comment should not apply
-        $this->assertEquals(null, SolveKpi::forUser($user) );
+        $this->assertEquals(null, $solveKpi->forUser($user) );
 
         $ticket->addComment(null, "A requester comment", Ticket::STATUS_OPEN);   //Not solving the ticket should not count
-        $this->assertEquals(null, SolveKpi::forUser($user) );
+        $this->assertEquals(null, $solveKpi->forUser($user) );
 
         $ticket->addComment($user, "A requester comment", Ticket::STATUS_SOLVED);
-        $this->assertEquals(5, SolveKpi::forUser($user) );
+        $this->assertEquals(5, $solveKpi->forUser($user) );
     }
 
     /** @test */
@@ -102,7 +105,7 @@ class KpisTest extends TestCase
 
         $ticket->addComment($user, null, Ticket::STATUS_SOLVED);
 
-        $this->assertEquals(5, SolveKpi::forUser($user) );
+        $this->assertEquals(5, (new SolveKpi)->forUser($user) );
     }
 
     /** @test */
@@ -114,7 +117,7 @@ class KpisTest extends TestCase
         );
 
         $ticket->addComment($user, "A second comment", Ticket::STATUS_SOLVED); //Second comment should not count for the KPI
-        $this->assertEquals(5, SolveKpi::forTeam($team) );
+        $this->assertEquals(5, (new SolveKpi)->forTeam($team) );
     }
 
     /** @test */
@@ -132,7 +135,7 @@ class KpisTest extends TestCase
         $ticket3->addComment(null, "A requester comment");                           //A requester comment should not apply
         $ticket3->addComment($user, "A requester comment", Ticket::STATUS_SOLVED);   //One touch resolution
 
-        $this->assertEquals(2/3, OneTouchResolutionKpi::forUser($user) );
+        $this->assertEquals(2/3, (new OneTouchResolutionKpi)->forUser($user) );
     }
 
     /** @test */
@@ -148,8 +151,7 @@ class KpisTest extends TestCase
         $ticket1->addComment($user, "A requester comment",  Ticket::STATUS_OPEN);
         $ticket2->addComment($user, "A requester comment",  Ticket::STATUS_SOLVED);
 
-
-        $this->assertEquals(1/2, ReopenedKpi::forUser($user) );
+        $this->assertEquals(1/2, (new ReopenedKpi)->forUser($user) );
     }
 //- Reopened ratio
 //- Satisfaction ratio

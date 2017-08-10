@@ -9,37 +9,51 @@ use App\Kpi\ReopenedKpi;
 use App\Kpi\SolveKpi;
 use App\Ticket;
 use App\User;
+use Carbon\Carbon;
 
 class KpiRepository{
 
+    protected $startDate;
+    protected $endDate;
+
+    public function __construct($startDate = null, $endDate = null){
+        $this->startDate    = $startDate ? : Carbon::today()->firstOfMonth() ;
+        $this->endDate      = $endDate   ? : Carbon::tomorrow() ;
+    }
+
     public function tickets($agent = null){
-        if(! $agent) return Ticket::count();
-        if( $agent instanceof User )     return Ticket::where(["user_id" => $agent->id])->count();
-        return Ticket::where(["team_id" => $agent->id])->count();
+        if(! $agent)                        $q = Ticket::query();
+        else if( $agent instanceof User )   $q = Ticket::where(["user_id" => $agent->id]);
+        else                                $q = Ticket::where(["team_id" => $agent->id]);
+        return $q->whereBetween('created_at',[$this->startDate,$this->endDate])->count();
     }
 
     public function firstReplyKpi( $agent = null ){
-        if( ! $agent)                    return $this->toTime( FirstReplyKpi::forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )     return $this->toTime( FirstReplyKpi::forUser( auth()->user() ) );
-        return $this->toTime( FirstReplyKpi::forTeam( $agent ) );
+        $kpi = (new FirstReplyKpi)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                    return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )     return $this->toTime( $kpi->forUser( auth()->user() ) );
+        return $this->toTime( $kpi->forTeam( $agent ) );
     }
 
     public function solveKpi( $agent = null ){
-        if( ! $agent)                    return $this->toTime( SolveKpi::forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )     return $this->toTime( SolveKpi::forUser( auth()->user() ) );
-        return $this->toTime( SolveKpi::forTeam( $agent ) );
+        $kpi = (new SolveKpi)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                    return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )     return $this->toTime( $kpi->forUser( auth()->user() ) );
+        return $this->toTime( $kpi->forTeam( $agent ) );
     }
 
     public function oneTouchResolutionKpi( $agent = null ){
-        if( ! $agent)                    return $this->toPercentage(OneTouchResolutionKpi::forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )     return $this->toPercentage(OneTouchResolutionKpi::forUser( auth()->user() ) );
-        return $this->toPercentage(OneTouchResolutionKpi::forTeam( $agent ) );
+        $kpi = (new OneTouchResolutionKpi)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                    return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )     return $this->toPercentage($kpi->forUser( auth()->user() ) );
+        return $this->toPercentage($kpi->forTeam( $agent ) );
     }
 
     public function reopenedKpi( $agent = null ){
-        if( ! $agent)                    return $this->toPercentage(ReopenedKpi::forType( Kpi::TYPE_USER ), true );
-        if( $agent instanceof User )     return $this->toPercentage(ReopenedKpi::forUser( auth()->user() ), true );
-        return $this->toPercentage(ReopenedKpi::forTeam( $agent ), true );
+        $kpi = (new ReopenedKpi)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                    return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ), true );
+        if( $agent instanceof User )     return $this->toPercentage($kpi->forUser( auth()->user() ), true );
+        return $this->toPercentage($kpi->forTeam( $agent ), true );
     }
 
     public function average($kpi, $agent){
@@ -67,9 +81,9 @@ class KpiRepository{
     }
 
     private function toTime($minutes){
-        $days = floor ($minutes / 1440);
-        $hours = floor (($minutes - $days * 1440) / 60);
-        $mins = $minutes - ($days * 1440) - ($hours * 60);
+        $days   = floor ($minutes / 1440);
+        $hours  = floor (($minutes - $days * 1440) / 60);
+        $mins   = $minutes - ($days * 1440) - ($hours * 60);
         return "{$days} days {$hours} hours {$mins} minutes";
     }
 

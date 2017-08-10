@@ -22,6 +22,21 @@ class Kpi extends BaseModel {
 
     const KPI               = null;
 
+    protected $startDate;
+    protected $endDate;
+
+    public function __construct(array $attributes = []) {
+        parent::__construct($attributes);
+        $this->startDate   = Carbon::today()->startOfMonth();
+        $this->endDate     = Carbon::tomorrow();
+    }
+
+    public function forDates($start,$end = null){
+        $this->startDate    = $start;
+        $this->endDate      = $end ? : $start->tomorrow();
+        return $this;
+    }
+
     public static function obtain(Carbon $date,$relation_id,$type){
         return static::firstOrCreate([
             "date"          => $date->toDateString(),
@@ -43,22 +58,25 @@ class Kpi extends BaseModel {
             ]);
     }
 
-    public static function forUser($user){
-        $result =  static::where(['relation_id' => $user->id, 'type' => Kpi::TYPE_USER, "kpi" => static::KPI])
+    public function forUser($user){
+        $result =  static::whereBetween('date',[$this->startDate, $this->endDate])
+                          ->where(['relation_id' => $user->id, 'type' => Kpi::TYPE_USER, "kpi" => static::KPI])
                          ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
         return $result->avg ?? null;
     }
 
-    public static function forTeam($team){
-        $result =  static::where(['relation_id' => $team->id, 'type' => Kpi::TYPE_TEAM, "kpi" => static::KPI])
+    public function forTeam($team){
+        $result =  static::whereBetween('date',[$this->startDate, $this->endDate])
+                         ->where(['relation_id' => $team->id, 'type' => Kpi::TYPE_TEAM, "kpi" => static::KPI])
                          ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
         return $result->avg ?? null;
     }
 
-    public static function forType($type){
-        $result =  static::where(['type' => $type, "kpi" => static::KPI])
+    public function forType($type){
+        $result =  static::whereBetween('date',[$this->startDate, $this->endDate])
+                          ->where(['type' => $type, "kpi" => static::KPI])
                          ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
         return $result->avg ?? null;
