@@ -21,11 +21,27 @@ class KpiRepository{
         $this->endDate      = $endDate   ? : Carbon::tomorrow() ;
     }
 
-    public function tickets($agent = null){
+    private function ticketsQuery($agent = null){
         if(! $agent)                        $q = Ticket::query();
         else if( $agent instanceof User )   $q = Ticket::where(["user_id" => $agent->id]);
         else                                $q = Ticket::where(["team_id" => $agent->id]);
-        return $q->whereBetween('created_at',[$this->startDate,$this->endDate])->count();
+        return $q->whereBetween('created_at',[$this->startDate,$this->endDate]);
+    }
+
+    public function tickets($agent = null){
+        return $this->ticketsQuery($agent)->count();
+    }
+
+    public function unansweredTickets($agent = null){
+        return $this->ticketsQuery($agent)->open()->whereDoesntHave('comments')->count();
+    }
+
+    public function openTickets($agent = null){
+        return $this->ticketsQuery($agent)->open()->count();
+    }
+
+    public function solvedTickets($agent = null){
+        return $this->ticketsQuery($agent)->solved()->count();
     }
 
     public function firstReplyKpi( $agent = null ){
@@ -58,20 +74,24 @@ class KpiRepository{
 
     public function average($kpi, $agent){
         if($kpi == Kpi::KPI_FIRST_REPLY) {
-            $agentValue = $this->firstReplyKpi($agent);
-            $overallValue = $this->firstReplyKpi();
+            $agentValue     = $this->firstReplyKpi($agent);
+            $overallValue   = $this->firstReplyKpi();
         }
         else if($kpi == Kpi::KPI_SOLVED){
-            $agentValue = $this->solveKpi($agent);
-            $overallValue = $this->solveKpi();
+            $agentValue     = $this->solveKpi($agent);
+            $overallValue   = $this->solveKpi();
         }
         else if($kpi == Kpi::KPI_ONE_TOUCH_RESOLUTION){
-            $agentValue = $this->oneTouchResolutionKpi($agent);
-            $overallValue = $this->oneTouchResolutionKpi();
+            $agentValue     = $this->oneTouchResolutionKpi($agent);
+            $overallValue   = $this->oneTouchResolutionKpi();
         }
         else if($kpi == Kpi::KPI_REOPENED){
             $agentValue     = $this->reopenedKpi($agent);
             $overallValue   = $this->reopenedKpi();
+        }
+        else if($kpi == Kpi::KPI_UNANSWERED_TICKETS){
+            $agentValue     = $this->unansweredTickets($agent);
+            $overallValue   = $this->unansweredTickets();
         }
         else{
             $agentValue     = $this->tickets($agent);
@@ -83,12 +103,11 @@ class KpiRepository{
     private function toTime($minutes){
         $days   = floor ($minutes / 1440);
         $hours  = floor (($minutes - $days * 1440) / 60);
-        $mins   = $minutes - ($days * 1440) - ($hours * 60);
-        return "{$days} days {$hours} hours {$mins} minutes";
+        $mins   = (int)($minutes - ($days * 1440) - ($hours * 60));
+        return "{$days} Days {$hours} Hours {$mins} Mins";
     }
 
     private function toPercentage($value, $inverse = false){
-        if($inverse) return (1 - $value) * 100 . " %";
-        return $value * 100 . " %";
+        return  ($inverse ? 1 - $value : $value)* 100 ;
     }
 }

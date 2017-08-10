@@ -15,6 +15,7 @@ class Kpi extends BaseModel {
     const KPI_SOLVED                = 2;
     const KPI_ONE_TOUCH_RESOLUTION  = 3;
     const KPI_REOPENED              = 4;
+    const KPI_UNANSWERED_TICKETS    = 5;
 
     public $incrementing    = false;
     public $timestamps      = false;

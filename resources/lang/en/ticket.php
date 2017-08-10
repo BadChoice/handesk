@@ -6,6 +6,7 @@ return [
     "assigned"      => "Assigned",
     "myTickets"     => "My Tickets",
     "unassigned"    => "Unassigned",
+    "unanswered"    => "Unanswered",
     "archive"       => "Archive",
     "subject"       => "Subject",
     "requester"     => "Requester",

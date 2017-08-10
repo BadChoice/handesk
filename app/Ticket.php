@@ -110,6 +110,14 @@ class Ticket extends BaseModel{
         $this->update(["status" => $status]);
     }
 
+    public function scopeOpen($query){
+        return $query->where('status','<',Ticket::STATUS_SOLVED);
+    }
+
+    public function scopeSolved($query){
+        return $query->where('status','>=',Ticket::STATUS_SOLVED);
+    }
+
     public function statusName(){
         switch ($this->status){
             case static::STATUS_NEW                 : return "new";
