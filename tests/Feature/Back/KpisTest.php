@@ -4,16 +4,13 @@ namespace Tests\Feature;
 
 use App\Kpi\FirstReplyKpi;
 use App\Kpi\Kpi;
-use App\Kpi\OneTouchResolution;
 use App\Kpi\OneTouchResolutionKpi;
 use App\Kpi\ReopenedKpi;
 use App\Kpi\SolveKpi;
-use App\Notifications\NewComment;
 use App\Team;
 use App\Ticket;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

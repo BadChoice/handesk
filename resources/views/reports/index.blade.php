@@ -8,46 +8,34 @@
         <thead>
             <tr>
                 <th></th>
-                <th> First Reply Time </th>
-                <th> Solve Time </th>
-                <th> One touch resolution ratio </th>
-                <th> Reopened ratio </th>
+                <th> {{ __('report.firstReplyTime') }}          </th>
+                <th> {{ __('report.solveTime') }}               </th>
+                <th> {{ __('report.onTouchResolutionRatio') }}  </th>
+                <th> {{ __('report.reopenedRatio') }}           </th>
             </tr>
         </thead>
         <tr>
             <td> You </td>
-            <td>  {{ App\Kpi\FirstReplyKpi::forUser( auth()->user() ) }}</td>
-            <td>  {{ App\Kpi\SolveKpi::forUser( auth()->user() ) }}        </td>
-            <td>  {{ App\Kpi\OneTouchResolutionKpi::forUser( auth()->user() ) }} %        </td>
-            <td>  {{ App\Kpi\ReopenedKpi::forUser( auth()->user() ) }} %        </td>
+            <td>  {{ $repository->firstReplyKpi(auth()->user()) }} ( {{ $repository->average(App\Kpi\Kpi::KPI_FIRST_REPLY, auth()->user()) }} )  </td>
+            <td>  {{ $repository->solveKpi(auth()->user()) }}     ( {{ $repository->average(App\Kpi\Kpi::KPI_SOLVED, auth()->user()) }} )</td>
+            <td>  {{ $repository->oneTouchResolutionKpi( auth()->user() ) }}    ( {{ $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, auth()->user()) }} )     </td>
+            <td>  {{ $repository->reopenedKpi( auth()->user() ) }}   ( {{ $repository->average(App\Kpi\Kpi::KPI_REOPENED, auth()->user()) }} )      </td>
         </tr>
+        @foreach(auth()->user()->teams as $team)
         <tr>
-            <td> You Previous month </td>
-            <td>  {{ App\Kpi\FirstReplyKpi::forUser( auth()->user() ) }}</td>
-            <td>  {{ App\Kpi\SolveKpi::forUser( auth()->user() ) }}        </td>
-            <td>  {{ App\Kpi\OneTouchResolutionKpi::forUser( auth()->user() ) }} %        </td>
-            <td>  {{ App\Kpi\ReopenedKpi::forUser( auth()->user() ) }} %        </td>
+            <td> {{ $team->name }} </td>
+            <td>  {{ $repository->firstReplyKpi($team) }} ( {{ $repository->average(App\Kpi\Kpi::KPI_FIRST_REPLY, $team) }} )  </td>
+            <td>  {{ $repository->solveKpi($team) }}     ( {{ $repository->average(App\Kpi\Kpi::KPI_SOLVED, $team) }} )</td>
+            <td>  {{ $repository->oneTouchResolutionKpi( $team ) }}    ( {{ $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, $team) }} )     </td>
+            <td>  {{ $repository->reopenedKpi( $team ) }}   ( {{ $repository->average(App\Kpi\Kpi::KPI_REOPENED, $team) }} )      </td>
         </tr>
-        <tr>
-            <td> Team 1 </td>
-            <td>  {{ App\Kpi\FirstReplyKpi::forUser( auth()->user() ) }}</td>
-            <td>  {{ App\Kpi\SolveKpi::forUser( auth()->user() ) }}        </td>
-            <td>  {{ App\Kpi\OneTouchResolutionKpi::forUser( auth()->user() ) }} %        </td>
-            <td>  {{ App\Kpi\ReopenedKpi::forUser( auth()->user() ) }} %        </td>
-        </tr>
-        <tr>
-            <td> Team 2 </td>
-            <td>  {{ App\Kpi\FirstReplyKpi::forUser( auth()->user() ) }}</td>
-            <td>  {{ App\Kpi\SolveKpi::forUser( auth()->user() ) }}        </td>
-            <td>  {{ App\Kpi\OneTouchResolutionKpi::forUser( auth()->user() ) }} %        </td>
-            <td>  {{ App\Kpi\ReopenedKpi::forUser( auth()->user() ) }} %        </td>
-        </tr>
+        @endforeach
         <tr>
             <td> All average </td>
-            <td>  {{ App\Kpi\FirstReplyKpi::forUser( auth()->user() ) }}</td>
-            <td>  {{ App\Kpi\SolveKpi::forUser( auth()->user() ) }}        </td>
-            <td>  {{ App\Kpi\OneTouchResolutionKpi::forUser( auth()->user() ) }} %        </td>
-            <td>  {{ App\Kpi\ReopenedKpi::forUser( auth()->user() ) }} %        </td>
+            <td>  {{$repository->firstReplyKpi() }}</td>
+            <td>  {{ $repository->solveKpi() }}     </td>
+            <td>  {{ $repository->oneTouchResolutionKpi( ) }}         </td>
+            <td>  {{ $repository->reopenedKpi(  ) }}         </td>
         </tr>
     </table>
 
