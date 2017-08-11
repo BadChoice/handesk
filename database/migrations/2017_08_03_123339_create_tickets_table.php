@@ -24,7 +24,9 @@ class CreateTicketsTable extends Migration
             $table->unsignedInteger("user_id")->nullable();
             $table->tinyInteger("status")->default(Ticket::STATUS_NEW);
             $table->tinyInteger("priority")->default(Ticket::PRIORITY_NORMAL);
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

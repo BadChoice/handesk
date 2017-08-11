@@ -7,9 +7,10 @@ use App\Events\TicketStatusUpdated;
 use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel{
-    use Taggable;
+    use SoftDeletes, Taggable;
 
     const STATUS_NEW                = 1;
     const STATUS_OPEN               = 2;
