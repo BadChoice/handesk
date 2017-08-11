@@ -102,6 +102,7 @@ class KpiRepository{
             $agentValue     = $this->tickets($agent);
             $overallValue   = $this->tickets();
         }
+        if($overallValue == 0) return 0;
         return $this->toPercentage(  - 1 + ($agentValue / $overallValue) );
     }
 
