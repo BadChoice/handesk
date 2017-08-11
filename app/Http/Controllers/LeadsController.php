@@ -11,4 +11,8 @@ class LeadsController extends Controller
         else                      $leads = auth()->user()->teamsLeads();
         return view('leads.index', [ "leads" => $leads->paginate(25) ]);
     }
+
+    public function show(Lead $lead){
+        return view('leads.show', ["lead" => $lead]);
+    }
 }

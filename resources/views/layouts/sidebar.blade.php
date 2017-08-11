@@ -13,7 +13,7 @@
     <br>
     <h4> @icon(dot-circle-o) {{ trans_choice('lead.lead',2) }}</h4>
     <ul>
-        <li><a href="{{route('leads.index')}}">       {{ trans_choice('lead.lead',2) }}  </a> <span class="label">{{ $repository->recentlyUpdated()->count() }}  </span> </li>
+        <li><a href="{{route('leads.index')}}">       {{ trans_choice('lead.lead',2) }}  </a>  </li>
     </ul>
 
     <br>

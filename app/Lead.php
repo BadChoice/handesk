@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Services\Mailchimp;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends BaseModel
@@ -24,7 +23,7 @@ class Lead extends BaseModel
     }
 
     public function statusUpdates() {
-        return $this->hasMany( StatusUpdate::class );
+        return $this->hasMany( LeadStatusUpdate::class );
     }
 
     public function updateStatus($status, $reason = '') {
