@@ -3,12 +3,12 @@
     <h4> @icon(inbox) {{ trans_choice('ticket.ticket',2) }}</h4>
     <ul>
         @php $repository = new App\Repositories\TicketsRepository @endphp
-        <li class="active"><a href="{{route('tickets.index')}}">    {{ __('ticket.open') }}          </a> @include('components.sidebarLabel', ["count" => $repository->all()->count() ]) </li>
-        <li><a href="{{route('tickets.index')}}?unassigned=true">   {{ __('ticket.unassigned') }}   </a> @include('components.sidebarLabel', ["count" => $repository->unassigned()->count() ])       </li>
-        <li><a href="{{route('tickets.index')}}?assigned=true">     {{ __('ticket.myTickets') }}    </a> @include('components.sidebarLabel', ["count" => $repository->assignedToMe()->count() ])     </li>
-        <li><a href="{{route('tickets.index')}}?recent=true">       {{ __('ticket.recent') }}       </a> @include('components.sidebarLabel', ["count" => $repository->recentlyUpdated()->count() ])  </li>
-        <li><a href="{{route('tickets.index')}}?solved=true">       {{ __('ticket.solved') }}       </a>  </li>
-        <li><a href="{{route('tickets.index')}}?closed=true">       {{ __('ticket.archive') }}     </a></li>
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?all=true",          "title" => __('ticket.open'),       "count" => $repository->all()->count()])
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?unassigned=true",   "title" => __('ticket.unassigned'), "count" => $repository->unassigned()->count()])
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?assigned=true",     "title" => __('ticket.myTickets'), "count" => $repository->assignedToMe()->count()])
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?recent=true",     "title" => __('ticket.recent'), "count" => $repository->recentlyUpdated()->count()])
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?solved=true",     "title" => __('ticket.solved')])
+        @include('components.sidebarItem', ["url" => route('tickets.index') . "?closed=true",     "title" => __('ticket.closed')])
     </ul>
 
     <br>
