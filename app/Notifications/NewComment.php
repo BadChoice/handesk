@@ -43,6 +43,7 @@ class NewComment extends Notification
                     ->greeting(" ")
                     ->line(":: Reply above this line ::")
                     ->line('A new comment for the ticket')
+                    ->line($this->ticket->title)
                     ->line($this->comment->body)
                     ->action('See the ticket', $notifiable instanceof Requester ? route("requester.tickets.show", $this->ticket->public_token) : route("tickets.show", $this->ticket))
                     ->line('Thank you for using our application!')
