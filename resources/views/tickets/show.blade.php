@@ -9,7 +9,7 @@
     </div>
 
     @if($ticket->status != App\Ticket::STATUS_CLOSED)
-        @include('components.ticketActions')
+        @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
 
         <div class="comment new-comment">
             {{ Form::open(["url" => route("comments.store",$ticket)]) }}
@@ -29,34 +29,5 @@
 
 
 @section('scripts')
-    <script>
-        $('#tags').tagsInput({
-            'height': '20px',
-            'width': '100%',
-            'onAddTag': onAddTag,
-            'onRemoveTag': onRemoveTag,
-            'placeholderColor': '#bbb',
-            'defaultText': "Add...",
-        });
-
-        function onAddTag(tag){
-            $.post({
-                url: "{{route("tickets.tags.store",$ticket)}}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "tag": tag
-                }
-            });
-        }
-
-        function onRemoveTag(tag){
-            $.ajax({
-                url: "{{ route("tickets.tags.store",$ticket)}}" + "/" + tag,
-                method : "DELETE",
-                data:{
-                    "_token" : "{{ csrf_token() }}",
-                }
-            });
-        }
-    </script>
+    @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket])
 @endsection

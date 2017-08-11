@@ -20,9 +20,11 @@ class CreateLeadsTable extends Migration
 
 
             $table->integer('status')->default(Lead::STATUS_NEW );
-            $table->unsignedInteger('team_id')->unsigned()->nullable();
 
-            $table->string('fullName');
+            $table->unsignedInteger('team_id')->unsigned()->nullable();
+            $table->unsignedInteger('user_id')->unsigned()->nullable();
+
+            $table->string('name');
             $table->text('body')->nullable();
 
             $table->string('username')->nullable();

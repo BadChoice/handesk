@@ -24,7 +24,9 @@
                 <td> <a href="{{route('leads.show',$lead)}}"> {{ $lead->email }} </a> </td>
                 <td> {{ nameOrDash( $lead->team ) }}</td>
                 <td> {{ $lead->company }}</td>
-                <td> <a href="{{route('leads.show',$lead)}}"> {{ $lead->statusName() }} </a> </td>
+                <td> <a class="label lead-status-{{$lead->statusName()}}" href="{{route('leads.show',$lead)}}">
+                        {{ __("lead.".$lead->statusName() ) }}
+                    </a> </td>
                 <td> {{ $lead->created_at->diffForHumans() }}</td>
                 <td> {{ $lead->updated_at->diffForHumans() }}</td>
             </tr>

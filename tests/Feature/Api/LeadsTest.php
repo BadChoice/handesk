@@ -32,7 +32,7 @@ class LeadsTest extends TestCase
             "email"       => "bruce@wayne.com",
             "body"        => "I'm interested in buying this awesome app",
             "username"    => "brucewayne",
-            "fullName"    => "Bruce Wayne",
+            "name"    => "Bruce Wayne",
             "phone"       => "0044 456 567 54",
             "address"     => "Wayne manner",
             "city"        => "Gotham",
@@ -48,7 +48,7 @@ class LeadsTest extends TestCase
             $this->assertEquals("I'm interested in buying this awesome app", $lead->body);
             $this->assertEquals("brucewayne",       $lead->username);
             $this->assertEquals("Wayne enterprises",$lead->company);
-            $this->assertEquals("Bruce Wayne",      $lead->fullName);
+            $this->assertEquals("Bruce Wayne",      $lead->name);
             $this->assertEquals("0044 456 567 54",  $lead->phone);
             $this->assertEquals("Wayne manner",     $lead->address);
             $this->assertEquals("Gotham",           $lead->city);

@@ -16,7 +16,7 @@ class CreateLeadStatusUpdatesTable extends Migration
     {
         Schema::create('lead_status_updates', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('status')->default(Lead::STATUS_NEW);
+            $table->integer('new_status')->default(Lead::STATUS_NEW);
             $table->text('body')->nullable();
             $table->unsignedInteger('lead_id')->unsigned();
             $table->unsignedInteger('user_id')->unsigned();

@@ -5,7 +5,7 @@ namespace App;
 class LeadStatusUpdate extends BaseModel
 {
     public function statusName(){
-        return Lead::getStatusText($this->status);
+        return Lead::getStatusText($this->new_status);
     }
 
     public function user(){

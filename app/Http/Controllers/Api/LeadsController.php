@@ -11,14 +11,14 @@ class LeadsController extends ApiController
 {
     public function store(){
         $this->validate(request(), [
-            "fullName" => "required|min:3",
+            "name"      => "required|min:3",
             "email"    => "required|email",
             "tags"     => "required",
         ]);
 
         $lead = Lead::create([
             "email"         => request('email'),
-            "fullName"      => request('fullName'),
+            "name"          => request('name'),
 
             "team_id"       => request("team_id"),
             "username"      => request("username"),

@@ -347,6 +347,12 @@
 .green {
   color: green;
 }
+.bold {
+  font-weight: bold;
+}
+.thin {
+  font-weight: 100;
+}
 .shadow-outer-1 {
   -webkit-box-shadow: 0 0 0 1px rgba(89, 105, 128, 0.1), 0 1px 3px 0 rgba(89, 105, 128, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
           box-shadow: 0 0 0 1px rgba(89, 105, 128, 0.1), 0 1px 3px 0 rgba(89, 105, 128, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -583,6 +589,31 @@ a {
 .ticket-status-closed {
   background-color: gray;
   color: white;
+}
+.lead-status-new {
+  font-weight: bold;
+  color: white;
+  background-color: black;
+}
+.lead-status-first-contact {
+  font-weight: bold;
+  color: white;
+  background-color: blue;
+}
+.lead-status-visited {
+  font-weight: bold;
+  color: white;
+  background-color: orange;
+}
+.lead-status-completed {
+  font-weight: bold;
+  color: white;
+  background-color: green;
+}
+.lead-status-failed {
+  font-weight: bold;
+  color: white;
+  background-color: red;
 }
 .button {
   background-color: #33BC8C;

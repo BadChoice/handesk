@@ -69,7 +69,7 @@ $factory->define(Comment::class, function(Faker\Generator $faker){
 
 $factory->define(Lead::class, function(Faker\Generator $faker){
     return [
-        "fullName" => $faker->word,
+        "name"      => $faker->word,
         "email"    => $faker->safeEmail,
     ];
 });

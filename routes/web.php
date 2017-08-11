@@ -23,17 +23,18 @@ Route::group(["prefix" => "requester"], function(){
 });
 
 Route::group(["middleware" => "auth"], function(){
-    Route::get ('tickets'                           , 'TicketsController@index')            ->name('tickets.index');
-    Route::get ('tickets/{ticket}'                  , 'TicketsController@show')             ->name('tickets.show');
-    Route::post('tickets/{ticket}/assign'           , 'TicketsAssignController@store')      ->name('tickets.assign');
-    Route::post('tickets/{ticket}/comments'         , 'CommentsController@store')           ->name('comments.store');
+    Route::get      ('tickets'                      , 'TicketsController@index')            ->name('tickets.index');
+    Route::get      ('tickets/{ticket}'             , 'TicketsController@show')             ->name('tickets.show');
+    Route::post     ('tickets/{ticket}/assign'      , 'TicketsAssignController@store')      ->name('tickets.assign');
+    Route::post     ('tickets/{ticket}/comments'    , 'CommentsController@store')           ->name('comments.store');
     Route::resource('tickets/{ticket}/tags'         , 'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
 
-    Route::resource ('leads'                         ,'LeadsController');
-    Route::post     ('leads/{ticket}/assign'         ,'LeadAssignController@store')      ->name('leads.assign');
-    Route::resource ('leads/{lead}/tags'             ,'LeadTagsController', ["only" => ["store", "destroy"], "as" => "leads"]);
+    Route::resource ('leads'                        ,'LeadsController');
+    Route::post     ('leads/{lead}/assign'          ,'LeadAssignController@store')      ->name('leads.assign');
+    Route::post     ('leads/{lead}/status'          ,'LeadStatusController@store')      ->name('leads.status.store');
+    Route::resource ('leads/{lead}/tags'            ,'LeadTagsController', ["only" => ["store", "destroy"], "as" => "leads"]);
 
-    Route::resource('teams'                      ,'TeamsController');
+    Route::resource('teams'                         ,'TeamsController');
     Route::get ('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
     Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
 

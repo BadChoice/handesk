@@ -7,6 +7,7 @@ use App\Events\TicketStatusUpdated;
 use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel{
@@ -108,7 +109,7 @@ class Ticket extends BaseModel{
     }
 
     public function updateStatus($status){
-        $this->update(["status" => $status]);
+        $this->update(["status" => $status, "updated_at" => Carbon::now() ]);
     }
 
     public function scopeOpen($query){

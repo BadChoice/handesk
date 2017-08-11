@@ -57,17 +57,17 @@ class LeadsBackTest extends TestCase
 
     /** @test */
     public function can_update_lead_status() {
-        $user   = factory(User::class)->create();
+        $user   = factory(User::class)->states('admin')->create();
         $lead   = factory(Lead::class)->create(["email" => "another@email.com", "status" => Lead::STATUS_NEW, "updated_at" => Carbon::parse("-2 days") ]);
 
-        $response = $this->actingAs($user)->post("leads/{$lead->id}/status", ["status" => Lead::STATUS_FIRST_CONTACT, "body" => "I've visited them"]);
+        $response = $this->actingAs($user)->post("leads/{$lead->id}/status", ["new_status" => Lead::STATUS_FIRST_CONTACT, "body" => "I've visited them"]);
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertStatus(Response::HTTP_FOUND);
         $this->assertCount(1, $lead->fresh()->statusUpdates );
         $this->assertEquals( $lead->fresh()->status,     Lead::STATUS_FIRST_CONTACT);
         $this->assertEquals( $lead->fresh()->updated_at, Carbon::now() );
         tap( $lead->fresh()->statusUpdates->first() , function($statusUpdate) use($user){
-            $this->assertEquals(  Lead::STATUS_FIRST_CONTACT, $statusUpdate->status);
+            $this->assertEquals(  Lead::STATUS_FIRST_CONTACT, $statusUpdate->new_status);
             $this->assertEquals( "I've visited them", $statusUpdate->body);
             $this->assertEquals( $user->id, $statusUpdate->user->id);
         });

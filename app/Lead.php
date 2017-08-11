@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends BaseModel
@@ -23,21 +24,22 @@ class Lead extends BaseModel
     }
 
     public function statusUpdates() {
-        return $this->hasMany( LeadStatusUpdate::class );
+        return $this->hasMany( LeadStatusUpdate::class )->latest();
     }
 
-    public function updateStatus($status, $reason = '') {
-        $this->update(compact("status"));
-        $this->statusUpdates()->create( ["status" => $status, "reason" => $reason] );
+    public function updateStatus($user, $body, $status) {
+        if( ! $this->user)  $this->update(["status" => $status, "updated_at" => Carbon::now(), "user_id" => $user->id] );
+        else                $this->update(["status" => $status, "updated_at" => Carbon::now()] );
+        $this->statusUpdates()->create( ["user_id" => $user->id, "new_status" => $status, "body" => $body] );
     }
 
     public static function availableStatus() {
         return [
-            static::STATUS_NEW          => "New",
-            static::STATUS_FIRST_CONTACT=> "First contact",
-            static::STATUS_VISITED      => "Visited",
-            static::STATUS_COMPLETED    => "Completed",
-            static::STATUS_FAILED       => "Failed"
+            static::STATUS_NEW              => "new",
+            static::STATUS_FIRST_CONTACT    => "first-contact",
+            static::STATUS_VISITED          => "visited",
+            static::STATUS_COMPLETED        => "completed",
+            static::STATUS_FAILED           => "failed"
         ];
     }
 
