@@ -36,8 +36,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::directive("gravatar", function($email, $size = 30){
-            $email = md5(strtolower(trim($email)));
-            $gravatarURL = "https://www.gravatar.com/avatar/" . $email."?s=".$size."&d=mm";
+            $email = md5( strtolower(trim($email)) );
+            //$gravatarURL = "https://www.gravatar.com/avatar/" . $email."?s=".$size."&d=mm";
+            $defaultImage = urlencode("http://revo.works/images/logo.png");
+            $gravatarURL = "https://www.gravatar.com/avatar/" . $email."?s=".$size."&default={$defaultImage}";
             return '<img id = '.$email.''.$size.' class="gravatar" src="'.$gravatarURL.'" width="'.$size.'">';
         });
 

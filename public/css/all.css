@@ -432,10 +432,9 @@ th:last-child {
   width: 300px;
 }
 .sidebar img {
-  margin-left: 24px;
-  margin-top: 12px;
-  margin-bottom: 24px;
-  height: 40px;
+  margin-left: 56px;
+  margin-bottom: 4px;
+  height: 59px;
 }
 .sidebar h4 {
   margin-left: 24px;
