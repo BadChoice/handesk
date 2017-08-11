@@ -28,7 +28,7 @@ class NewComment extends Notification
      * @return array
      */
     public function via($notifiable) {
-        return ( method_exists($notifiable, 'routeNotificationForSlack' )) ? ['slack'] : ['mail'];
+        return ( method_exists($notifiable, 'routeNotificationForSlack' ) && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
     }
 
     /**

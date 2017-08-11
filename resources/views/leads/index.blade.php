@@ -29,6 +29,7 @@
                 <td> <a href="mailto:{{$lead->email}}" target="_blank"> {{ $lead->email }} </a> </td>
                 <td> {{ $lead->tagsString(", ") }} </td>
                 <td> {{ nameOrDash( $lead->team ) }}</td>
+                <td> <a href="mailto:{{$lead->email}}" target="_blank"> {{ $lead->email }} </a> </td>
                 <td> {{ nameOrDash( $lead->user ) }}</td>
                 <td> <a class="label lead-status-{{$lead->statusName()}}" href="{{route('leads.show',$lead)}}">
                         {{ __("lead.".$lead->statusName() ) }}

@@ -17,9 +17,8 @@ class LeadAssigned extends Notification
         $this->lead = $lead;
     }
 
-    public function via($notifiable)
-    {
-        return ['mail'];
+    public function via($notifiable) {
+        return ( method_exists($notifiable, 'routeNotificationForSlack' ) && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
     }
 
     /**

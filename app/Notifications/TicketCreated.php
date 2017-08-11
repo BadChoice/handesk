@@ -24,8 +24,8 @@ class TicketCreated extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable){
-        return ( method_exists($notifiable, 'routeNotificationForSlack' )) ? ['slack'] : ['mail'];
+    public function via($notifiable) {
+        return ( method_exists($notifiable, 'routeNotificationForSlack' ) && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
     }
 
     /**

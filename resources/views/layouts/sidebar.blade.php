@@ -15,24 +15,24 @@
     <h4> @icon(dot-circle-o) {{ trans_choice('lead.lead',2) }}</h4>
     <ul>
         @php $repository = new App\Repositories\LeadsRepository @endphp
-        <li><a href="{{route('leads.index')}}">                 {{ trans_choice('lead.lead',2) }}   </a> @include('components.sidebarLabel', ["count" => $repository->all()->count() ])             </li>
-        <li><a href="{{route('leads.index')}}?mine=true">       {{ trans_choice('lead.mine',2) }}  </a>  @include('components.sidebarLabel', ["count" => $repository->assignedToMe()->count() ])    </li>
-        <li><a href="{{route('leads.index')}}?completed=true">  {{ trans_choice('lead.completed',2) }}  </a>  </li>
-        <li><a href="{{route('leads.index')}}?failed=true">     {{ trans_choice('lead.failed',2) }}  </a>  </li>
+        @include('components.sidebarItem', ["url" => route('leads.index'). "?all=true",         "title" => trans_choice('lead.lead',2), "count" => $repository->all()->count()] )
+        @include('components.sidebarItem', ["url" => route('leads.index'). "?mine=true",        "title" => trans_choice('lead.mine',2), "count" =>  $repository->assignedToMe()->count()] )
+        @include('components.sidebarItem', ["url" => route('leads.index'). "?completed=true",   "title" => trans_choice('lead.completed',2) ])
+        @include('components.sidebarItem', ["url" => route('leads.index'). "?failed=true",      "title" => trans_choice('lead.failed',2) ])
     </ul>
 
     <br>
     <h4> @icon(bar-chart) {{ trans_choice('report.report',2) }}</h4>
     <ul>
-        <li><a href="{{route('reports.index')}}">       {{ trans_choice('report.report',2) }}  </a> </li>
+        @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report',2) ])
     </ul>
 
     <br>
     <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
     <ul>
-        <li><a href="{{ route('teams.index') }}">Teams</a></li>
-        @if(auth()->user()->admin)
-            <li><a href="">Users</a></li>
-        @endif
+        @include('components.sidebarItem', ["url" => route('teams.index'), "title" => trans_choice('team.team',2) ])
+    @if(auth()->user()->admin)
+        @include('components.sidebarItem', ["url" => "", "title" => trans_choice('ticket.user',2) ])
+    @endif
     </ul>
 </div>

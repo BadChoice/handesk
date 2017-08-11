@@ -24,7 +24,7 @@ class LeadCreated extends Notification
      * @return array
      */
     public function via($notifiable) {
-        return ['mail'];
+        return ( method_exists($notifiable, 'routeNotificationForSlack' ) && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
     }
 
     /**
