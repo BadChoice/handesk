@@ -6,8 +6,8 @@
 
     <div class="description">
         {{ Form::open( ["url" => route('reports.index'), 'method' => 'GET'] ) }}
-        {{ Form::date('startDate', $repository->startDate) }}
-        {{ Form::date('endDate', $repository->startDate) }}
+        {{ Form::date('startDate',  $repository->startDate) }}
+        {{ Form::date('endDate',    $repository->endDate) }}
         <button class="ph4">Filter</button>
         {{ Form::close() }}
     </div>
