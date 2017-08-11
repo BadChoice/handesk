@@ -1,4 +1,5 @@
 <div class="tinyHeader">
+    <div class="float-left">@gravatar(auth()->user()->email)</div>
     <a href=""><button class="secondary fs2">{{ auth()->user()->name }}</button></a>
     <div class="float-right ml3">
         {{ Form::open(["url" => route('logout')]) }}

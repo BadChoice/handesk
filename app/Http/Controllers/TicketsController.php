@@ -11,6 +11,7 @@ class TicketsController extends Controller
         if(request('assigned') )            $tickets = $repository->assignedToMe();
         else if(request('unassigned') )     $tickets = $repository->unassigned();
         else if(request('recent'))          $tickets = $repository->recentlyUpdated();
+        else if(request('solved'))          $tickets = $repository->solved();
         else if(request('closed'))          $tickets = $repository->closed();
         else                                $tickets = $repository->all();
 
