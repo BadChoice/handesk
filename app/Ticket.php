@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel{
-    use SoftDeletes, Taggable;
+    use SoftDeletes, Taggable, Assignable;
 
     const STATUS_NEW                = 1;
     const STATUS_OPEN               = 2;
@@ -63,22 +63,8 @@ class Ticket extends BaseModel{
         return $this->belongsToMany(Tag::class);
     }
 
-    public function assignTo($user){
-        if( ! $user instanceof User){
-            $user = User::findOrFail( $user );
-        }
-        if($this->user && $this->user->id == $user->id) return;
-        $this->user()->associate($user)->save();
-        $user->notify( new TicketAssigned($this) );
-    }
-
-    public function assignToTeam($team){
-        if( ! $team instanceof Team){
-            $team = Team::findOrFail( $team );
-        }
-        if($this->team && $this->team->id == $team->id) return;
-        $this->team()->associate($team)->save();
-        $team->notify( new TicketAssigned($this) );
+    protected function getAssignedNotification(){
+        return new TicketAssigned($this);
     }
 
     public function addComment($user, $body, $newStatus = null){

@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Notifications\LeadAssigned;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends BaseModel
 {
-    use SoftDeletes, Taggable;
+    use SoftDeletes, Taggable, Assignable;
 
     const STATUS_NEW            = 1;
     const STATUS_FIRST_CONTACT  = 2;
@@ -17,6 +18,10 @@ class Lead extends BaseModel
 
     public function team(){
         return $this->belongsTo(Team::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function tags(){
@@ -49,6 +54,10 @@ class Lead extends BaseModel
 
     public static function getStatusText($status) {
         return static::availableStatus()[$status];
+    }
+
+    protected function getAssignedNotification(){
+        return new LeadAssigned($this);
     }
 
 //    public function subscribeToMailchimp(){
