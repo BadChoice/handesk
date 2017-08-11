@@ -9,7 +9,7 @@
     </div>
 
     <div class="description comment">
-        {{ Form::open(["url" => route('leads.update',$lead), 'method' => "UPDATE"]) }}
+        {{ Form::open(["url" => route('leads.update',$lead), 'method' => "PUT"]) }}
         <table>
             <tr>
                 <td>{{ __('lead.username') }}:</td><td>  <input name="username" value="{{ $lead->username }}">  </td>

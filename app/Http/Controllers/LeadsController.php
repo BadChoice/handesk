@@ -15,4 +15,9 @@ class LeadsController extends Controller
     public function show(Lead $lead){
         return view('leads.show', ["lead" => $lead]);
     }
+
+    public function update(Lead $lead){
+        $lead->update( request()->all() );
+        return redirect()->route('leads.index');
+    }
 }

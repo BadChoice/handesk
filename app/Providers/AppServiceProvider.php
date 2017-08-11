@@ -35,12 +35,8 @@ class AppServiceProvider extends ServiceProvider
                 return  "<span class='busy'>" . \FA::spin('circle-o-notch') . "</span>";
         });
 
-        Blade::directive("gravatar", function($email, $size = 30){
-            $email = md5( strtolower(trim($email)) );
-            //$gravatarURL = "https://www.gravatar.com/avatar/" . $email."?s=".$size."&d=mm";
-            $defaultImage = urlencode("https://raw.githubusercontent.com/BadChoice/handesk/master/public/images/default-avatar.png");
-            $gravatarURL = "https://www.gravatar.com/avatar/" . $email."?s=".$size."&default={$defaultImage}";
-            return '<img id = '.$email.''.$size.' class="gravatar" src="'.$gravatarURL.'" width="'.$size.'">';
+        Blade::directive("gravatar", function($email){
+            return "<?php echo gravatar({$email} ?? null); ?>";
         });
 
         Blade::directive("paginator", function ($data) {
