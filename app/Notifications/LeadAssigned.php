@@ -12,8 +12,9 @@ class LeadAssigned extends Notification
     use Queueable;
 
     public $lead;
+
     public function __construct($lead) {
-        $this->lead;
+        $this->lead = $lead;
     }
 
     public function via($notifiable)

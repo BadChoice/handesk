@@ -26,6 +26,10 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class)->with('requester','user','team');
     }
 
+    public function leads(){
+        return $this->hasMany(Lead::class)->with('user','team');
+    }
+
     public function teams(){
         return $this->belongsToMany(Team::class, "memberships")->withPivot('admin');
     }

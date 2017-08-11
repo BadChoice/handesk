@@ -33,6 +33,7 @@
                     <td></td>
                 @endcan
                 <th> <a href="{{route('tickets.index')}}?team={{$team->id}}"> @icon(inbox) </a></th>
+                <th> <a href="{{route('leads.index')}}?team={{$team->id}}"> @icon(dot-circle-o) </a></th>
                 @can('administrate', $team)
                     <th> <a href="{{route('teams.edit',$team)}}"> @icon(pencil) </a></th>
                 @endcan

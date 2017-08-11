@@ -12,6 +12,7 @@
             <th> {{ __('lead.company') }}</th>
             <th> {{ __('lead.name') }}</th>
             <th> {{ __('team.email') }}</th>
+            <th> {{ trans_choice('ticket.tag',2) }}</th>
             <th> {{ __('team.team') }}</th>
             <th> {{ __('ticket.assigned') }}</th>
             <th> {{ __('lead.status') }}</th>
@@ -23,9 +24,10 @@
         @foreach($leads as $lead)
             <tr>
                 <td> @gravatar( $lead->email ) </td>
-                <td> {{ $lead->company }}</td>
+                <td> <a href="{{route('leads.show',$lead)}}"> {{ $lead->company }} </a></td>
                 <td> <a href="{{route('leads.show',$lead)}}"> {{ $lead->name }} </a> </td>
                 <td> <a href="mailto:{{$lead->email}}" target="_blank"> {{ $lead->email }} </a> </td>
+                <td> {{ $lead->tagsString(", ") }} </td>
                 <td> {{ nameOrDash( $lead->team ) }}</td>
                 <td> {{ nameOrDash( $lead->user ) }}</td>
                 <td> <a class="label lead-status-{{$lead->statusName()}}" href="{{route('leads.show',$lead)}}">

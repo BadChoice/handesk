@@ -3,10 +3,12 @@
 namespace Tests\Feature;
 
 use App\Lead;
+use App\Notifications\LeadAssigned;
 use App\Team;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -71,5 +73,36 @@ class LeadsBackTest extends TestCase
             $this->assertEquals( "I've visited them", $statusUpdate->body);
             $this->assertEquals( $user->id, $statusUpdate->user->id);
         });
+    }
+
+    /** @test */
+    public function can_update_a_lead(){
+        $user   = factory(User::class)->states('admin')->create();
+        $lead   = factory(Lead::class)->create(["email" => "another@email.com", "company" => "A company" ]);
+
+        $response = $this->actingAs($user)->put("leads/{$lead->id}", ["email" => "new@email.com", "company" => "Another company"]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals("Another company",  $lead->fresh()->company);
+        $this->assertEquals("new@email.com",    $lead->fresh()->email);
+    }
+
+    /** @test */
+    public function can_assign_a_user_and_team(){
+        Notification::fake();
+        $user   = factory(User::class)->states('admin')->create();
+        $team   = factory(Team::class)->create();
+        $lead   = factory(Lead::class)->create(["email" => "another@email.com", "company" => "A company" ]);
+
+        $response = $this->actingAs($user)->post("leads/{$lead->id}/assign", ["user_id" => $user->id, "team_id" => $team->id]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals($user->id,  $lead->fresh()->user->id);
+        $this->assertEquals($team->id,  $lead->fresh()->team->id);
+
+        Notification::assertSentTo([$user, $team], LeadAssigned::class, function($notification,$channels) use($lead){
+                return $lead->id == $notification->lead->id;
+            }
+        );
     }
 }

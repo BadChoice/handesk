@@ -56,18 +56,12 @@ class LeadsTest extends TestCase
             $this->assertCount(2, $lead->tags);
             $this->assertTrue( $lead->tags->pluck('name')->contains("xef"));
 
-            Notification::assertSentTo(
-                [$admin],
-                LeadCreated::class,
-                function ($notification, $channels) use ($lead) {
+            Notification::assertSentTo( [$admin], LeadCreated::class, function ($notification, $channels) use ($lead) {
                     return $notification->lead->id === $lead->id;
                 }
             );
         });
-
-        Notification::assertNotSentTo(
-            [$nonAdmin], LeadCreated::class
-        );
+        Notification::assertNotSentTo( [$nonAdmin], LeadCreated::class );
     }
 
     /** @test */

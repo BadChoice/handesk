@@ -14,7 +14,7 @@ class TicketsController extends Controller
         else if(request('closed'))          $tickets = $repository->closed();
         else                                $tickets = $repository->all();
 
-        if( request('team'))                $tickets = $tickets->where('team_id', request('team'));
+        if( request('team'))                $tickets = $tickets->where('tickets.team_id', request('team'));
 
         $tickets = $tickets->select('tickets.*')->latest('updated_at');
 
