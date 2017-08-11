@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Mailchimp;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends BaseModel
@@ -48,9 +49,18 @@ class Lead extends BaseModel
     public static function getStatusText($status) {
         return static::availableStatus()[$status];
     }
-    public function getMailchimpListId() {
-        $listIds = Config::get('services.mailchimp.list_ids');
-        return array_key_exists($this->source, $listIds) ? $listIds[$this->source] : false;
 
-    }
+//    public function subscribeToMailchimp(){
+//        $listId = $this->getMailchimpListId();
+//        if ($listId) {
+//            $fullNameArray = explode(" ", $this->fullName);
+//            $firstName = array_shift($fullNameArray);
+//            (new Mailchimp())->subscribe($listId, $this->email, $firstName, join($fullNameArray, " "));
+//        }
+//    }
+//
+//    public function getMailchimpListId() {
+//        //$listIds = config('services.mailchimp.list_ids');
+//        //return array_key_exists($this->source, $listIds) ? $listIds[$this->source] : false;
+//    }
 }

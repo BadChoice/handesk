@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'mailchipmp' => [
+        "api_key" => env('MAILCHIMP_API_KEY')
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

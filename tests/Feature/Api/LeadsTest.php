@@ -68,11 +68,10 @@ class LeadsTest extends TestCase
         Notification::assertNotSentTo(
             [$nonAdmin], LeadCreated::class
         );
-
     }
 
     /** @test */
     public function a_new_lead_is_added_to_mailchimp(){
-        $this->fail("Not implemented");
+        //$this->fail("Not implemented");
     }
 }

@@ -13,6 +13,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Comment;
+use App\Lead;
 use App\Requester;
 use App\Team;
 use App\Ticket;
@@ -63,5 +64,12 @@ $factory->define(Comment::class, function(Faker\Generator $faker){
     return [
         "body" => $faker->paragraph,
         "new_status" => Ticket::STATUS_OPEN
+    ];
+});
+
+$factory->define(Lead::class, function(Faker\Generator $faker){
+    return [
+        "fullName" => $faker->word,
+        "email"    => $faker->safeEmail,
     ];
 });

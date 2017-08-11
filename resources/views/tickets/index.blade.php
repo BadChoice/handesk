@@ -5,8 +5,6 @@
     </div>
     @paginator($tickets)
 
-
-
     <table class="striped">
         <thead>
             <tr>

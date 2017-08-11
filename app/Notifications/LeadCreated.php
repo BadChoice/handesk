@@ -36,8 +36,8 @@ class LeadCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('A new lead has been created')
+                    ->action('See lead', route("leads/{$lead->id}"))
                     ->line('Thank you for using our application!');
     }
 

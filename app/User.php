@@ -32,9 +32,14 @@ class User extends Authenticatable
 
     public function teamsTickets(){
         return Ticket::join('memberships','tickets.team_id','=','memberships.team_id')
-                       ->where('memberships.user_id',$this->id)->select('tickets.id');
+                       ->where('memberships.user_id',$this->id)->select('tickets.*');
         //return $this->belongsToMany(Ticket::class, "memberships", "team_id", "team_id");
         //return $this->hasManyThrough(Ticket::class, Membership::class,"user_id","team_id")->with('requester','user','team');
+    }
+
+    public function teamsLeads(){
+        return Lead::join('memberships','leads.team_id','=','memberships.team_id')
+                ->where('memberships.user_id',$this->id)->select('leads.*');
     }
 
     public static function notifyAdmins( $notification ){
