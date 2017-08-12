@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function password(){
         $this->validate(request(), [
             "old"       => "old_password:". auth()->user()->password,
-            "password"  => "confirmed"
+            "password"  => "confirmed|min:5"
         ]);
         auth()->user()->update(["password" => bcrypt(request('password'))]);
         return back();

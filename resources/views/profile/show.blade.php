@@ -5,31 +5,31 @@
     </div>
 
     <div class="description actions comment mb4">
-        <h3>{{ $user->name }}</h3>
+        <div class="float-left ml4 mt-2 shadow-outer-1 circle">@gravatar($user->email, 90)</div>
+        <h3 class="ml4 float-left"> {{ $user->name }}</h3>
     </div>
-    <div class="description">
+
+    <div class="clear-both"></div>
+
+    <div class="description mt4">
         {{ Form::open( ["url" => route('profile.update'), 'method' => 'PUT'] ) }}
-        <div class="float-left">
-            @gravatar($user->email, 90)
-        </div>
-        <div class="float-left">
-            <table class="w-50">
-                <tr><td>{{ __('user.name') }}: </td><td class="w-100">{{ Form::text('name', $user->name, ["class" => "w-100"]) }}</td></tr>
-                <tr><td>{{ __('user.email') }}: </td><td class="w-100">{{ Form::email('email', $user->email, ["class" => "w-100"]) }}</td></tr>
-                <tr><td><button class="ph4 uppercase">  {{ __('ticket.update') }}</button></td></tr>
-            </table>
-        </div>
+        <table class="w-50">
+            <tr><td> {{ __('user.name') }}:      </td><td class="w-60">{{ Form::text('name', $user->name, ["class" => "w-100"]) }}</td></tr>
+            <tr><td> {{ __('user.email') }}:     </td><td class="w-60">{{ Form::email('email', $user->email, ["class" => "w-100"]) }}</td></tr>
+            <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td></tr>
+        </table>
         {{ Form::close() }}
     </div>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="clear-both mb4"></div>
 
-    <div class="comment actions">
+    <a class="ml5 pointer" onClick="$('#password').toggle('fast')"> @icon(key) {{ __('user.changePassword') }}</a>
+    <div id="password" class="comment actions hidden mt3">
         {{ Form::open( ["url" => route('profile.password')] ) }}
         <table class="w-50 ">
-            <tr><td>{{ __('user.oldPassword') }}: </td><td >{{ Form::password('old', ["class" => "w-100"]) }}</td></tr>
-            <tr><td>{{ __('user.newPassword') }}: </td><td >{{ Form::password('password', ["class" => "w-100"]) }}</td></tr>
-            <tr><td>{{ __('user.confirmPassword') }}: </td><td >{{ Form::password('password_confirmation', ["class" => "w-100"]) }}</td></tr>
+            <tr><td>{{ __('user.oldPassword') }}: </td><td class="w-60">{{ Form::password('old', ["class" => "w-100"]) }}</td></tr>
+            <tr><td>{{ __('user.newPassword') }}: </td><td class="w-60">{{ Form::password('password', ["class" => "w-100"]) }}</td></tr>
+            <tr><td>{{ __('user.confirmPassword') }}: </td><td class="w-60">{{ Form::password('password_confirmation', ["class" => "w-100"]) }}</td></tr>
             <tr><td><button class="ph4 uppercase">  {{ __('user.changePassword') }}</button></td></tr>
         </table>
         {{ Form::close() }}

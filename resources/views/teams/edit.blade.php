@@ -3,15 +3,22 @@
     <div class="description">
         <a href="{{ url()->previous() }}">Teams</a>
     </div>
-    <div class="description comment actions">
-        <h3> {{ $team->name }}</h3>
+
+    <div class="description actions comment mb4">
+        <div class="float-left ml4 mt-2  circle">@gravatar($team->email, 90)</div>
+        <h3 class="ml4 float-left"> {{ $team->name }}</h3>
     </div>
-    {{ Form::open(["url" => route('teams.update',$team), "method" => "PUT"]) }}
-    <table class="w-50">
-        <tr><td>{{ __("team.name") }}: </td><td><input class="w-100" name="name"  value="{{$team->name}}">      </td></tr>
-        <tr><td>{{ __("team.email") }}: </td><td><input class="w-100" name="email"  value="{{$team->email}}">   </td></tr>
-        <tr><td>{{ __("team.slack_webhook_url") }}:</td><td> <input class="w-100" name="slack_webhook_url" value="{{$team->slack_webhook_url}}"></td></tr>
-        <tr><td colspan="2"> <button class="uppercase"> @busy {{ __('ticket.update') }}</button>                </td></tr>
-    </table>
-    {{ Form::close() }}
+
+    <div class="clear-both"></div>
+
+    <div class="description mt4">
+        {{ Form::open(["url" => route('teams.update',$team), "method" => "PUT"]) }}
+        <table class="w-50">
+            <tr><td>{{ __("team.name") }}:              </td><td class="w-60"><input class="w-100" name="name"  value="{{$team->name}}">      </td></tr>
+            <tr><td>{{ __("team.email") }}:             </td><td class="w-60"><input class="w-100" name="email"  value="{{$team->email}}">   </td></tr>
+            <tr><td>{{ __("team.slack_webhook_url") }}: </td><td class="w-60"><input class="w-100" name="slack_webhook_url" value="{{$team->slack_webhook_url}}"></td></tr>
+            <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td></tr>
+        </table>
+        {{ Form::close() }}
+    </div>
 @endsection
