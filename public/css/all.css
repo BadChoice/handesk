@@ -403,10 +403,19 @@ div.tagsinput{border:1px solid #CCC;background:#FFF;padding:5px;width:300px;heig
   text-align: right;
 }
 .red {
-  color: red;
+  color: #E73140;
 }
 .green {
-  color: green;
+  color: #33BC8C;
+}
+.white {
+  color: white;
+}
+.bg-danger {
+  background-color: #E73140;
+}
+.bg-success {
+  background-color: #33BC8C;
 }
 .bold {
   font-weight: bold;
@@ -644,20 +653,20 @@ a {
   font-size: 10px;
 }
 .ticket-status-new {
-  background-color: red;
   color: white;
+  background-color: #E73140;
 }
 .ticket-status-open {
   color: white;
   background-color: pink;
 }
 .ticket-status-pending {
-  background-color: orange;
   color: white;
+  background-color: orange;
 }
 .ticket-status-solved {
-  background-color: green;
   color: white;
+  background-color: #33BC8C;
 }
 .ticket-status-closed {
   background-color: gray;
@@ -681,12 +690,12 @@ a {
 .lead-status-completed {
   font-weight: bold;
   color: white;
-  background-color: green;
+  background-color: #33BC8C;
 }
 .lead-status-failed {
   font-weight: bold;
   color: white;
-  background-color: red;
+  background-color: #E73140;
 }
 .button {
   background-color: #33BC8C;

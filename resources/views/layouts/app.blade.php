@@ -22,6 +22,7 @@
         @include('layouts.tinyHeader')
         @include('layouts.sidebar')
         <div class="content container-fluid">
+            @include('components.errors')
             @yield('content')
         </div>
         {{--@include('layouts.footer')--}}
