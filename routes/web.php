@@ -23,6 +23,10 @@ Route::group(["prefix" => "requester"], function(){
 });
 
 Route::group(["middleware" => "auth"], function(){
+    Route::get      ('profile'                      , 'ProfileController@show')             ->name('profile.show');
+    Route::put      ('profile'                      , 'ProfileController@update')           ->name('profile.update');
+    Route::post     ('password'                     , 'ProfileController@password')         ->name('profile.password');
+
     Route::get      ('tickets'                      , 'TicketsController@index')            ->name('tickets.index');
     Route::get      ('tickets/{ticket}'             , 'TicketsController@show')             ->name('tickets.show');
     Route::post     ('tickets/{ticket}/assign'      , 'TicketsAssignController@store')      ->name('tickets.assign');

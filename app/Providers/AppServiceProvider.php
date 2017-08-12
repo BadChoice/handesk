@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use App\Services\Pop3\Pop3;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         require_once(base_path() . '/helpers/helpers.php');
+
+        Validator::extend('old_password', function ($attribute, $value, $parameters, $validator) {
+            return Hash::check($value, current($parameters));
+        });
     }
 
     /**

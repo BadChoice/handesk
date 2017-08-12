@@ -2,9 +2,10 @@
 @section('content')
     <div class="description">
         <a href="{{ url()->previous() }}">Teams</a>
+    </div>
+    <div class="description comment actions">
         <h3> {{ $team->name }}</h3>
     </div>
-
     {{ Form::open(["url" => route('teams.update',$team), "method" => "PUT"]) }}
     <table class="w-50">
         <tr><td>{{ __("team.name") }}: </td><td><input class="w-100" name="name"  value="{{$team->name}}">      </td></tr>
