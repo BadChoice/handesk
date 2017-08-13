@@ -34,6 +34,9 @@ class TicketsController extends Controller
     public function store(){
         $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request('tags'));
         $ticket->updateStatus( request('status') );
+        if(request('team_id')) {
+            $ticket->assignToTeam(request('team_id'));
+        }
         return redirect()->route('tickets.show',$ticket);
     }
 }

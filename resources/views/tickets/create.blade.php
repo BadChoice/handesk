@@ -18,6 +18,14 @@
             <tr><td class="w-20">Subject: </td>     <td><input name="title" class="w-100"/></td></tr>
             <tr><td>Tags:       </td>               <td><input name="tags" id="tags"/></td></tr>
             <tr><td>Comment:    </td>               <td><textarea name="body"></textarea></td></tr>
+            <tr>
+                <td>{{ __('team.team') }}:</td>
+                @can("assignToTeam", new App\Ticket)
+                    <td>{{ Form::select('team_id', createSelectArray( App\Team::all(),true)) }}
+                @else
+                    <td>{{ Form::select('team_id', createSelectArray( auth()->user()->teams,false)) }}
+                @endcan
+            </tr>
             <tr><td>Status:     </td><td>
                 {{ Form::select("status", [
                     App\Ticket::STATUS_NEW     => __("ticket.new"),

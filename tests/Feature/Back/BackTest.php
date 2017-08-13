@@ -178,23 +178,26 @@ class BackTest extends TestCase
     public function can_create_a_ticket(){
         Notification::fake();
         $user = factory(User::class)->create();
+        $team = factory(Team::class)->create();
 
         $response = $this->actingAs($user)->post('tickets',[
             "requester" => ["name" => "Justin", "email" => "justin@biber.com"],
             "title" => "Hello",
             "body" => "Baby",
             "tags" =>"first tag,second tag",
-            "status" => Ticket::STATUS_OPEN
+            "status" => Ticket::STATUS_OPEN,
+            "team_id" => $team->id,
         ]);
         
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertEquals(1, Ticket::count());
-        tap(Ticket::first(), function($ticket){
+        tap(Ticket::first(), function($ticket) use($team){
             $this->assertEquals("Hello", $ticket->title);
             $this->assertEquals("Baby", $ticket->body);
             $this->assertEquals("Justin", $ticket->requester->name);
             $this->assertEquals("justin@biber.com", $ticket->requester->email);
             $this->assertEquals(Ticket::STATUS_OPEN, $ticket->status);
+            $this->assertEquals($team->id, $ticket->team->id);
             $this->assertTrue($ticket->tags->pluck('name')->contains('second tag'));
         });
     }
