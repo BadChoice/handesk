@@ -38,7 +38,7 @@ class TicketAssigned extends Notification
     {
         $mail = (new MailMessage)
             ->subject("Ticket assigned: #" .$this->ticket->id . ": ". $this->ticket->title)
-            ->view( "emails.ticketAssigned" ,[
+            ->view( "emails.ticket" ,[
                     "title"  => "Ticket assigned to " . $notifiable->name,
                     "ticket" => $this->ticket,
                     "url"    => route("tickets.show", $this->ticket),

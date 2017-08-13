@@ -36,15 +36,18 @@ class TicketCreated extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->subject("Ticket created: {$this->ticket->requester->name}")
-                    ->greeting(" ")
-                    ->line(":: Reply above this line ::")
-                    ->line($this->ticket->title)
-                    ->line($this->ticket->body)
-                    ->action('See the ticket', route("tickets.show", $this->ticket))
-                    ->line('Thank you for using our application!')
-                    ->line("ticket-id:{$this->ticket->id}.");
+        $mail = (new MailMessage)
+            ->subject("New ticket: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->view( "emails.ticket" ,[
+                    "title"  => "New ticket created",
+                    "ticket" => $this->ticket,
+                    "url"    => route("tickets.show", $this->ticket),
+                ]
+            );
+        if($this->ticket->requester->email){
+            $mail->from($this->ticket->requester->email, $this->ticket->requester->name);
+        }
+        return $mail;
     }
 
     public function toSlack($notifiable)

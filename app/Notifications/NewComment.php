@@ -38,16 +38,19 @@ class NewComment extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable) {
-        return (new MailMessage)
-                    ->subject("Ticket updated: {$this->ticket->requester->name}")
-                    ->greeting(" ")
-                    ->line(":: Reply above this line ::")
-                    ->line('A new comment for the ticket')
-                    ->line($this->ticket->title)
-                    ->line($this->comment->body)
-                    ->action('See the ticket', $notifiable instanceof Requester ? route("requester.tickets.show", $this->ticket->public_token) : route("tickets.show", $this->ticket))
-                    ->line('Thank you for using our application!')
-                    ->line("ticket-id:{$this->ticket->id}.");
+        $mail = (new MailMessage)
+            ->subject("Ticket updated: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->view( "emails.ticket" ,[
+                    "title"  => "Ticket updated",
+                    "ticket" => $this->ticket,
+                    "comment" => $this->comment,
+                    "url"    => $notifiable instanceof Requester ? route("requester.tickets.show", $this->ticket->public_token) : route("tickets.show", $this->ticket),
+                ]
+            );
+        if($this->comment->author()->email){
+            $mail->from($this->comment->author()->email, $this->comment->author()->name);
+        }
+        return $mail;
     }
 
     public function toSlack($notifiable) {

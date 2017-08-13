@@ -16,11 +16,19 @@
         </div>
 
         <div style="border-bottom:1px solid #efefef; padding-bottom:10px; margin-left:60px; margin-top:40px;">
-            <b> {{ $ticket->requester->name }}</b><br>
-            <span style="color:gray">{{ $ticket->created_at->toDateTimeString() }}</span><br>
-            <p>
-                {{ $ticket->body }}
-            </p>
+            @if(isset($comment))
+                <b> {{ $comment->author()->name }}</b><br>
+                <span style="color:gray">{{ $comment->created_at->toDateTimeString() }}</span><br>
+                <p>
+                    {{ $comment->body }}
+                </p>
+            @else
+                <b> {{ $ticket->requester->name }}</b><br>
+                <span style="color:gray">{{ $ticket->created_at->toDateTimeString() }}</span><br>
+                <p>
+                    {{ $ticket->body }}
+                </p>
+            @endif
         </div>
 
         <!--div style="margin:60px">
@@ -30,7 +38,7 @@
         </div-->
 
         <div style="margin-top:40px">
-            You are an agent. Add a comment by replying to this email or <a href="{{$url}}">view the ticket in Handesk</a>
+            Add a comment by replying to this email or <a href="{{$url}}">view the ticket in Handesk</a>
         </div>
 
         <div style="margin-top:40px">
