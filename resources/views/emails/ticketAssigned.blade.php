@@ -10,27 +10,27 @@
         </style>
     </head>
     <body>
-        <div style="/*border-bottom:1px solid #efefef;*/ padding-bottom:10px; font-size:12px">
-            <span style="color:#d1d1d1"> {{ config('mail.fetch.replyAboveLine') }}</span>
+        <div style="border-bottom:1px solid #efefef; padding-bottom:10px;">
+            <span style="color:#d1d1d1; font-size:12px"> {{ config('mail.fetch.replyAboveLine') }}</span><br><br>
+            <span style="font-size:12px">{{ $title }}</span>
         </div>
 
-        <div>
-            <h3> {{ $title }}</h3>
-            <b> {{ $ticket->requester->name }}</b>
-            <p style="color:gray">
+        <div style="border-bottom:1px solid #efefef; padding-bottom:10px; margin-left:60px; margin-top:40px;">
+            <b> {{ $ticket->requester->name }}</b><br>
+            <span style="color:gray">{{ $ticket->created_at->toDateTimeString() }}</span><br>
+            <p>
                 {{ $ticket->body }}
             </p>
         </div>
 
-        <div style="margin:60px">
+        <!--div style="margin:60px">
             <a href="{{$url}}" style="background-color:#33BC8C; border-radius:4px; padding:10px 20px 10px 20px; color:white; text-decoration:none;" >
                 SEE THE TICKET
             </a>
-        </div>
+        </div-->
 
         <div style="margin-top:40px">
-            Reply to this email or click the link below:<br>
-            <a href="{{$url}}">{{ $url }}</a>
+            You are an agent. Add a comment by replying to this email or <a href="{{$url}}">view the ticket in Handesk</a>
         </div>
 
         <div style="margin-top:40px">

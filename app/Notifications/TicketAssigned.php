@@ -36,22 +36,18 @@ class TicketAssigned extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->
-        subject("Ticket assigned: #" .$this->ticket->id . ": ". $this->ticket->title)
-            ->view(
-            "emails.ticketAssigned" ,[
-                "title" => "Ticket assigned",
-                "ticket" => $this->ticket,
-                "url" => route("tickets.show", $this->ticket)
+        $mail = (new MailMessage)
+            ->subject("Ticket assigned: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->view( "emails.ticketAssigned" ,[
+                    "title"  => "Ticket assigned to " . $notifiable->name,
+                    "ticket" => $this->ticket,
+                    "url"    => route("tickets.show", $this->ticket),
             ]
         );
-
-        return (new MailMessage)
-                    ->subject("Ticket assigned: {$this->ticket->requester->name}")
-                    ->line('The ticket has been assigned to you.')
-                    ->line($this->ticket->body)
-                    ->action('See the ticket', route("tickets.show", $this->ticket))
-                    ->line('Thank you for using our application!');
+        if($this->ticket->requester->email){
+            $mail->from($this->ticket->requester->email, $this->ticket->requester->name);
+        }
+        return $mail;
     }
 
     public function toSlack($notifiable) {
