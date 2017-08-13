@@ -173,4 +173,29 @@ class BackTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
         $this->assertCount(1, $ticket->fresh()->tags);
     }
+
+    /** @test */
+    public function can_create_a_ticket(){
+        Notification::fake();
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->post('tickets',[
+            "requester" => ["name" => "Justin", "email" => "justin@biber.com"],
+            "title" => "Hello",
+            "body" => "Baby",
+            "tags" =>"first tag,second tag",
+            "status" => Ticket::STATUS_OPEN
+        ]);
+        
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals(1, Ticket::count());
+        tap(Ticket::first(), function($ticket){
+            $this->assertEquals("Hello", $ticket->title);
+            $this->assertEquals("Baby", $ticket->body);
+            $this->assertEquals("Justin", $ticket->requester->name);
+            $this->assertEquals("justin@biber.com", $ticket->requester->email);
+            $this->assertEquals(Ticket::STATUS_OPEN, $ticket->status);
+            $this->assertTrue($ticket->tags->pluck('name')->contains('second tag'));
+        });
+    }
 }

@@ -3,6 +3,11 @@
     <div class="description">
         <h3>{{ trans_choice('lead.lead',2) }} ( {{ $leads->count() }} )</h3>
     </div>
+
+    <div class="m4">
+        <a class="button " href="{{ route("leads.create") }}">@icon(plus) New Lead</a>
+    </div>
+
     @paginator($leads)
 
     <table class="striped">

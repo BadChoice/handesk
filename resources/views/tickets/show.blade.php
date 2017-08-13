@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="description comment">
-        <a href="{{ url()->previous() }}">Tickets</a>
+        <a href="{{ route('tickets.index') }}">Tickets</a>
         <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
         @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span> &nbsp;
         <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>

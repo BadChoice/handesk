@@ -3,6 +3,11 @@
     <div class="description">
         <h3>Tickets ( {{ $tickets->count() }} )</h3>
     </div>
+
+    <div class="m4">
+        <a class="button " href="{{ route("tickets.create") }}">@icon(plus) New Ticket</a>
+    </div>
+
     @paginator($tickets)
 
     <table class="striped">

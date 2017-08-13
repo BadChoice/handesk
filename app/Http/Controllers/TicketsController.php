@@ -26,4 +26,14 @@ class TicketsController extends Controller
         $this->authorize('view', $ticket);
         return view('tickets.show', ["ticket" => $ticket ]);
     }
+    
+    public function create(){
+        return view('tickets.create');
+    }
+
+    public function store(){
+        $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request('tags'));
+        $ticket->updateStatus( request('status') );
+        return redirect()->route('tickets.show',$ticket);
+    }
 }

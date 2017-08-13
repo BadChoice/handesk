@@ -18,20 +18,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(["prefix" => "requester"], function(){
-    Route::get ('tickets/{token}'                  , 'RequesterTicketsController@show')     ->name('requester.tickets.show');
-    Route::post('tickets/{token}/comments'        , 'RequesterCommentsController@store')    ->name('requester.comments.store');
+    Route::get ('tickets/{token}'                   ,'RequesterTicketsController@show')     ->name('requester.tickets.show');
+    Route::post('tickets/{token}/comments'          ,'RequesterCommentsController@store')    ->name('requester.comments.store');
 });
 
 Route::group(["middleware" => "auth"], function(){
-    Route::get      ('profile'                      , 'ProfileController@show')             ->name('profile.show');
-    Route::put      ('profile'                      , 'ProfileController@update')           ->name('profile.update');
-    Route::post     ('password'                     , 'ProfileController@password')         ->name('profile.password');
+    Route::get      ('profile'                      ,'ProfileController@show')             ->name('profile.show');
+    Route::put      ('profile'                      ,'ProfileController@update')           ->name('profile.update');
+    Route::post     ('password'                     ,'ProfileController@password')         ->name('profile.password');
 
-    Route::get      ('tickets'                      , 'TicketsController@index')            ->name('tickets.index');
-    Route::get      ('tickets/{ticket}'             , 'TicketsController@show')             ->name('tickets.show');
-    Route::post     ('tickets/{ticket}/assign'      , 'TicketsAssignController@store')      ->name('tickets.assign');
-    Route::post     ('tickets/{ticket}/comments'    , 'CommentsController@store')           ->name('comments.store');
-    Route::resource('tickets/{ticket}/tags'         , 'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
+    Route::resource ('tickets'                      ,'TicketsController', ["except" => ["edit", "destroy"]]);
+    Route::post     ('tickets/{ticket}/assign'      ,'TicketsAssignController@store')      ->name('tickets.assign');
+    Route::post     ('tickets/{ticket}/comments'    ,'CommentsController@store')           ->name('comments.store');
+    Route::resource('tickets/{ticket}/tags'         ,'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
 
     Route::resource ('leads'                        ,'LeadsController');
     Route::post     ('leads/{lead}/assign'          ,'LeadAssignController@store')      ->name('leads.assign');
