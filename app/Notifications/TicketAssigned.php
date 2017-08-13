@@ -36,6 +36,16 @@ class TicketAssigned extends Notification
      */
     public function toMail($notifiable)
     {
+        return (new MailMessage)->
+        subject("Ticket assigned: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->view(
+            "emails.ticketAssigned" ,[
+                "title" => "Ticket assigned",
+                "ticket" => $this->ticket,
+                "url" => route("tickets.show", $this->ticket)
+            ]
+        );
+
         return (new MailMessage)
                     ->subject("Ticket assigned: {$this->ticket->requester->name}")
                     ->line('The ticket has been assigned to you.')

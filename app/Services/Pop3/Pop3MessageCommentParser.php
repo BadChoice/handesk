@@ -19,11 +19,11 @@ class Pop3MessageCommentParser{
     }
 
     public function isAComment(){
-        return str_contains($this->message->body(), ":: Reply above this line ::");
+        return str_contains($this->message->body(), config('mail.fetch.replyAboveLine'));
     }
 
     public function getCommentBody(){
-        return strstr($this->message->body(), ":: Reply above this line ::", true);
+        return strstr($this->message->body(),config('mail.fetch.replyAboveLine'), true);
     }
 
     public function getTicketId() {

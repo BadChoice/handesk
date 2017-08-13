@@ -125,6 +125,7 @@ return [
         "port" => env('MAIL_FETCH_PORT',110),
         "username" => env('MAIL_FETCH_USERNAME','hi'),
         "password" => env('MAIL_FETCH_PASSWORD'),
+        "replyAboveLine" => "##- Please type your reply above this line -##",
     ]
 
 ];
