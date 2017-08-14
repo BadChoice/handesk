@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel{
     use SoftDeletes, Taggable, Assignable, Subscribable;
-
+    
     const STATUS_NEW                = 1;
     const STATUS_OPEN               = 2;
     const STATUS_PENDING            = 3;
@@ -123,4 +123,5 @@ class Ticket extends BaseModel{
     public function getSubscribableName(){
         return $this->requester->name;
     }
+
 }

@@ -4,6 +4,8 @@ namespace App;
 
 class Comment extends BaseModel
 {
+    protected $appends = ["author"];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -14,5 +16,9 @@ class Comment extends BaseModel
 
     public function author(){
             return $this->user ? : $this->ticket->requester;
+    }
+
+    public function getAuthorAttribute(){
+        return array_only($this->author()->toArray(),["name","email"]);
     }
 }

@@ -35,7 +35,6 @@ class SimpleTicketTest extends TestCase
 
     /** @test */
     public function can_create_a_ticket(){
-
         Notification::fake();
         $admin      = factory(User::class)->create(["admin" => 1]);
         $nonAdmin   = factory(User::class)->create(["admin" => 0]);

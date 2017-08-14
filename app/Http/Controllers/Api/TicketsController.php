@@ -19,7 +19,7 @@ class TicketsController extends ApiController
     }
 
     public function show(Ticket $ticket){
-        return $this->respond( $ticket->load('comments') );
+        return $this->respond( $ticket->load('requester','comments') );
     }
 
     public function store(){

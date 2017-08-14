@@ -30,7 +30,6 @@ class TeamTicketTest extends TestCase
 
     /** @test */
     public function can_create_a_ticket(){
-
         Notification::fake();
         $team = factory(Team::class)->create();
 
