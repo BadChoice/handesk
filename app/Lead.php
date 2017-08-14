@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\LeadAssigned;
+use App\Services\Mailchimp;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -58,6 +59,20 @@ class Lead extends BaseModel
 
     protected function getAssignedNotification(){
         return new LeadAssigned($this);
+    }
+
+    public function getSubscribableLists(){
+        $listIds = config('services.mailchimp.tag_list_id');
+        return array_intersect_key($listIds, array_flip($this->tags->pluck('name')->toArray()));
+    }
+
+    public function subscribeToMailchimp(){
+        $mailchimp      = app()->make(Mailchimp::class);
+        $fullNameArray  = explode(" ", $this->name);
+        $firstName      = array_shift($fullNameArray);
+        foreach($this->getSubscribableLists() as $listName => $listId){
+            $mailchimp->subscribe($listId, $this->email, $firstName, join($fullNameArray, " "));
+        }
     }
 
 //    public function subscribeToMailchimp(){

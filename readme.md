@@ -13,6 +13,7 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Instant email/slack notifications when tickets are created/updated
 · Everything is unlimited 
 · Lead management (With its API as well)
+· Auto lead subscription to mailchimp based on its tags
 · Tickets reporting 
 
 ## Installation

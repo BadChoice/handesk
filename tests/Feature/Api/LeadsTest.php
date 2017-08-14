@@ -7,6 +7,8 @@ use App\Notifications\LeadCreated;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Requester;
+use App\Services\Mailchimp;
+use App\Services\MailchimpFake;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
@@ -66,6 +68,23 @@ class LeadsTest extends TestCase
 
     /** @test */
     public function a_new_lead_is_added_to_mailchimp(){
-        //$this->fail("Not implemented");
+        $mailChimpFake = new MailchimpFake();
+        app()->instance(Mailchimp::class, $mailChimpFake);
+
+
+        $response = $this->post('api/leads',[
+            "email"    => "bruce@wayne.com",
+            "username" => "brucewayne",
+            "name"     => "Bruce Wayne",
+            "tags"     => ["email", "xef", "retail", "email"],
+        ]);
+
+        $response->assertStatus(Response::HTTP_CREATED);
+
+        tap(Lead::first(), function($lead) use($mailChimpFake){
+            $mailChimpFake->assertSubscribed($lead->email, config('services.mailchimp.tag_list_id.xef'));
+            $mailChimpFake->assertSubscribed($lead->email, config('services.mailchimp.tag_list_id.retail'));
+            $mailChimpFake->assertNotSubscribed($lead->email, config('services.mailchimp.tag_list_id.flow'));
+        });
     }
 }

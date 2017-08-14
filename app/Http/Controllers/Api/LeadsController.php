@@ -31,6 +31,8 @@ class LeadsController extends ApiController
             "body"          => request("body"),
         ])->attachTags( request('tags') );
 
+        $lead->subscribeToMailchimp();
+
         User::notifyAdmins( new LeadCreated($lead) );
 
         return $this->respond(["id" => $lead->id], Response::HTTP_CREATED);
