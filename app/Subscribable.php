@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Services\Mailchimp;
+use App\Jobs\SubscribeToMailchimp;
 
 trait Subscribable{
 
@@ -15,11 +15,11 @@ trait Subscribable{
     }
 
     public function subscribeToMailchimp(){
-        $mailchimp      = app()->make(Mailchimp::class);
         $fullNameArray  = explode(" ", $this->getSubscribableName());
         $firstName      = array_shift($fullNameArray);
-        foreach($this->getSubscribableLists() as $listName => $listId){
-            $mailchimp->subscribe($listId, $this->getSubscribableEmail(), $firstName, join($fullNameArray, " "));
+        $fullName       = join($fullNameArray, " ");
+        foreach( $this->getSubscribableLists() as $listName => $listId){
+            dispatch( new SubscribeToMailchimp($listId, $this->getSubscribableEmail(), $firstName, $fullName) );
         }
     }
 }
