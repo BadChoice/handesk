@@ -11,11 +11,11 @@ class Comment extends BaseModel
     }
 
     public function ticket(){
-            return $this->belongsTo(Ticket::class);
-        }
+        return $this->belongsTo(Ticket::class);
+    }
 
     public function author(){
-            return $this->user ? : $this->ticket->requester;
+        return $this->user ? : $this->ticket->requester;
     }
 
     public function getAuthorAttribute(){

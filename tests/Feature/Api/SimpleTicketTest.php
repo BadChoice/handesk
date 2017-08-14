@@ -47,7 +47,7 @@ class SimpleTicketTest extends TestCase
             "title"         => "App is not working",
             "body"          => "I can't log in into the application",
             "tags"          => ["xef"]
-        ]);
+        ],["token" => 'the-api-token']);
 
         $response->assertStatus( Response::HTTP_CREATED );
         $response->assertJson(["data" => ["id" => 1]]);
@@ -82,7 +82,7 @@ class SimpleTicketTest extends TestCase
     public function requester_is_required(){
         $response = $this->post('api/tickets',$this->validParams([
             "requester" => "",
-        ]));
+        ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $response->assertJsonFragment([
             "error" => "The given data failed to pass validation."
@@ -94,7 +94,7 @@ class SimpleTicketTest extends TestCase
     public function title_is_required(){
         $response = $this->post('api/tickets',$this->validParams([
             "title" => "",
-        ]));
+        ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $response->assertJsonFragment([
             "error" => "The given data failed to pass validation."
@@ -110,7 +110,7 @@ class SimpleTicketTest extends TestCase
 
         $response = $this->post("api/tickets/{$ticket->id}/comments", [
             "body" => "this is a comment"
-        ]);
+        ],["token" => 'the-api-token']);
 
         $response->assertStatus ( Response::HTTP_CREATED );
         $response->assertJson   (["data" => ["id" => 2]]);
@@ -129,7 +129,7 @@ class SimpleTicketTest extends TestCase
         $ticket = factory(Ticket::class)->create();
 
         $this->assertNull( $ticket->user );
-        $response = $this->post("api/tickets/{$ticket->id}/assign", ["user" => $user->id]);
+        $response = $this->post("api/tickets/{$ticket->id}/assign", ["user" => $user->id], ["token" => 'the-api-token']);
 
         $response->assertStatus ( Response::HTTP_CREATED );
         $this->assertEquals($ticket->fresh()->user->id, $user->id);
@@ -148,7 +148,7 @@ class SimpleTicketTest extends TestCase
         $ticket = factory(Ticket::class)->create();
         $this->assertEquals($ticket->status, Ticket::STATUS_NEW);
 
-        $this->put("api/tickets/{$ticket->id}", ["status" => Ticket::STATUS_PENDING]);
+        $this->put("api/tickets/{$ticket->id}", ["status" => Ticket::STATUS_PENDING] ,["token" => 'the-api-token']);
 
         $this->assertEquals($ticket->fresh()->status, Ticket::STATUS_PENDING);
     }
@@ -166,7 +166,7 @@ class SimpleTicketTest extends TestCase
                 "name"  => "Bruce Wayne",
                 "email" => "bruce@wayne.com"
             ]
-        ]));
+        ]),["token" => 'the-api-token']);
 
         $response->assertStatus ( Response::HTTP_CREATED );
         $this->assertEquals(1, Requester::count());

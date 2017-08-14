@@ -42,7 +42,7 @@ class TeamTicketTest extends TestCase
             "body"          => "I can't log in into the application",
             "tags"          => ["xef"],
             "team_id"       => $team->id
-        ]);
+        ],["token" => 'the-api-token']);
 
         $response->assertStatus( Response::HTTP_CREATED );
         $response->assertJson(["data" => ["id" => 1]]);

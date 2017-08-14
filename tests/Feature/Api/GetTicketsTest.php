@@ -24,7 +24,7 @@ class GetTicketsTest extends TestCase
         factory(Ticket::class,2)->create(["requester_id" => $requester->id, "status" => Ticket::STATUS_SOLVED]);
         factory(Ticket::class,2)->create();
 
-        $response = $this->get("api/tickets?requester=requesterName");
+        $response = $this->get("api/tickets?requester=requesterName",["token" => 'the-api-token']);
 
         $response->assertJsonStructure([
             "data" => [
@@ -44,7 +44,7 @@ class GetTicketsTest extends TestCase
         factory(Ticket::class,2)->create(["requester_id" => $requester->id, "status" => Ticket::STATUS_SOLVED]);
         factory(Ticket::class,2)->create();
 
-        $response = $this->get("api/tickets?requester=requesterName&status=solved");
+        $response = $this->get("api/tickets?requester=requesterName&status=solved",["token" => 'the-api-token']);
 
         $response->assertJsonStructure([
             "data" => [
@@ -64,7 +64,7 @@ class GetTicketsTest extends TestCase
         factory(Ticket::class,2)->create(["requester_id" => $requester->id, "status" => Ticket::STATUS_CLOSED]);
         factory(Ticket::class,2)->create();
 
-        $response = $this->get("api/tickets?requester=requesterName&status=closed");
+        $response = $this->get("api/tickets?requester=requesterName&status=closed",["token" => 'the-api-token']);
 
         $response->assertJsonStructure([
             "data" => [
@@ -81,10 +81,10 @@ class GetTicketsTest extends TestCase
     public function can_get_a_ticket(){
         $ticket = factory(Ticket::class)->create();
         $ticket->comments()->createMany(
-          factory(Comment::class,5)->make()->toArray()
+          factory(Comment::class,5)->make()->transform(function($comment){return $comment->setAppends([]);})->toArray()
         );
 
-        $response = $this->get("api/tickets/{$ticket->id}");
+        $response = $this->get("api/tickets/{$ticket->id}",["token" => 'the-api-token']);
         $response->assertJsonStructure([
             "data" => [
                  "title", "body", "status", "created_at", "updated_at", "comments" => [

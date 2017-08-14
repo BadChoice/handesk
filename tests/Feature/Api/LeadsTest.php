@@ -34,14 +34,14 @@ class LeadsTest extends TestCase
             "email"       => "bruce@wayne.com",
             "body"        => "I'm interested in buying this awesome app",
             "username"    => "brucewayne",
-            "name"    => "Bruce Wayne",
+            "name"        => "Bruce Wayne",
             "phone"       => "0044 456 567 54",
             "address"     => "Wayne manner",
             "city"        => "Gotham",
             "postal_code" => "90872",
             "company"     => "Wayne enterprises",
             "tags"        => ["email", "xef", "email"],
-        ]);
+        ], ["token" => 'the-api-token']);
 
         $response->assertStatus(Response::HTTP_CREATED);
 
@@ -71,13 +71,12 @@ class LeadsTest extends TestCase
         $mailChimpFake = new MailchimpFake();
         app()->instance(Mailchimp::class, $mailChimpFake);
 
-
         $response = $this->post('api/leads',[
             "email"    => "bruce@wayne.com",
             "username" => "brucewayne",
             "name"     => "Bruce Wayne",
             "tags"     => ["email", "xef", "retail", "email"],
-        ]);
+        ],["token" => 'the-api-token']);
 
         $response->assertStatus(Response::HTTP_CREATED);
 
