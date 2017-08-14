@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 class TicketsController extends ApiController
 {
     public function index(){
-        $requester = Requester::whereName( request('requester'))->firstOrFail();
+        $requester = Requester::whereName( request('requester'))->orWhere('email','=', request('requester') )->firstOrFail();
         if      ( request('status') == 'solved') $tickets = $requester->solvedTickets;
         else if ( request('status') == 'closed') $tickets = $requester->closedTickets;
         else                                     $tickets = $requester->openTickets;
