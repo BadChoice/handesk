@@ -26,4 +26,17 @@ class LeadsController extends Controller
         $lead->update( request()->all() );
         return redirect()->route('leads.index');
     }
+
+    public function create(){
+        return view('leads.create');
+    }
+
+    public function store(){
+        $lead = Lead::create( request()->except(['tags','team_id']) )->attachTags(request('tags'));
+        if(request('team_id')){
+            $lead->assignToTeam( request('team_id'));
+        }
+        return redirect()->route('leads.show',$lead);
+    }
+
 }
