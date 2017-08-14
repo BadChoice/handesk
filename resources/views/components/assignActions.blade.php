@@ -6,8 +6,7 @@
             <td colspan="2"> <input id="tags" name="tags" value="{{$object->tagsString()}}"></td>
         </tr>
         @can("assignToTeam", $object)
-            <tr><td>{{ __('team.team') }}:</td>
-            <td>{{ Form::select('team_id', createSelectArray( App\Team::all(),true), $object->team_id ) }}</td><td></td></tr>
+            @include('components.assignTeamField', ["team" => $object->team])
         @endcan
         <tr>
         @can("assignToTeam", $object)

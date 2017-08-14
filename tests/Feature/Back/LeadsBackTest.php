@@ -105,4 +105,30 @@ class LeadsBackTest extends TestCase
             }
         );
     }
+
+    /** @test */
+    public function can_create_a_lead(){
+        Notification::fake();
+        $user = factory(User::class)->create();
+        $team = factory(Team::class)->create();
+
+        $response = $this->actingAs($user)->post('leads',[
+            "email" => "justin@biber.com",
+            "name"  => "Jason mandela",
+            "company"  => "Wayne",
+            "team_id" => $team->id,
+            "tags" => "first tag,second tag"
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals(1, Lead::count());
+        tap(Lead::first(), function($lead) use($team){
+            $this->assertEquals("Wayne", $lead->company);
+            $this->assertEquals("Jason mandela", $lead->name);
+            $this->assertEquals("justin@biber.com", $lead->email);
+            $this->assertEquals(Lead::STATUS_NEW, $lead->status);
+            $this->assertEquals($team->id, $lead->team->id);
+            $this->assertTrue($lead->tags->pluck('name')->contains('second tag'));
+        });
+    }
 }
