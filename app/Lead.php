@@ -3,13 +3,12 @@
 namespace App;
 
 use App\Notifications\LeadAssigned;
-use App\Services\Mailchimp;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends BaseModel
 {
-    use SoftDeletes, Taggable, Assignable;
+    use SoftDeletes, Taggable, Assignable, Subscribable;
 
     const STATUS_NEW            = 1;
     const STATUS_FIRST_CONTACT  = 2;
@@ -61,31 +60,11 @@ class Lead extends BaseModel
         return new LeadAssigned($this);
     }
 
-    public function getSubscribableLists(){
-        $listIds = config('services.mailchimp.tag_list_id');
-        return array_intersect_key($listIds, array_flip($this->tags->pluck('name')->toArray()));
+    public function getSubscribableEmail(){
+        return $this->email;
     }
 
-    public function subscribeToMailchimp(){
-        $mailchimp      = app()->make(Mailchimp::class);
-        $fullNameArray  = explode(" ", $this->name);
-        $firstName      = array_shift($fullNameArray);
-        foreach($this->getSubscribableLists() as $listName => $listId){
-            $mailchimp->subscribe($listId, $this->email, $firstName, join($fullNameArray, " "));
-        }
+    public function getSubscribableName(){
+        return $this->name;
     }
-
-//    public function subscribeToMailchimp(){
-//        $listId = $this->getMailchimpListId();
-//        if ($listId) {
-//            $fullNameArray = explode(" ", $this->fullName);
-//            $firstName = array_shift($fullNameArray);
-//            (new Mailchimp())->subscribe($listId, $this->email, $firstName, join($fullNameArray, " "));
-//        }
-//    }
-//
-//    public function getMailchimpListId() {
-//        //$listIds = config('services.mailchimp.list_ids');
-//        //return array_key_exists($this->source, $listIds) ? $listIds[$this->source] : false;
-//    }
 }

@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel{
-    use SoftDeletes, Taggable, Assignable;
+    use SoftDeletes, Taggable, Assignable, Subscribable;
 
     const STATUS_NEW                = 1;
     const STATUS_OPEN               = 2;
@@ -114,5 +114,13 @@ class Ticket extends BaseModel{
             case static::STATUS_SOLVED              : return "solved";
             case static::STATUS_CLOSED              : return "closed";
         }
+    }
+
+    public function getSubscribableEmail(){
+        return $this->requester->email;
+    }
+
+    public function getSubscribableName(){
+        return $this->requester->name;
     }
 }
