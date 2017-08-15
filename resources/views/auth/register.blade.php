@@ -1,76 +1,66 @@
-@extends('layouts.app')
+@extends('auth.layout')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+    <div class="center text-center mt5 w-20">
+        <img src="{{url("images/handesk_full.png")}}" class="w-80">
+        <h3>Register</h3>
+            <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    {{ csrf_field() }}
+                <table>
+                    <tr>
+                        <td class="w-40">Name:</td>
+                        <td class="w-60">
+                            <input id="name" type="text" class="w-100" name="name" value="{{ old('name') }}" required autofocus>
+                            @if ($errors->has('name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
+                        </td>
+                    </tr>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
+                    <tr>
+                        <td>E-Mail Address:</td>
+                        <td>
+                                <input id="email" type="email" class="w-100" name="email" value="{{ old('email') }}" required>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>
+                            <input id="password" type="password" class="w-100" name="password" required>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                        </td>
+                    </tr>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                    <tr>
+                        <td>Confirm Password</td>
+                        <td><input id="password-confirm" type="password" class="w-100" name="password_confirmation" required></td>
+                    </tr>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                    <tr>
+                        <td colspan="2">
+                            <input id="team_token" type="text" class="w-100" name="team_token" value="{{request('team_token')}}" required placeholder="INVITATION CODE">
+                        </td>
+                    </tr>
 
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" class="uppercase p2 center w-100">Register</button>
+                        </td>
+                    </tr>
+                </table>
+                </form>
             </div>
-        </div>
-    </div>
-</div>
 @endsection

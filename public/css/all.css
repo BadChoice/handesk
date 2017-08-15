@@ -562,6 +562,15 @@ input {
   border-radius: 4px;
   padding: 12px;
 }
+input::-webkit-input-placeholder {
+  color: #c8c8c8;
+}
+input:-ms-input-placeholder {
+  color: #c8c8c8;
+}
+input::placeholder {
+  color: #c8c8c8;
+}
 input[type=checkbox] {
   vertical-align: super;
 }
