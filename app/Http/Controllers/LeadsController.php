@@ -32,7 +32,13 @@ class LeadsController extends Controller
     }
 
     public function store(){
-        $lead = Lead::create( request()->except(['tags','team_id']) )->attachTags(request('tags'));
+        $this->validate(request(),[
+            "name" => "required|min:3",
+            "email" => "nullable|unique:leads",
+            "phone" => "nullable|unique:leads",
+        ]);
+
+        $lead = Lead::create( request()->except( ['tags','team_id']) )->attachTags( request('tags') );
         if(request('team_id')){
             $lead->assignToTeam( request('team_id'));
         }

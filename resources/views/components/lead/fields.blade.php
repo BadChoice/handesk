@@ -1,6 +1,6 @@
 <tr>
-    <td>{{ __('lead.company') }}:</td><td>   <input name="company" value="{{ $lead->company }}">   </td>
     <td>{{ __('lead.name') }}:</td><td>      <input name="name" value="{{ $lead->name }}" required>  </td>
+    <td>{{ __('lead.company') }}:</td><td>   <input name="company" value="{{ $lead->company }}">   </td>
 </tr><tr>
     <td>{{ __('lead.email') }}:</td><td>     <input name="email" value="{{ $lead->email }}"> </td>
     <td>{{ __('lead.phone') }}:</td><td>     <input name="phone" value="{{ $lead->phone }}"> </td>

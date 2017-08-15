@@ -131,4 +131,35 @@ class LeadsBackTest extends TestCase
             $this->assertTrue($lead->tags->pluck('name')->contains('second tag'));
         });
     }
+
+    /** @test */
+    public function can_not_create_a_duplicated_lead_email(){
+        $user = factory(User::class)->create();
+        factory(Lead::class)->create(["email" => "an_email@email.com", "phone" => "666777888"]);
+
+        $response = $this->actingAs($user)->post('leads',[
+            "email"   => "an_email@email.com",
+            "name"    => "Jason mandela",
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $response->assertSessionHasErrors(["email"]);
+        $this->assertEquals(1, Lead::count() );
+    }
+
+    /** @test */
+    public function can_not_create_a_duplicated_lead_phone(){
+        $user = factory(User::class)->create();
+        factory(Lead::class)->create(["email" => "an_email@email.com", "phone" => "666777888"]);
+
+        $response = $this->actingAs($user)->post('leads',[
+            "email"   => "another_email@email.com",
+            "phone"   => "666777888",
+            "name"    => "Jason mandela",
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $response->assertSessionHasErrors(["phone"]);
+        $this->assertEquals(1, Lead::count() );
+    }
 }
