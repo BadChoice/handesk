@@ -11,4 +11,9 @@ class UsersController extends Controller
         $users = User::with('teams')->paginate(25);
         return view('users.index', ["users" => $users] );
     }
+
+    public function impersonate(User $user){
+        auth()->loginUsingId($user->id);
+        return redirect()->route('tickets.index');
+    }
 }

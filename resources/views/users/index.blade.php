@@ -13,6 +13,7 @@
             <th> {{ trans_choice('team.name',1) }}          </th>
             <th> {{ trans_choice('team.email',2) }}        </th>
             <th> {{ trans_choice('team.team',1) }}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
                 <td> {{ $user->name }}</td>
                 <td> {{ $user->email }}</td>
                 <td> {{ implode(", ", $user->teams->pluck('name')->toArray() ) }}</td>
+                <td> <a href="{{ route('users.impersonate', $user) }}"> @icon(key) </a></td>
             </tr>
         @endforeach
         </tbody>

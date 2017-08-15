@@ -16,7 +16,7 @@
                 <th> {{ __('ticket.subject') }}</th>
                 <th> {{ __('ticket.requester') }}</th>
                 <th> {{ __('ticket.team') }}</th>
-                <th> {{ __('ticket.user') }}</th>
+                <th> {{ __('ticket.assigned') }}</th>
                 <th> {{ __('ticket.requested') }}</th>
                 <th> {{ __('ticket.updated') }}</th>
             </tr>

@@ -12,7 +12,7 @@ return [
     "requester"     => "Requester",
     "date"          => "Date",
     "team"          => "Team",
-    "user"          => "Agent",
+    "user"          => "Agent|Agents",
     "recent"        => "Recently updated",
     "requested"     => "Requested",
     "updated"       => "Updated",
