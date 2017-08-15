@@ -2,8 +2,9 @@
 
 @section('content')
 
-    <div class="center text-center mt5 w-20">
-        <img src="{{url("images/handesk_full.png")}}" class="w-80">
+    <div class="center text-center mt5 w-40">
+        <img src="{{url("images/handesk_full.png")}}" class="w-40">
+        <p class="w-60 center"> {{ __('team.invitedDesc') }}</p>
         <h3>Register</h3>
             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}

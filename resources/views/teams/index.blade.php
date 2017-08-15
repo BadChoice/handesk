@@ -28,7 +28,11 @@
                 <td> {{ $team->name }}</td>
                 <td> {{ $team->members->count() }}</td>
                 @can('administrate', $team)
-                    <td> <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a></td>
+                    <td>
+                        <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a>
+                        <div class="hidden" id="register-link-{{$team->id}}"> {{ route('membership.store',$team->token)}} </div>
+                        <a class="ml2 pointer" onclick="copyToClipboard('#register-link-{{$team->id}}')">@icon(clipboard)</a>
+                    </td>
                 @else
                     <td></td>
                 @endcan

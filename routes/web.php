@@ -41,6 +41,8 @@ Route::group(["middleware" => "auth"], function(){
     Route::get ('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
     Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
 
+    Route::resource('users'                         ,'UsersController', ["only" => "index"]);
+
     Route::get('reports',               'ReportsController@index')->name('reports.index');
 });
 
