@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Handesk') }}</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
