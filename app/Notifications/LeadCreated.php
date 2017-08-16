@@ -36,6 +36,7 @@ class LeadCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->replyTo(config('mail.fetch.username'))
                     ->line('A new lead has been created')
                     ->action('See lead', route("leads.show", $this->lead))
                     ->line('Thank you for using our application!');

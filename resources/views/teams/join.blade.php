@@ -6,7 +6,17 @@
         <h3 class="fs4"> {{ __('team.invitedTitle', ["team" => strtoupper($team->name)] ) }}</h3>
         <p> {{ __('team.invitedDesc') }}</p>
         {{ Form::open(["url" => route('membership.store', $team->token)]) }}
-        <button class="uppercase fs2 p3 mv3">{{ __('team.join') }} {{ $team->name }} {{ __('team.team') }}</button>
+        <button class="uppercase fs2 p3 mv3">{{ __('team.join') }} <b>{{ $team->name }}</b> {{ __('team.team') }}</button>
         {{ Form::close() }}
+
+        <div class="mt5 bt p3 pt5">
+            {{ __('team.register') }}<br>
+            <div class="mv3">
+                <a  href="{{ route('register') }}?team_token={{$team->token}}" id="register-link">
+                    {{ route('register') }}?team_token={{$team->token}}
+                </a>
+            </div>
+            <button class="pointer" onclick="copyToClipboard('#register-link')">@icon(clipboard) Copy to clipboard</button>
+        </div>
     </div>
 @endsection

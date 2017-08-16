@@ -1,5 +1,6 @@
 <?php
 
+use App\Settings;
 use App\Team;
 use App\Ticket;
 use App\User;
@@ -16,12 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         factory(User::class)->create([
-            "email"     => "jordi.p@revo.works",
-            "password"  => bcrypt("secret"),
+            "email"     => "admin@handesk.com",
+            "password"  => bcrypt("admin"),
             "admin"     => true,
         ]);
 
-        $teams = factory(Team::class,4)->create();
+        Settings::create();
+
+        /*$teams = factory(Team::class,4)->create();
         $teams->each(function($team){
             $team->memberships()->create([
                 "user_id" => factory(User::class)->create()->id
@@ -30,5 +33,6 @@ class DatabaseSeeder extends Seeder
         });
 
         factory(Ticket::class)->create();
+        */
     }
 }

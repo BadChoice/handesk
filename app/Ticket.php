@@ -31,11 +31,10 @@ class Ticket extends BaseModel{
             "public_token"  => str_random(24),
         ])->attachTags( $tags );
 
-        tap(new TicketCreated($ticket), function($newTicketNotification) use($requester) {
+        tap(new TicketCreated($ticket), function($newTicketNotification) use ($requester) {
             User::notifyAdmins( $newTicketNotification );
             $requester->notify( $newTicketNotification );
         });
-
         return $ticket;
     }
 

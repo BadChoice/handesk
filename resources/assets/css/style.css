@@ -410,6 +410,12 @@
 .white {
   color: white;
 }
+.lighter-gray {
+  color: #c8c8c8;
+}
+.gray {
+  color: #7c8287;
+}
 .bg-danger {
   background-color: #E73140;
 }
@@ -468,6 +474,33 @@
 }
 .br3 {
   border-radius: 16px;
+}
+.bb {
+  border-bottom: 1px solid #F0F0F0;
+}
+.bt {
+  border-top: 1px solid #F0F0F0;
+}
+.o0 {
+  opacity: 0;
+}
+.o20 {
+  opacity: 0.2;
+}
+.o40 {
+  opacity: 0.4;
+}
+.o50 {
+  opacity: 0.5;
+}
+.o60 {
+  opacity: 0.6;
+}
+.o80 {
+  opacity: 0.8;
+}
+.o100 {
+  opacity: 0.1;
 }
 .float-left {
   float: left;
@@ -560,6 +593,15 @@ input {
   height: 4px;
   border-radius: 4px;
   padding: 12px;
+}
+input::-webkit-input-placeholder {
+  color: #c8c8c8;
+}
+input:-ms-input-placeholder {
+  color: #c8c8c8;
+}
+input::placeholder {
+  color: #c8c8c8;
 }
 input[type=checkbox] {
   vertical-align: super;

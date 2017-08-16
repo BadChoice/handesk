@@ -15,6 +15,7 @@
 use App\Comment;
 use App\Lead;
 use App\Requester;
+use App\Settings;
 use App\Team;
 use App\Ticket;
 use function foo\func;
@@ -71,5 +72,10 @@ $factory->define(Lead::class, function(Faker\Generator $faker){
     return [
         "name"      => $faker->word,
         "email"    => $faker->safeEmail,
+    ];
+});
+
+$factory->define(Settings::class, function(Faker\Generator $faker){
+    return [
     ];
 });

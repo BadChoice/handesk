@@ -41,6 +41,12 @@ Route::group(["middleware" => "auth"], function(){
     Route::get ('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');
     Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
 
+    Route::group(["middleware" => "can:see-admin"] , function(){
+        Route::resource('users'                         ,'UsersController', ["only" => "index"]);
+        Route::get     ('users/{user}/impersonate'      ,'UsersController@impersonate')->name('users.impersonate');
+        Route::resource('settings'                      ,'SettingsController', ["only" => ["edit","update"] ]);
+    });
+
     Route::get('reports',               'ReportsController@index')->name('reports.index');
 });
 

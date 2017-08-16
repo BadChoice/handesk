@@ -85,7 +85,7 @@ class SimpleTicketTest extends TestCase
         ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $response->assertJsonFragment([
-            "error" => "The given data failed to pass validation."
+            "error"
         ]);
         $this->assertEquals(0, Ticket::count() );
     }
@@ -97,7 +97,7 @@ class SimpleTicketTest extends TestCase
         ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $response->assertJsonFragment([
-            "error" => "The given data failed to pass validation."
+            "error"
         ]);
         $this->assertEquals(0, Ticket::count() );
     }
