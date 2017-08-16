@@ -15,7 +15,7 @@ class LeadsController extends Controller
 
         if( request('team'))                $leads = $leads->where('leads.team_id', request('team'));
 
-        return view('leads.index', [ "leads" => $leads->paginate(25) ]);
+        return view('leads.index', [ "leads" => $leads->latest()->paginate(25) ]);
     }
 
     public function show(Lead $lead){
