@@ -8,13 +8,13 @@ Check out the screenshots to see how nice it looks, and feel fee to contribute b
 We will keep adding features as we need them, but our basic workflow is totally covered :D
 
 ## Features
-· Email polling (new tickets and tickets updates)
-· API for creating/updating/fetching tickets/leads so you can display them into your main app
-· Instant email/slack notifications when tickets are created/updated
-· Everything is unlimited 
-· Lead management (With its API as well)
-· Auto lead subscription to mailchimp based on its tags
-· Tickets reporting 
+· Email polling (new tickets and tickets updates)    
+· API for creating/updating/fetching tickets/leads so you can display them into your main app    
+· Instant email/slack notifications when tickets are created/updated   
+· Everything is unlimited    
+· Lead management (With its API as well)   
+· Auto lead subscription to mailchimp based on its tags   
+· Tickets reporting    
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation
@@ -37,11 +37,33 @@ php artisan migrate --seed
 Open your `app/Console/Kernel.php` to update the schedulers as you want (event comment them if not needed)
 Add the cron job `* * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1`
 
+
+### Further configuration
+#### Email pulling
+Enter your mail credentials in .env
+
+````
+MAIL_FETCH_HOST=pop3.codepassion.io   
+MAIL_FETCH_PORT=110   
+MAIL_FETCH_USERNAME=hello@codepassion.io   
+MAIL_FETCH_PASSWORD=mypassion!25   
+````
+
+#### Mailchimp
+Set your mailchimp key in .env
+`MAILCHIMP_API_KEY=448027f3acac5594605be3adf78be862-us15`
+
+And enter the relation of `tags => list` id in `app/config/services.php` mailchimp section
+
+#### Api Token
+Set your desired API token in the .env
+
+```API_TOKEN=the-api-token```
+
+### Screenshots
+
 ## Development
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.
+   
+PRs are welcome!
 
-TODOS:
-2. Reports by (all, teams, user) 
- - Satisfaction ratio
- 
-3. Leads
