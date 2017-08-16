@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="description actions comment mb4">
+    <div class="description actions comment mb4 mt5">
         <h3 class="ml4 float-left"> {{ trans_choice('setting.setting',2) }}</h3>
     </div>
 
