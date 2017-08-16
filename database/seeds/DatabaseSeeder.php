@@ -17,14 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         factory(User::class)->create([
-            "email"     => "jordi.p@revo.works",
-            "password"  => bcrypt("secret"),
+            "email"     => "admin@handesk.com",
+            "password"  => bcrypt("admin"),
             "admin"     => true,
         ]);
 
         Settings::create();
 
-        $teams = factory(Team::class,4)->create();
+        /*$teams = factory(Team::class,4)->create();
         $teams->each(function($team){
             $team->memberships()->create([
                 "user_id" => factory(User::class)->create()->id
@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         });
 
         factory(Ticket::class)->create();
+        */
     }
 }
