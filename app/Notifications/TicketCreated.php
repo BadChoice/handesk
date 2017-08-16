@@ -53,7 +53,7 @@ class TicketCreated extends Notification
 
     public function toSlack($notifiable)
     {
-        return (new BaseTicketSlackMessage($this->ticket))
+        return (new BaseTicketSlackMessage($this->ticket, $notifiable))
                 ->content('Ticket created');
     }
     /**

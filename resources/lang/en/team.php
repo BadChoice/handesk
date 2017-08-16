@@ -12,4 +12,5 @@ return [
     "name"              => "Name",
     "email"             => "Email",
     "slack_webhook_url" => "Slack webhook url",
+    "slack_webhook_urlDesc" => "You can customize the channel or user by adding it at the end of the url prepending an ?. Example: https://hooks.slack.com/services/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?#custom-channel"
 ];

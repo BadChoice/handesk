@@ -25,8 +25,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
         $schedule->command('handesk:closeSolvedTickets')->dailyAt('23:55');
         $schedule->command('handesk:createTicketsFromNewEmails')->everyMinute();
     }

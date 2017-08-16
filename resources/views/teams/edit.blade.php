@@ -17,6 +17,7 @@
             <tr><td>{{ __("team.name") }}:              </td><td class="w-60"><input class="w-100" name="name"  value="{{$team->name}}">      </td></tr>
             <tr><td>{{ __("team.email") }}:             </td><td class="w-60"><input class="w-100" name="email"  value="{{$team->email}}">   </td></tr>
             <tr><td>{{ __("team.slack_webhook_url") }}: </td><td class="w-60"><input class="w-100" name="slack_webhook_url" value="{{$team->slack_webhook_url}}"></td></tr>
+            <tr><td colspan="2"> <span class="lighter-gray fs2">{{ __('team.slack_webhook_urlDesc') }}</span></td></tr>
             <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td></tr>
         </table>
         {{ Form::close() }}

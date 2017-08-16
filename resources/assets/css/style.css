@@ -410,6 +410,12 @@
 .white {
   color: white;
 }
+.lighter-gray {
+  color: #c8c8c8;
+}
+.gray {
+  color: #7c8287;
+}
 .bg-danger {
   background-color: #E73140;
 }

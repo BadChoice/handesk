@@ -54,8 +54,9 @@ class NewComment extends Notification
         return $mail;
     }
 
+
     public function toSlack($notifiable) {
-        return (new BaseTicketSlackMessage)
+        return (new BaseTicketSlackMessage(null, $notifiable))
                 ->content('Ticket updated')
                 ->attachment(function ($attachment)  {
                     $attachment->title($this->ticket->requester->name . " : " . $this->ticket->title, route("tickets.show", $this->ticket))
