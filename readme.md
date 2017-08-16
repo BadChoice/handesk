@@ -34,7 +34,7 @@ php artisan migrate --seed
 127.0.0.1   localhost YourMac.local
 ```
 
-Open your `app/Console/Kernel.php` to update the schedulers as you want (event comment them if not needed)
+Open your `app/Console/Kernel.php` to update the schedulers as you want (comment them if not needed)
 Add the cron job `* * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1`
 
 
@@ -61,6 +61,12 @@ Set your desired API token in the .env
 ```API_TOKEN=the-api-token```
 
 ### Screenshots
+![Tickets screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/tickets.png)
+![Ticket screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/ticket.png)
+![Leads screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/leads.png)
+![Lead screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/lead.png)
+![Invitation screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/invitation.png)
+![Email screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/email.png)
 
 ## Development
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.
