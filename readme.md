@@ -60,6 +60,9 @@ Set your desired API token in the .env
 
 ```API_TOKEN=the-api-token```
 
+There is the `badchoice/handesk-php` package in packagist to easily talk with the api.
+
+
 ### Screenshots
 ![Tickets screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/tickets.png)
 ![Ticket screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/ticket.png)
