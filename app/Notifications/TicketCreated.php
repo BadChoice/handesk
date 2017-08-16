@@ -38,6 +38,7 @@ class TicketCreated extends Notification
     {
         $mail = (new MailMessage)
             ->subject("New ticket: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->replyTo(config('mail.fetch.username'))
             ->view( "emails.ticket" ,[
                     "title"  => "New ticket created",
                     "ticket" => $this->ticket,

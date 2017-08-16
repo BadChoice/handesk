@@ -38,6 +38,7 @@ class TicketAssigned extends Notification
     {
         $mail = (new MailMessage)
             ->subject("Ticket assigned: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->replyTo(config('mail.fetch.username'))
             ->view( "emails.ticket" ,[
                     "title"  => "Ticket assigned to " . $notifiable->name,
                     "ticket" => $this->ticket,

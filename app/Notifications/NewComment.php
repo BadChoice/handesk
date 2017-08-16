@@ -40,6 +40,7 @@ class NewComment extends Notification
     public function toMail($notifiable) {
         $mail = (new MailMessage)
             ->subject("Ticket updated: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->replyTo(config('mail.fetch.username'))
             ->view( "emails.ticket" ,[
                     "title"  => "Ticket updated",
                     "ticket" => $this->ticket,
