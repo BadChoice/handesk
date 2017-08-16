@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Requester;
+use App\Settings;
 use App\Team;
 use App\Ticket;
 use Illuminate\Http\Response;
@@ -62,6 +63,37 @@ class TeamTicketTest extends TestCase
             Notification::assertSentTo(
                 [$team],
                 TicketAssigned::class,
+                function ($notification, $channels) use ($ticket) {
+                    return $notification->ticket->id === $ticket->id;
+                }
+            );
+        });
+    }
+
+    /** @test */
+    public function a_ticket_created_without_team_notifies_the_default_setting(){
+        Notification::fake();
+
+        $setting = factory(Settings::class)->create(["slack_webhook_url" => "http://fake-slack-webhook-url.com"]);
+
+        $response = $this->post('api/tickets',[
+            "requester"     => [
+                "name" => "johndoe",
+                "email" => "john@doe.com"
+            ],
+            "title"         => "App is not working",
+            "body"          => "I can't log in into the application",
+            "tags"          => ["xef"],
+            "team_id"       => null
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus( Response::HTTP_CREATED );
+        $response->assertJson(["data" => ["id" => 1]]);
+
+        tap( Ticket::first(), function($ticket) use($setting) {
+            Notification::assertSentTo(
+                [$setting],
+                TicketCreated::class,
                 function ($notification, $channels) use ($ticket) {
                     return $notification->ticket->id === $ticket->id;
                 }

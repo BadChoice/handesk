@@ -1,5 +1,6 @@
 <?php
 
+use App\Settings;
 use App\Team;
 use App\Ticket;
 use App\User;
@@ -20,6 +21,8 @@ class DatabaseSeeder extends Seeder
             "password"  => bcrypt("secret"),
             "admin"     => true,
         ]);
+
+        Settings::create();
 
         $teams = factory(Team::class,4)->create();
         $teams->each(function($team){

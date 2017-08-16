@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Notifications\TicketCreated;
 use App\Requester;
+use App\Settings;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
@@ -35,15 +36,21 @@ class TicketsController extends ApiController
             request('tags')
         );
 
-        if( request('team_id') ){
-            $ticket->assignToTeam( request('team_id') );
-        }
-        //TODO: Notify default if not in a team
+        if( request('team_id') ){ $ticket->assignToTeam( request('team_id') );      }
+        else                    { $this->notifyDefault($ticket);                     }
+
         return $this->respond(["id" => $ticket->id ], Response::HTTP_CREATED);
     }
 
     public function update(Ticket $ticket){
         $ticket->updateStatus( request('status') );
         return $this->respond(["id" => $ticket->id ], Response::HTTP_OK);
+    }
+
+    private function notifyDefault($ticket){
+        $setting = Settings::first();
+        if($setting && $setting->slack_webhook_url){
+            $setting->notify( new TicketCreated($ticket) );
+        }
     }
 }
