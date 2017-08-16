@@ -38,6 +38,7 @@ class TicketsController extends ApiController
         if( request('team_id') ){
             $ticket->assignToTeam( request('team_id') );
         }
+        //TODO: Notify default if not in a team
         return $this->respond(["id" => $ticket->id ], Response::HTTP_CREATED);
     }
 
