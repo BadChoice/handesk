@@ -16,6 +16,12 @@ class LeadsController extends ApiController
             "tags"     => "required",
         ]);
 
+        $lead = Lead::where('email',request('email'))->orWhere('phone',request('phone'))->first();
+        if($lead){
+            $lead->attachTags( request('tags'));
+            return $this->respond(["id" => $lead->id], Response::HTTP_CREATED);
+        }
+
         $lead = Lead::create([
             "email"         => request('email'),
             "name"          => request('name'),

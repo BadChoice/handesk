@@ -27,6 +27,9 @@ class LeadsTest extends TestCase
 
     /** @test */
     public function can_create_a_lead(){
+        $mailChimpFake = new MailchimpFake();
+        app()->instance(Mailchimp::class, $mailChimpFake);
+
         $admin      = factory(User::class)->create(["admin" => 1]);
         $nonAdmin   = factory(User::class)->create(["admin" => 0]);
 
@@ -84,6 +87,25 @@ class LeadsTest extends TestCase
             $mailChimpFake->assertSubscribed($lead->email, config('services.mailchimp.tag_list_id.xef'));
             $mailChimpFake->assertSubscribed($lead->email, config('services.mailchimp.tag_list_id.retail'));
             $mailChimpFake->assertNotSubscribed($lead->email, config('services.mailchimp.tag_list_id.flow'));
+        });
+    }
+
+    /** @test */
+    public function creating_a_lead_that_email_already_exists_only_adds_the_tags(){
+        $lead = factory(Lead::class)->create(["email" => "bruce@wayne.com"]);
+        $response = $this->post('api/leads',[
+            "email"    => "bruce@wayne.com",
+            "username" => "brucewayne",
+            "name"     => "Bruce Wayne",
+            "tags"     => ["email", "xef", "retail", "email"],
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus(Response::HTTP_CREATED);
+        $this->assertEquals(1, Lead::count() );
+        tap($lead->fresh()->tags()->pluck('name'), function($tags){
+            $this->assertTrue( $tags->contains("retail") );
+            $this->assertTrue( $tags->contains("email") );
+            $this->assertTrue( $tags->contains("xef") );
         });
     }
 }
