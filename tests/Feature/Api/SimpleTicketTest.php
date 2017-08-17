@@ -103,6 +103,25 @@ class SimpleTicketTest extends TestCase
     }
 
     /** @test */
+    public function can_create_a_ticket_without_requester_email(){
+        Notification::fake();
+        $admin      = factory(User::class)->create(["admin" => 1]);
+        $nonAdmin   = factory(User::class)->create(["admin" => 0]);
+
+        $response = $this->post('api/tickets',[
+            "requester" => [
+                "name"  => "johndoe",
+            ],
+            "title"         => "App is not working",
+            "body"          => "I can't log in into the application",
+            "tags"          => ["xef"]
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus( Response::HTTP_CREATED );
+        $response->assertJson(["data" => ["id" => 1]]);
+    }
+
+    /** @test */
     public function requester_can_comment_the_ticket(){
         Notification::fake();
         $ticket = factory(Ticket::class)->create();
