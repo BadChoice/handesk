@@ -92,5 +92,20 @@ class GetTicketsTest extends TestCase
                 ]
             ]
         ]);
+        $this->assertCount(5, $response->json()["data"]["comments"] );
+    }
+
+    /** @test */
+    public function when_getting_a_ticket_only_public_comments_are_returned(){
+        $ticket = factory(Ticket::class)->create();
+        $ticket->comments()->createMany(
+            factory(Comment::class,2)->make()->transform(function($comment){return $comment->setAppends([]);})->toArray()
+        );
+        $ticket->comments()->createMany(
+            factory(Comment::class,2)->make(["private" => true])->transform(function($comment){return $comment->setAppends([]);})->toArray()
+        );
+
+        $response = $this->get("api/tickets/{$ticket->id}",["token" => 'the-api-token']);
+        $this->assertCount(2, $response->json()["data"]["comments"] );
     }
 }

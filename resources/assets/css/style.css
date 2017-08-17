@@ -604,7 +604,7 @@ input::placeholder {
   color: #c8c8c8;
 }
 input[type=checkbox] {
-  vertical-align: super;
+  height: 10px;
 }
 select {
   border-radius: 4px;
@@ -737,6 +737,9 @@ a {
   font-weight: bold;
   color: white;
   background-color: #E73140;
+}
+.note {
+  background-color: #FFF9E4;
 }
 .button {
   background-color: #33BC8C;

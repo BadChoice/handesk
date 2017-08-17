@@ -55,6 +55,10 @@ class Ticket extends BaseModel{
     }
 
     public function comments(){
+        return $this->commentsAndNotes()->where('private',false);
+    }
+
+    public function commentsAndNotes(){
         return $this->hasMany(Comment::class)->latest();
     }
 
@@ -91,6 +95,17 @@ class Ticket extends BaseModel{
         });
         event( new TicketCommented($this, $comment, $previousStatus) );
         return $comment;
+    }
+
+    public function addNote($user, $body){
+        if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
+        else                        { $this->touch(); }
+        return $this->comments()->create([
+            "body"          => $body,
+            "user_id"       => $user->id,
+            "new_status"    => $this->status,
+            "private"       => true,
+        ]);
     }
 
     public function updateStatus($status){

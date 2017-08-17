@@ -101,9 +101,22 @@ class BackTest extends TestCase
                 }
             );
         });
+    }
 
-        // assert notification sent to requester, team, but not sent to user
-        //TODO: assert notifications
+    /** @test */
+    public function can_comment_a_ticket_with_a_private_note(){
+        Notification::fake();
+        $user   = factory(User::class)->create();
+        $team   = factory(Team::class)->create();
+        $ticket = factory(Ticket::class)->create(["user_id" => $user->id, "team_id" => $team->id]);
+        $this->assertCount(0, $ticket->comments);
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/comments",["body" => "This is my comment", "private" => true]);
+        $response->assertStatus(Response::HTTP_FOUND);
+
+        $this->assertCount(0, $ticket->fresh()->comments);
+        $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
+
     }
 
     /** @test */

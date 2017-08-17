@@ -21,5 +21,5 @@
             {{ Form::close() }}
         </div>
     @endif
-    @include('components.ticketComments')
+    @include('components.ticketComments', ["comments" => $ticket->comments])
 @endsection

@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedInteger('ticket_id');
             $table->unsignedInteger('user_id')->nullable();
             $table->tinyInteger('new_status');
+            $table->boolean('private')->default(0);
             $table->text('body');
             $table->timestamps();
         });

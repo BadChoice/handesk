@@ -27,4 +27,5 @@ return [
     "pending"       => "Pending",
     "solved"        => "Solved",
     "closed"        => "Closed",
+    "note"          => "Note",
 ];
