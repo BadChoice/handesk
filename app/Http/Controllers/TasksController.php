@@ -7,7 +7,7 @@ use App\Task;
 class TasksController extends Controller
 {
     public function index(){
-        return view('tasks.index', ["tasks" => Task::today()->get() ]);
+        return view('tasks.index', ["tasks" => auth()->user()->tasks ]);
     }
 
     public function destroy(Task $task){

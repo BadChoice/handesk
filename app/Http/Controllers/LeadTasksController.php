@@ -12,7 +12,7 @@ class LeadTasksController extends Controller
     }
 
     public function store(Lead $lead){
-        $lead->tasks()->create( request()->all() );
+        $lead->tasks()->create( ["user_id" => auth()->user()->id] + request()->all() );
         return back();
     }
 }

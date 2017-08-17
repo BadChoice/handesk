@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Notification;
@@ -44,6 +45,14 @@ class User extends Authenticatable
     public function teamsLeads(){
         return Lead::join('memberships','leads.team_id','=','memberships.team_id')
                 ->where('memberships.user_id',$this->id)->select('leads.*');
+    }
+
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
+
+    public function todayTasks(){
+        return $this->hasMany(Task::class)->where('completed',false)->where('datetime','<', Carbon::tomorrow());
     }
 
     public static function notifyAdmins( $notification ){

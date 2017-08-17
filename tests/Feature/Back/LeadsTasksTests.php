@@ -26,9 +26,10 @@ class LeadsTasksTest extends TestCase
 
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertCount(1, $lead->tasks);
-        tap( $lead->tasks->first(), function($task) {
+        tap( $lead->tasks->first(), function($task) use($user) {
             $this->assertEquals("My first task", $task->body);
             $this->assertNull($task->date);
+            $this->assertEquals($user->id, $task->user_id);
             $this->assertFalse((bool)$task->completed);
         });
     }

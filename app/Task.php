@@ -13,7 +13,11 @@ class Task extends BaseModel
         return $this->belongsTo(Lead::class);
     }
 
-    public function scopeToday($query){
-        return $query->where('completed',false)->whereBetween('datetime',[Carbon::today(), Carbon::tomorrow()]);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
+
+    /*public function scopeToday($query){
+        return $query->where('completed',false)->whereBetween('datetime',[Carbon::today(), Carbon::tomorrow()]);
+    }*/
 }
