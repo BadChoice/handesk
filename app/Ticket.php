@@ -117,10 +117,12 @@ class Ticket extends BaseModel{
     public function merge($user, $tickets){
         collect($tickets)->map(function($ticket) {
             return is_numeric($ticket) ? Ticket::find($ticket) : $ticket;
+        })->reject(function($ticket) {
+            return $ticket->status > Ticket::STATUS_SOLVED;
         })->each(function($ticket) use($user) {
-           $ticket->addNote( $user, "Merged with #{$this->id}" );
-           $ticket->updateStatus(Ticket::STATUS_MERGED);
-           $this->mergedTickets()->attach($ticket);
+            $ticket->addNote( $user, "Merged with #{$this->id}" );
+            $ticket->updateStatus(Ticket::STATUS_MERGED);
+            $this->mergedTickets()->attach($ticket);
         });
     }
 
@@ -134,6 +136,10 @@ class Ticket extends BaseModel{
 
     public function scopeSolved($query){
         return $query->where('status','>=',Ticket::STATUS_SOLVED);
+    }
+
+    public function canBeEdited(){
+        return ! in_array($this->status, [Ticket::STATUS_CLOSED, Ticket::STATUS_MERGED]);
     }
 
     public function statusName(){

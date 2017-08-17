@@ -1,5 +1,6 @@
 <tr>
         <td>
+                <input type="checkbox" name="selected[{{$ticket->id}}]" meta:index="{{$ticket->id}}" class="hidden selector">
                 <span class="label ticket-status-{{ $ticket->statusName() }}">{{ str_limit($ticket->statusName(),1,'') }}</span>&nbsp;
                 <a href="{{route('tickets.show',$ticket)}}"> #{{ $ticket->id }}. {{  str_limit($ticket->title,35)  }}</a>
         </td>

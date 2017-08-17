@@ -249,11 +249,13 @@ class BackTest extends TestCase
 
     /** @test */
     public function can_merge_tickets(){
-        $user = factory(User::class)->states(['admin'])->create();
+        $user    = factory(User::class)->states(['admin'])->create();
         $tickets = factory(Ticket::class, 4)->create();
 
-        $this->actingAs($user)->post("tickets/1/merge", ["tickets" => [2, 3]]);
+        $response = $this->actingAs($user)->post("tickets/merge", ["ticket_id" => 1, "tickets" => [2, 3]]);
 
-        $this->assertEquals(Ticket::STATUS_MERGED)
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals(Ticket::STATUS_MERGED, $tickets[1]->fresh()->status);
+        $this->assertEquals(Ticket::STATUS_MERGED, $tickets[2]->fresh()->status);
     }
 }

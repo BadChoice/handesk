@@ -27,10 +27,12 @@ Route::group(["middleware" => "auth"], function(){
     Route::put      ('profile'                      ,'ProfileController@update')           ->name('profile.update');
     Route::post     ('password'                     ,'ProfileController@password')         ->name('profile.password');
 
+    Route::get      ('tickets/merge'                ,'TicketsMergeController@index')       ->name('tickets.merge.index');
+    Route::post     ('tickets/merge'                ,'TicketsMergeController@store')       ->name('tickets.merge.store');
     Route::resource ('tickets'                      ,'TicketsController', ["except" => ["edit", "destroy"]]);
     Route::post     ('tickets/{ticket}/assign'      ,'TicketsAssignController@store')      ->name('tickets.assign');
     Route::post     ('tickets/{ticket}/comments'    ,'CommentsController@store')           ->name('comments.store');
-    Route::resource('tickets/{ticket}/tags'         ,'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
+    Route::resource ('tickets/{ticket}/tags'         ,'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
 
     Route::resource ('leads'                        ,'LeadsController');
     Route::post     ('leads/{lead}/assign'          ,'LeadAssignController@store')      ->name('leads.assign');

@@ -750,8 +750,15 @@ a {
   border-radius: 4px;
 }
 .secondary {
+  border: solid 1px #46A5E0;
   background-color: transparent;
   color: #46A5E0;
+  font-weight: 100;
+}
+.ternary {
+  background-color: transparent;
+  color: #46A5E0;
+  border-color: #c8c8c8;
   font-weight: 100;
 }
 button {

@@ -28,4 +28,8 @@ return [
     "solved"        => "Solved",
     "closed"        => "Closed",
     "note"          => "Note",
+    "merge"         => "Merge",
+    "mergeDesc"     => "Select the ones to merge and click here",
+    "mergeDesc2"    => "Please, enter the ticket number to merge to",
+    "merged"        => "Merged",
 ];
