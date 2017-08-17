@@ -32,35 +32,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        var mergin = false;
-        function onMergePressed(){
-            if( ! mergin) {
-                mergin = true;
-                $("#mergeButton").removeClass("secondary");
-                $("#mergeButton").html("{{__('ticket.mergeDesc')}}");
-                return $(".selector").show();
-            }
-
-            var tickets = $("input[name^=selected]:checked").map(function() {
-                return $(this).attr("meta:index");
-            }).toArray();
-
-            if(tickets.length == 0) return;
-
-            var ticket = prompt("{{__('ticket.mergeDesc2')}}");
-
-            $.post({
-                url: "{{ route('tickets.merge.store') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "ticket_id" : ticket,
-                    "tickets" : tickets
-                },
-                success: function(){
-                    location.reload();
-                }
-            });
-        }
-    </script>
+    @include('components.js.merge')
 @endsection
