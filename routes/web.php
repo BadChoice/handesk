@@ -37,10 +37,10 @@ Route::group(["middleware" => "auth"], function(){
     Route::resource ('leads'                        ,'LeadsController');
     Route::post     ('leads/{lead}/assign'          ,'LeadAssignController@store')      ->name('leads.assign');
     Route::post     ('leads/{lead}/status'          ,'LeadStatusController@store')      ->name('leads.status.store');
-    Route::resource ('leads/{lead}/tags'            ,'LeadTagsController', ["only" => ["store", "destroy"], "as" => "leads"]);
-    Route::resource ('leads/{lead}/tasks'           ,'LeadTasksController', ["only" => ["store", "update", "destroy"], "as" => "leads"]);
+    Route::resource ('leads/{lead}/tags'            ,'LeadTagsController',  ["only" => ["store", "destroy"], "as" => "leads"]);
+    Route::resource ('leads/{lead}/tasks'           ,'LeadTasksController', ["only" => ["index", "store", "update", "destroy"], "as" => "leads"]);
 
-    Route::resource ('tasks'                        ,'TasksController' ,["only" => ["update"] ]);
+    Route::resource ('tasks'                        ,'TasksController' ,["only" => ["index", "update", "destroy"] ]);
 
     Route::resource('teams'                         ,'TeamsController');
     Route::get ('teams/{token}/join', 'TeamMembershipController@index')->name('membership.index');

@@ -5,7 +5,7 @@
         <h3> {{ $lead->company }} · {{ $lead->name }} · {{ $lead->email }} </h3>
         @busy <span class="label lead-status-{{ $lead->statusName() }}"> {{ __("lead.".$lead->statusName() ) }} </span> &nbsp;
         <span class="date">{{  $lead->created_at->diffForHumans() }} · {{  nameOrDash($lead->team) }}</span>
-        <br>
+        <a class="float-right button secondary mr4 mt5 mb-5" href="{{route('leads.tasks.index',$lead)}}"> @icon(tasks) {{ trans_choice('lead.task',2) }} <span class="label lead-status-failed">{{ $lead->uncompletedTasks->count() }}</span></a>
     </div>
 
     <div class="description comment">

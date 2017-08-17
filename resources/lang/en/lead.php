@@ -20,4 +20,8 @@ return [
     "first-contact"         => "First contact",
     "completed"             => "Completed",
     "failed"                => "Failed",
+    "task"                  => "Task|Tasks",
+    "due"                   => "Due",
+    "complete"              => "Complete",
+    "todayTasks"            => "Today tasks",
 ];

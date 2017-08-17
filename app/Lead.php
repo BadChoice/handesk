@@ -29,7 +29,11 @@ class Lead extends BaseModel
     }
 
     public function tasks(){
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class)->latest();
+    }
+
+    public function uncompletedTasks(){
+        return $this->tasks()->whereCompleted(false);
     }
 
     public function statusUpdates() {

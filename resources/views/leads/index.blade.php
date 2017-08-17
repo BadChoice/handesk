@@ -21,6 +21,7 @@
             <th> {{ __('team.team') }}</th>
             <th> {{ __('ticket.assigned') }}</th>
             <th> {{ __('lead.status') }}</th>
+            <th> {{ trans_choice('lead.task',2) }}</th>
             <th> {{ __('ticket.requested') }}</th>
             <th> {{ __('ticket.updated') }}</th>
         </tr>
@@ -37,7 +38,13 @@
                 <td> {{ nameOrDash( $lead->user ) }}</td>
                 <td> <a class="label lead-status-{{$lead->statusName()}}" href="{{route('leads.show',$lead)}}">
                         {{ __("lead.".$lead->statusName() ) }}
-                    </a> </td>
+                    </a>
+                </td>
+                <td>
+                    @if($lead->uncompletedTasks->count())
+                        <span class="label lead-status-failed"> <a href="{{route('leads.tasks.index',$lead)}}" class="white">{{ $lead->uncompletedTasks->count() }}</a></span>
+                    @endif
+                </td>
                 <td> {{ $lead->created_at->diffForHumans() }}</td>
                 <td> {{ $lead->updated_at->diffForHumans() }}</td>
             </tr>
