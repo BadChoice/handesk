@@ -18,6 +18,8 @@ class Ticket extends BaseModel{
     const STATUS_PENDING            = 3;
     const STATUS_SOLVED             = 4;
     const STATUS_CLOSED             = 5;
+    const STATUS_MERGED             = 6;
+    const STATUS_SPAM               = 7;
 
     const PRIORITY_LOW              = 1;
     const PRIORITY_NORMAL           = 2;
@@ -66,6 +68,10 @@ class Ticket extends BaseModel{
         return $this->belongsToMany(Tag::class);
     }
 
+    public function mergedTickets(){
+        return $this->belongsToMany(Ticket::class, "merged_tickets", "ticket_id", "merged_ticket_id");
+    }
+
     protected function getAssignedNotification(){
         return new TicketAssigned($this);
     }
@@ -106,6 +112,16 @@ class Ticket extends BaseModel{
             "new_status"    => $this->status,
             "private"       => true,
         ]);
+    }
+
+    public function merge($user, $tickets){
+        collect($tickets)->map(function($ticket) {
+            return is_numeric($ticket) ? Ticket::find($ticket) : $ticket;
+        })->each(function($ticket) use($user) {
+           $ticket->addNote( $user, "Merged with #{$this->id}" );
+           $ticket->updateStatus(Ticket::STATUS_MERGED);
+           $this->mergedTickets()->attach($ticket);
+        });
     }
 
     public function updateStatus($status){

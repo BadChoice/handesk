@@ -246,4 +246,14 @@ class BackTest extends TestCase
         $response->assertSessionHasErrors("team_token");
         $this->assertEquals(0, User::count() );
     }
+
+    /** @test */
+    public function can_merge_tickets(){
+        $user = factory(User::class)->states(['admin'])->create();
+        $tickets = factory(Ticket::class, 4)->create();
+
+        $this->actingAs($user)->post("tickets/1/merge", ["tickets" => [2, 3]]);
+
+        $this->assertEquals(Ticket::STATUS_MERGED)
+    }
 }

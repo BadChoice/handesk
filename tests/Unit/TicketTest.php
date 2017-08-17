@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Ticket;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -80,5 +81,27 @@ class TicketTest extends TestCase
 
        $this->assertCount(0, $ticket->comments);
        $this->assertEquals(Ticket::STATUS_SOLVED, $ticket->status);
+   }
+
+   /** @test */
+   public function can_merge_tickets(){
+       $user    = factory(User::class)->create();
+
+       $ticket1 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
+       $ticket2 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
+       $ticket3 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
+
+       $ticket1->merge($user,  [$ticket2->id, $ticket3] );
+
+       $this->assertEquals( Ticket::STATUS_NEW,    $ticket1->fresh()->status );
+       $this->assertEquals( Ticket::STATUS_MERGED, $ticket2->fresh()->status );
+       $this->assertEquals( Ticket::STATUS_MERGED, $ticket3->fresh()->status );
+       $this->assertCount(1, $ticket2->commentsAndNotes);
+       $this->assertEquals("Merged with #1", $ticket2->commentsAndNotes->first()->body);
+       $this->assertCount(1, $ticket3->commentsAndNotes);
+       $this->assertEquals("Merged with #1", $ticket3->commentsAndNotes->first()->body);
+
+       $this->assertTrue( $ticket1->mergedTickets->contains($ticket2) );
+       $this->assertTrue( $ticket1->mergedTickets->contains($ticket3) );
    }
 }
