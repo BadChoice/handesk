@@ -28,6 +28,10 @@ class Lead extends BaseModel
         return $this->belongsToMany(Tag::class);
     }
 
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
+
     public function statusUpdates() {
         return $this->hasMany( LeadStatusUpdate::class )->latest();
     }

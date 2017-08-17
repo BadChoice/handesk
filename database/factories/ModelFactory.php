@@ -16,6 +16,7 @@ use App\Comment;
 use App\Lead;
 use App\Requester;
 use App\Settings;
+use App\Task;
 use App\Team;
 use App\Ticket;
 use function foo\func;
@@ -78,4 +79,13 @@ $factory->define(Lead::class, function(Faker\Generator $faker){
 $factory->define(Settings::class, function(Faker\Generator $faker){
     return [
     ];
+});
+
+$factory->define(Task::class, function(Faker\Generator $faker){
+   return [
+       "body" => $faker->sentence(),
+       "lead_id" => function(){
+            return factory(Lead::class)->create()->id;
+       }
+   ];
 });
