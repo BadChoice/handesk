@@ -36,7 +36,8 @@ class User extends Authenticatable
     }
 
     public function settings(){
-        return UserSettings::firstOrCreate(["user_id" => $this->id]);
+        //return UserSettings::firstOrCreate(["user_id" => $this->id]);
+        return $this->hasOne( UserSettings::class )->withDefault();
     }
 
     public function teamsTickets(){

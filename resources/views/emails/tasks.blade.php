@@ -1,9 +1,14 @@
 @extends('emails.layout')
 
 @section('body')
-    <table class="striped">
+
+    <p> {{ __('lead.todayTasksDesc') }}</p>
+
+    <table class="striped" style="width:100%">
         <thead>
-        <tr>
+        <tr style="text-align:left">
+            <th></th>
+            <th> {{ trans_choice('lead.lead',1) }}</th>
             <th> {{ trans_choice('lead.task',1) }}</th>
             <th> {{ trans_choice('ticket.assigned',1) }}</th>
             <th> {{ trans_choice('lead.due',1) }}</th>

@@ -14,9 +14,10 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Everything is unlimited    
 · Lead management (With its API as well)   
 · Auto lead subscription to mailchimp based on its tags   
-· Tickets reporting
-· Tickets internal notes
-· Can merge tickets    
+· Tickets reporting   
+· Tickets internal notes   
+· Can merge tickets       
+· Lead tasks, that can have a due date, and sending daily tasks email
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation

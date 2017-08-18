@@ -17,8 +17,8 @@
             <tr><td> {{ __('user.name') }}:     </td><td class="w-60">{{ Form::text('name', $user->name, ["class" => "w-100"]) }}</td></tr>
             <tr><td> {{ __('user.email') }}:    </td><td class="w-60">{{ Form::email('email', $user->email, ["class" => "w-100"]) }}</td></tr>
             <tr><td></td></tr>
-            <tr><td>{{ __('user.dailyTasksNotification') }}:   </td><td> <input type="checkbox" name="daily_tasks_notification" @if($user->settings()->daily_tasks_notification) checked @endif></td></tr>
-            <tr><td>{{ __('user.ticketsSignature') }}:         </td><td><textarea name="tickets_signature"> {{ $user->settings()->tickets_signature }} </textarea> </td></tr>
+            <tr><td>{{ __('user.dailyTasksNotification') }}:   </td><td> <input type="checkbox" name="daily_tasks_notification" @if($user->settings->daily_tasks_notification) checked @endif></td></tr>
+            <tr><td>{{ __('user.ticketsSignature') }}:         </td><td><textarea name="tickets_signature"> {{ $user->settings->tickets_signature }} </textarea> </td></tr>
             <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td></tr>
         </table>
         {{ Form::close() }}
