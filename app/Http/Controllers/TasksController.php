@@ -7,7 +7,10 @@ use App\Task;
 class TasksController extends Controller
 {
     public function index(){
-        return view('tasks.index', ["tasks" => auth()->user()->tasks ]);
+        $tasks = auth()->user()->tasks->groupBy( function($task){
+            return ($task->datetime) ? $task->datetime->toDateString() : 1;
+        });
+        return view('tasks.index', ["tasks" =>  $tasks]);
     }
 
     public function destroy(Task $task){

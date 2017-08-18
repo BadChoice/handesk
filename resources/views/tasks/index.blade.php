@@ -19,7 +19,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($tasks as $task)
+        @foreach( $tasks as $date => $days )
+            <tr> <td colspan="5" class="bg-white mt4"> @if($date != 1) {{ $date }} @endif </td> </tr>
+            @foreach( $days as $task )
             <tr>
                 <td> @gravatar($task->lead->email) </td>
                 <td><a href="{{route('leads.show',$task->lead)}}">{{ $task->lead->name }}</a></td>
@@ -34,6 +36,7 @@
                     @endif
                 </td>
             </tr>
+        @endforeach
         @endforeach
         </tbody>
     </table>
