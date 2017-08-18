@@ -35,6 +35,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, "memberships")->withPivot('admin');
     }
 
+    public function settings(){
+        return UserSettings::firstOrCreate(["user_id" => $this->id]);
+    }
+
     public function teamsTickets(){
         return Ticket::join('memberships','tickets.team_id','=','memberships.team_id')
                        ->where('memberships.user_id',$this->id)->select('tickets.*');

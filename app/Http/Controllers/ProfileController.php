@@ -13,6 +13,10 @@ class ProfileController extends Controller
             "name"  => request('name'),
             "email" => request('email') ? : auth()->user()->email,
         ]);
+        auth()->user()->settings()->update([
+            "daily_tasks_notification" => request()->has('daily_tasks_notification'),
+            "tickets_signature"        => request('tickets_signature'),
+        ]);
         return back();
     }
 
