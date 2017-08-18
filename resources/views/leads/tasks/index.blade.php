@@ -22,6 +22,7 @@
         <thead>
         <tr>
             <th> {{ trans_choice('lead.task',1) }}</th>
+            <th> {{ trans_choice('ticket.assigned',1) }}</th>
             <th> {{ trans_choice('lead.due',1) }}</th>
             <th></th>
         </tr>
@@ -30,6 +31,7 @@
         @foreach($lead->tasks as $task)
             <tr>
                 <td class="@if($task->completed) strike-trough @endif">{{ $task->body }}</td>
+                <td>{{ $task->user->name }}</td>
                 <td>{{ $task->datetime ? $task->datetime->toDateString() : ""}}</td>
                 <td>
                     @if( ! $task->completed)
