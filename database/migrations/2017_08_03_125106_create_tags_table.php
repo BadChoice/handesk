@@ -19,10 +19,10 @@ class CreateTagsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('tag_ticket', function(Blueprint $table){
-            $table->increments('id');
+        Schema::create('taggables', function(Blueprint $table){
             $table->unsignedInteger('tag_id');
-            $table->unsignedInteger('ticket_id');
+            $table->unsignedInteger('taggable_id');
+            $table->string('taggable_type');
         });
     }
 
