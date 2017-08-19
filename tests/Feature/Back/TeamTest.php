@@ -103,4 +103,20 @@ class TeamTest extends TestCase
         $response->assertStatus(Response::HTTP_FORBIDDEN);
         $this->assertNull( Team::first() );
     }
+
+    /** @test */
+    public function can_see_team_agents(){
+        $team   = factory(Team::class)->create();
+        $user1 = factory(User::class)->create(["name" => "User 1"]);
+        $user2 = factory(User::class)->create(["name" => "User 2"]);
+        $team->members()->attach( $user1 );
+        $team->members()->attach( $user2 );
+
+        $response = $this->actingAs($user1)->get("teams/{$team->id}/agents");
+
+        $response->assertStatus( Response::HTTP_OK );
+        $response->assertSee("User 1");
+        $response->assertSee("User 2");
+
+    }
 }

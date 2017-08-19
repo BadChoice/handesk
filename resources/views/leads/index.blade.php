@@ -18,7 +18,7 @@
             <th> {{ __('lead.name') }}</th>
             <th> {{ __('team.email') }}</th>
             <th> {{ trans_choice('ticket.tag',2) }}</th>
-            <th> {{ __('team.team') }}</th>
+            <th> {{ trans_choice('team.team',1) }}</th>
             <th> {{ __('ticket.assigned') }}</th>
             <th> {{ __('lead.status') }}</th>
             <th> {{ trans_choice('lead.task',2) }}</th>
