@@ -24,6 +24,7 @@
         <tr>
             <th class="small"></th>
             <th> {{ trans_choice('team.member',2) }}        </th>
+            <th> {{ trans_choice('team.email',2) }}        </th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
             <tr>
                 <td class="small"> @gravatar($user->email) </td>
                 <td> {{ $user->name }}</td>
+                <td> <a href="mailto:{{$user->email}}" target="_blank">{{ $user->email }}</a></td>
             </tr>
         @endforeach
         </tbody>
