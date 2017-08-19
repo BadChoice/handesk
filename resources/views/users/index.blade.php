@@ -4,7 +4,6 @@
         <h3>Agents ( {{ $users->count() }} )</h3>
     </div>
 
-
     @paginator($users)
     <table class="striped">
         <thead>
