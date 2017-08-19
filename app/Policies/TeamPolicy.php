@@ -14,6 +14,6 @@ class TeamPolicy
     }
 
     public function administrate($user, $team){
-        return $team->pivot->admin;
+        return $team->pivot->admin ?? false;
     }
 }

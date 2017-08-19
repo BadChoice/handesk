@@ -106,7 +106,7 @@ class TeamTest extends TestCase
 
     /** @test */
     public function can_see_team_agents(){
-        $team   = factory(Team::class)->create();
+        $team  = factory(Team::class)->create();
         $user1 = factory(User::class)->create(["name" => "User 1"]);
         $user2 = factory(User::class)->create(["name" => "User 2"]);
         $team->members()->attach( $user1 );
