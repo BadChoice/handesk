@@ -12,7 +12,11 @@ class Attachment extends BaseModel
         return $this->morphTo();
     }
 
-    public static function storeAttachmentsFromEmail(IncomingMail $mail, $attachable ){
+    /**
+     * @param IncomingMail $mail
+     * @param $attachable
+     */
+    public static function storeAttachmentsFromEmail($mail, $attachable ){
         foreach( $mail->getAttachments() as $mailAttachment ) {
             $path = str_replace(" ", "_", $attachable->id . "_" . $mailAttachment->name);
             Storage::put("public/attachments/" . $path, file_get_contents( $mailAttachment->filePath ));
