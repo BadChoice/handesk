@@ -47,7 +47,7 @@ class Lead extends BaseModel
     public function updateStatus($user, $body, $status) {
         if( ! $this->user)  $this->update(["status" => $status, "updated_at" => Carbon::now(), "user_id" => $user->id] );
         else                $this->update(["status" => $status, "updated_at" => Carbon::now()] );
-        $this->statusUpdates()->create( ["user_id" => $user->id, "new_status" => $status, "body" => $body] );
+        return $this->statusUpdates()->create( ["user_id" => $user->id, "new_status" => $status, "body" => $body] );
     }
 
     public static function availableStatus() {

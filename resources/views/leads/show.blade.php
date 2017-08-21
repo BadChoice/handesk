@@ -17,12 +17,12 @@
         {{ Form::close() }}
     </div>
     @include('components.assignActions', ["endpoint" => "leads", "object" => $lead])
-    @include('components.uploadAttachment', ["attachable" => $lead, "type" => "leads"])
 
     <div class="comment new-comment">
-        {{ Form::open(["url" => route("leads.status.store",$lead)]) }}
+        {{ Form::open(["url" => route("leads.status.store",$lead), "files" => true]) }}
         <textarea name="body"></textarea>
         <br>
+        @include('components.uploadAttachment', ["attachable" => $lead, "type" => "leads"])
         {{ Form::select("new_status", App\Lead::availableStatus(), $lead->status) }}
         <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.comment') }}</button>
         {{ Form::close() }}

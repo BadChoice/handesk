@@ -34,4 +34,5 @@ return [
     "merged"           => "Merged",
     "attachment"       => "Attachment|Attachments",
     "uploadAttachment" => "Upload Attachment",
+    "attachFile"       => "Attach file",
 ];
