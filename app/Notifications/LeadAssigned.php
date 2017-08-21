@@ -18,7 +18,8 @@ class LeadAssigned extends Notification
     }
 
     public function via($notifiable) {
-        return ( method_exists($notifiable, 'routeNotificationForSlack' ) && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
+        //return ( method_exists($notifiable, 'routeNotificationForSlack' ) && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
+        return ['mail'];
     }
 
     /**
@@ -35,6 +36,7 @@ class LeadAssigned extends Notification
                     ->action('See Lead', route('leads.show', $this->lead))
                     ->line('Thank you for using our application!');
     }
+
 
     /**
      * Get the array representation of the notification.
