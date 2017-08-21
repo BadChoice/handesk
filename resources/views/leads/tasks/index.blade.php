@@ -31,7 +31,7 @@
         @foreach($lead->tasks as $task)
             <tr>
                 <td class="@if($task->completed) strike-trough @endif">{{ $task->body }}</td>
-                <td>{{ $task->user->name }}</td>
+                <td>{{ nameOrDash($task->user)}}</td>
                 <td>{{ $task->datetime ? $task->datetime->toDateString() : ""}}</td>
                 <td>
                     @if( ! $task->completed)
