@@ -6,9 +6,9 @@ class Pop3{
 
     protected $connection;
 
-    function login($host, $port, $user, $pass, $folder = "INBOX", $ssl = false) {
+    function login($host, $port, $user, $pass, $folder = "INBOX", $ssl = false, $options ="/pop3") {
         $ssl = ($ssl == false) ? "/novalidate-cert" : "";
-        $this->connection = (imap_open("{" . "$host:$port/pop3$ssl" . "}$folder", $user, $pass));
+        $this->connection = (imap_open("{" . "$host:$port$options$ssl" . "}$folder", $user, $pass));
         return $this;
     }
 

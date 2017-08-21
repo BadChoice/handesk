@@ -19,7 +19,7 @@ class CreateTicketsFromNewEmails implements ShouldQueue
     public $newTickets  = 0;
 
     public function handle(Pop3 $pop3) {
-        $pop3->login( config('mail.fetch.host'), config('mail.fetch.port'), config('mail.fetch.username'), config('mail.fetch.password') );
+        $pop3->login( config('mail.fetch.host'), config('mail.fetch.port'), config('mail.fetch.username'), config('mail.fetch.password'),"INBOX",false,config('mail.fetch.options') );
         $pop3->getMessages()->each(function($message){
             $this->processMessage($message);
             $message->delete();
