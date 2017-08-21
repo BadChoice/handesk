@@ -5,6 +5,7 @@
             <div class="pt1"><b>{{ $comment->statusName() }}</b> · {{ nameOrDash($comment->user) }} · {{ $comment->created_at->diffForHumans() }}</div>
         </div>
         <div>{!! nl2br( strip_tags($comment->body)) !!} </div>
+        @include('components.attachments', ["attachments" => $comment->attachments])
     </div>
 @endforeach
 

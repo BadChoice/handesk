@@ -4,7 +4,6 @@
         <h3>Agents ( {{ $users->count() }} )</h3>
     </div>
 
-
     @paginator($users)
     <table class="striped">
         <thead>
@@ -12,7 +11,7 @@
             <th class="small"></th>
             <th> {{ trans_choice('team.name',1) }}          </th>
             <th> {{ trans_choice('team.email',2) }}        </th>
-            <th> {{ trans_choice('team.team',1) }}</th>
+            <th> {{ trans_choice('team.team',2) }}</th>
             <th></th>
         </tr>
         </thead>

@@ -1,9 +1,10 @@
 <?php
 
 return [
-    "team"              => "Team",
+    "team"              => "Team|Teams",
     "member"            => "Member|Members",
     "invitationLink"    => "Invitation link",
+    "invitationLinkDesc"=> "Invite more agents to this team by sending this link, if they don't have a Handesk account yet, use the registration link",
     "join"              => "Join",
     "invitedTitle"      => "You are invited to join the :team team",
     "invitedDesc"       => "By joining this team, you will be able to see and update its support tickets, as well as assign them to other team members",

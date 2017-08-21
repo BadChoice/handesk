@@ -13,10 +13,10 @@
 
     @if( $ticket->canBeEdited() )
         @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
-
         <div class="comment new-comment">
-            {{ Form::open(["url" => route("comments.store",$ticket)]) }}
+            {{ Form::open(["url" => route("comments.store",$ticket) , "files" => true]) }}
             <textarea name="body"></textarea>
+            @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
             <div class="mb1">
                 {{ __('ticket.note') }}: {{ Form::checkbox('private') }}
             </div>
