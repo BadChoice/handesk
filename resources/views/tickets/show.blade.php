@@ -13,6 +13,7 @@
 
     @if( $ticket->canBeEdited() )
         @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
+        @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
 
         <div class="comment new-comment">
             {{ Form::open(["url" => route("comments.store",$ticket)]) }}

@@ -12,6 +12,12 @@ class Attachment extends BaseModel
         return $this->morphTo();
     }
 
+    public static function storeAttachmentFromRequest($request, $attachable){
+        $path = str_replace(" ", "_", $attachable->id . "_" . $request->file('attachment')->getClientOriginalName());
+        Storage::putFileAs("public/attachments/", $request->file('attachment'), $path );
+        $attachable->attachments()->create(["path" => $path]);
+    }
+
     /**
      * @param IncomingMail $mail
      * @param $attachable
