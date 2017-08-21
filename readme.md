@@ -9,6 +9,7 @@ We will keep adding features as we need them, but our basic workflow is totally 
 
 ## Features
 · Email polling (new tickets and tickets updates)    
+· Email attachments as ticket attachments (using laravel storage driver)
 · API for creating/updating/fetching tickets/leads so you can display them into your main app    
 · Instant email/slack notifications when tickets are created/updated   
 · Everything is unlimited    
@@ -27,6 +28,7 @@ composer install
 php artisan key:generate
 # Setup your .env file to match you desired database
 php artisan migrate --seed
+mkdir app/storage/mail_attachments
 ```
 
 > The default admin user is admin@handesk.com / admin

@@ -68,6 +68,10 @@ class Ticket extends BaseModel{
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
+    public function attachments() {
+        return $this->morphMany(Attachment::class, 'attachable');
+    }
+
     public function mergedTickets(){
         return $this->belongsToMany(Ticket::class, "merged_tickets", "ticket_id", "merged_ticket_id");
     }

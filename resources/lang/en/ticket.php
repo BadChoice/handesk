@@ -32,4 +32,5 @@ return [
     "mergeDesc"     => "Select the ones to merge and click here",
     "mergeDesc2"    => "Please, enter the ticket number to merge to",
     "merged"        => "Merged",
+    "attachment"    => "Attachment|Attachments"
 ];
