@@ -50,10 +50,10 @@ Add the cron job `* * * * * php /path-to-your-project/artisan schedule:run >> /d
 Enter your mail credentials in .env
 
 ````
-MAIL_FETCH_HOST=pop3.codepassion.io   
+MAIL_FETCH_HOST=pop3.handesk.com   
 MAIL_FETCH_PORT=110   
-MAIL_FETCH_USERNAME=hello@codepassion.io   
-MAIL_FETCH_PASSWORD=mypassion!25   
+MAIL_FETCH_USERNAME=hello@handesk.com   
+MAIL_FETCH_PASSWORD=secret-password   
 ````
 
 #### Mailchimp
