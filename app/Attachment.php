@@ -14,8 +14,8 @@ class Attachment extends BaseModel
 
     public static function storeAttachmentsFromEmail(IncomingMail $mail, $attachable ){
         foreach( $mail->getAttachments() as $mailAttachment ) {
-            $path = $attachable->id . "-" . $mailAttachment->name;
-            Storage::put($attachable->id . "-" . $mailAttachment->name, file_get_contents( $mailAttachment->filePath ));
+            $path = str_replace(" ", "_", $attachable->id . "_" . $mailAttachment->name);
+            Storage::put("public/attachments/" . $path, file_get_contents( $mailAttachment->filePath ));
             $attachable->attachments()->create(["path" => $path]);
             unlink( $mailAttachment->filePath );
         }

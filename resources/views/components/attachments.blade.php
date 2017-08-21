@@ -1,7 +1,9 @@
 @if($attachments->count() )
-    <div class="bt mt2 pt2">
+    <div class="">
         @foreach( $attachments as $attachment)
-            <a href="">{{ $attachment->path }}</a>
+            @icon(paperclip)
+            <a href="{{ asset("storage/attachments/$attachment->path")}}" target="_blank">{{ $attachment->path }}</a>
+            &nbsp;
         @endforeach
     </div>
 @endif

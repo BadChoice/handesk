@@ -28,7 +28,9 @@ composer install
 php artisan key:generate
 # Setup your .env file to match you desired database
 php artisan migrate --seed
-mkdir app/storage/mail_attachments
+mkdir storage/app/mail_attachments
+mkdir storage/app/public/attachments
+php artisan storage:link #if you use the local driver
 ```
 
 > The default admin user is admin@handesk.com / admin
