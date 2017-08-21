@@ -33,12 +33,10 @@ Route::group(["middleware" => "auth"], function(){
     Route::post     ('tickets/{ticket}/assign'      ,'TicketsAssignController@store')      ->name('tickets.assign');
     Route::post     ('tickets/{ticket}/comments'    ,'CommentsController@store')           ->name('comments.store');
     Route::resource ('tickets/{ticket}/tags'         ,'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
-    Route::post     ('tickets/{ticket}/attachments'  ,'TicketsAttachmentsController@store')->name('tickets.attachments.store');
 
     Route::resource ('leads'                        ,'LeadsController');
     Route::post     ('leads/{lead}/assign'          ,'LeadAssignController@store')      ->name('leads.assign');
     Route::post     ('leads/{lead}/status'          ,'LeadStatusController@store')      ->name('leads.status.store');
-    Route::post     ('leads/{lead}/attachments'     ,'LeadAttachmentsController@store') ->name('leads.attachments.store');
     Route::resource ('leads/{lead}/tags'            ,'LeadTagsController',  ["only" => ["store", "destroy"], "as" => "leads"]);
     Route::resource ('leads/{lead}/tasks'           ,'LeadTasksController', ["only" => ["index", "store", "update", "destroy"], "as" => "leads"]);
 
