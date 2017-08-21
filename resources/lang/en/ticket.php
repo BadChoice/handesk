@@ -27,7 +27,7 @@ return [
     "pending"       => "Pending",
     "solved"        => "Solved",
     "closed"        => "Closed",
-    "note"          => "Note",
+    "note"          => "Private Note",
     "merge"         => "Merge",
     "mergeDesc"     => "Select the ones to merge and click here",
     "mergeDesc2"    => "Please, enter the ticket number to merge to",
