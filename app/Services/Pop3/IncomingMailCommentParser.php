@@ -23,7 +23,7 @@ class IncomingMailCommentParser{
     }
 
     public function getCommentBody(){
-        return strstr($this->message->textPlain,config('mail.fetch.replyAboveLine'), true);
+        return strstr($this->message->textPlain, config('mail.fetch.replyAboveLine'), true);
     }
 
     public function getTicketId() {

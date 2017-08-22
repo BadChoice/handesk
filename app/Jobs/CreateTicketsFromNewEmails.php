@@ -41,7 +41,7 @@ class CreateTicketsFromNewEmails implements ShouldQueue
         $ticket         = $messageParser->checkIfItIsACommentAndGetTheTicket();
         if( ! $ticket ) return false;
         $comment = $ticket->addComment( $messageParser->getUser( $ticket ),
-                             $messageParser->getCommentBody() );
+                                        $messageParser->getCommentBody() );
         Attachment::storeAttachmentsFromEmail($message, $comment);
         $this->newComments = $this->newComments + 1;
         return true;
