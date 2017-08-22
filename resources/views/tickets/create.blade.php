@@ -8,16 +8,16 @@
     <div class="comment description actions">
         <table class="w-50">
             <tr><td class="w-20"><b> {{ __('ticket.requester') }}:</b></td></tr>
-            <tr><td>Name: </td>     <td class="w-100"><input type="name" name="requester[name]" class="w-100"></td></tr>
-            <tr><td>Email:  </td>   <td class="w-100"><input type="email" name="requester[email]" class="w-100"></td></tr>
+            <tr><td>Name: </td>     <td class="w-100"><input type="name" name="requester[name]" class="w-100" required></td></tr>
+            <tr><td>Email:  </td>   <td class="w-100"><input type="email" name="requester[email]" class="w-100" required></td></tr>
         </table>
     </div>
 
     <div class="comment new-comment">
         <table class="w-50">
-            <tr><td class="w-20">Subject: </td>     <td><input name="title" class="w-100"/></td></tr>
+            <tr><td class="w-20">Subject: </td>     <td><input name="title" class="w-100" required/></td></tr>
             <tr><td>Tags:       </td>               <td><input name="tags" id="tags"/></td></tr>
-            <tr><td>Comment:    </td>               <td><textarea name="body"></textarea></td></tr>
+            <tr><td>Comment:    </td>               <td><textarea name="body" required></textarea></td></tr>
             @include('components.assignTeamField')
             <tr><td>Status:     </td><td>
                 {{ Form::select("status", [
