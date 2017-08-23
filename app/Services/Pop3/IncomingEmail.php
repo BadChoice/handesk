@@ -16,6 +16,10 @@ class IncomingEmail{
         return $this->email->textPlain;
     }
 
+    public function getAttachments(){
+        return $this->email->getAttachments();
+    }
+
     public function __get($value){
         return $this->email->$value;
     }
