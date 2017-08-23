@@ -16,6 +16,10 @@ class FakeIncomingMail{
         $this->textPlain   = $body;
     }
 
+    public function body(){
+        return $this->textPlain;
+    }
+
     public function getAttachments(){
         return [];
     }

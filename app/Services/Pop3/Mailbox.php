@@ -17,7 +17,7 @@ class Mailbox{
         $mailsIds = $this->mailbox->searchMailbox('ALL');
         if (! $mailsIds) return collect();
         return collect($mailsIds)->map(function ($mail_id) {
-            return $this->mailbox->getMail($mail_id);
+            return new IncomingEmail($this->mailbox->getMail($mail_id));
         });
     }
 
