@@ -11,7 +11,7 @@ class IncomingEmail{
 
     public function body(){
         if ( empty($this->email->textPlain) ) {
-            return strip_tags($this->email->message->textHtml, '<p><a>');
+            return strip_tags($this->email->textHtml, '<p><a>');
         }
         return $this->email->textPlain;
     }
