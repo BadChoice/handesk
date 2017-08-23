@@ -7,9 +7,11 @@ class Mailbox{
     /** @var \PhpImap\Mailbox mailbox*/
     protected $mailbox;
 
-    function login($host, $port, $user, $pass, $folder = "INBOX", $ssl = false) {
+    function login($host, $port, $user, $pass, $folder = "INBOX", $ssl = false, $options ="/pop3") {
         $ssl = ($ssl == false) ? "/novalidate-cert" : "";
-        $this->mailbox    = new \PhpImap\Mailbox("{" . "$host:$port/pop3$ssl" . "}$folder", $user, $pass, storage_path('app/mail_attachments') );
+        if( $options == null)
+            $options = '/pop3';
+        $this->mailbox    = new \PhpImap\Mailbox("{" . "$host:$port$options$ssl" . "}$folder", $user, $pass, storage_path('app/mail_attachments') );
         return $this;
     }
 
