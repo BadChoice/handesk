@@ -5,7 +5,7 @@ namespace App\Services\Pop3;
 use App\Ticket;
 use App\User;
 
-class Pop3MessageCommentParser{
+class IncomingMailCommentParser{
 
     public $message;
 
@@ -19,20 +19,20 @@ class Pop3MessageCommentParser{
     }
 
     public function isAComment(){
-        return str_contains($this->message->body(), config('mail.fetch.replyAboveLine'));
+        return str_contains($this->message->textPlain, config('mail.fetch.replyAboveLine'));
     }
 
     public function getCommentBody(){
-        return strstr($this->message->body(),config('mail.fetch.replyAboveLine'), true);
+        return strstr($this->message->textPlain, config('mail.fetch.replyAboveLine'), true);
     }
 
     public function getTicketId() {
-        preg_match('~ticket-id:(\d+)(\.)~', $this->message->body(), $results );
+        preg_match('~ticket-id:(\d+)(\.)~', $this->message->textPlain, $results );
         return  (count($results) > 1) ? $results[1] : null;
     }
 
     public function getUser($ticket){
-        $fromEmail = $this->message->from()["email"];
+        $fromEmail = $this->message->fromAddress;
         if($fromEmail == $ticket->requester->email) return null;
         return User::where("email", $fromEmail)->first();
     }

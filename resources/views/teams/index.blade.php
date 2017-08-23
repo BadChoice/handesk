@@ -26,7 +26,7 @@
             <tr>
                 <td class="small"> @gravatar($team->email) </td>
                 <td> {{ $team->name }}</td>
-                <td> {{ $team->members->count() }}</td>
+                <td> <a href="{{route('teams.agents',$team)}}">{{ $team->members->count() }}</a></td>
                 @can('administrate', $team)
                     <td>
                         <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a>

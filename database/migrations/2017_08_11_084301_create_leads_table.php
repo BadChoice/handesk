@@ -38,12 +38,6 @@ class CreateLeadsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::create('lead_tag', function(Blueprint $table){
-            $table->increments('id');
-            $table->unsignedInteger('lead_id');
-            $table->unsignedInteger('tag_id');
-        });
     }
 
     /**
@@ -51,8 +45,7 @@ class CreateLeadsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('leads');
     }
 }

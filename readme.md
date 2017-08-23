@@ -9,6 +9,7 @@ We will keep adding features as we need them, but our basic workflow is totally 
 
 ## Features
 · Email polling (new tickets and tickets updates)    
+· Email attachments as ticket attachments (using laravel storage driver)
 · API for creating/updating/fetching tickets/leads so you can display them into your main app    
 · Instant email/slack notifications when tickets are created/updated   
 · Everything is unlimited    
@@ -27,6 +28,9 @@ composer install
 php artisan key:generate
 # Setup your .env file to match you desired database
 php artisan migrate --seed
+mkdir storage/app/mail_attachments
+mkdir storage/app/public/attachments
+php artisan storage:link #if you use the local driver
 ```
 
 > The default admin user is admin@handesk.com / admin
@@ -46,10 +50,10 @@ Add the cron job `* * * * * php /path-to-your-project/artisan schedule:run >> /d
 Enter your mail credentials in .env
 
 ````
-MAIL_FETCH_HOST=pop3.codepassion.io   
+MAIL_FETCH_HOST=pop3.handesk.com   
 MAIL_FETCH_PORT=110   
-MAIL_FETCH_USERNAME=hello@codepassion.io   
-MAIL_FETCH_PASSWORD=mypassion!25   
+MAIL_FETCH_USERNAME=hello@handesk.com   
+MAIL_FETCH_PASSWORD=secret-password   
 ````
 
 #### Mailchimp

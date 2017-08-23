@@ -18,6 +18,10 @@ class Comment extends BaseModel
         return $this->user ? : $this->ticket->requester;
     }
 
+    public function attachments() {
+        return $this->morphMany(Attachment::class, 'attachable');
+    }
+
     public function getAuthorAttribute(){
         return array_only($this->author()->toArray(),["name","email"]);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Services\Pop3;
 
-class FakePop3 extends Pop3{
+class FakeMailbox extends Mailbox{
 
     public $messages;
 
@@ -12,6 +12,10 @@ class FakePop3 extends Pop3{
 
     function getMessages($message = "") {
         return collect($this->messages);
+    }
+
+    public function delete($mail_id){
+        return true;
     }
 
     public function expunge(){

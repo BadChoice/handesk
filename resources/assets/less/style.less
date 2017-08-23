@@ -119,8 +119,12 @@ a{
   color:white;
   border:none;
   cursor: pointer;
-  .p2;
-  .br1;
+  .p2;  .br1;  .shadow-hard;  .relative;
+}
+
+.button:active, button:active{
+  top:2px;
+  .shadow0;
 }
 
 .secondary{
@@ -128,6 +132,8 @@ a{
   background-color:transparent;
   color: @brand-second;
   font-weight:100;
+  .shadow0;
+  top:1px;
 }
 
 .ternary{
@@ -135,11 +141,15 @@ a{
   color: @brand-second;
   border-color: @lighter-gray;
   font-weight:100;
+  .shadow0;
+  top:1px;
 }
 
 button{
   .button;
 }
+
+button:focus {outline:0;}
 
 .actions{
   .pt3;
