@@ -134,6 +134,7 @@ return [
         "username" => env('MAIL_FETCH_USERNAME','hi'),
         "password" => env('MAIL_FETCH_PASSWORD'),
         "replyAboveLine" => "##- Please type your reply above this line -##",
+        "options" => env('MAIL_FETCH_OPTIONS','/pop3'),
     ]
 
 ];
