@@ -11,7 +11,7 @@ class ProfileController extends Controller
     public function update(){
         auth()->user()->update([
             "name"      => request('name'),
-            "language"  => request('language'),
+            "locale"    => request('locale'),
             "email"     => request('email') ? : auth()->user()->email,
         ]);
 

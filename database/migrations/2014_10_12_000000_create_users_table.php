@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('locale')->default(Language::EN);
+            $table->string('locale',8)->default(Language::EN);
             $table->string('password');
             $table->boolean("admin")->default( 0 );
             $table->rememberToken();

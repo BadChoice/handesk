@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Language;
 use Closure;
 
 class UserLocale

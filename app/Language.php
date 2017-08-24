@@ -4,10 +4,10 @@ namespace App;
 
 class Language {
 
-    const EN = 1;
-    const ES = 2;
-    const CA = 3;
-    const FR = 4;
+    const EN = "en";
+    const ES = "es";
+    const CA = "ca";
+    const FR = "fr";
 
     public static function available() {
         return [
@@ -17,6 +17,5 @@ class Language {
             static::FR => __("languages.fr"),
         ];
     }
-
     //
 }
