@@ -6,7 +6,7 @@ class FakeMailbox extends Mailbox{
 
     public $messages;
 
-    public function login($host, $port, $user, $pass, $folder = "INBOX", $ssl = false) {
+    public function login($host, $port, $user, $pass, $folder = "INBOX", $ssl = false, $options = null) {
 
     }
 
