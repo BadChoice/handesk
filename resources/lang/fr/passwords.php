@@ -11,9 +11,9 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-    'password' => 'Les contrasenyes han de contenir almenys 6 caràcters i coincidir.',
-    'reset'    => "La contrasenya s'ha restablert!",
-    'sent'     => 'Recordatori de contrasenya enviat!',
-    'token'    => 'Aquest token de recuperació de contrasenya és invàlid.',
-    'user'     => 'No podem trobar a un usuari amb aquest correu electrònic.',
+    'password' => 'Les mots de passe doivent contenir au moins six caractères et être identiques.',
+    'reset'    => 'Votre mot de passe a été réinitialisé !',
+    'sent'     => 'Nous vous avons envoyé par courriel le lien de réinitialisation du mot de passe !',
+    'token'    => "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
+    'user'     => "Aucun utilisateur n'a été trouvé avec cette adresse courriel.",
 ];
