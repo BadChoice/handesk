@@ -31,7 +31,7 @@ class CreateTicketsFromNewEmails implements ShouldQueue
 
     private function processMessage($message){
         if( $this->addCommentFromMessage( $message ) ) return;
-        $ticket = Ticket::createAndNotify(["name" => $message->fromName, "email" => $message->fromAddress], $message->subject, $message->textPlain, ["email"]);
+        $ticket = Ticket::createAndNotify(["name" => $message->fromName, "email" => $message->fromAddress], $message->subject, $message->body(), ["email"]);
         Attachment::storeAttachmentsFromEmail($message, $ticket);
         $this->newTickets = $this->newTickets + 1;
     }
