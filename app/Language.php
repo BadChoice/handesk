@@ -8,6 +8,7 @@ class Language {
     const ES = "es";
     const CA = "ca";
     const FR = "fr";
+    const DE = "de";
 
     public static function available() {
         return [
@@ -15,6 +16,7 @@ class Language {
             static::ES => __("languages.es"),
             static::CA => __("languages.ca"),
             static::FR => __("languages.fr"),
+            static::DE => __("languages.de"),
         ];
     }
     //

@@ -5,4 +5,5 @@ return [
     "es"  => "Spanish",
     "ca"  => "Catalan",
     "fr"  => "French",
+    "de"  => "German",
 ];
