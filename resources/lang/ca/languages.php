@@ -5,4 +5,5 @@ return [
     "es"  => "Castellà",
     "ca"  => "Catala",
     "fr"  => "Francès",
+    "de"  => "Alemany",
 ];
