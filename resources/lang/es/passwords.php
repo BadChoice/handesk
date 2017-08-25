@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Password Reset Language Lines
@@ -12,11 +11,9 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-
-    'password' => 'La contraseña debe tener al menos seis carácteres y debe coincidir con la contraseña de confirmación.',
-    'reset' => 'Tu contraseña ha sido restablecida!',
-    'sent' => "Te hemos enviado un email con un link para restablecer tu contraseña!",
-    'token' => 'El token para restablecer tu contraseña es inválido.',
-    'user' => "No encontramos ningún usuario con este email.",
-
+    'password' => 'Las contraseñas deben contener al menos 6 caracters y coincidir.',
+    'reset' => 'Su contraseña ha sido cambiada.',
+    'sent' => 'Le hemos enviado un correo de cambio de contraseña!',
+    'token' => 'El código de cambio de contraseña es inválido.',
+    'user' => "No podemos encontrar un usuario con ese nombre.",
 ];
