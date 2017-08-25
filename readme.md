@@ -18,7 +18,8 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Tickets reporting   
 · Tickets internal notes   
 · Can merge tickets       
-· Lead tasks, that can have a due date, and sending daily tasks email
+· Lead tasks, that can have a due date, and sending daily tasks email   
+· UI multi language support (default en, alternative: ca es fr de)   
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation
