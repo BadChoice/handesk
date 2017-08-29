@@ -14,18 +14,21 @@
     @if( $ticket->canBeEdited() )
         @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
         <div class="comment new-comment">
-            {{ Form::open(["url" => route("comments.store",$ticket) , "files" => true]) }}
+            {{ Form::open(["url" => route("comments.store",$ticket) , "files" => true, "id" => "comment-form"]) }}
             <textarea name="body"></textarea>
             @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
             <div class="mb1">
                 {{ __('ticket.note') }}: {{ Form::checkbox('private') }}
             </div>
-            {{ Form::select("new_status", [
-                App\Ticket::STATUS_OPEN     => __("ticket.open"),
-                App\Ticket::STATUS_PENDING  => __("ticket.pending"),
-                App\Ticket::STATUS_SOLVED   => __("ticket.solved"),
-            ], $ticket->status) }}
-            <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.comment') }}</button>
+            {{ Form::hidden('new_status', $ticket->tatus, ["id" => "new_status"]) }}
+            <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.commentAs') }} {{ $ticket->statusName() }}</button>
+            <span class="dropdown button caret-down"> @icon(caret-down) </span>
+            <ul class="dropdown-container">
+                <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_OPEN    }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-open mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.open") }}   </b> </a></li>
+                <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_PENDING }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-pending mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.pending") }}</b> </a></li>
+                <li><a class="pointer" onClick="setStatusAndSubmit( {{ App\Ticket::STATUS_SOLVED  }} )"><div style="width:10px; height:10px" class="circle inline ticket-status-solved mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("ticket.solved") }} </b> </a></li>
+            </ul>
+
             {{ Form::close() }}
         </div>
     @endif
@@ -35,4 +38,10 @@
 
 @section('scripts')
     @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket])
+    <script>
+        function setStatusAndSubmit(new_status){
+            $("#new_status").val(new_status);
+            $("#comment-form").submit();
+        }
+    </script>
 @endsection

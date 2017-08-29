@@ -18,6 +18,7 @@ return [
     "updated"    => "Updated",
     "update"     => "Update",
     "comment"    => "Comment",
+    "commentAs"  => "Comment as",
     "assign"     => "Assign",
     "status"     => "Status",
     "tag"        => "Tag|Tags",
