@@ -1,17 +1,7 @@
-@import "Hurricane";
-
-table{
-  border-collapse: collapse;
-  width:100%;
-  .text-left;
-}
+@import "Hurricane/Hurricane";
 
 table tr{
   height:@size5;
-}
-
-table.condensed tr{
-  height:@size4;
 }
 
 thead{
@@ -26,15 +16,4 @@ table th{
 
 table .small{
   width:45px;
-}
-
-table.striped tr:nth-child(even){
-  background-color:@broken-white;
-}
-
-table td:first-child,th:first-child{
-  .pl4;
-}
-table td:last-child,th:last-child{
-  .pr3;
 }

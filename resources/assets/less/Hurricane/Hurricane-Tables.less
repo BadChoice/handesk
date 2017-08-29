@@ -1,0 +1,62 @@
+@import "Hurricane";
+
+table{
+  border-collapse: collapse;
+  .w100;
+  .text-left;
+}
+
+table tr{
+  height:@size3;
+}
+
+thead{
+  .bb;
+}
+
+table th{
+  color: @light-gray;
+  font-weight:100;
+  .text-left;
+}
+
+table .small{
+  width:@size5;
+}
+
+//======= VARIATIONS ======
+table.condensed tr{
+  height:@size2;
+  .p1;
+}
+
+table.condensed td{
+  .p1;
+}
+
+table.expanded tr{
+  height:@size5;
+}
+
+table.striped tr:nth-child(even){
+  background-color:@broken-white;
+}
+
+table.striped tr, table.striped td{
+  border-bottom: none;
+}
+
+table td:first-child, table th:first-child{
+  .pl4;
+}
+table td:last-child, table th:last-child{
+  .pr4;
+}
+
+table thead.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1px;
+  z-index: 5;
+  background: #fff;
+}

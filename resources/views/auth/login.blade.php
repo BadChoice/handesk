@@ -1,13 +1,13 @@
 @extends('auth.layout')
 
 @section('content')
-    <div class="center text-center mt5 w-20">
-            <img src="{{url("images/handesk_full.png")}}" class="w-80">
+    <div class="center text-center mt5 w20">
+            <img src="{{url("images/handesk_full.png")}}" class="w80">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
                 <div class="m3">
-                    <input id="email" type="email" class="w-80" name="email" value="{{ old('email') }}" required autofocus>
+                    <input id="email" type="email" class="w80" name="email" value="{{ old('email') }}" required autofocus>
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="m3">
-                    <input id="password" type="password" class="w-80" name="password" required>
+                    <input id="password" type="password" class="w80" name="password" required>
                     @if ($errors->has('password'))
                         <span class="help-block">
                             <strong>{{ $errors->first('password') }}</strong>
@@ -24,7 +24,7 @@
                     @endif
                 </div>
                 <div class="mh3 mb2">
-                    <button type="submit" class="uppercase ph5 w-80">Login</button>
+                    <button type="submit" class="uppercase ph5 w80">Login</button>
                 </div>
                 <div class="mb3">
                     <input type="checkbox" class="" name="remember" {{ old('remember') ? 'checked' : '' }}>

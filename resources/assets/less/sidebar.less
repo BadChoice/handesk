@@ -1,4 +1,4 @@
-@import "Hurricane";
+@import "Hurricane/Hurricane";
 
 .sidebar{
   .pt4;
@@ -21,12 +21,13 @@
   color:@lighter-gray;
 }
 
+.sidebar ul{
+}
+
 .sidebar li{
   .pl4; .pt2; .pr2;
   list-style: none;
-  margin-left:-40px;
-  height:32px;
-  @color: 1234;
+  height:@size5 - @size2;
 }
 
 .sidebar li a{
