@@ -6,9 +6,7 @@
 
     <div class="description">
         {{ Form::open( ["url" => route('reports.index'), 'method' => 'GET'] ) }}
-        {{ Form::date('startDate',  $repository->startDate) }}
-        {{ Form::date('endDate',    $repository->endDate) }}
-        <button class="ph4 uppercase"> @icon(filter) {{ __('report.filter') }}</button>
+        @include('components.datesFilter')
         {{ Form::close() }}
     </div>
 
