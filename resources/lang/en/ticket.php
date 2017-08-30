@@ -37,6 +37,7 @@ return [
     "uploadAttachment" => "Upload Attachment",
     "attachFile"       => "Attach file",
     "escalate"         => "Escalate",
+    "escalated"        => "Escalated",
     "de-escalate"      => "De-escalate",
     "escalatedDesc"    => "This ticket is <b>escalated</b>, all comments will be added as private notes until de-escalated",
 ];

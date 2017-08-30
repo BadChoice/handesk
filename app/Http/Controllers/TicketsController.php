@@ -13,6 +13,7 @@ class TicketsController extends Controller
         else if(request('recent'))          $tickets = $repository->recentlyUpdated();
         else if(request('solved'))          $tickets = $repository->solved();
         else if(request('closed'))          $tickets = $repository->closed();
+        else if(request('escalated'))       $tickets = $repository->escalated();
         else                                $tickets = $repository->all();
 
         if( request('team'))                $tickets = $tickets->where('tickets.team_id', request('team'));
