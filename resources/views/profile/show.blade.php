@@ -5,8 +5,9 @@
     </div>
 
     <div class="description actions comment mb4">
-        <div class="float-left ml4 mt-2 shadow-outer-1 circle">@gravatar($user->email, 90)</div>
-        <h3 class="ml4 float-left"> {{ $user->name }}</h3>
+        <div class="float-left ml4  shadow-outer-1 circle">@gravatar($user->email, 90)</div>
+        <h3 class="ml4 float-left"> @if($user->assistant) <span class="gold">@icon(star)</span> @endif {{ $user->name }}</h3>
+        <div class="clear-both mb-5"> </div>
     </div>
 
     <div class="clear-both"></div>

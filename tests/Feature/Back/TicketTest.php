@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Notifications\NewComment;
+use App\Notifications\TicketEscalated;
 use App\Team;
 use App\Ticket;
 use App\User;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class BackTest extends TestCase
+class TicketTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -215,37 +216,6 @@ class BackTest extends TestCase
         });
     }
 
-    /** @test */
-    public function a_user_can_register(){
-        $team = factory(Team::class)->create(["token" => "TEAMTOKEN"]);
-
-        $response = $this->post('register',[
-            "name"                  => "Peter parker",
-            "email"                 => "peter@parker.com",
-            "password"              => "secret",
-            "password_confirmation" => "secret",
-            "team_token"            => "TEAMTOKEN",
-        ]);
-
-        $response->assertStatus(Response::HTTP_FOUND);
-        $this->assertTrue( $team->members->contains(function($member){
-            return $member->name = "Peter parker";
-        }));
-    }
-
-    /** @test */
-    public function can_not_register_without_a_valid_token(){
-        $response = $this->post('register',[
-            "name"                  => "Peter parker",
-            "email"                 => "peter@parker.com",
-            "password"              => "secret",
-            "password_confirmation" => "secret",
-            "team_token"            => "NON_EXISTING_TOKEN",
-        ]);
-        $response->assertStatus(Response::HTTP_FOUND);
-        $response->assertSessionHasErrors("team_token");
-        $this->assertEquals(0, User::count() );
-    }
 
     /** @test */
     public function can_merge_tickets(){
@@ -257,5 +227,37 @@ class BackTest extends TestCase
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertEquals(Ticket::STATUS_MERGED, $tickets[1]->fresh()->status);
         $this->assertEquals(Ticket::STATUS_MERGED, $tickets[2]->fresh()->status);
+    }
+
+    /** @test */
+    public function can_escalate_a_ticket(){
+        Notification::fake();
+        $user        = factory(User::class)->create();
+        $assistant   = factory(User::class)->states(["assistant"])->create();
+        $ticket      = factory(Ticket::class)->create();
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/escalate");
+
+        $response->assertStatus( Response::HTTP_FOUND );
+        $this->assertEquals(1, $ticket->fresh()->level);
+
+        Notification::assertSentTo(
+            [$assistant],
+            TicketEscalated::class,
+            function ($notification, $channels) use ($ticket) {
+                return $notification->ticket->id === $ticket->id;
+            }
+        );
+    }
+
+    /** @test */
+    public function can_unescalate_ticket(){
+        $user   = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create(["level" => 1]);
+
+        $response = $this->actingAs($user)->delete("tickets/{$ticket->id}/escalate");
+
+        $response->assertStatus( Response::HTTP_FOUND );
+        $this->assertEquals(0, $ticket->fresh()->level);
     }
 }
