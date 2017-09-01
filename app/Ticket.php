@@ -7,6 +7,7 @@ use App\Events\TicketStatusUpdated;
 use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
+use App\Notifications\TicketEscalated;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -81,6 +82,9 @@ class Ticket extends BaseModel{
     }
 
     public function addComment($user, $body, $newStatus = null){
+        if( $user && $this->isEscalated() ){
+            return $this->addNote($user, $body);
+        }
         $previousStatus = $this->status;
         if($newStatus && $newStatus != $previousStatus) $this->updateStatus($newStatus);
         else                                            $this->touch();
@@ -108,14 +112,20 @@ class Ticket extends BaseModel{
     }
 
     public function addNote($user, $body){
+        if( ! $body ) return;
         if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
         else                        { $this->touch(); }
-        return $this->comments()->create([
+        $comment = $this->comments()->create([
             "body"          => $body,
             "user_id"       => $user->id,
             "new_status"    => $this->status,
             "private"       => true,
         ]);
+        tap(new NewComment($this, $comment), function($newCommentNotification) {
+            if( $this->team ) $this->team->notify( $newCommentNotification );
+            User::notifyAdmins( $newCommentNotification );
+        });
+        return $comment;
     }
 
     public function merge($user, $tickets){
@@ -132,6 +142,17 @@ class Ticket extends BaseModel{
 
     public function updateStatus($status){
         $this->update(["status" => $status, "updated_at" => Carbon::now() ]);
+    }
+
+    public function setLevel( $level ){
+        $this->update(["level" => $level]);
+        if($level == 1){
+            User::notifyAssistants( new TicketEscalated($this));
+        }
+    }
+
+    public function isEscalated(){
+        return $this->level == 1;
     }
 
     public function scopeOpen($query){

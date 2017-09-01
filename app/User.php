@@ -7,12 +7,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Notification;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'locale', 'password',
     ];
 
     protected $hidden = [
@@ -21,6 +21,10 @@ class User extends Authenticatable
 
     public function scopeAdmin($query){
         return $query->whereAdmin(true);
+    }
+
+    public function scopeAssistant($query){
+        return $query->where('assistant',true);
     }
 
     public function tickets(){
@@ -62,6 +66,10 @@ class User extends Authenticatable
 
     public static function notifyAdmins( $notification ){
         Notification::send( User::admin()->get() , $notification);
+    }
+
+    public static function notifyAssistants( $notification ){
+        Notification::send( User::assistant()->get() , $notification);
     }
 
     public function __get($attribute){

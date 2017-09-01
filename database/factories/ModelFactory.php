@@ -33,7 +33,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 $factory->state(App\User::class, 'admin', function ($faker) {
     return [
-        'admin' => 'true',
+        'admin' => 1,
+    ];
+});
+
+$factory->state(App\User::class, 'assistant', function ($faker) {
+    return [
+        'assistant' => 1,
     ];
 });
 

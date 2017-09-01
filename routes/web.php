@@ -22,7 +22,7 @@ Route::group(["prefix" => "requester"], function(){
     Route::post('tickets/{token}/comments'          ,'RequesterCommentsController@store')    ->name('requester.comments.store');
 });
 
-Route::group(["middleware" => "auth"], function(){
+Route::group(["middleware" => ["auth","userLocale"]], function(){
     Route::get      ('profile'                      ,'ProfileController@show')             ->name('profile.show');
     Route::put      ('profile'                      ,'ProfileController@update')           ->name('profile.update');
     Route::post     ('password'                     ,'ProfileController@password')         ->name('profile.password');
@@ -33,6 +33,9 @@ Route::group(["middleware" => "auth"], function(){
     Route::post     ('tickets/{ticket}/assign'      ,'TicketsAssignController@store')      ->name('tickets.assign');
     Route::post     ('tickets/{ticket}/comments'    ,'CommentsController@store')           ->name('comments.store');
     Route::resource ('tickets/{ticket}/tags'         ,'TicketsTagsController', ["only" => ["store", "destroy"], "as" => "tickets"]);
+
+    Route::post     ('tickets/{ticket}/escalate'    ,'TicketsEscalateController@store')           ->name('tickets.escalate.store');
+    Route::delete   ('tickets/{ticket}/escalate'    ,'TicketsEscalateController@destroy')         ->name('tickets.escalate.destroy');
 
     Route::resource ('leads'                        ,'LeadsController');
     Route::post     ('leads/{lead}/assign'          ,'LeadAssignController@store')      ->name('leads.assign');
