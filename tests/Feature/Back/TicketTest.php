@@ -4,11 +4,15 @@ namespace Tests\Feature;
 
 use App\Notifications\NewComment;
 use App\Notifications\TicketEscalated;
+use App\Services\Bitbucket\Bitbucket;
+use App\Services\IssueCreator;
 use App\Team;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
+use Mockery;
+use Mockery\Mock;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -259,5 +263,35 @@ class TicketTest extends TestCase
 
         $response->assertStatus( Response::HTTP_FOUND );
         $this->assertEquals(0, $ticket->fresh()->level);
+    }
+
+    /** @test */
+    public function can_create_issue_from_ticket(){
+        Notification::fake();
+        $user   = factory(User::class)->states(["admin"])->create();
+        $ticket = factory(Ticket::class)->create();
+        $service = Mockery::mock(Bitbucket::class);
+        $service->shouldReceive('createIssue')->andReturn( (object)["id" => 12] );
+        app()->instance(IssueCreator::class, $service);
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/issue",[
+            "repository" => "test/repo"
+        ]);
+
+        $response->assertStatus( Response::HTTP_FOUND );
+        $this->assertEquals(1, $ticket->fresh()->commentsAndNotes->count() );
+        $this->assertContains("#12", $ticket->fresh()->commentsAndNotes->first()->body);
+    }
+
+    /** @test */
+    public function non_admin_cannot_create_issue_from_ticket(){
+        $user   = factory(User::class)->create();
+        $ticket = factory(Ticket::class)->create();
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/issue",[
+            "repository" => "test/repo"
+        ]);
+
+        $response->assertStatus( Response::HTTP_FORBIDDEN );
     }
 }

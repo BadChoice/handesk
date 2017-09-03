@@ -2,16 +2,16 @@
 
 namespace App\Services\Bitbucket;
 
+use App\Services\IssueCreator;
 use GuzzleHttp\Client;
 
-class Bitbucket{
+class Bitbucket implements IssueCreator{
 
     const URL       = "https://api.bitbucket.org/2.0";
-    private $token  = "a";
 
     protected function getClient(){
         return new Client([
-                'auth' => [ env('BITBUCKET_USER'), env('BITBUCKET_PASSWORD')]
+                'auth' => [ config('issues.credentials.user'), config('issues.credentials.password')]
             ]);
     }
 
