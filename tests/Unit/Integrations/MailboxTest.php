@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Integrations;
 
 use App\Services\Pop3\Mailbox;
 use Tests\TestCase;
 
+/** @group integrations */
 class MailboxTest extends TestCase
 {
     /** @test */
