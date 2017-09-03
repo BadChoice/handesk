@@ -37,7 +37,7 @@ Route::group(["middleware" => ["auth","userLocale"]], function(){
     Route::post     ('tickets/{ticket}/escalate'    ,'TicketsEscalateController@store')           ->name('tickets.escalate.store');
     Route::delete   ('tickets/{ticket}/escalate'    ,'TicketsEscalateController@destroy')         ->name('tickets.escalate.destroy');
 
-    Route::post     ('tickets/{ticket}/issue'       ,'TicketsIssueController@store')           ->name('tickets.escalate.store');
+    Route::post     ('tickets/{ticket}/issue'       ,'TicketsIssueController@store')                ->name('tickets.issue.store');
 
     Route::resource ('leads'                        ,'LeadsController');
     Route::post     ('leads/{lead}/assign'          ,'LeadAssignController@store')      ->name('leads.assign');

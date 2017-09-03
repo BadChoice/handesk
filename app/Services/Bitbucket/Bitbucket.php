@@ -15,6 +15,8 @@ class Bitbucket implements IssueCreator{
             ]);
     }
 
+    // https://confluence.atlassian.com/bitbucket/issues-resource-296095191.html
+    // Try to fix it!
     /**
      * @param $repository string revo-pos/revo-back
      * @param $title string
@@ -24,8 +26,9 @@ class Bitbucket implements IssueCreator{
     function createIssue($repository, $title, $body) {
         $response = $this->getClient()->post(static::URL . "/repositories/{$repository}/issues", [
             "form_params" => [
-                "title" => $title,
-                "body"  => $body
+                "title"     => $title,
+                "content"   => urlencode($body),
+                //"content" => "This is a test content"
             ]
         ]);
         $responseJson = json_decode( $response->getBody() );

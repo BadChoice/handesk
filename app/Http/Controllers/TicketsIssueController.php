@@ -18,8 +18,8 @@ class TicketsIssueController extends Controller{
     }
 
     private function validateIssueNotAlreadyCreated($ticket){
-        $alreadyCreated = $ticket->commentsAndNotes->contains(function($note){
-            return starts_with("Issue created to", $note);
+        $alreadyCreated = $ticket->commentsAndNotes->contains(function($comment){
+            return starts_with($comment->body, "Issue created to");
         });
         if($alreadyCreated)
             throw new \Exception("Issue already created");
