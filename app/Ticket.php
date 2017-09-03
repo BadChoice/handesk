@@ -8,6 +8,7 @@ use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Notifications\TicketEscalated;
+use App\Services\IssueCreator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -183,6 +184,41 @@ class Ticket extends BaseModel{
 
     public function getSubscribableName(){
         return $this->requester->name;
+    }
+
+    //========================================================
+    // ISSUE
+    //========================================================
+    public function createIssue(IssueCreator $issueCreator, $repository){
+        $issue = $issueCreator->createIssue(
+                $repository,
+                $this->title,
+                "Issue from ticket: " . route('tickets.show', $this). "   \n\r" . $this->body
+        );
+        $this->addNote( auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}" );
+        //TODO: Notify somebody? if so, create the test
+        return $issue;
+    }
+
+    public function findIssueNote(){
+        return $this->commentsAndNotes->first(function($comment){
+            return starts_with($comment->body, "Issue created");
+        });
+    }
+
+    public function getIssueId(){
+        $issueNote = $this->findIssueNote();
+        if( ! $issueNote ) return null;
+        return substr($issueNote->body, strpos($issueNote->body,"#") + 1);
+    }
+
+    public function issueUrl(){
+        $issueNote = $this->findIssueNote();
+        if( ! $issueNote ) return null;
+        $start  = strpos($issueNote->body,"https://");
+        $end    = strpos($issueNote->body,"with id");
+        $apiUrl = substr($issueNote->body, $start , $end - $start );
+        return str_replace("api.","", str_replace("1.0/repositories/","", $apiUrl));
     }
 
 }
