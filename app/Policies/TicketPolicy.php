@@ -65,4 +65,5 @@ class TicketPolicy
     public function assignToTeam(User $user, Ticket $ticket){
 
     }
+
 }

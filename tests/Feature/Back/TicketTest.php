@@ -294,4 +294,27 @@ class TicketTest extends TestCase
 
         $response->assertStatus( Response::HTTP_FORBIDDEN );
     }
+
+    /** @test */
+    public function issue_can_not_be_created_twice(){
+        Notification::fake();
+        $user   = factory(User::class)->states(["admin"])->create();
+        $ticket = factory(Ticket::class)->create();
+        $service = Mockery::mock(Bitbucket::class);
+        $service->shouldReceive('createIssue')->andReturn( (object)["id" => 12] );
+        app()->instance(IssueCreator::class, $service);
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/issue",[
+            "repository" => "test/repo"
+        ]);
+
+        $response->assertStatus( Response::HTTP_FOUND );
+        $this->assertEquals(1, $ticket->fresh()->commentsAndNotes->count() );
+
+        $response = $this->actingAs($user)->post("tickets/{$ticket->id}/issue",[
+            "repository" => "test/repo"
+        ]);
+        $response->assertStatus( Response::HTTP_INTERNAL_SERVER_ERROR );
+        $this->assertEquals(1, $ticket->fresh()->commentsAndNotes->count() );
+    }
 }
