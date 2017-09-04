@@ -20,7 +20,7 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Tickets can be escalated, so assistants can comment on them to help the teams   
 · Can merge tickets       
 · Lead tasks, that can have a due date, and sending daily tasks email   
-· Create issues to your code repository directly from the ticket
+· Create issues to your code repository directly from the ticket   
 · UI multi language support (default en, alternativ ca, de, fr, es)
 
 ## Installation
