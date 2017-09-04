@@ -32,9 +32,10 @@ class LeadAssigned extends Notification
     {
         return (new MailMessage)
                     ->replyTo(config('mail.fetch.username'))
-                    ->line('A lead has been assigned to you')
-                    ->action('See Lead', route('leads.show', $this->lead))
-                    ->line('Thank you for using our application!');
+                    ->view('emails.lead', [
+                        "title" => "Lead assigned",
+                        "lead" => $this->lead
+                    ]);
     }
 
 
