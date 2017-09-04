@@ -7,7 +7,7 @@ use App\Task;
 class TasksController extends Controller
 {
     public function index(){
-        $tasks = auth()->user()->tasks->groupBy( function($task){
+        $tasks = auth()->user()->uncompletedTasks->groupBy( function($task){
             return ($task->datetime) ? $task->datetime->toDateString() : 1;
         });
         return view('tasks.index', ["tasks" =>  $tasks]);

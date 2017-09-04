@@ -11,13 +11,13 @@
                 <b> {{ $comment->author()->name }}</b><br>
                 <span style="color:gray">{{ $comment->created_at->toDateTimeString() }}</span><br>
                 <p>
-                    {{ $comment->body }}
+                    {!! nl2br( strip_tags($comment->body)) !!}
                 </p>
             @else
                 <b> {{ $ticket->requester->name }}</b><br>
                 <span style="color:gray">{{ $ticket->created_at->toDateTimeString() }}</span><br>
                 <p>
-                    {{ $ticket->body }}
+                    {!! nl2br( strip_tags($ticket->body)) !!}
                 </p>
             @endif
         </div>

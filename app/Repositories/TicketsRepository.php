@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class TicketsRepository{
 
+    public function escalated(){
+        if( auth()->user()->assistant )
+            return Ticket::whereLevel(1)->where('status','<',Ticket::STATUS_SOLVED);
+        return Ticket::whereStatus(100);
+    }
+
     public function assignedToMe(){
         return auth()->user()->tickets()->where('status','<',Ticket::STATUS_SOLVED);
     }

@@ -7,6 +7,8 @@ use App\Events\TicketStatusUpdated;
 use App\Notifications\NewComment;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
+use App\Notifications\TicketEscalated;
+use App\Services\IssueCreator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -81,6 +83,9 @@ class Ticket extends BaseModel{
     }
 
     public function addComment($user, $body, $newStatus = null){
+        if( $user && $this->isEscalated() ){
+            return $this->addNote($user, $body);
+        }
         $previousStatus = $this->status;
         if($newStatus && $newStatus != $previousStatus) $this->updateStatus($newStatus);
         else                                            $this->touch();
@@ -108,14 +113,20 @@ class Ticket extends BaseModel{
     }
 
     public function addNote($user, $body){
+        if( ! $body ) return;
         if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
         else                        { $this->touch(); }
-        return $this->comments()->create([
+        $comment = $this->comments()->create([
             "body"          => $body,
             "user_id"       => $user->id,
             "new_status"    => $this->status,
             "private"       => true,
         ]);
+        tap(new NewComment($this, $comment), function($newCommentNotification) {
+            if( $this->team ) $this->team->notify( $newCommentNotification );
+            User::notifyAdmins( $newCommentNotification );
+        });
+        return $comment;
     }
 
     public function merge($user, $tickets){
@@ -132,6 +143,17 @@ class Ticket extends BaseModel{
 
     public function updateStatus($status){
         $this->update(["status" => $status, "updated_at" => Carbon::now() ]);
+    }
+
+    public function setLevel( $level ){
+        $this->update(["level" => $level]);
+        if($level == 1){
+            User::notifyAssistants( new TicketEscalated($this));
+        }
+    }
+
+    public function isEscalated(){
+        return $this->level == 1;
     }
 
     public function scopeOpen($query){
@@ -162,6 +184,41 @@ class Ticket extends BaseModel{
 
     public function getSubscribableName(){
         return $this->requester->name;
+    }
+
+    //========================================================
+    // ISSUE
+    //========================================================
+    public function createIssue(IssueCreator $issueCreator, $repository){
+        $issue = $issueCreator->createIssue(
+                $repository,
+                $this->title,
+                "Issue from ticket: " . route('tickets.show', $this). "   \n\r" . $this->body
+        );
+        $this->addNote( auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}" );
+        //TODO: Notify somebody? if so, create the test
+        return $issue;
+    }
+
+    public function findIssueNote(){
+        return $this->commentsAndNotes->first(function($comment){
+            return starts_with($comment->body, "Issue created");
+        });
+    }
+
+    public function getIssueId(){
+        $issueNote = $this->findIssueNote();
+        if( ! $issueNote ) return null;
+        return substr($issueNote->body, strpos($issueNote->body,"#") + 1);
+    }
+
+    public function issueUrl(){
+        $issueNote = $this->findIssueNote();
+        if( ! $issueNote ) return null;
+        $start  = strpos($issueNote->body,"https://");
+        $end    = strpos($issueNote->body,"with id");
+        $apiUrl = substr($issueNote->body, $start , $end - $start );
+        return str_replace("api.","", str_replace("1.0/repositories/","", $apiUrl));
     }
 
 }

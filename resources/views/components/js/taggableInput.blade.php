@@ -1,6 +1,6 @@
 <script>
     $('#{{$el}}').tagsInput({
-        'height': '20px',
+        'height': '32px',
         'width': '100%',
         'onAddTag': onAddTag,
         'onRemoveTag': onRemoveTag,

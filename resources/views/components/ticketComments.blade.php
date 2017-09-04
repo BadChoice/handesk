@@ -1,7 +1,7 @@
     @foreach($comments as $comment)
         <div class="comment @if($comment->private) note @endif">
             <div class="date mb4">
-                <div class="float-left mr3">@gravatar($comment->author()->email) </div>
+                <div class="float-left mr3">@include('components.gravatar',["user" => $comment->author()] )</div>
                 <div class="pt1">{{ $comment->author()->name }} · {{ $comment->created_at->diffForHumans() }}</div>
             </div>
             <div>

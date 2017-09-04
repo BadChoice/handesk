@@ -23,6 +23,10 @@ class User extends Authenticatable {
         return $query->whereAdmin(true);
     }
 
+    public function scopeAssistant($query){
+        return $query->where('assistant',true);
+    }
+
     public function tickets(){
         return $this->hasMany(Ticket::class)->with('requester','user','team');
     }
@@ -56,12 +60,20 @@ class User extends Authenticatable {
         return $this->hasMany(Task::class);
     }
 
+    public function uncompletedTasks(){
+        return $this->hasMany(Task::class)->where('completed',false);
+    }
+
     public function todayTasks(){
         return $this->hasMany(Task::class)->where('completed',false)->where('datetime','<', Carbon::tomorrow());
     }
 
     public static function notifyAdmins( $notification ){
         Notification::send( User::admin()->get() , $notification);
+    }
+
+    public static function notifyAssistants( $notification ){
+        Notification::send( User::assistant()->get() , $notification);
     }
 
     public function __get($attribute){

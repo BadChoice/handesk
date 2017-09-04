@@ -18,7 +18,7 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-                <td class="small"> @gravatar($user->email) </td>
+                <td> @include("components.gravatar",["user" => $user]) </td>
                 <td> {{ $user->name }}</td>
                 <td> {{ $user->email }}</td>
                 <td> {{ implode(", ", $user->teams->pluck('name')->toArray() ) }}</td>

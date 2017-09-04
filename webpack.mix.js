@@ -15,7 +15,8 @@ mix.js([
         'resources/assets/js/app.js',
         'resources/assets/js/libs/jquery.tagsinput.min.js'  //http://xoxco.com/projects/code/tagsinput/
     ], 'public/js')
-    .less('resources/assets/less/style.less',                   '../resources/assets/css/style.css')
+    .babel('resources/assets/js/moment.min.js'                 ,'public/js/moment.js')
+    .less('resources/assets/less/style.less',                  '../resources/assets/css/style.css')
     .styles([
         'resources/assets/css/libs/jquery.tagsinput.min.css',
         'resources/assets/css/style.css'

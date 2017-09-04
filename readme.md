@@ -17,9 +17,11 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Auto lead subscription to mailchimp based on its tags   
 · Tickets reporting   
 · Tickets internal notes   
+· Tickets can be escalated, so assistants can comment on them to help the teams   
 · Can merge tickets       
 · Lead tasks, that can have a due date, and sending daily tasks email   
-· UI multi language support (default en, alternative: ca es fr de)   
+· Create issues to your code repository directly from the ticket
+· UI multi language support (default en, alternativ ca, de, fr, es)
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation

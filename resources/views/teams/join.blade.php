@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="center text-center m5 p4 w-40">
+    <div class="center text-center m5 p4 w40">
         <img src="{{url("/images/handesk_full.png")}}" class="mb4">
         <br>
         <h3 class="fs4"> {{ __('team.invitedTitle', ["team" => strtoupper($team->name)] ) }}</h3>
