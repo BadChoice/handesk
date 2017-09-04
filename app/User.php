@@ -60,6 +60,10 @@ class User extends Authenticatable {
         return $this->hasMany(Task::class);
     }
 
+    public function uncompletedTasks(){
+        return $this->hasMany(Task::class)->where('completed',false);
+    }
+
     public function todayTasks(){
         return $this->hasMany(Task::class)->where('completed',false)->where('datetime','<', Carbon::tomorrow());
     }
