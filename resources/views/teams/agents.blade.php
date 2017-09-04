@@ -22,7 +22,7 @@
     <table class="striped">
         <thead>
         <tr>
-            <th class="small"></th>
+            <th class="small p2"></th>
             <th> {{ trans_choice('team.member',2) }}        </th>
             <th> {{ trans_choice('team.email',2) }}        </th>
         </tr>
@@ -30,7 +30,7 @@
         <tbody>
         @foreach($team->members as $user)
             <tr>
-                <td class="small"> @gravatar($user->email) </td>
+                <td> @include("components.gravatar",["user" => $user]) </td>
                 <td> {{ $user->name }}</td>
                 <td> <a href="mailto:{{$user->email}}" target="_blank">{{ $user->email }}</a></td>
             </tr>

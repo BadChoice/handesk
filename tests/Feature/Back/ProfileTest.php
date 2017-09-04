@@ -26,7 +26,7 @@ class ProfileTest extends TestCase
     public function can_update_profile(){
         $user = factory(User::class)->create(["name" => "Sexy Girl"]);
 
-        $response = $this->actingAs($user)->put('profile',["name" => "Sexy boy"]);
+        $response = $this->actingAs($user)->put('profile', ["name" => "Sexy boy", "locale" => "en"]);
 
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertEquals("Sexy boy", $user->fresh()->name);

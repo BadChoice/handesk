@@ -1,0 +1,37 @@
+@import "Hurricane";
+
+.grid{
+  display:flex;
+  flex-wrap: wrap;
+}
+
+.grid-spaced{
+  .grid;
+  justify-content:space-between;;
+}
+
+.grid-center{
+  .grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.col-min66 {  flex-grow: 1;  min-width:66%; }
+.col-min50 {  flex-grow: 1;  min-width:50%; }
+.col-min33 {  flex-grow: 1;  min-width:33%; }
+.col-min25 {  flex-grow: 1;  min-width:25%; }
+.col-min20 {  flex-grow: 1;  min-width:20%; }
+.col-min10 {  flex-grow: 1;  min-width:10%; }
+
+@media screen and (min-width:0px) and (max-width:@tablet-max-size) {
+  .col-min66 {min-width: 33%;  }
+  .col-min25 { min-width: 50%; }
+  .col-min20 { min-width: 33%; }
+  .col-min10 { min-width: 33%; }
+}
+
+@media screen and (min-width:0px) and (max-width:@phone-max-size) {
+  .col-min10, .col-min20, .col-min25, .col-min33, .col-min50, .col-min66{
+    min-width: 100%;
+  }
+}

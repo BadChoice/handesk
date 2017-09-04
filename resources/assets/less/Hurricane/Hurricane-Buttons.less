@@ -1,0 +1,56 @@
+@import "Hurricane";
+
+button, .button{
+  background-color:@brand;
+  border:solid 1px @brand;
+  height:@size4 + @size1;
+  min-width:@size5 * 2;
+  .white; .fs2;
+  padding:6px;
+  transition: all 0.3s ease 0s;
+  .text-decoration-none;
+  .pointer;  .mr1;  .br1;
+  vertical-align: middle;
+}
+
+button:hover, .button:hover{
+  //background-color:ligthen(@brand,20);
+}
+
+button:active, .button:active{
+  top:1px;
+  //background-color:ligthen(@brand,20);
+}
+
+button:focus, .button:focus, a:focus{
+  outline:none;
+}
+
+button.small{
+  height: 22px;
+  padding: 0px 5px 0px 5px;
+  font-size: 11px;
+}
+
+.secondary {
+  background-color: white;
+  color: #777;
+  border: 1px solid #ddd;
+}
+
+.secondary:hover{
+  background-color:#efefef;
+}
+
+.button-medium{
+  height:45px;
+}
+
+.button-big{
+  height:50px;
+}
+
+.button-special{
+  height:50px;
+  border-radius: 20px;
+}

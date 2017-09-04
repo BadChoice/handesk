@@ -18,6 +18,7 @@ return [
     "updated"    => "Updated",
     "update"     => "Update",
     "comment"    => "Comment",
+    "commentAs"  => "Comment as",
     "assign"     => "Assign",
     "status"     => "Status",
     "tag"        => "Tag|Tags",
@@ -35,4 +36,10 @@ return [
     "attachment"       => "Attachment|Attachments",
     "uploadAttachment" => "Upload Attachment",
     "attachFile"       => "Attach file",
+    "escalate"         => "Escalate",
+    "escalated"        => "Escalated",
+    "de-escalate"      => "De-escalate",
+    "escalatedDesc"    => "This ticket is <b>escalated</b>, all comments will be added as private notes until de-escalated",
+    "createIssue"      => "Create issue",
+    "seeIssue"         => "See Issue",
 ];

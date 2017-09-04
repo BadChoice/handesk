@@ -24,7 +24,8 @@ class TicketPolicy
     public function view(User $user, Ticket $ticket)
     {
         return  $ticket->user_id == $user->id ||
-                $user->teamsTickets()->pluck('id')->contains($ticket->id);
+                $user->teamsTickets()->pluck('id')->contains($ticket->id) ||
+                ( $user->assistant && $ticket->isEscalated() );
     }
 
     /**
@@ -64,4 +65,5 @@ class TicketPolicy
     public function assignToTeam(User $user, Ticket $ticket){
 
     }
+
 }

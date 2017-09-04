@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Bitbucket\Bitbucket;
+use App\Services\IssueCreator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
@@ -30,8 +32,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
+
+        app()->bind( IssueCreator::class, Bitbucket::class );
+
         Blade::directive("icon", function ($icon) {
             return icon($icon);
         });

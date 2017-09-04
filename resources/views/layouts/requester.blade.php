@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="center w-80">
+        <div class="center w80">
             @yield('content')
         </div>
     </div>

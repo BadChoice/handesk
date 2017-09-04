@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Integrations;
+
 use App\Services\Mailchimp;
 use Tests\TestCase;
 

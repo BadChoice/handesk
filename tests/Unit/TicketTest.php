@@ -104,4 +104,20 @@ class TicketTest extends TestCase
        $this->assertTrue( $ticket1->mergedTickets->contains($ticket2) );
        $this->assertTrue( $ticket1->mergedTickets->contains($ticket3) );
    }
+
+   /** @test */
+   public function adding_a_comment_when_escalated_it_is_added_as_a_note(){
+       $user    = factory(User::class)->create();
+       $ticket  = factory(Ticket::class)->create(["level" => 1]);
+       $comment = $ticket->addComment($user, "this is a comment");
+       $this->assertTrue($comment->private);
+   }
+
+    /** @test */
+    public function adding_a_requester_comment_when_escalated_it_is_not_added_as_a_note(){
+        $ticket  = factory(Ticket::class)->create(["level" => 1]);
+        $comment = $ticket->addComment(null, "this is a comment");
+
+        $this->assertFalse($comment->private == true);
+    }
 }

@@ -1,4 +1,8 @@
-@import "Hurricane";
+@import "Hurricane/Hurricane";
+@import "Hurricane/Hurricane-Basic";
+@import "Hurricane/Hurricane-Dropdown";
+@import "Hurricane/Hurricane-Tables";
+@import "Hurricane/Hurricane-Grid";
 
 @import "table";
 @import "sidebar";
@@ -49,7 +53,7 @@ a{
 
 .new-comment textarea{
   .br2;  .mb2; .p2;
-  .w-100;
+  .w100;
   height:60px;
   border:1px solid @lighter-gray;
 }
@@ -128,7 +132,7 @@ a{
 }
 
 .secondary{
-  border:solid 1px @brand-second;
+  border:solid 1px lighten(@brand-second,20);
   background-color:transparent;
   color: @brand-second;
   font-weight:100;
@@ -164,4 +168,12 @@ button:focus {outline:0;}
   list-style: none;
   display: inline-block;
   .mr2;
+}
+
+.caret-down{
+  padding: 6px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -2px;
+  vertical-align: text-top;
 }

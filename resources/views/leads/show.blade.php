@@ -9,7 +9,7 @@
     </div>
 
     <div class="description comment">
-        {{ Form::open(["url" => route('leads.update',$lead), 'method' => "PUT"]) }}
+        {{ Form::open(["url" => route('leads.update',$lead), 'method' => "PUT", "id" => "comment-form"]) }}
         <table>
             @include('components.lead.fields', ["lead" => $lead])
             <tr><td colspan="3"><button class="uppercase"> {{ __('ticket.update') }}</button></td></tr>
@@ -23,8 +23,15 @@
         <textarea name="body"></textarea>
         <br>
         @include('components.uploadAttachment', ["attachable" => $lead, "type" => "leads"])
-        {{ Form::select("new_status", App\Lead::availableStatus(), $lead->status) }}
-        <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.comment') }}</button>
+        {{ Form::hidden("new_status", $lead->status, ["id" => "new_status"]) }}
+
+        <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.commentAs') }} {{ $lead->statusName() }}</button>
+        <span class="dropdown button caret-down"> @icon(caret-down) </span>
+        <ul class="dropdown-container">
+            @foreach(App\Lead::availableStatus() as $value => $status)
+                <li><a class="pointer" onClick="setStatusAndSubmit( {{ $value    }} )"><div style="width:10px; height:10px" class="circle inline lead-status-{{$status}} mr1"></div> {{ __('ticket.commentAs') }} <b>{{ __("lead.$status") }}   </b> </a></li>
+            @endforeach
+        </ul>
         {{ Form::close() }}
     </div>
     @include('components.leadStatus')
@@ -32,4 +39,10 @@
 
 @section('scripts')
     @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "leads", "object" => $lead])
+    <script>
+        function setStatusAndSubmit(new_status){
+            $("#new_status").val(new_status);
+            $("#comment-form").submit();
+        }
+    </script>
 @endsection
