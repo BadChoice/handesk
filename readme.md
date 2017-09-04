@@ -19,8 +19,9 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Tickets internal notes   
 · Tickets can be escalated, so assistants can comment on them to help the teams   
 · Can merge tickets       
-· Lead tasks, that can have a due date, and sending daily tasks email
-· UI multi language support (default en, alternativ de)
+· Lead tasks, that can have a due date, and sending daily tasks email   
+· Create issues to your code repository directly from the ticket
+· UI multi language support (default en, alternativ ca, de, fr, es)
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation
@@ -79,6 +80,7 @@ There is the `badchoice/handesk-php` package in packagist to easily talk with th
 ![Lead screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/lead.png)
 ![Invitation screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/invitation.png)
 ![Email screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/email.png)
+
 
 ## Development
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.

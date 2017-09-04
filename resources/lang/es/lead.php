@@ -2,9 +2,9 @@
 
 return [
     "lead"                  => "Lead|Leads",
-    "status"                => "Estado",
-    "all"                   => "Todo",
-    "mine"                  => "Mío",
+    "status"                => "Estado|Estados",
+    "all"                   => "Todo|Todos",
+    "mine"                  => "Mío|Míos",
     "company"               => "Negocio",
     "address"               => "Dirección",
     "postalCode"            => "Codigo postal",

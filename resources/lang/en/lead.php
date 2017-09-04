@@ -2,9 +2,9 @@
 
 return [
     "lead"                  => "Lead|Leads",
-    "status"                => "Status",
-    "all"                   => "All",
-    "mine"                  => "Mine",
+    "status"                => "Status|Status",
+    "all"                   => "All|All",
+    "mine"                  => "Mine|Mine",
     "company"               => "Company",
     "address"               => "Address",
     "postalCode"            => "Postal code",
