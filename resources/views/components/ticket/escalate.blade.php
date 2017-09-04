@@ -11,5 +11,6 @@
     <div class="float-right mt-2 mr4">
     {{ Form::open(["url" => route('tickets.escalate.store', $ticket) ]) }}
     <button class="secondary">@icon(flag) {{ __('ticket.escalate') }}</button>
+    {{ Form::close() }}
     </div>
 @endif
