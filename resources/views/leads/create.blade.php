@@ -9,7 +9,7 @@
         <table>
             @include('components.lead.fields', ["lead" => new App\Lead( request()->all() )])
             @include('components.assignTeamField')
-            <tr><td> {{ trans_choice('ticket.tag',2) }}</td><td colspan="4"> <input id="tags" name="tags" ></td></tr>
+            <tr><td> {{ trans_choice('ticket.tag',2) }}</td><td colspan="4"> <input id="tags" name="tags" value="{{request('tags')}}"></td></tr>
             <tr><td colspan="3"><button class="uppercase"> {{ __('ticket.new') }}</button></td></tr>
         </table>
         {{ Form::close() }}
