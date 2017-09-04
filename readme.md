@@ -22,7 +22,7 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Lead tasks, that can have a due date, and sending daily tasks email
 · Lead tasks, that can have a due date, and sending daily tasks email   
 · Create issues to your code repository directly from the ticket
-· UI multi language support (default en, alternativ de)
+· UI multi language support (default en, alternativ de, es, fr, ca)
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation

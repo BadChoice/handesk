@@ -9,7 +9,7 @@
     </div>
 
     <div class="description comment">
-        {{ Form::open(["url" => route('leads.update',$lead), 'method' => "PUT", "id" => "comment-form"]) }}
+        {{ Form::open(["url" => route('leads.update',$lead), 'method' => "PUT"]) }}
         <table>
             @include('components.lead.fields', ["lead" => $lead])
             <tr><td colspan="3"><button class="uppercase"> {{ __('ticket.update') }}</button></td></tr>
@@ -19,7 +19,7 @@
     @include('components.assignActions', ["endpoint" => "leads", "object" => $lead])
 
     <div class="comment new-comment">
-        {{ Form::open(["url" => route("leads.status.store",$lead), "files" => true]) }}
+        {{ Form::open(["url" => route("leads.status.store",$lead), "files" => true, "id" => "comment-form"]) }}
         <textarea name="body"></textarea>
         <br>
         @include('components.uploadAttachment', ["attachable" => $lead, "type" => "leads"])
