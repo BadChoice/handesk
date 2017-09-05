@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="description comment">
-        <a href="{{ route('tickets.index') }}">Tickets</a>
+        <a href="{{ route('tickets.index') }}">{{ trans_choice('ticket.ticket', 2) }}</a>
         <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
-        @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket.".$ticket->statusName() ) }}</span> &nbsp;
+        @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket." . $ticket->statusName() ) }}</span> &nbsp;
         <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }} &lt;{{$ticket->requester->email}}&gt;</span>
         {{--<a class="ml4" title="Public Link" href="{{route('requester.tickets.show',$ticket->public_token)}}"> @icon(globe) </a>--}}
 
@@ -18,13 +18,13 @@
     @if( $ticket->canBeEdited() )
         @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
         <div class="comment new-comment">
-            {{ Form::open(["url" => route("comments.store",$ticket) , "files" => true, "id" => "comment-form"]) }}
+            {{ Form::open(["url" => route("comments.store", $ticket) , "files" => true, "id" => "comment-form"]) }}
             <textarea name="body"></textarea>
             @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
             <div class="mb1">
                 {{ __('ticket.note') }}: {{ Form::checkbox('private') }}
             </div>
-            {{ Form::hidden('new_status', $ticket->tatus, ["id" => "new_status"]) }}
+            {{ Form::hidden('new_status', $ticket->status, ["id" => "new_status"]) }}
             <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.commentAs') }} {{ $ticket->statusName() }}</button>
             <span class="dropdown button caret-down"> @icon(caret-down) </span>
             <ul class="dropdown-container">

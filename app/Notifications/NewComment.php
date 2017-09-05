@@ -40,10 +40,10 @@ class NewComment extends Notification
      */
     public function toMail($notifiable) {
         $mail = (new MailMessage)
-            ->subject("Ticket updated: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->subject(__('notification.ticketUpdated') . ": #{$this->ticket->id}: {$this->ticket->title}")
             ->replyTo(config('mail.fetch.username'))
-            ->view( "emails.ticket" ,[
-                    "title"  => "Ticket updated",
+            ->view( "emails.ticket", [
+                    "title"  => __("notification.ticketUpdated"),
                     "ticket" => $this->ticket,
                     "comment" => $this->comment,
                     "url"    => $notifiable instanceof Requester ? route("requester.tickets.show", $this->ticket->public_token) : route("tickets.show", $this->ticket),
@@ -58,10 +58,10 @@ class NewComment extends Notification
 
     public function toSlack($notifiable) {
         return (new BaseTicketSlackMessage(null, $notifiable))
-                ->content('Ticket updated')
+                ->content(__('notification.ticketUpdated'))
                 ->attachment(function ($attachment)  {
-                    $attachment->title($this->ticket->requester->name . " : " . $this->ticket->title, route("tickets.show", $this->ticket))
-                               ->content("Status: " . $this->ticket->statusName() . "\n\n" . $this->comment->body);
+                    $attachment->title($this->ticket->requester->name   . ": " . $this->ticket->title, route("tickets.show", $this->ticket))
+                               ->content( trans_choice('lead.status', 1). ": " . __('ticket.' . $this->ticket->statusName()) . "\n\n" . $this->comment->body);
                 });
     }
     /**

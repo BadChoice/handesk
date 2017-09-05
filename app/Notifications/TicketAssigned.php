@@ -38,10 +38,10 @@ class TicketAssigned extends Notification
     public function toMail($notifiable)
     {
         $mail = (new MailMessage)
-            ->subject("Ticket assigned: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->subject(__("notification.ticketAssigned") . ": #" . $this->ticket->id . ": ". $this->ticket->title)
             ->replyTo(config('mail.fetch.username'))
             ->view( "emails.ticket" ,[
-                    "title"  => "Ticket assigned to " . $notifiable->name,
+                    "title"  => __("notification.ticketAssignedTo") . " " . $notifiable->name,
                     "ticket" => $this->ticket,
                     "url"    => route("tickets.show", $this->ticket),
             ]
@@ -54,7 +54,7 @@ class TicketAssigned extends Notification
 
     public function toSlack($notifiable) {
         return (new BaseTicketSlackMessage($this->ticket, $notifiable))
-                ->content('Ticket assigned');
+                ->content(__('notification.ticketAssigned'));
     }
 
     /**

@@ -5,7 +5,7 @@
     </div>
 
     <div class="m4">
-        <a class="button " href="{{ route("tickets.create") }}">@icon(plus) New Ticket</a>
+        <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
         <a class="button secondary" id="mergeButton" onclick="onMergePressed()"> {{ __('ticket.merge') }}</a>
     </div>
 

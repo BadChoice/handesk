@@ -19,15 +19,15 @@
             <tr><td> {{ __('user.email')    }}: </td><td class="w60">{{ Form::email('email',                   $user->email,   ["class" => "w100"]) }}</td></tr>
             <tr><td> {{ __('user.language') }}: </td><td>{{ Form::select('locale', App\Language::available(),   $user->locale                       ) }}</td></tr>
             <tr><td></td></tr>
-            <tr><td><H2>{{ trans_choice('user.notification',2) }}</H2></td></tr>
-            <tr><td>{{ __('user.newTicketNotification') }}</td>     <td> {{ Form::checkbox('new_ticket_notification',true, $user->settings->new_ticket_notification) }}</td></tr>
-            <tr><td>{{ __('user.ticketAssignedNotification') }}</td><td> {{ Form::checkbox('ticket_assigned_notification',true, $user->settings->ticket_assigned_notification) }}</td></tr>
-            <tr><td>{{ __('user.ticketUpdatedNotification') }}</td> <td> {{ Form::checkbox('ticket_updated_notification',true, $user->settings->ticket_updated_notification) }}</td></tr>
-            <tr><td>{{ __('user.newLeadNotification') }}</td>       <td> {{ Form::checkbox('new_lead_notification',true, $user->settings->new_lead_notification) }}</td></tr>
-            <tr><td>{{ __('user.leadAssignedNotification') }}</td>  <td> {{ Form::checkbox('lead_assigned_notification',true, $user->settings->lead_assigned_notification) }}</td></tr>
-            <tr><td>{{ __('user.dailyTasksNotification') }}:   </td><td> <input type="checkbox" name="daily_tasks_notification" @if($user->settings->daily_tasks_notification) checked @endif></td></tr>
+            <tr><td><H2>{{ trans_choice('user.notification', 2) }}</H2></td></tr>
+            <tr><td>{{ __('user.newTicketNotification')     }}  </td><td> {{ Form::checkbox('new_ticket_notification',true, $user->settings->new_ticket_notification) }}</td></tr>
+            <tr><td>{{ __('user.ticketAssignedNotification')}}  </td><td> {{ Form::checkbox('ticket_assigned_notification',true, $user->settings->ticket_assigned_notification) }}</td></tr>
+            <tr><td>{{ __('user.ticketUpdatedNotification') }}  </td><td> {{ Form::checkbox('ticket_updated_notification',true, $user->settings->ticket_updated_notification) }}</td></tr>
+            <tr><td>{{ __('user.newLeadNotification')       }}  </td><td> {{ Form::checkbox('new_lead_notification',true, $user->settings->new_lead_notification) }}</td></tr>
+            <tr><td>{{ __('user.leadAssignedNotification')  }}  </td><td> {{ Form::checkbox('lead_assigned_notification',true, $user->settings->lead_assigned_notification) }}</td></tr>
+            <tr><td>{{ __('user.dailyTasksNotification')    }}: </td><td> <input type="checkbox" name="daily_tasks_notification" @if( $user->settings->daily_tasks_notification ) checked @endif></td></tr>
             <tr><td></td></tr>
-            <tr><td>{{ __('user.ticketsSignature') }}:         </td><td><textarea name="tickets_signature"> {{ $user->settings->tickets_signature }} </textarea> </td></tr>
+            <tr><td>{{ __('user.ticketsSignature')          }}: </td><td><textarea name="tickets_signature"> {{ $user->settings->tickets_signature }} </textarea> </td></tr>
             <tr><td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td></tr>
         </table>
         {{ Form::close() }}
