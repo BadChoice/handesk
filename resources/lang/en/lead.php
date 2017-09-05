@@ -26,4 +26,5 @@ return [
     "complete"              => "Complete",
     "todayTasks"            => "Today tasks",
     "todayTasksDesc"        => "There are the task you have for today:",
+    "search"                => "Search",
 ];
