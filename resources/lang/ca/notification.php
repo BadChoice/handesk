@@ -7,6 +7,7 @@ return [
     "newTicket"             => "Nou tiquet",
     "ticketCreated"         => "Tiquet creat",
     "ticketAssigned"        => "Tiquet assignat",
+    "ticketAssignedTo"      => "Tiquet assignat a",
     "ticketUpdated"         => "Tiquet actualitzat",
     "ticketEscalated"       => "Tiquet escalat",
 ];
