@@ -106,6 +106,24 @@ class TicketTest extends TestCase
    }
 
    /** @test */
+   public function merging_to_itself_is_not_merged(){
+       $user    = factory(User::class)->create();
+
+       $ticket1 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
+       $ticket2 = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
+
+       $ticket1->merge($user,  [$ticket1->id, $ticket2] );
+
+       $this->assertEquals( Ticket::STATUS_NEW,    $ticket1->fresh()->status );
+       $this->assertEquals( Ticket::STATUS_MERGED, $ticket2->fresh()->status );
+       $this->assertCount(1, $ticket2->commentsAndNotes);
+       $this->assertEquals("Merged with #1", $ticket2->commentsAndNotes->first()->body);
+       $this->assertCount(0, $ticket1->commentsAndNotes);
+
+       $this->assertTrue( $ticket1->mergedTickets->contains($ticket2) );
+   }
+
+   /** @test */
    public function adding_a_comment_when_escalated_it_is_added_as_a_note(){
        $user    = factory(User::class)->create();
        $ticket  = factory(Ticket::class)->create(["level" => 1]);

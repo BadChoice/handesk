@@ -133,7 +133,7 @@ class Ticket extends BaseModel{
         collect($tickets)->map(function($ticket) {
             return is_numeric($ticket) ? Ticket::find($ticket) : $ticket;
         })->reject(function($ticket) {
-            return $ticket->status > Ticket::STATUS_SOLVED;
+            return $ticket->id == $this->id || $ticket->status > Ticket::STATUS_SOLVED;
         })->each(function($ticket) use($user) {
             $ticket->addNote( $user, "Merged with #{$this->id}" );
             $ticket->updateStatus(Ticket::STATUS_MERGED);
