@@ -16,8 +16,15 @@ class CreateUserSettingsTable extends Migration
         Schema::create('user_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->boolean('daily_tasks_notification')->default(true);
-            $table->string('tickets_signature')->nullable();
+            $table->boolean('daily_tasks_notification')     ->default( true );
+            $table->string('tickets_signature')             ->nullable();
+
+            $table->boolean('new_ticket_notification')      ->default( true );
+            $table->boolean('ticket_assigned_notification') ->default( true );
+            $table->boolean('ticket_updated_notification')  ->default( true );
+            $table->boolean('new_lead_notification')        ->default( true );
+            $table->boolean('lead_assigned_notification')   ->default( true );
+
             $table->timestamps();
         });
     }
