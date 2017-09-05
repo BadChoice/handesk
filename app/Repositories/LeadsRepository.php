@@ -48,7 +48,7 @@ class LeadsRepository{
         } else {
             $leadsQuery = auth()->user()->teamsLeads();
         }
-        return $leadsQuery->where(function($query){
+        return $leadsQuery->where(function($query) use($text){
                 $query  ->where("name"        ,"like","%{$text}%")
                         ->orWhere("email"    ,"like","%{$text}%")
                         ->orWhere("company"  ,"like","%{$text}%")
