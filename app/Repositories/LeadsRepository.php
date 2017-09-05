@@ -45,15 +45,17 @@ class LeadsRepository{
     public function search($text){
         if( auth()->user()->admin ){
             $leadsQuery = Lead::query();
-        }else {
+        } else {
             $leadsQuery = auth()->user()->teamsLeads();
         }
-        return $leadsQuery->where("name"        ,"like","%{$text}%")
-                           ->orWhere("email"    ,"like","%{$text}%")
-                           ->orWhere("company"  ,"like","%{$text}%")
-                           ->orWhere("city"     ,"like","%{$text}%")
-                           ->orWhere("country"  ,"like","%{$text}%")
-                           ->orWhere("phone"    ,"like","%{$text}%")
-            ;
+        return $leadsQuery->where(function($query){
+                $query  ->where("name"        ,"like","%{$text}%")
+                        ->orWhere("email"    ,"like","%{$text}%")
+                        ->orWhere("company"  ,"like","%{$text}%")
+                        ->orWhere("city"     ,"like","%{$text}%")
+                        ->orWhere("country"  ,"like","%{$text}%")
+                        ->orWhere("phone"    ,"like","%{$text}%");
+        });
+            /*->distinct()*/;
     }
 }
