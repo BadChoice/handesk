@@ -5,7 +5,7 @@ return [
     "ticket"     => "Ticket|Tickets",
     "assigned"   => "Assigned",
     "myTickets"  => "My Tickets",
-    "newTicket" =>  "New Ticket",
+    "newTicket"  =>  "New Ticket",
     "unassigned" => "Unassigned",
     "unanswered" => "Unanswered",
     "archive"    => "Archive",

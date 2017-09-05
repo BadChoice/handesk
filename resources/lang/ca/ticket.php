@@ -5,7 +5,7 @@ return [
     "ticket"     => "Tiquet|Tiquets",
     "assigned"   => "Assignat",
     "myTickets"  => "Els meus tiquets",
-    "newTicket" =>  "Nou Tiquet",
+    "newTicket"  =>  "Nou Tiquet",
     "unassigned" => "Sense assignar",
     "unanswered" => "Sense resposta",
     "archive"    => "Arxivar",

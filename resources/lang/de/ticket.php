@@ -5,7 +5,7 @@ return [
     "ticket"     => "Ticket|Tickets",
     "assigned"   => "Zugewiesen",
     "myTickets"  => "Meine Tickets",
-    "newTicket" =>  "Nieuw Ticket",
+    "newTicket"  =>  "Nieuw Ticket",
     "unassigned" => "Nicht zugewiesen",
     "unanswered" => "Unbeantwortet",
     "archive"    => "Archiviert",

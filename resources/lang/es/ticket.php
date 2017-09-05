@@ -5,7 +5,7 @@ return [
     "ticket"     => "Tiquet|Tiquets",
     "assigned"   => "Assignado",
     "myTickets"  => "Mis tiquets",
-    "newTicket" =>  "Nuevo Tiquet",
+    "newTicket"  =>  "Nuevo Tiquet",
     "unassigned" => "Sin asignar",
     "unanswered" => "Sin respuesta",
     "archive"    => "Arxivar",
@@ -29,7 +29,7 @@ return [
     "reopen"           => "Reabrir",
     "pending"          => "Pendiente",
     "solved"           => "Solucionado",
-    'isSolvedQuestion'  => "¿Está solucionado?",
+    'isSolvedQuestion' => "¿Está solucionado?",
     "closed"           => "Cerrado",
     "note"             => "Nota privada",
     "merge"            => "Fusionar",
@@ -44,6 +44,6 @@ return [
     "de-escalate"      => "Desescalar ",
     "escalatedDesc"    => "Este tiquet está <b>escalado</b>, todos los comentarios serán añadidos como notas privadas hasta que se desescale",
     "createIssue"      => "Crear una incidencia",
-    "seeIssue"         => "Veure incidencia",
+    "seeIssue"         => "Ver incidencia",
 
 ];
