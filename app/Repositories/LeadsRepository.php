@@ -41,4 +41,19 @@ class LeadsRepository{
         }
         return auth()->user()->teamsLeads()->where('status','=',Lead::STATUS_FAILED);
     }
+
+    public function search($text){
+        if( auth()->user()->admin ){
+            $leadsQuery = Lead::query();
+        }else {
+            $leadsQuery = auth()->user()->teamsLeads();
+        }
+        return $leadsQuery->where("name"        ,"like","%{$text}%")
+                           ->orWhere("email"    ,"like","%{$text}%")
+                           ->orWhere("company"  ,"like","%{$text}%")
+                           ->orWhere("city"     ,"like","%{$text}%")
+                           ->orWhere("country"  ,"like","%{$text}%")
+                           ->orWhere("phone"    ,"like","%{$text}%")
+            ;
+    }
 }
