@@ -19,6 +19,7 @@ class LeadsController extends Controller
     }
 
     public function show(Lead $lead){
+        $this->authorize('view',$lead);
         return view('leads.show', ["lead" => $lead]);
     }
 
