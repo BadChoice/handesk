@@ -2,10 +2,10 @@
 
 return [
     "all"        => "Todos",
-    "ticket"     => "Tiquet|Tiquets",
+    "ticket"     => "Tíquet|Tíquets",
     "assigned"   => "Assignado",
-    "myTickets"  => "Mis tiquets",
-    "newTicket"  =>  "Nuevo Tiquet",
+    "myTickets"  => "Mis tíquets",
+    "newTicket"  =>  "Nuevo Tíquet",
     "unassigned" => "Sin asignar",
     "unanswered" => "Sin respuesta",
     "archive"    => "Arxivar",
@@ -34,7 +34,7 @@ return [
     "note"             => "Nota privada",
     "merge"            => "Fusionar",
     "mergeDesc"        => "Selecciona los que quieras fusionar y clica aquí",
-    "mergeDesc2"       => "Por favor, introduce el número de tiquet a fusionar",
+    "mergeDesc2"       => "Por favor, introduce el número de tíquet a fusionar",
     "merged"           => "Fusionado",
     "attachment"       => "Adjunto|Adjuntos",
     "uploadAttachment" => "Subir un adjunto",
@@ -42,7 +42,7 @@ return [
     "escalate"         => "Escalar",
     "escalated"        => "Escalado",
     "de-escalate"      => "Desescalar ",
-    "escalatedDesc"    => "Este tiquet está <b>escalado</b>, todos los comentarios serán añadidos como notas privadas hasta que se desescale",
+    "escalatedDesc"    => "Este tíquet está <b>escalado</b>, todos los comentarios serán añadidos como notas privadas hasta que se desescale",
     "createIssue"      => "Crear una incidencia",
     "seeIssue"         => "Ver incidencia",
 
