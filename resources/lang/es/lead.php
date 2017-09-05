@@ -2,6 +2,7 @@
 
 return [
     "lead"                  => "Lead|Leads",
+    "newLead"               => "Nuevo Lead",
     "status"                => "Estado|Estados",
     "all"                   => "Todo|Todos",
     "mine"                  => "Mío|Míos",

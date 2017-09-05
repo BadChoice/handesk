@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "you"                       => "You",
     "name"                      => "Name",
     "email"                     => "Email",
     "profile"                   => "Profile",
@@ -10,9 +11,9 @@ return [
     "newPassword"               => "New Password",
     "confirmPassword"           => "Confirm Password",
     "changePassword"            => "Change Password",
-    "dailyTasksNotification"    => "Daily tasks notification",
     "ticketsSignature"          => "Tickets signature",
     "notification"              => "Notification|Notifications",
+    "dailyTasksNotification"    => "Daily tasks notification",
     "newTicketNotification"     => "New ticket notification",
     "ticketAssignedNotification"=> "Ticket assigned notification",
     "ticketUpdatedNotification" => "Ticket updated notification",

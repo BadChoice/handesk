@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="description">
-        <h3>Reports</h3>
+        <h3>{{ trans_choice('report.report', 2) }}</h3>
     </div>
 
     <div class="description">
@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tr>
-            <td> You </td>
+            <td> {{ __('user.you') }} </td>
             <td>  {{ $repository->tickets( auth()->user() ) }}   </td>
             <td>  {{ $repository->unansweredTickets( auth()->user() ) }}   </td>
             <td>  {{ $repository->openTickets( auth()->user() ) }}   </td>
@@ -40,11 +40,11 @@
             </td>
             <td>
                 {{ $repository->oneTouchResolutionKpi( auth()->user() ) }} %
-                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, auth()->user()) ])
+                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, auth()->user()) ])
             </td>
             <td>
                 {{ $repository->reopenedKpi( auth()->user() ) }} %
-                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_REOPENED, auth()->user()) ])
+                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_REOPENED, auth()->user()) ])
             </td>
         </tr>
         @foreach(auth()->user()->teams as $team)
@@ -57,24 +57,24 @@
 
             <td>
                 {{ $repository->firstReplyKpi(auth()->user()) }}
-                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_FIRST_REPLY, auth()->user())  ])
+                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_FIRST_REPLY, auth()->user())  ])
             </td>
             <td>
                 {{ $repository->solveKpi($team) }}
-                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, $team) ])
+                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, $team) ])
             </td>
             <td>
                 {{ $repository->oneTouchResolutionKpi( $team ) }} %
-                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, $team) ])
+                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_ONE_TOUCH_RESOLUTION, $team) ])
             </td>
             <td>
                 {{ $repository->reopenedKpi( $team ) }} %
-                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_REOPENED, $team) ])
+                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_REOPENED, $team) ])
             </td>
         </tr>
         @endforeach
         <tr>
-            <td> All </td>
+            <td> {{ __('ticket.all') }} </td>
             <td>  @if(auth()->user()->admin ){{ $repository->tickets( ) }}  @endif </td>
             <td>  @if(auth()->user()->admin ){{ $repository->unansweredTickets( ) }}  @endif </td>
             <td>  @if(auth()->user()->admin ){{ $repository->openTickets( ) }}  @endif </td>

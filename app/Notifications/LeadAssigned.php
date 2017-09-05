@@ -34,7 +34,7 @@ class LeadAssigned extends Notification
         return (new MailMessage)
                     ->replyTo(config('mail.fetch.username'))
                     ->view('emails.lead', [
-                        "title" => "Lead assigned",
+                        "title" => __('notification.leadAssigned'),
                         "lead" => $this->lead
                     ]);
     }

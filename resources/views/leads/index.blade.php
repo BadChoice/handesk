@@ -5,7 +5,7 @@
     </div>
 
     <div class="m4">
-        <a class="button " href="{{ route("leads.create") }}">@icon(plus) New Lead</a>
+        <a class="button " href="{{ route("leads.create") }}">@icon(plus) {{ __('lead.newLead') }}</a>
     </div>
 
     @paginator($leads)

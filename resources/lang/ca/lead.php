@@ -2,6 +2,7 @@
 
 return [
     "lead"                  => "Lead|Leads",
+    "newLead"               => "Nou Lead",
     "status"                => "Estat|Estats",
     "all"                   => "Tot|Tots",
     "mine"                  => "Meu|Meus",

@@ -1,13 +1,13 @@
 <tr>
         <td>
                 <input type="checkbox" name="selected[{{$ticket->id}}]" meta:index="{{$ticket->id}}" class="hidden selector">
-                <span class="label ticket-status-{{ $ticket->statusName() }}">{{ str_limit($ticket->statusName(),1,'') }}</span>&nbsp;
+                <span class="label ticket-status-{{ $ticket->statusName() }}">{{ str_limit(__('ticket.' . $ticket->statusName()), 1, '') }}</span>&nbsp;
                 @if( $ticket->isEscalated() ) @icon(flag) @endif
-                <a href="{{route('tickets.show',$ticket)}}"> #{{ $ticket->id }}. {{  str_limit($ticket->title,35)  }}</a>
+                <a href="{{ route('tickets.show', $ticket) }}"> #{{ $ticket->id }}. {{  str_limit($ticket->title, 35) }}</a>
         </td>
-        <td> {{ $ticket->requester->name }}              </td>
-        <td> {{ nameOrDash( $ticket->team ) }}           </td>
-        <td> {{ nameOrDash( $ticket->user ) }}           </td>
-        <td> {{ $ticket->created_at->diffForHumans() }}  </td>
-        <td> {{ $ticket->updated_at->diffForHumans() }}  </td>
+        <td> {{ $ticket->requester->name            }}</td>
+        <td> {{ nameOrDash( $ticket->team )         }}</td>
+        <td> {{ nameOrDash( $ticket->user )         }}</td>
+        <td> {{ $ticket->created_at->diffForHumans()}}</td>
+        <td> {{ $ticket->updated_at->diffForHumans()}}</td>
 </tr>
