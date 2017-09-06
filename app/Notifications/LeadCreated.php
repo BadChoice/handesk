@@ -39,7 +39,7 @@ class LeadCreated extends Notification
         return (new MailMessage)
                     ->replyTo(config('mail.fetch.username'))
                     ->view('emails.lead', [
-                        "title" => "A new lead has been created",
+                        "title" => __("notification.newLeadCreatedDesc"),
                         "lead" => $this->lead
                     ]);
     }

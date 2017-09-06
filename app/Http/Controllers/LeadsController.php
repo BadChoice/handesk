@@ -13,12 +13,13 @@ class LeadsController extends Controller
         else if(request('failed'))      { $leads = $repository->failed(); }
         else $leads = $repository->all();
 
-        if( request('team'))                $leads = $leads->where('leads.team_id', request('team'));
+        if( request('team'))              $leads = $leads->where('leads.team_id', request('team'));
 
         return view('leads.index', [ "leads" => $leads->latest()->paginate(25) ]);
     }
 
     public function show(Lead $lead){
+        $this->authorize('view',$lead);
         return view('leads.show', ["lead" => $lead]);
     }
 

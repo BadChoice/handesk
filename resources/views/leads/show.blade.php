@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="description comment">
-        <a href="{{ route('leads.index') }}">Leads</a>
+        <a href="{{ route('leads.index') }}">{{ trans_choice('lead.lead', 2) }}</a>
         <h3> {{ $lead->company }} · {{ $lead->name }} · {{ $lead->email }} </h3>
-        @busy <span class="label lead-status-{{ $lead->statusName() }}"> {{ __("lead.".$lead->statusName() ) }} </span> &nbsp;
+        @busy <span class="label lead-status-{{ $lead->statusName() }}"> {{ __("lead." . $lead->statusName() ) }} </span> &nbsp;
         <span class="date">{{  $lead->created_at->diffForHumans() }} · {{  nameOrDash($lead->team) }}</span>
-        <a class="float-right button secondary mr4 mt5 mb-5" href="{{route('leads.tasks.index',$lead)}}"> @icon(tasks) {{ trans_choice('lead.task',2) }} <span class="label lead-status-failed">{{ $lead->uncompletedTasks->count() }}</span></a>
+        <a class="float-right button secondary mr4 mt5 mb-5" href="{{ route('leads.tasks.index', $lead) }}"> @icon(tasks) {{ trans_choice('lead.task', 2) }} <span class="label lead-status-failed">{{ $lead->uncompletedTasks->count() }}</span></a>
     </div>
 
     <div class="description comment">
@@ -25,7 +25,7 @@
         @include('components.uploadAttachment', ["attachable" => $lead, "type" => "leads"])
         {{ Form::hidden("new_status", $lead->status, ["id" => "new_status"]) }}
 
-        <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.commentAs') }} {{ $lead->statusName() }}</button>
+        <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.commentAs') }} {{ __("lead." . $lead->statusName()) }}</button>
         <span class="dropdown button caret-down"> @icon(caret-down) </span>
         <ul class="dropdown-container">
             @foreach(App\Lead::availableStatus() as $value => $status)

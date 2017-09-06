@@ -13,6 +13,7 @@ let mix = require('laravel-mix');
 
 mix.js([
         'resources/assets/js/app.js',
+        'resources/assets/js/searcher.js',
         'resources/assets/js/libs/jquery.tagsinput.min.js'  //http://xoxco.com/projects/code/tagsinput/
     ], 'public/js')
     .babel('resources/assets/js/moment.min.js'                 ,'public/js/moment.js')

@@ -2,7 +2,7 @@
 @section('content')
     <div class="description comment">
         <h3>{{ $ticket->title }}</h3>
-        <span class="label ticket-status-{{ $ticket->statusName() }}">{{ $ticket->statusName() }}</span>&nbsp;
+        <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __('ticket.' . $ticket->statusName()) }}</span>&nbsp;
         <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }}</span>
     </div>
 
@@ -12,9 +12,9 @@
             <textarea name="body"></textarea>
             <br>
             @if($ticket->status == App\Ticket::STATUS_SOLVED)
-                Reopen ? {{ Form::checkbox('reopen') }}
+                {{ __('ticket.reopen') }} ? {{ Form::checkbox('reopen') }}
             @else
-                Is Solved ? {{ Form::checkbox('solved') }}
+                {{ __('ticket.isSolvedQuestion') }} {{ Form::checkbox('solved') }}
             @endif
             <br><br>
             <button class="uppercase ph3"> @busy @icon(comment) {{ __('ticket.comment') }}</button>

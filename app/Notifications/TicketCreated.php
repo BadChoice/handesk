@@ -38,10 +38,10 @@ class TicketCreated extends Notification
     public function toMail($notifiable)
     {
         $mail = (new MailMessage)
-            ->subject("New ticket: #" .$this->ticket->id . ": ". $this->ticket->title)
+            ->subject(__("notification.newTicket") . ": #{$this->ticket->id}: {$this->ticket->title}")
             ->replyTo(config('mail.fetch.username'))
             ->view( "emails.ticket" ,[
-                    "title"  => "New ticket created",
+                    "title"  => __("notification.newTicketCreated"),
                     "ticket" => $this->ticket,
                     "url"    => route("tickets.show", $this->ticket),
                 ]
@@ -55,7 +55,7 @@ class TicketCreated extends Notification
     public function toSlack($notifiable)
     {
         return (new BaseTicketSlackMessage($this->ticket, $notifiable))
-                ->content('Ticket created');
+                ->content(__('notification.ticketCreated'));
     }
     /**
      * Get the array representation of the notification.

@@ -50,11 +50,21 @@ class LeadsBackTest extends TestCase
     /** @test */
     public function can_see_a_leads_detail(){
         $user   = factory(User::class)->create();
-        $lead   = factory(Lead::class)->create(["email" => "another@email.com"]);
+        $lead   = factory(Lead::class)->create(["email" => "another@email.com", "user_id" => $user->id]);
 
         $response = $this->actingAs($user)->get("leads/{$lead->id}");
 
         $response->assertStatus(Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function can_not_see_a_lead_that_is_not_mine(){
+        $user   = factory(User::class)->create();
+        $lead   = factory(Lead::class)->create(["email" => "another@email.com"]);
+
+        $response = $this->actingAs($user)->get("leads/{$lead->id}");
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
