@@ -18,7 +18,7 @@ return [
     "requested"  => "Solicitado",
     "updated"    => "Actualizado",
     "update"     => "Actualitzar",
-    "comment"    => "Commentario",
+    "comment"    => "Comentario",
     "commentAs"  => "Comentar como",
     "assign"     => "Asignar",
     "status"     => "Estado",

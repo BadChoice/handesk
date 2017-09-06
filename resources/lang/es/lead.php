@@ -8,7 +8,7 @@ return [
     "mine"                  => "Mío|Míos",
     "company"               => "Negocio",
     "address"               => "Dirección",
-    "postalCode"            => "Codigo postal",
+    "postalCode"            => "Código postal",
     "username"              => "Username",
     "name"                  => "Nombre",
     "phone"                 => "Teléfono",
