@@ -16,7 +16,9 @@
         <tr>
             <th class="small"></th>
             <th> {{ trans_choice('team.team',1) }}          </th>
+            <th> {{ trans_choice('team.email',1) }}          </th>
             <th> {{ trans_choice('team.member',2) }}        </th>
+            <th> {{ trans_choice('team.slack',1) }}          </th>
             <th> {{ trans_choice('team.invitationLink',1) }}</th>
             <th>                                            </th>
         </tr>
@@ -26,7 +28,9 @@
             <tr>
                 <td class="small"> @gravatar($team->email) </td>
                 <td> {{ $team->name }}</td>
+                <td> <a href="mailto:{{ $team->email }}">{{ $team->email }}</a></td>
                 <td> <a href="{{route('teams.agents',$team)}}">{{ $team->members->count() }}</a></td>
+                <td> @if($team->slack_webhook_url) @icon(check) @else @icon(times) @endif </td>
                 @can('administrate', $team)
                     <td>
                         <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a>
