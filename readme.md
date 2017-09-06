@@ -4,6 +4,8 @@
 Handesk has been created by our need (At Revo Systems www.revo.works) to have a powerful yet simple Ticketing system, we needed a system that allowed us to
 have multiple teams, with multiple users, easy and efficient reporting by all/team/user as well as lead management.
 
+[Landing page: http://handesk.io](http://handesk.io)
+
 Check out the screenshots to see how nice it looks, and feel fee to contribute by sending us PRs.
 We will keep adding features as we need them, but our basic workflow is totally covered :D
 
