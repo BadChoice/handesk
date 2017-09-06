@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@handesk.dev'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@handesk.io'),
         'name' => env('MAIL_FROM_NAME', 'Handesk'),
     ],
 
@@ -85,7 +85,6 @@ return [
     */
 
     'username' => env('MAIL_USERNAME'),
-
     'password' => env('MAIL_PASSWORD'),
 
     /*
