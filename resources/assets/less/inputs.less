@@ -3,8 +3,9 @@
 input{
   border:1px solid @lighter-gray;
   color:@gray;
-  height:@size1;
-  .br1; .p3;
+  //height:@size1;
+  .br1;
+  padding:6px 12px 6px 12px;
 }
 
 input::placeholder {
@@ -13,6 +14,10 @@ input::placeholder {
 
 input[type=checkbox]{
   height: 10px;
+}
+
+input[type=number],input[type=password]{
+  padding:6px;
 }
 
 input[type=file] {

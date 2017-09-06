@@ -9,6 +9,7 @@
                 <div class="m3">
                     <input id="email" type="email" class="w80" name="email" value="{{ old('email') }}" required autofocus>
                     @if ($errors->has('email'))
+                        <br>
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
