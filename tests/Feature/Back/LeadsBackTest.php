@@ -7,6 +7,7 @@ use App\Notifications\LeadAssigned;
 use App\Team;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -15,9 +16,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class LeadsBackTest extends TestCase
 {
     use DatabaseMigrations;
+    use InteractsWithExceptionHandling;
 
     /** @test */
     public function admin_can_see_all_leads(){
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->states('admin')->create();
         factory(Lead::class)->create(["email" => "anEmail@email.com"]);
 
