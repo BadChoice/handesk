@@ -8,10 +8,9 @@ php:
 sudo: false
 
 before_script:
-  - cp .env.example .env
-  - composer install --dev --prefer-source --no-interaction
+  - php -r "file_exists('.env') || copy('.env.example', '.env');"
+  - composer install
   - php artisan key:generate
-  - php artisan migrate --seed
 
 script:
   - vendor/bin/phpunit --exclude-group=integrations
