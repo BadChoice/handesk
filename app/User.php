@@ -7,6 +7,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Notification;
 
+/**
+ * @property string name
+ */
 class User extends Authenticatable {
 
     use Notifiable;
