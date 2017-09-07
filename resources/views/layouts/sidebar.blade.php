@@ -2,7 +2,7 @@
     <img src="{{ url("/images/handesk_small.png") }}">
     <h4> @icon(inbox) {{ trans_choice('ticket.ticket', 2) }}</h4>
     <ul>
-        @php ( $repository = new App\Repositories\TicketsRepository )
+        @php ( $repository = new App\Repositories\TicketsRepository ) @endphp
         @if( auth()->user()->assistant )
             @include('components.sidebarItem', ["url" => route('tickets.index') . "?escalated=true",    "title" => __('ticket.escalated'),  "count" => $repository->escalated()     ->count()])
         @endif
