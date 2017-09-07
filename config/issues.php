@@ -3,11 +3,11 @@
 return [
     "driver" => "bitbucket",
     "credentials" => [
-        "driver"        => 'basic', //basic, oauth
-        "key"           => env("BITBUCKET_KEY"),        //oauth
-        "secret"        => env("BITBUCKET_SECRET"),     //oauth
-        "user"          => env("BITBUCKET_USER"),       //basic auth
-        "password"      => env("BITBUCKET_PASSWORD")    //basic auth
+        "driver"        => env("BITBUCKET_DRIVER", 'basic'), //basic, oauth
+        "key"           => env("BITBUCKET_KEY"),           //oauth
+        "secret"        => env("BITBUCKET_SECRET"),        //oauth
+        "user"          => env("BITBUCKET_USER"),          //basic auth
+        "password"      => env("BITBUCKET_PASSWORD")       //basic auth
     ],
     "repositories" => [
         "Xef Back"    => "revo-pos/revo-back",
