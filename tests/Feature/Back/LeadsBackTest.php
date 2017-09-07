@@ -77,7 +77,7 @@ class LeadsBackTest extends TestCase
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertCount(1, $lead->fresh()->statusUpdates );
         $this->assertEquals( $lead->fresh()->status,     Lead::STATUS_FIRST_CONTACT);
-        $this->assertEquals( $lead->fresh()->updated_at, Carbon::now() );
+        $this->assertEquals( $lead->fresh()->updated_at->toDateString(), Carbon::now()->toDateString() );
         tap( $lead->fresh()->statusUpdates->first() , function($statusUpdate) use($user){
             $this->assertEquals(  Lead::STATUS_FIRST_CONTACT, $statusUpdate->new_status);
             $this->assertEquals( "I've visited them", $statusUpdate->body);
