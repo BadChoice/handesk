@@ -81,4 +81,32 @@ class ProfileTest extends TestCase
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertTrue(Hash::check('secret', $this->user->fresh()->password));
     }
+
+    /**
+     * @test
+     * @dataProvider toggableNotifications
+     */
+    public function can_toggle_notification($notification)
+    {
+        $response = $this->put(route('profile.update'), [
+            'name' => 'Sexy boy',
+            'locale' => 'en',
+            $notification => true
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertTrue(!!$this->user->fresh()->settings->{$notification});
+    }
+
+    public function toggableNotifications()
+    {
+        return [
+            ['new_ticket_notification'],
+            ['ticket_assigned_notification'],
+            ['ticket_updated_notification'],
+            ['new_lead_notification'],
+            ['lead_assigned_notification'],
+            ['daily_tasks_notification']
+        ];
+    }
 }
