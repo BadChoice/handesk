@@ -114,7 +114,7 @@ class Ticket extends BaseModel{
 
     public function addNote($user, $body){
         if( ! $body ) return;
-        if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
+        //if( ! $this->user && $user) { $this->user()->associate($user)->save(); }  //We don't want the notes to automatically assign the user
         else                        { $this->touch(); }
         $comment = $this->comments()->create([
             "body"          => $body,
