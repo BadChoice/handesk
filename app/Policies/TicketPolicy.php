@@ -66,4 +66,8 @@ class TicketPolicy
 
     }
 
+    public function createIssue(User $user, Ticket $ticket){
+        return false;
+    }
+
 }

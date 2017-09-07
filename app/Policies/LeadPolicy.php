@@ -20,4 +20,8 @@ class LeadPolicy
             $user->teamsLeads()->pluck('id')->contains($lead->id);
     }
 
+    public function assignToTeam(User $user, Lead $lead){
+        return false;
+    }
+
 }

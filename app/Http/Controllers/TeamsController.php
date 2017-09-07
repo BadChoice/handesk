@@ -17,7 +17,6 @@ class TeamsController extends Controller
 
     public function store(){
         $this->authorize("create", Team::class);
-
         Team::create([
             "name"              => request('name'),
             "email"             => request('email'),

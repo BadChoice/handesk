@@ -16,4 +16,8 @@ class TeamPolicy
     public function administrate($user, $team){
         return $team->pivot->admin ?? false;
     }
+
+    public function create(User $user){
+        return false;
+    }
 }
