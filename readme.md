@@ -32,8 +32,8 @@ Its very simple, you just need to follow the standard Laravel installation
 ```
 git clone https://github.com/BadChoice/handesk.git
 composer install
-php artisan key:generate
 # Setup your .env file to match you desired database
+php artisan key:generate
 php artisan migrate --seed
 mkdir storage/app/mail_attachments
 mkdir storage/app/public/attachments
