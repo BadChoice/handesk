@@ -6,7 +6,8 @@ use App\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class Kpi extends BaseModel {
+class Kpi extends BaseModel
+{
     const TYPE_ALL                  = 1;
     const TYPE_USER                 = 2;
     const TYPE_TEAM                 = 3;
@@ -26,60 +27,71 @@ class Kpi extends BaseModel {
     protected $startDate;
     protected $endDate;
 
-    public function __construct(array $attributes = []) {
+    public function __construct(array $attributes = [])
+    {
         parent::__construct($attributes);
         $this->startDate   = Carbon::today()->startOfMonth();
         $this->endDate     = Carbon::tomorrow();
     }
 
-    public function forDates($start,$end = null){
+    public function forDates($start, $end = null)
+    {
         $this->startDate    = $start;
-        $this->endDate      = $end ? : $start->tomorrow();
+        $this->endDate      = $end ?: $start->tomorrow();
+
         return $this;
     }
 
-    public static function obtain(Carbon $date,$relation_id,$type){
+    public static function obtain(Carbon $date, $relation_id, $type)
+    {
         return static::firstOrCreate([
-            "date"          => $date->toDateString(),
-            "relation_id"   => $relation_id,
-            "type"          => $type,
-            "kpi"           => static::KPI
+            'date'          => $date->toDateString(),
+            'relation_id'   => $relation_id,
+            'type'          => $type,
+            'kpi'           => static::KPI,
         ]);
     }
 
-    public function addValue($value){
+    public function addValue($value)
+    {
         return static::where([
-                "date"          => $this->date,
-                "relation_id"   => $this->relation_id,
-                "type"          => $this->type,
-                "kpi"           => $this->kpi
+                'date'          => $this->date,
+                'relation_id'   => $this->relation_id,
+                'type'          => $this->type,
+                'kpi'           => $this->kpi,
             ])->update([
-                "total" => $this->total  + $value,
-                "count" => $this->count +1
+                'total' => $this->total + $value,
+                'count' => $this->count + 1,
             ]);
     }
 
-    public function forUser($user){
-        $result =  static::whereBetween('date',[$this->startDate, $this->endDate])
-                          ->where(['relation_id' => $user->id, 'type' => Kpi::TYPE_USER, "kpi" => static::KPI])
+    public function forUser($user)
+    {
+        $result =  static::whereBetween('date', [$this->startDate, $this->endDate])
+                          ->where(['relation_id' => $user->id, 'type' => self::TYPE_USER, 'kpi' => static::KPI])
                          ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
+
         return $result->avg ?? null;
     }
 
-    public function forTeam($team){
-        $result =  static::whereBetween('date',[$this->startDate, $this->endDate])
-                         ->where(['relation_id' => $team->id, 'type' => Kpi::TYPE_TEAM, "kpi" => static::KPI])
+    public function forTeam($team)
+    {
+        $result =  static::whereBetween('date', [$this->startDate, $this->endDate])
+                         ->where(['relation_id' => $team->id, 'type' => self::TYPE_TEAM, 'kpi' => static::KPI])
                          ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
+
         return $result->avg ?? null;
     }
 
-    public function forType($type){
-        $result =  static::whereBetween('date',[$this->startDate, $this->endDate])
-                          ->where(['type' => $type, "kpi" => static::KPI])
+    public function forType($type)
+    {
+        $result =  static::whereBetween('date', [$this->startDate, $this->endDate])
+                          ->where(['type' => $type, 'kpi' => static::KPI])
                          ->select(DB::raw('sum(total*100)/sum(count*100.0) as avg'))
                          ->first();
+
         return $result->avg ?? null;
     }
 }

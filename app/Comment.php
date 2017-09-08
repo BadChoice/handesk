@@ -4,25 +4,30 @@ namespace App;
 
 class Comment extends BaseModel
 {
-    protected $appends = ["author"];
+    protected $appends = ['author'];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function ticket(){
+    public function ticket()
+    {
         return $this->belongsTo(Ticket::class);
     }
 
-    public function author(){
-        return $this->user ? : $this->ticket->requester;
+    public function author()
+    {
+        return $this->user ?: $this->ticket->requester;
     }
 
-    public function attachments() {
+    public function attachments()
+    {
         return $this->morphMany(Attachment::class, 'attachable');
     }
 
-    public function getAuthorAttribute(){
-        return array_only($this->author()->toArray(),["name","email"]);
+    public function getAuthorAttribute()
+    {
+        return array_only($this->author()->toArray(), ['name', 'email']);
     }
 }

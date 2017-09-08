@@ -15,13 +15,13 @@ return [
     */
 
     'mailchimp' => [
-        "api_key" => env('MAILCHIMP_API_KEY'),
+        'api_key'     => env('MAILCHIMP_API_KEY'),
         'tag_list_id' => [
             'xef'      => '499b95d54d',
             'retail'   => '8012b3aeab',
             'flow'     => 'c176e8feaf',
             'web'      => 'ad27d6f6f8',
-        ]
+        ],
     ],
 
     'mailgun' => [
@@ -30,7 +30,7 @@ return [
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
@@ -40,8 +40,8 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
+        'model'  => App\User::class,
+        'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
 

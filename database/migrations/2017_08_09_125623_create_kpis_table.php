@@ -11,9 +11,10 @@ class CreateKpisTable extends Migration
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         Schema::create('kpis', function (Blueprint $table) {
-            $table->primary(["date","type","relation_id","kpi"]);
+            $table->primary(['date', 'type', 'relation_id', 'kpi']);
             $table->date('date');
             $table->tinyInteger('type');
             $table->tinyInteger('kpi');

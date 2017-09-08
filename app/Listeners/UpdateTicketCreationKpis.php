@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\TicketCreated;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class UpdateTicketCreationKpis
 {
@@ -22,6 +20,7 @@ class UpdateTicketCreationKpis
      * Handle the event.
      *
      * @param  TicketCreated  $event
+     *
      * @return void
      */
     public function handle(TicketCreated $event)

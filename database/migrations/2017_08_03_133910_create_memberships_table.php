@@ -15,9 +15,9 @@ class CreateMembershipsTable extends Migration
     {
         Schema::create('memberships', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger("user_id");
-            $table->unsignedInteger("team_id");
-            $table->boolean("admin")->default(0);
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('team_id');
+            $table->boolean('admin')->default(0);
             $table->timestamps();
         });
     }
