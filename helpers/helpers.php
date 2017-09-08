@@ -28,9 +28,10 @@ function gravatar($email, $size = 30){
 }
 
 function toTime($minutes){
-    $days   = floor ($minutes / (Carbon::HOURS_PER_DAY * Carbon::MINUTES_PER_HOUR));
-    $hours  = floor (($minutes - $days * (Carbon::HOURS_PER_DAY * Carbon::MINUTES_PER_HOUR)) / Carbon::MINUTES_PER_HOUR);
-    $mins   = (int) ($minutes - ($days * (Carbon::HOURS_PER_DAY * Carbon::MINUTES_PER_HOUR)) - ($hours * 60));
+    $minutes_per_day = (Carbon::HOURS_PER_DAY * Carbon::MINUTES_PER_HOUR);
+    $days            = floor ($minutes / ($minutes_per_day));
+    $hours           = floor (($minutes - $days * ($minutes_per_day)) / Carbon::MINUTES_PER_HOUR);
+    $mins            = (int) ($minutes - ($days * ($minutes_per_day)) - ($hours * 60));
     return "{$days} Days {$hours} Hours {$mins} Mins";
 }
 
