@@ -10,18 +10,17 @@ use App\Kpi\SolveKpi;
 use App\Ticket;
 use App\User;
 use Carbon\Carbon;
-use ReflectionClass;
 
 class KpiRepository{
     public $startDate;
     public $endDate;
 
     protected $kpiFunctions = [
-            Kpi::KPI_FIRST_REPLY          => 'firstReplyKpi',
-            Kpi::KPI_SOLVED               => 'solveKpi',
-            Kpi::KPI_ONE_TOUCH_RESOLUTION => 'oneTouchResolutionKpi',
-            Kpi::KPI_REOPENED             => 'reopenedKpi',
-            Kpi::KPI_UNANSWERED_TICKETS   => 'unansweredTickets',
+        Kpi::KPI_FIRST_REPLY          => 'firstReplyKpi',
+        Kpi::KPI_SOLVED               => 'solveKpi',
+        Kpi::KPI_ONE_TOUCH_RESOLUTION => 'oneTouchResolutionKpi',
+        Kpi::KPI_REOPENED             => 'reopenedKpi',
+        Kpi::KPI_UNANSWERED_TICKETS   => 'unansweredTickets',
     ];
 
     public function __construct($startDate = null, $endDate = null){
@@ -69,8 +68,7 @@ class KpiRepository{
 
     public function average($kpi, $agent){
         extract( $this->getAverageValues( $this->kpiFunctions[$kpi], $agent ) );
-        if($overallValue == 0) return 0;
-        return $this->toPercentage(  - 1 + ($agentValue / $overallValue) );
+        return ($overallValue == 0) ? 0 : toPercentage(  - 1 + ($agentValue / $overallValue) );
     }
 
     protected function getAverageValues($functionName, $agent){
@@ -89,26 +87,15 @@ class KpiRepository{
 
     protected function percentageKpi($kpiClass, $agent = null, $inverse = false){
         $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                       return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ), $inverse );
-        if( $agent instanceof User )        return $this->toPercentage($kpi->forUser( auth()->user() ), $inverse );
-        return $this->toPercentage($kpi->forTeam( $agent ), $inverse );
+        if( ! $agent)                       return toPercentage($kpi->forType( Kpi::TYPE_USER ), $inverse );
+        if( $agent instanceof User )        return toPercentage($kpi->forUser( auth()->user() ), $inverse );
+        return toPercentage($kpi->forTeam( $agent ), $inverse );
     }
 
     protected function timeKpi($kpiClass, $agent = null){
         $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                       return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )        return $this->toTime( $kpi->forUser( auth()->user() ) );
-        return $this->toTime( $kpi->forTeam( $agent ) );
-    }
-
-    protected function toTime($minutes){
-        $days   = floor ($minutes / 1440);
-        $hours  = floor (($minutes - $days * 1440) / 60);
-        $mins   = (int)($minutes - ($days * 1440) - ($hours * 60));
-        return "{$days} Days {$hours} Hours {$mins} Mins";
-    }
-
-    protected function toPercentage($value, $inverse = false){
-        return  ($inverse ? 1 - $value : $value)* 100 ;
+        if( ! $agent)                       return toTime( $kpi->forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )        return toTime( $kpi->forUser( auth()->user() ) );
+        return toTime( $kpi->forTeam( $agent ) );
     }
 }

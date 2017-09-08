@@ -7,9 +7,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class Kpi extends BaseModel {
-    const TYPE_ALL  = 1;
-    const TYPE_USER = 2;
-    const TYPE_TEAM = 3;
+    const TYPE_ALL                  = 1;
+    const TYPE_USER                 = 2;
+    const TYPE_TEAM                 = 3;
 
     const KPI_FIRST_REPLY           = 1;
     const KPI_SOLVED                = 2;

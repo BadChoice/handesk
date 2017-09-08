@@ -24,3 +24,14 @@ function gravatar($email, $size = 30){
     $gravatarURL = "https://www.gravatar.com/avatar/" . $email."?s=".$size."&default={$defaultImage}";
     return '<img id = '.$email.''.$size.' class="gravatar" src="'.$gravatarURL.'" width="'.$size.'">';
 }
+
+function toTime($minutes){
+    $days   = floor ($minutes / 1440);
+    $hours  = floor (($minutes - $days * 1440) / 60);
+    $mins   = (int) ($minutes - ($days * 1440) - ($hours * 60));
+    return "{$days} Days {$hours} Hours {$mins} Mins";
+}
+
+function toPercentage($value, $inverse = false){
+    return  ($inverse ? 1 - $value : $value)* 100 ;
+}
