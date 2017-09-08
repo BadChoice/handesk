@@ -4,18 +4,17 @@ linting: true
 
 enabled:
   - strict
-  - unalign_double_arrow
+  - align_double_arrow
+  - align_equals
   - phpdoc_order
   - phpdoc_separation
-
-disabled:
   - short_array_syntax
 
 finder:
+  name:
+    - "*.php"
   exclude:
     - "public"
     - "resources"
     - "tests"
     - "_ide_helper.php"
-  name:
-    - "*.php"
