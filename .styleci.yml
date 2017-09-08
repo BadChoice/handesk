@@ -9,7 +9,7 @@ enabled:
   - phpdoc_order
   - phpdoc_separation
 disabled:
-  -unalign_equals
+  - unalign_equals
 
 finder:
   name:
