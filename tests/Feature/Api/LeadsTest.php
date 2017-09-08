@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Authenticatable\Admin;
 use App\Lead;
 use App\Notifications\LeadCreated;
 use App\Notifications\TicketAssigned;
@@ -29,7 +30,7 @@ class LeadsTest extends TestCase
         $mailChimpFake = new MailchimpFake();
         app()->instance(Mailchimp::class, $mailChimpFake);
 
-        $admin      = factory(User::class)->create(["admin" => 1]);
+        $admin      = factory(Admin::class)->create();
         $nonAdmin   = factory(User::class)->create(["admin" => 0]);
 
         $response = $this->post('api/leads',[

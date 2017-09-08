@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Authenticatable\Admin;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Requester;
@@ -36,7 +37,7 @@ class SimpleTicketTest extends TestCase
     /** @test */
     public function can_create_a_ticket(){
         Notification::fake();
-        $admin      = factory(User::class)->create(["admin" => 1]);
+        $admin      = factory(Admin::class)->create();
         $nonAdmin   = factory(User::class)->create(["admin" => 0]);
 
         $response = $this->post('api/tickets',[
