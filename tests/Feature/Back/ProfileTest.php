@@ -86,7 +86,7 @@ class ProfileTest extends TestCase
      * @test
      * @dataProvider toggableNotifications
      */
-    public function can_toggle_notification($notification)
+    public function can_turn_on_notification($notification)
     {
         $response = $this->put(route('profile.update'), [
             'name' => 'Sexy boy',
@@ -96,6 +96,23 @@ class ProfileTest extends TestCase
 
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertTrue(!!$this->user->fresh()->settings->{$notification});
+    }
+
+    /**
+     * @test
+     * @dataProvider toggableNotifications
+     */
+    public function can_turn_off_notification($notification)
+    {
+        $this->user->settings()->updateOrCreate([], [$notification => 1]);
+
+        $response = $this->put(route('profile.update'), [
+            'name' => 'Sexy boy',
+            'locale' => 'en'
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertDatabaseHas('user_settings', ['user_id' => $this->user->id, $notification => 0]);
     }
 
     public function toggableNotifications()
