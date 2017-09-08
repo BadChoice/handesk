@@ -10,10 +10,19 @@ use App\Kpi\SolveKpi;
 use App\Ticket;
 use App\User;
 use Carbon\Carbon;
+use ReflectionClass;
 
 class KpiRepository{
     public $startDate;
     public $endDate;
+
+    protected $kpiFunctions = [
+            Kpi::KPI_FIRST_REPLY          => 'firstReplyKpi',
+            Kpi::KPI_SOLVED               => 'solveKpi',
+            Kpi::KPI_ONE_TOUCH_RESOLUTION => 'oneTouchResolutionKpi',
+            Kpi::KPI_REOPENED             => 'reopenedKpi',
+            Kpi::KPI_UNANSWERED_TICKETS   => 'unansweredTickets',
+    ];
 
     public function __construct($startDate = null, $endDate = null){
         $this->startDate    = $startDate ? : Carbon::today()->firstOfMonth() ;
@@ -24,13 +33,6 @@ class KpiRepository{
         $this->startDate    = $start;
         $this->endDate      = $end;
         return $this;
-    }
-
-    private function ticketsQuery($agent = null){
-        if(! $agent)                        $q = Ticket::query();
-        else if( $agent instanceof User )   $q = Ticket::where(["user_id" => $agent->id]);
-        else                                $q = Ticket::where(["team_id" => $agent->id]);
-        return $q->whereBetween('created_at',[$this->startDate,$this->endDate]);
     }
 
     public function tickets($agent = null){
@@ -65,57 +67,48 @@ class KpiRepository{
         return $this->percentageKpi(ReopenedKpi::class, $agent, true);
     }
 
-    public function percentageKpi($kpiClass, $agent = null, $inverse = false){
-        $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                       return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ), $inverse );
-        if( $agent instanceof User )        return $this->toPercentage($kpi->forUser( auth()->user() ), $inverse );
-                                            return $this->toPercentage($kpi->forTeam( $agent ), $inverse );
-    }
-
-    public function timeKpi($kpiClass, $agent = null){
-        $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                       return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )        return $this->toTime( $kpi->forUser( auth()->user() ) );
-                                            return $this->toTime( $kpi->forTeam( $agent ) );
-    }
-
     public function average($kpi, $agent){
-        if($kpi == Kpi::KPI_FIRST_REPLY) {
-            $agentValue     = $this->firstReplyKpi($agent);
-            $overallValue   = $this->firstReplyKpi();
-        }
-        else if($kpi == Kpi::KPI_SOLVED){
-            $agentValue     = $this->solveKpi($agent);
-            $overallValue   = $this->solveKpi();
-        }
-        else if($kpi == Kpi::KPI_ONE_TOUCH_RESOLUTION){
-            $agentValue     = $this->oneTouchResolutionKpi($agent);
-            $overallValue   = $this->oneTouchResolutionKpi();
-        }
-        else if($kpi == Kpi::KPI_REOPENED){
-            $agentValue     = $this->reopenedKpi($agent);
-            $overallValue   = $this->reopenedKpi();
-        }
-        else if($kpi == Kpi::KPI_UNANSWERED_TICKETS){
-            $agentValue     = $this->unansweredTickets($agent);
-            $overallValue   = $this->unansweredTickets();
-        }
-        else{
-            $agentValue     = $this->tickets($agent);
-            $overallValue   = $this->tickets();
-        }
+        extract( $this->getAverageValues( $this->kpiFunctions[$kpi], $agent ) );
         if($overallValue == 0) return 0;
         return $this->toPercentage(  - 1 + ($agentValue / $overallValue) );
     }
 
-    private function toTime($minutes){
+    protected function getAverageValues($functionName, $agent){
+        return [
+            "agentValue"      => $this->$functionName( $agent ),
+            "overallValue"    => $this->$functionName()
+        ];
+    }
+
+    protected function ticketsQuery($agent = null){
+        if(! $agent)                        $q = Ticket::query();
+        else if( $agent instanceof User )   $q = Ticket::where(["user_id" => $agent->id]);
+        else                                $q = Ticket::where(["team_id" => $agent->id]);
+        return $q->whereBetween('created_at',[$this->startDate,$this->endDate]);
+    }
+
+    protected function percentageKpi($kpiClass, $agent = null, $inverse = false){
+        $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                       return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ), $inverse );
+        if( $agent instanceof User )        return $this->toPercentage($kpi->forUser( auth()->user() ), $inverse );
+        return $this->toPercentage($kpi->forTeam( $agent ), $inverse );
+    }
+
+    protected function timeKpi($kpiClass, $agent = null){
+        $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                       return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )        return $this->toTime( $kpi->forUser( auth()->user() ) );
+        return $this->toTime( $kpi->forTeam( $agent ) );
+    }
+
+    protected function toTime($minutes){
         $days   = floor ($minutes / 1440);
         $hours  = floor (($minutes - $days * 1440) / 60);
         $mins   = (int)($minutes - ($days * 1440) - ($hours * 60));
         return "{$days} Days {$hours} Hours {$mins} Mins";
     }
 
-    private function toPercentage($value, $inverse = false){
+    protected function toPercentage($value, $inverse = false){
         return  ($inverse ? 1 - $value : $value)* 100 ;
     }
 }
