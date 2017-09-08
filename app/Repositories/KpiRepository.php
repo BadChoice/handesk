@@ -50,31 +50,33 @@ class KpiRepository{
     }
 
     public function firstReplyKpi( $agent = null ){
-        $kpi = (new FirstReplyKpi)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                    return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )     return $this->toTime( $kpi->forUser( auth()->user() ) );
-        return $this->toTime( $kpi->forTeam( $agent ) );
+        return $this->timeKpi(FirstReplyKpi::class, $agent);
     }
 
     public function solveKpi( $agent = null ){
-        $kpi = (new SolveKpi)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                    return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )     return $this->toTime( $kpi->forUser( auth()->user() ) );
-        return $this->toTime( $kpi->forTeam( $agent ) );
+        return $this->timeKpi(SolveKpi::class, $agent);
     }
 
     public function oneTouchResolutionKpi( $agent = null ){
-        $kpi = (new OneTouchResolutionKpi)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                    return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ) );
-        if( $agent instanceof User )     return $this->toPercentage($kpi->forUser( auth()->user() ) );
-        return $this->toPercentage($kpi->forTeam( $agent ) );
+        return $this->percentageKpi(OneTouchResolutionKpi::class, $agent, false);
     }
 
     public function reopenedKpi( $agent = null ){
-        $kpi = (new ReopenedKpi)->forDates($this->startDate, $this->endDate);
-        if( ! $agent)                    return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ), true );
-        if( $agent instanceof User )     return $this->toPercentage($kpi->forUser( auth()->user() ), true );
-        return $this->toPercentage($kpi->forTeam( $agent ), true );
+        return $this->percentageKpi(ReopenedKpi::class, $agent, true);
+    }
+
+    public function percentageKpi($kpiClass, $agent = null, $inverse = false){
+        $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                       return $this->toPercentage($kpi->forType( Kpi::TYPE_USER ), $inverse );
+        if( $agent instanceof User )        return $this->toPercentage($kpi->forUser( auth()->user() ), $inverse );
+                                            return $this->toPercentage($kpi->forTeam( $agent ), $inverse );
+    }
+
+    public function timeKpi($kpiClass, $agent = null){
+        $kpi = (new $kpiClass)->forDates($this->startDate, $this->endDate);
+        if( ! $agent)                       return $this->toTime( $kpi->forType( Kpi::TYPE_USER ) );
+        if( $agent instanceof User )        return $this->toTime( $kpi->forUser( auth()->user() ) );
+                                            return $this->toTime( $kpi->forTeam( $agent ) );
     }
 
     public function average($kpi, $agent){
