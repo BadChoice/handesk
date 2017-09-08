@@ -35,8 +35,6 @@ composer install
 # Setup your .env file to match you desired database
 php artisan key:generate
 php artisan migrate --seed
-mkdir storage/app/mail_attachments
-mkdir storage/app/public/attachments
 php artisan storage:link #if you use the local driver
 ```
 
