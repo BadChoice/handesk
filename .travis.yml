@@ -9,7 +9,7 @@ sudo: false
 
 before_script:
   - php -r "file_exists('.env') || copy('.env.example', '.env');"
-  - composer install
+  - composer install --no-interaction
   - php artisan key:generate
 
 script:
