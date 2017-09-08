@@ -18,7 +18,7 @@ class CreateTeamsTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('slack_webhook_url')->nullable();
-            $table->string('token',24);
+            $table->string('token', 24);
             $table->timestamps();
         });
     }

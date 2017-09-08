@@ -16,13 +16,15 @@ class CloseSolvedTickets implements ShouldQueue
 
     protected $thresholdDays;
 
-    public function __construct($thresholdDays = 4) {
+    public function __construct($thresholdDays = 4)
+    {
         $this->thresholdDays = $thresholdDays;
     }
 
-    public function handle() {
+    public function handle()
+    {
         Ticket::whereStatus(Ticket::STATUS_SOLVED)
-                ->where('created_at','<', Carbon::parse("-{$this->thresholdDays} days"))
-                ->update(["status" => Ticket::STATUS_CLOSED]);
+                ->where('created_at', '<', Carbon::parse("-{$this->thresholdDays} days"))
+                ->update(['status' => Ticket::STATUS_CLOSED]);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Notifications\LeadAssigned;
 use Carbon\Carbon;
+use App\Notifications\LeadAssigned;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends BaseModel
@@ -16,67 +16,85 @@ class Lead extends BaseModel
     const STATUS_COMPLETED      = 4;
     const STATUS_FAILED         = 5;
 
-    public function team(){
+    public function team()
+    {
         return $this->belongsTo(Team::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function tags(){
+    public function tags()
+    {
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function attachments() {
+    public function attachments()
+    {
         return $this->morphMany(Attachment::class, 'attachable');
     }
 
-    public function tasks(){
+    public function tasks()
+    {
         return $this->hasMany(Task::class)->latest();
     }
 
-    public function uncompletedTasks(){
+    public function uncompletedTasks()
+    {
         return $this->tasks()->whereCompleted(false);
     }
 
-    public function statusUpdates() {
-        return $this->hasMany( LeadStatusUpdate::class )->latest();
+    public function statusUpdates()
+    {
+        return $this->hasMany(LeadStatusUpdate::class)->latest();
     }
 
-    public function updateStatus($user, $body, $status) {
-        if( ! $this->user)  $this->update(["status" => $status, "updated_at" => Carbon::now(), "user_id" => $user->id] );
-        else                $this->update(["status" => $status, "updated_at" => Carbon::now()] );
-        return $this->statusUpdates()->create( ["user_id" => $user->id, "new_status" => $status, "body" => $body] );
+    public function updateStatus($user, $body, $status)
+    {
+        if (! $this->user) {
+            $this->update(['status' => $status, 'updated_at' => Carbon::now(), 'user_id' => $user->id]);
+        } else {
+            $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
+        }
+
+        return $this->statusUpdates()->create(['user_id' => $user->id, 'new_status' => $status, 'body' => $body]);
     }
 
-    public static function availableStatus() {
+    public static function availableStatus()
+    {
         return [
-            static::STATUS_NEW              => "new",
-            static::STATUS_FIRST_CONTACT    => "first-contact",
-            static::STATUS_VISITED          => "visited",
-            static::STATUS_COMPLETED        => "completed",
-            static::STATUS_FAILED           => "failed"
+            static::STATUS_NEW              => 'new',
+            static::STATUS_FIRST_CONTACT    => 'first-contact',
+            static::STATUS_VISITED          => 'visited',
+            static::STATUS_COMPLETED        => 'completed',
+            static::STATUS_FAILED           => 'failed',
         ];
     }
 
-    public function statusName() {
+    public function statusName()
+    {
         return static::getStatusText($this->status);
     }
 
-    public static function getStatusText($status) {
+    public static function getStatusText($status)
+    {
         return static::availableStatus()[$status];
     }
 
-    protected function getAssignedNotification(){
+    protected function getAssignedNotification()
+    {
         return new LeadAssigned($this);
     }
 
-    public function getSubscribableEmail(){
+    public function getSubscribableEmail()
+    {
         return $this->email;
     }
 
-    public function getSubscribableName(){
+    public function getSubscribableName()
+    {
         return $this->name;
     }
 }
