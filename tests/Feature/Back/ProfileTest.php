@@ -30,7 +30,7 @@ class ProfileTest extends TestCase
         $response = $this->get('profile');
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertSee($this->user->name);
+        $response->assertSee(e($this->user->name));
     }
 
     /** @test */
@@ -80,6 +80,23 @@ class ProfileTest extends TestCase
 
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertTrue(Hash::check('secret', $this->user->fresh()->password));
+    }
+
+    /**
+     * @test
+     */
+    public function can_change_signature()
+    {
+        $signature = 'This is my new signature.';
+
+        $response = $this->put(route('profile.update'), [
+            'name' => 'Sexy boy',
+            'locale' => 'en',
+            'tickets_signature'=> $signature
+        ]);
+
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals($signature, $this->user->fresh()->settings->tickets_signature);
     }
 
     /**
