@@ -2,17 +2,15 @@
 
 namespace Tests\Feature;
 
-use App\Notifications\NewComment;
 use App\Team;
-use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegisterTest extends TestCase{
-    use DatabaseMigrations;
+
+    use RefreshDatabase;
 
     /** @test */
     public function a_user_can_register(){

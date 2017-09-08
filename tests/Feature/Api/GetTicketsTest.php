@@ -7,15 +7,12 @@ use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Requester;
 use App\Ticket;
-use App\User;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GetTicketsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function can_get_open_tickets(){

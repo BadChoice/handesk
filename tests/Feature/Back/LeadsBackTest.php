@@ -11,11 +11,11 @@ use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LeadsBackTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
     use InteractsWithExceptionHandling;
 
     /** @test */

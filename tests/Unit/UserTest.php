@@ -5,13 +5,12 @@ namespace Tests\Unit;
 use App\Team;
 use App\Ticket;
 use App\User;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function a_user_can_see_its_team_tickets(){
