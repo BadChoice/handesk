@@ -8,6 +8,8 @@ enabled:
   - align_equals
   - phpdoc_order
   - phpdoc_separation
+disabled:
+  -unalign_equals
 
 finder:
   name:
