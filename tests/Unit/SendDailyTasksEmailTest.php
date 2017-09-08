@@ -11,11 +11,11 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SendDailyTasksEmailTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function an_email_with_daily_tasks_is_sent(){

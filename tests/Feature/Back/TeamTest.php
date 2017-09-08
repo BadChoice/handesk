@@ -6,11 +6,11 @@ use App\Team;
 use App\User;
 use Illuminate\Http\Response;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TeamTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function admin_can_see_all_teams(){

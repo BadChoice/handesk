@@ -11,11 +11,11 @@ use App\Ticket;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TeamTicketTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     private function validParams($overrides = []){
         return array_merge([

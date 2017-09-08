@@ -3,16 +3,12 @@
 namespace Tests\Unit;
 
 use App\Lead;
-use App\Ticket;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LeadTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function can_subscribe_to_mailchimp(){

@@ -7,12 +7,12 @@ use App\Services\Pop3\FakeIncomingMail;
 use App\Services\Pop3\IncomingMailCommentParser;
 use App\Ticket;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class IncomingEmailParserTest extends TestCase{
 
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function can_detect_replies_as_comments() {

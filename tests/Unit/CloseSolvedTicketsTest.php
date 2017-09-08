@@ -6,11 +6,11 @@ use App\Jobs\CloseSolvedTickets;
 use App\Ticket;
 use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CloseSolvedTicketsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function a_ticket_solved_before_threshold_is_closed(){

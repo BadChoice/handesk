@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Notification;
 use Mockery;
 use Mockery\Mock;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TicketIssueTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     private function setIssueCreatorMock(){
         $issueCreator = Mockery::mock(Bitbucket::class);
