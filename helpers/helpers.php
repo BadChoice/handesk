@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 function createSelectArray($array, $withNull = false){
     if( ! $array) return [];
     $values = $array->pluck("name", "id")->toArray();
@@ -26,9 +28,9 @@ function gravatar($email, $size = 30){
 }
 
 function toTime($minutes){
-    $days   = floor ($minutes / 1440);
-    $hours  = floor (($minutes - $days * 1440) / 60);
-    $mins   = (int) ($minutes - ($days * 1440) - ($hours * 60));
+    $days   = floor ($minutes / (Carbon::HOURS_PER_DAY * Carbon::MINUTES_PER_HOUR));
+    $hours  = floor (($minutes - $days * (Carbon::HOURS_PER_DAY * Carbon::MINUTES_PER_HOUR)) / Carbon::MINUTES_PER_HOUR);
+    $mins   = (int) ($minutes - ($days * (Carbon::HOURS_PER_DAY * Carbon::MINUTES_PER_HOUR)) - ($hours * 60));
     return "{$days} Days {$hours} Hours {$mins} Mins";
 }
 
