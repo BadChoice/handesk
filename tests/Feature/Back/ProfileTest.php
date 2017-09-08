@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProfileTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @var User
@@ -85,6 +85,7 @@ class ProfileTest extends TestCase
     /**
      * @test
      * @dataProvider toggableNotifications
+     * @param string $notification
      */
     public function can_turn_on_notification($notification)
     {
@@ -101,6 +102,7 @@ class ProfileTest extends TestCase
     /**
      * @test
      * @dataProvider toggableNotifications
+     * @param string $notification
      */
     public function can_turn_off_notification($notification)
     {
@@ -112,7 +114,7 @@ class ProfileTest extends TestCase
         ]);
 
         $response->assertStatus(Response::HTTP_FOUND);
-        $this->assertDatabaseHas('user_settings', ['user_id' => $this->user->id, $notification => 0]);
+        $this->assertFalse(!!$this->user->fresh()->settings->{$notification});
     }
 
     public function toggableNotifications()
