@@ -8,7 +8,6 @@ enabled:
   - align_equals
   - phpdoc_order
   - phpdoc_separation
-  - short_array_syntax
 
 finder:
   name:
