@@ -33,9 +33,4 @@ class CloseSolvedTicketsTest extends TestCase
         $this->assertEquals(Ticket::STATUS_CLOSED,  $ticket2->fresh()->status);
         $this->assertEquals(Ticket::STATUS_NEW,     $ticket3->fresh()->status);
     }
-
-    /** @test */
-    public function a_ticket_solved_after_treshold_is_not_closed(){
-
-    }
 }
