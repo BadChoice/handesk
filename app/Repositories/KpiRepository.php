@@ -7,6 +7,7 @@ use App\Kpi\Kpi;
 use App\Kpi\OneTouchResolutionKpi;
 use App\Kpi\ReopenedKpi;
 use App\Kpi\SolveKpi;
+use App\Team;
 use App\Ticket;
 use App\User;
 use Carbon\Carbon;
@@ -79,8 +80,10 @@ class KpiRepository{
     }
 
     protected function ticketsQuery($agent = null){
-        $query = $agent ? Ticket::where(["team_id" => $agent->id]) : Ticket::query();
-        return $query->whereBetween('created_at',[$this->startDate, $this->endDate]);
+        $query = Ticket::query();
+        if( $agent instanceof User )  $query = $query->where(["user_id" => $agent->id]);
+        if( $agent instanceof Team )  $query = $query->where(["team_id" => $agent->id]);
+        return $query->whereBetween('created_at', [$this->startDate, $this->endDate]);
     }
 
     protected function percentageKpi($kpiClass, $agent = null, $inverse = false){
