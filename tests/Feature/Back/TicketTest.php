@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Authenticatable\Assistant;
 use App\Notifications\NewComment;
 use App\Notifications\TicketEscalated;
 use App\Services\Bitbucket\Bitbucket;
@@ -238,7 +239,7 @@ class TicketTest extends TestCase
     public function can_escalate_a_ticket(){
         Notification::fake();
         $user        = factory(User::class)->create();
-        $assistant   = factory(User::class)->states(["assistant"])->create();
+        $assistant   = factory(Assistant::class)->create();
         $ticket      = factory(Ticket::class)->create();
 
         $response = $this->actingAs($user)->post("tickets/{$ticket->id}/escalate");

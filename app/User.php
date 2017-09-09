@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Authenticatable\Admin;
+use App\Authenticatable\Assistant;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,22 +16,13 @@ class User extends Authenticatable {
 
     use Notifiable;
 
+    protected $table = 'users';
+
     protected $guarded = ['admin','assistant'];
-    /*protected $fillable = [
-        'name', 'email', 'locale', 'password',
-    ];*/
 
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function scopeAdmin($query){
-        return $query->whereAdmin(true);
-    }
-
-    public function scopeAssistant($query){
-        return $query->where('assistant',true);
-    }
 
     public function tickets(){
         return $this->hasMany(Ticket::class)->with('requester','user','team');
@@ -72,12 +65,20 @@ class User extends Authenticatable {
         return $this->hasMany(Task::class)->where('completed',false)->where('datetime','<', Carbon::tomorrow());
     }
 
+    /**
+     * @deprecated
+     * @param $notification
+     */
     public static function notifyAdmins( $notification ){
-        Notification::send( User::admin()->get() , $notification);
+        Notification::send( Admin::all() , $notification);
     }
 
+    /**
+     * @deprecated
+     * @param $notification
+     */
     public static function notifyAssistants( $notification ){
-        Notification::send( User::assistant()->get() , $notification);
+        Notification::send( Assistant::all() , $notification);
     }
 
     public function getTeamsTicketsAttribute()
