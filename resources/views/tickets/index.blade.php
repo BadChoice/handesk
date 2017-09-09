@@ -18,8 +18,8 @@
                 <th> {{ __('ticket.requester') }}</th>
                 <th> {{ __('ticket.team') }}</th>
                 <th> {{ __('ticket.assigned') }}</th>
-                <th> {{ __('ticket.requested') }}</th>
-                <th> {{ __('ticket.updated') }}</th>
+                <th class="hide-mobile"> {{ __('ticket.requested') }}</th>
+                <th class="hide-mobile"> {{ __('ticket.updated') }}</th>
             </tr>
         </thead>
         <tbody>

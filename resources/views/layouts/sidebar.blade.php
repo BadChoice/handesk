@@ -1,4 +1,7 @@
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
+    <div class="show-mobile absolute ml2 mt-2 fs3">
+        <span class="fs3 white" onclick="toggleSidebar()">X</span>
+    </div>
     <img src="{{ url("/images/handesk_small.png") }}">
     <h4> @icon(inbox) {{ trans_choice('ticket.ticket', 2) }}</h4>
     <ul>
@@ -41,4 +44,8 @@
         @endif
     </ul>
     <br><br>
+</div>
+
+<div class="show-mobile absolute ml2 mt3 fs3">
+    <span class="fs3 black" onclick="toggleSidebar()">☰</span>
 </div>

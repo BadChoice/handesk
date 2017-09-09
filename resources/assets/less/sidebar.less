@@ -53,3 +53,12 @@
   background-color: @brand-second;
   color:white;
 }
+
+@media (max-width:@phone-max-size) {
+  .sidebar{
+    left: -@sidebar-width - 20;
+    .shadow-outer-2;
+    position:absolute;
+    z-index:99;
+  }
+}

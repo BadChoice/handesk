@@ -8,6 +8,6 @@
         <td> {{ $ticket->requester->name            }}</td>
         <td> {{ nameOrDash( $ticket->team )         }}</td>
         <td> {{ nameOrDash( $ticket->user )         }}</td>
-        <td> {{ $ticket->created_at->diffForHumans()}}</td>
-        <td> {{ $ticket->updated_at->diffForHumans()}}</td>
+        <td class="hide-mobile"> {{ $ticket->created_at->diffForHumans()}}</td>
+        <td class="hide-mobile"> {{ $ticket->updated_at->diffForHumans()}}</td>
 </tr>

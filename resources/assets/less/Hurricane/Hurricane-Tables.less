@@ -53,10 +53,28 @@ table td:last-child, table th:last-child{
   .pr4;
 }
 
+table.no-padding td:first-child, table.no-padding th:first-child{
+  .p0;
+}
+table.no-padding td:last-child, table.no-padding th:last-child{
+  .p0;
+}
+
 table thead.sticky {
   position: -webkit-sticky;
   position: sticky;
   top: -1px;
   z-index: 5;
   background: #fff;
+}
+
+
+@media (max-width: @phone-max-size) {
+
+  table td:first-child, table th:first-child{
+    .pl2;
+  }
+  table td:last-child, table th:last-child{
+    .pr2;
+  }
 }

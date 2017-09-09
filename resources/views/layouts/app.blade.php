@@ -38,6 +38,13 @@
             document.execCommand("copy");
             $temp.remove();
         }
+        function toggleSidebar(){
+            var position = 0;
+            if( $('#sidebar').position().left == 0) {
+                position = -350;
+            }
+            $('#sidebar').animate({"left":position + "px"}, 200);
+        }
     </script>
     @yield('scripts')
 

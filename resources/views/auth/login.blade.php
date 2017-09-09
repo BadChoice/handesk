@@ -1,10 +1,10 @@
 @extends('auth.layout')
 
 @section('content')
-    <div class="center text-center mt5 w20">
+    <div class="center text-center mt5" style="max-width:300px">
             <img src="{{url("images/handesk_full.png")}}" class="w80">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                    {{ csrf_field() }}
+                {{ csrf_field() }}
 
                 <div class="m3">
                     <input id="email" type="email" class="w80" name="email" value="{{ old('email') }}" required autofocus>

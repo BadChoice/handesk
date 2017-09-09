@@ -4,13 +4,21 @@
   box-sizing: border-box;
 }
 
+.show-mobile{
+  display:none;
+}
+
 a       { .text-decoration-none; color:@brand-second;   }
 a:hover { .text-decoration-none; .o60;                  }
 ul      {  .pl0;                                        }
 li      {  list-style-type: none;                       }
 
-@media (max-width: 420px) {
+@media (max-width: @phone-max-size) {
   .hide-mobile{
     display:none;
+  }
+
+  .show-mobile{
+    display:unset;
   }
 }
