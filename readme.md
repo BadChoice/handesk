@@ -65,7 +65,16 @@ MAIL_FETCH_PASSWORD=secret-password
 Set your mailchimp key in .env
 `MAILCHIMP_API_KEY=448027f3acac5594605be3adf78be862-us15`
 
-And enter the relation of `tags => list` id in `app/config/services.php` mailchimp section
+And enter the relation of `tags => list` id in `config/services.php` mailchimp section
+
+#### Bitbucket
+You can create issues directly to your code repository from tickets. You need to setup your credentials in the .env
+```
+BITBUCKET_USER=bitbucket-user-if-using-basic-auth
+BITBUCKET_PASSWORD=bitbucket-password-if-using-basic-auth
+```
+
+And enter your repositories list in `config/issues.php` file, filling the `repositories` field. 
 
 #### Api Token
 Set your desired API token in the .env
