@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="description comment">
-        <a href="{{ route('tickets.index') }}">{{ trans_choice('ticket.ticket', 2) }}</a>
+        <div class="breadcrumb">
+            <a href="{{ route('tickets.index') }}">{{ trans_choice('ticket.ticket', 2) }}</a>
+        </div>
         <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
         @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket." . $ticket->statusName() ) }}</span> &nbsp;
         <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }} &lt;{{$ticket->requester->email}}&gt;</span>

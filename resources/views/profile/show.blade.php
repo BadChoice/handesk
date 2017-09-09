@@ -14,7 +14,7 @@
 
     <div class="description mt4 new-comment">
         {{ Form::open( ["url" => route('profile.update'), 'method' => 'PUT'] ) }}
-        <table class="w50">
+        <table class="maxw600">
             <tr><td> {{ __('user.name')     }}: </td><td class="w60">{{ Form::text('name',                     $user->name,    ["class" => "w100"]) }}</td></tr>
             <tr><td> {{ __('user.email')    }}: </td><td class="w60">{{ Form::email('email',                   $user->email,   ["class" => "w100"]) }}</td></tr>
             <tr><td> {{ __('user.language') }}: </td><td>{{ Form::select('locale', App\Language::available(),   $user->locale                       ) }}</td></tr>
