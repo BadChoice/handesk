@@ -79,10 +79,8 @@ class KpiRepository{
     }
 
     protected function ticketsQuery($agent = null){
-        if(! $agent)                        $q = Ticket::query();
-        else if( $agent instanceof User )   $q = Ticket::where(["user_id" => $agent->id]);
-        else                                $q = Ticket::where(["team_id" => $agent->id]);
-        return $q->whereBetween('created_at',[$this->startDate,$this->endDate]);
+        $query = $agent ? Ticket::where(["team_id" => $agent->id]) : Ticket::query();
+        return $query->whereBetween('created_at',[$this->startDate, $this->endDate]);
     }
 
     protected function percentageKpi($kpiClass, $agent = null, $inverse = false){
