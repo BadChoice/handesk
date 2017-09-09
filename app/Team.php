@@ -29,4 +29,10 @@ class Team extends BaseModel
         if( $this->slack_webhook_url) return explode("?",$this->slack_webhook_url)[0];
         return null;
     }
+
+    public static function membersByTeam(){
+        return Team::all()->mapWithKeys(function($team){
+           return [$team->name => $team->members->pluck('name','id')->toArray() ];
+        });
+    }
 }

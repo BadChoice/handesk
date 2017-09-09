@@ -11,7 +11,7 @@
         <tr>
         @can("assignToTeam", $object)
             <td>{{ __('ticket.assigned') }}:</td>
-            <td>{{ Form::select('user_id', createSelectArray( App\User::all(),true), $object->user_id ) }}</td>
+            <td>{{ Form::select('user_id', App\Team::membersByTeam(), $object->user_id ) }}</td>
         @else
             @if( $object->team )
                 <td>{{ __('ticket.assigned') }}:</td>

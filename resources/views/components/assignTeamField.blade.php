@@ -2,8 +2,8 @@
 <tr>
     <td>{{ trans_choice('team.team',1) }}:</td>
     @can("assignToTeam", new App\Ticket)
-        <td>{{ Form::select('team_id', createSelectArray( App\Team::all(),true), $team->id) }}
+        <td>{{ Form::select('team_id', createSelectArray( App\Team::all(), true), $team->id) }}
     @else
-        <td>{{ Form::select('team_id', createSelectArray( auth()->user()->teams,false), $team->id) }}
+        <td>{{ Form::select('team_id', createSelectArray( auth()->user()->teams, false), $team->id) }}
     @endcan
 </td>
