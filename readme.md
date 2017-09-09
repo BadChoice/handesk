@@ -29,7 +29,8 @@ We will keep adding features as we need them, but our basic workflow is totally 
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation
-```
+
+```shell
 git clone https://github.com/BadChoice/handesk.git
 composer install
 # Setup your .env file to match you desired database
