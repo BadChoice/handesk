@@ -80,8 +80,8 @@ class User extends Authenticatable {
         Notification::send( User::assistant()->get() , $notification);
     }
 
-    public function __get($attribute){
-        if($attribute == 'teamsTickets') return $this->teamsTickets()->get();
-        return parent::__get($attribute);
+    public function getTeamsTicketsAttribute()
+    {
+        return $this->teamsTickets()->get();
     }
 }
