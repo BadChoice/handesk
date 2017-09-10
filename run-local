@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Set environment variables for dev
+export XDEBUG_HOST=$(ipconfig getifaddr en0) # Specific to MacOS
+export APP_ENV=${APP_ENV:-local}
+
+if [ $# -gt 0 ]; then
+    docker-compose "$@"
+else
+    docker-compose ps
+fi
