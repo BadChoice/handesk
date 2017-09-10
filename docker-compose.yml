@@ -1,0 +1,40 @@
+version: '2'
+services:
+  nginx:
+      build: nginx/.
+      ports:
+          - "8000:80"
+      volumes:
+          - ./:/var/www/html/handesk/
+          - nginx:/etc/letsencrypt
+      env_file: .env.nginx
+      networks:
+        - handesk-network
+
+  php-fpm:
+      build: .
+      volumes:
+        - ./:/var/www/html/handesk/
+      env_file: .env
+      environment:
+         XDEBUG_HOST: ${XDEBUG_HOST}
+      networks:
+        - handesk-network
+
+  mysql:
+    image: mysql:5.7.13
+    container_name: handesk-mysql
+    volumes:
+      - mysql:/var/lib/mysql
+    env_file: .env
+    networks:
+      - handesk-network
+
+volumes:
+  mysql:
+    driver: local
+  nginx:
+    driver: local
+
+networks:
+  handesk-network:
