@@ -98,8 +98,14 @@ There is the `badchoice/handesk-php` package in packagist to easily talk with th
 
 
 ## Development
-We try to follow a TDD approach as well as some mixed functional CSS for the frontend.
-   
-PRs are welcome!
+We try to follow a TDD approach as well as some mixed functional CSS for the frontend.   
+
+**PRs are welcome!**
+
+#### Php api 
+We have the following SDK's to easily interact with Handesk api
+
+[Handesk-php](https://github.com/BadChoice/handesk-php)   
+*In progress* [Handesk-ios](https://github.com/BadChoice/handesk-ios) 
  
 
