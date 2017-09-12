@@ -85,8 +85,10 @@ Set your desired API token in the .env
 
 ```API_TOKEN=the-api-token```
 
+We have the following SDK's to easily interact with Handesk api   
 There is the `badchoice/handesk-php` package in packagist to easily talk with the api.
-
+[Handesk-php](https://github.com/BadChoice/handesk-php)   
+[Handesk-ios](https://github.com/BadChoice/handesk-ios) *In progress*  
 
 ### Screenshots
 ![Tickets screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/tickets.png)
@@ -101,11 +103,5 @@ There is the `badchoice/handesk-php` package in packagist to easily talk with th
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.   
 
 **PRs are welcome!**
-
-#### Php api 
-We have the following SDK's to easily interact with Handesk api
-
-[Handesk-php](https://github.com/BadChoice/handesk-php)   
-*In progress* [Handesk-ios](https://github.com/BadChoice/handesk-ios) 
  
 
