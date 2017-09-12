@@ -5,6 +5,7 @@
 # To run in the background, run this:
 ./run-local up --build -d
 ```
+> You can use the `.env.docker`
 
 ## Using xdebug for local development
 These guidelines are for PHPSTORM
