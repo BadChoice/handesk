@@ -9,28 +9,22 @@
         <a class="button secondary" id="mergeButton" onclick="onMergePressed()"> {{ __('ticket.merge') }}</a>
     </div>
 
-    @paginator($tickets)
+    <div class="float-right mt-5 mr4">
+        <input id="searcher" placeholder="{{__('lead.search')}}" class="ml2">
+        <div class="inline ml-4">@icon(search)</div>
+    </div>
 
-    <table class="striped">
-        <thead>
-            <tr>
-                <th> {{ __('ticket.subject') }}</th>
-                <th> {{ __('ticket.requester') }}</th>
-                <th> {{ __('ticket.team') }}</th>
-                <th> {{ __('ticket.assigned') }}</th>
-                <th class="hide-mobile"> {{ __('ticket.requested') }}</th>
-                <th class="hide-mobile"> {{ __('ticket.updated') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($tickets as $ticket)
-                @include('components.ticket.ticketHeader', ["ticket" => $ticket])
-            @endforeach
-        </tbody>
-    </table>
-    @paginator($tickets)
+    <div id="results"></div>
+    <div id="all">
+        @paginator($tickets)
+        @include('tickets.indexTable')
+        @paginator($tickets)
+    </div>
 @endsection
 
 @section('scripts')
     @include('components.js.merge')
+    <script>
+        $("#searcher").searcher('tickets/search/');
+    </script>
 @endsection

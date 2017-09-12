@@ -48,4 +48,13 @@ class TicketsRepository{
         }
         return auth()->user()->teamsTickets()->where('status','=',Ticket::STATUS_CLOSED);
     }
+
+    public function search($text){
+        if( auth()->user()->admin ){
+            $leadsQuery = Ticket::query();
+        } else {
+            $leadsQuery = auth()->user()->teamsTickets();
+        }
+        return $leadsQuery->where('title','like',"%$text%")->orWhere('body','like',"%$text%");
+    }
 }

@@ -175,6 +175,8 @@ class Ticket extends BaseModel{
             case static::STATUS_PENDING             : return "pending";
             case static::STATUS_SOLVED              : return "solved";
             case static::STATUS_CLOSED              : return "closed";
+            case static::STATUS_MERGED              : return "merged";
+            case static::STATUS_SPAM                : return "spam";
         }
     }
 

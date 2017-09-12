@@ -29,6 +29,7 @@ Route::group(["middleware" => ["auth","userLocale"]], function(){
 
     Route::get      ('tickets/merge'                ,'TicketsMergeController@index')       ->name('tickets.merge.index');
     Route::post     ('tickets/merge'                ,'TicketsMergeController@store')       ->name('tickets.merge.store');
+    Route::get      ('tickets/search/{text}'        ,'TicketsSearchController@index')      ->name('tickets.search');
     Route::resource ('tickets'                      ,'TicketsController', ["except" => ["edit", "destroy"]]);
     Route::post     ('tickets/{ticket}/assign'      ,'TicketsAssignController@store')      ->name('tickets.assign');
     Route::post     ('tickets/{ticket}/comments'    ,'CommentsController@store')           ->name('comments.store');
