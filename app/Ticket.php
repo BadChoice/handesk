@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Authenticatable\Admin;
 use App\Events\TicketCommented;
 use App\Events\TicketStatusUpdated;
 use App\Notifications\NewComment;
@@ -28,7 +29,7 @@ class Ticket extends BaseModel{
     const PRIORITY_HIGH             = 3;
 
     public static function createAndNotify($requester, $title, $body, $tags){
-        $requester  = Requester::firstOrCreate( ["email" => $requester["email"] ?? null], ["name" => $requester["name"]]);
+        $requester  = Requester::findOrCreate($requester["name"], $requester["email"] ?? null);
         $ticket     = $requester->tickets()->create([
             "title"         => $title,
             "body"          => $body,
@@ -36,7 +37,7 @@ class Ticket extends BaseModel{
         ])->attachTags( $tags );
 
         tap(new TicketCreated($ticket), function($newTicketNotification) use ($requester) {
-            User::notifyAdmins( $newTicketNotification );
+            Admin::notifyAll( $newTicketNotification );
             $requester->notify( $newTicketNotification );
         });
         return $ticket;

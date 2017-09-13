@@ -8,6 +8,13 @@ class Requester extends BaseModel
 {
     use Notifiable;
 
+    public static function findOrCreate($name, $email = null){
+        if( ! $email ) {
+            return Requester::firstOrCreate(["name" => $name]);
+        }
+        return Requester::firstOrCreate(["email" => $email], ["name" => $name]);
+    }
+
     public function tickets(){
         return $this->hasMany(Ticket::class);
     }

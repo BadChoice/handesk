@@ -70,7 +70,7 @@ class User extends Authenticatable {
      * @param $notification
      */
     public static function notifyAdmins( $notification ){
-        Notification::send( Admin::all() , $notification);
+        Admin::notifyAll($notification);
     }
 
     /**
@@ -78,7 +78,7 @@ class User extends Authenticatable {
      * @param $notification
      */
     public static function notifyAssistants( $notification ){
-        Notification::send( Assistant::all() , $notification);
+        Assistant::notifyAll($notification);
     }
 
     public function getTeamsTicketsAttribute()
