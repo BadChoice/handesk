@@ -162,6 +162,23 @@ class SimpleTicketTest extends TestCase
     }
 
     /** @test */
+    public function commenting_a_closed_ticket_reopens_it(){
+        Notification::fake();
+        $ticket = factory(Ticket::class)->create(["status" => Ticket::STATUS_SOLVED]);
+
+        $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "body" => "this is a comment"
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus ( Response::HTTP_CREATED );
+        $response->assertJson   (["data" => ["id" => 1]]);
+
+        $this->assertCount  (1, $ticket->comments);
+        $this->assertEquals ($ticket->comments[0]->body, "this is a comment");
+        $this->assertEquals(Ticket::STATUS_OPEN, $ticket->fresh()->status);
+    }
+
+    /** @test */
     public function can_assign_ticket_to_user(){
         Notification::fake();
 

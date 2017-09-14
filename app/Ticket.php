@@ -88,12 +88,13 @@ class Ticket extends BaseModel{
             return $this->addNote($user, $body);
         }
         $previousStatus = $this->status;
-        if($newStatus && $newStatus != $previousStatus) $this->updateStatus($newStatus);
-        else                                            $this->touch();
+        if($newStatus && $newStatus != $previousStatus)                 $this->updateStatus($newStatus);
+        else if( ! $this->user && $this->status != static::STATUS_NEW)  $this->updateStatus(static::STATUS_OPEN);
+        else                                                            $this->touch();
 
         if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
 
-        event( new TicketStatusUpdated($this, $user,  $previousStatus) );
+        event( new TicketStatusUpdated($this, $user, $previousStatus) );
 
         if( ! $body) return;
 
