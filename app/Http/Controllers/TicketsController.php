@@ -47,4 +47,9 @@ class TicketsController extends Controller
         }
         return redirect()->route('tickets.show',$ticket);
     }
+
+    public function reopen(Ticket $ticket){
+        $ticket->updateStatus(Ticket::STATUS_OPEN);
+        return back();
+    }
 }
