@@ -79,6 +79,26 @@ class Ticket extends BaseModel{
         return $this->belongsToMany(Ticket::class, "merged_tickets", "ticket_id", "merged_ticket_id");
     }
 
+    /**
+     * @param $user
+     * @param $newStatus
+     * @return mixed
+     */
+    private function updateStatusFromComment($user, $newStatus) {
+        $previousStatus = $this->status;
+        if ($newStatus && $newStatus != $previousStatus)                $this->updateStatus($newStatus);
+        else if (!$this->user && $this->status != static::STATUS_NEW)   $this->updateStatus(static::STATUS_OPEN);
+        else                                                            $this->touch();
+        event(new TicketStatusUpdated($this, $user, $previousStatus));
+        return $previousStatus;
+    }
+
+    private function associateUserIfNecessary($user){
+        if ( ! $this->user && $user) {
+            $this->user()->associate($user)->save();
+        }
+    }
+
     protected function getAssignedNotification(){
         return new TicketAssigned($this);
     }
@@ -87,29 +107,15 @@ class Ticket extends BaseModel{
         if( $user && $this->isEscalated() ){
             return $this->addNote($user, $body);
         }
-        $previousStatus = $this->status;
-        if($newStatus && $newStatus != $previousStatus)                 $this->updateStatus($newStatus);
-        else if( ! $this->user && $this->status != static::STATUS_NEW)  $this->updateStatus(static::STATUS_OPEN);
-        else                                                            $this->touch();
-
-        if( ! $this->user && $user) { $this->user()->associate($user)->save(); }
-
-        event( new TicketStatusUpdated($this, $user, $previousStatus) );
-
+        $previousStatus = $this->updateStatusFromComment($user, $newStatus);
+        $this->associateUserIfNecessary($user);
         if( ! $body) return;
 
         $comment = $this->comments()->create([
             "body"          => $body,
             "user_id"       => $user ? $user->id : null,
             "new_status"    => $newStatus ?: $this->status,
-        ]);
-
-        tap(new NewComment($this, $comment), function($newCommentNotification) {
-            if( $this->team )                                                                   $this->team->notify( $newCommentNotification );
-            if( $this->user && (! auth()->user() || auth()->user()->id != $this->user->id))     $this->user->notify( $newCommentNotification );
-            if( $this->requester && auth()->user() )                                            $this->requester->notify( $newCommentNotification );
-            User::notifyAdmins( $newCommentNotification );
-        });
+        ])->notifyNewComment();
         event( new TicketCommented($this, $comment, $previousStatus) );
         return $comment;
     }
@@ -126,7 +132,7 @@ class Ticket extends BaseModel{
         ]);
         tap(new NewComment($this, $comment), function($newCommentNotification) {
             if( $this->team ) $this->team->notify( $newCommentNotification );
-            User::notifyAdmins( $newCommentNotification );
+            Admin::notifyAll( $newCommentNotification );
         });
         return $comment;
     }
