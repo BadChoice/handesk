@@ -106,8 +106,6 @@ class SimpleTicketTest extends TestCase
     /** @test */
     public function can_create_a_ticket_without_requester_email(){
         Notification::fake();
-        $admin      = factory(User::class)->create(["admin" => 1]);
-        $nonAdmin   = factory(User::class)->create(["admin" => 0]);
 
         $response = $this->post('api/tickets',[
             "requester" => [
@@ -120,6 +118,28 @@ class SimpleTicketTest extends TestCase
 
         $response->assertStatus( Response::HTTP_CREATED );
         $response->assertJson(["data" => ["id" => 1]]);
+    }
+
+    /** @test */
+    public function creating_a_ticket_of_a_requester_without_email_does_not_use_another_requester_without_email(){
+        Notification::fake();
+
+        factory(Requester::class)->create(["name" => "First requester", "email" => null]);
+        $response = $this->post('api/tickets',[
+            "requester" => [
+                "name"  => "Second Requester",
+            ],
+            "title"         => "App is not working",
+            "body"          => "I can't log in into the application",
+            "tags"          => ["xef"]
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus( Response::HTTP_CREATED );
+        $response->assertJson(["data" => ["id" => 1]]);
+        tap(Ticket::first(), function($ticket){
+            $this->assertEquals("Second Requester", $ticket->requester->name);
+            $this->assertNull($ticket->requester->email);
+        });
     }
 
     /** @test */
