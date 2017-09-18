@@ -3,7 +3,6 @@ preset: laravel
 risky: false
 
 enabled:
-  - strict
   - align_double_arrow
   - align_equals
   - phpdoc_order
