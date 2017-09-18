@@ -16,10 +16,9 @@ class CreateLeadsTable extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email') ->nullable();
+            $table->string('email')->nullable();
 
-
-            $table->integer('status')->default(Lead::STATUS_NEW );
+            $table->integer('status')->default(Lead::STATUS_NEW);
 
             $table->unsignedInteger('team_id')->unsigned()->nullable();
             $table->unsignedInteger('user_id')->unsigned()->nullable();
@@ -45,7 +44,8 @@ class CreateLeadsTable extends Migration
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         Schema::dropIfExists('leads');
     }
 }

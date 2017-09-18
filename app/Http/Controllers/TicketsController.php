@@ -2,54 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\TicketsRepository;
 use App\Ticket;
+use App\Repositories\TicketsRepository;
 
 class TicketsController extends Controller
 {
-    public function index(TicketsRepository $repository){
-        if(request('assigned') )            $tickets = $repository->assignedToMe();
-        else if(request('unassigned') )     $tickets = $repository->unassigned();
-        else if(request('recent'))          $tickets = $repository->recentlyUpdated();
-        else if(request('solved'))          $tickets = $repository->solved();
-        else if(request('closed'))          $tickets = $repository->closed();
-        else if(request('escalated'))       $tickets = $repository->escalated();
-        else                                $tickets = $repository->all();
+    public function index(TicketsRepository $repository)
+    {
+        if (request('assigned')) {
+            $tickets  = $repository->assignedToMe();
+        } elseif (request('unassigned')) {
+            $tickets  = $repository->unassigned();
+        } elseif (request('recent')) {
+            $tickets = $repository->recentlyUpdated();
+        } elseif (request('solved')) {
+            $tickets = $repository->solved();
+        } elseif (request('closed')) {
+            $tickets = $repository->closed();
+        } elseif (request('escalated')) {
+            $tickets = $repository->escalated();
+        } else {
+            $tickets = $repository->all();
+        }
 
-        if( request('team'))                $tickets = $tickets->where('tickets.team_id', request('team'));
+        if (request('team')) {
+            $tickets = $tickets->where('tickets.team_id', request('team'));
+        }
 
         $tickets = $tickets->select('tickets.*')->latest('updated_at');
 
-        return view('tickets.index', ["tickets" => $tickets->paginate(25, ['tickets.user_id']) ]);
+        return view('tickets.index', ['tickets' => $tickets->paginate(25, ['tickets.user_id'])]);
     }
 
-    public function show(Ticket $ticket) {
+    public function show(Ticket $ticket)
+    {
         $this->authorize('view', $ticket);
-        return view('tickets.show', ["ticket" => $ticket ]);
+
+        return view('tickets.show', ['ticket' => $ticket]);
     }
-    
-    public function create(){
+
+    public function create()
+    {
         return view('tickets.create');
     }
 
-    public function store(){
+    public function store()
+    {
         $this->validate(request(), [
-            "requester" => "required|array",
-            "title"     => "required|min:3",
-            "body"      => "required",
-            "team_id"   => "nullable|exists:teams,id"
+            'requester' => 'required|array',
+            'title'     => 'required|min:3',
+            'body'      => 'required',
+            'team_id'   => 'nullable|exists:teams,id',
         ]);
         $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request('tags'));
-        $ticket->updateStatus( request('status') );
+        $ticket->updateStatus(request('status'));
 
-        if( request('team_id') ) {
+        if (request('team_id')) {
             $ticket->assignToTeam(request('team_id'));
         }
-        return redirect()->route('tickets.show',$ticket);
+
+        return redirect()->route('tickets.show', $ticket);
     }
 
-    public function reopen(Ticket $ticket){
+    public function reopen(Ticket $ticket)
+    {
         $ticket->updateStatus(Ticket::STATUS_OPEN);
+
         return back();
     }
 }

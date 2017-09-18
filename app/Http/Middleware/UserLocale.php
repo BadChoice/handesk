@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Language;
 use Closure;
 
 class UserLocale
@@ -12,10 +11,13 @@ class UserLocale
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-        app()->setLocale( auth()->user()->locale );
+    public function handle($request, Closure $next)
+    {
+        app()->setLocale(auth()->user()->locale);
+
         return $next($request);
     }
 }

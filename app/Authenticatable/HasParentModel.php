@@ -2,8 +2,8 @@
 
 namespace App\Authenticatable;
 
-use Illuminate\Support\Str;
 use ReflectionClass;
+use Illuminate\Support\Str;
 
 trait HasParentModel
 {
@@ -16,7 +16,7 @@ trait HasParentModel
 
     public function getTable()
     {
-        if (!isset($this->table)) {
+        if (! isset($this->table)) {
             return str_replace('\\', '', Str::snake(Str::plural(class_basename($this->getParentClass()))));
         }
 
@@ -25,7 +25,7 @@ trait HasParentModel
 
     public function getForeignKey()
     {
-        return Str::snake(class_basename($this->getParentClass())) . '_' . $this->primaryKey;
+        return Str::snake(class_basename($this->getParentClass())).'_'.$this->primaryKey;
     }
 
     public function joiningTable($related)
