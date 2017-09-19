@@ -40,7 +40,7 @@ class Comment extends BaseModel
             if ($this->ticket->team) {
                 $this->ticket->team->notify($newCommentNotification);
             }
-            if ($this->ticket->user && (! auth()->user() || auth()->user()->id != $this->ticket->user->id)) {
+            if ( $this->shouldNotifyUser() ) {
                 $this->ticket->user->notify($newCommentNotification);
             }
             if ($this->ticket->requester && auth()->user()) {
@@ -50,5 +50,10 @@ class Comment extends BaseModel
         });
 
         return $this;
+    }
+
+    private function shouldNotifyUser()
+    {
+        return $this->ticket->user && (! auth()->user() || auth()->user()->id != $this->ticket->user->id);
     }
 }

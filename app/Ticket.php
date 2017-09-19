@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Authenticatable\Assistant;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
@@ -192,13 +193,18 @@ class Ticket extends BaseModel
     {
         $this->update(['level' => $level]);
         if ($level == 1) {
-            User::notifyAssistants(new TicketEscalated($this));
+            Assistant::notifyAll(new TicketEscalated($this));
         }
     }
 
     public function isEscalated()
     {
         return $this->level == 1;
+    }
+
+    public function hasBeenReplied()
+    {
+        return $this->comments()->whereNotNull('user_id')->count() > 1;
     }
 
     public function scopeOpen($query)

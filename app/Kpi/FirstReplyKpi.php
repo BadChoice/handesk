@@ -11,7 +11,7 @@ class FirstReplyKpi extends Kpi
         if (! $comment->user) {
             return false;
         }
-        if ($ticket->comments()->whereNotNull('user_id')->count() > 1) {
+        if ( $ticket->hasBeenReplied() ) {
             return false;
         }
 
