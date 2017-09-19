@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Authenticatable\Assistant;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
 use App\Events\TicketCommented;
 use App\Notifications\NewComment;
+use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
 use App\Notifications\TicketCreated;
 use App\Notifications\TicketAssigned;
