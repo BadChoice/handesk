@@ -16,12 +16,12 @@ class ProfileController extends Controller
         $user = auth()->user();
 
         $user->update([
-            'name' => $request->get('name'),
+            'name'   => $request->get('name'),
             'locale' => $request->get('locale'),
-            'email' => $request->get('email', $user->email),
+            'email'  => $request->get('email', $user->email),
         ]);
 
-        $user->settings()->updateOrCreate([],  $request->only('tickets_signature') + $this->notificationSettings($request));
+        $user->settings()->updateOrCreate([], $request->only('tickets_signature') + $this->notificationSettings($request));
 
         return back();
     }
@@ -31,8 +31,8 @@ class ProfileController extends Controller
         $user = auth()->user();
 
         $this->validate($request, [
-            'old' => 'old_password:' . $user->password,
-            'password' => 'confirmed|min:5'
+            'old'      => 'old_password:'.$user->password,
+            'password' => 'confirmed|min:5',
         ]);
 
         $user->update(['password' => bcrypt($request->get('password'))]);
@@ -43,12 +43,12 @@ class ProfileController extends Controller
     private function notificationSettings(Request $request)
     {
         return [
-            'new_ticket_notification' => $request->has('new_ticket_notification'),
-            'ticket_assigned_notification' => $request->has('ticket_assigned_notification'),
-            'ticket_updated_notification' => $request->has('ticket_updated_notification'),
-            'new_lead_notification' => $request->has('new_lead_notification'),
-            'lead_assigned_notification' => $request->has('lead_assigned_notification'),
-            'daily_tasks_notification' => $request->has('daily_tasks_notification')
+            'new_ticket_notification'      => $request->filled('new_ticket_notification'),
+            'ticket_assigned_notification' => $request->filled('ticket_assigned_notification'),
+            'ticket_updated_notification'  => $request->filled('ticket_updated_notification'),
+            'new_lead_notification'        => $request->filled('new_lead_notification'),
+            'lead_assigned_notification'   => $request->filled('lead_assigned_notification'),
+            'daily_tasks_notification'     => $request->filled('daily_tasks_notification'),
         ];
     }
 }

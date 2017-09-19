@@ -1,7 +1,6 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-
 use App\Authenticatable\Assistant;
 
 $factory->define(Assistant::class, function (Faker\Generator $faker) {

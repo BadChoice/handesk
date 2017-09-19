@@ -12,12 +12,15 @@ class ApiAuth
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-        if(request()->header('token') != env('API_TOKEN','the-api-token')) {
-            return response()->json(["error" => "unauthorized"], Response::HTTP_FORBIDDEN);
+    public function handle($request, Closure $next)
+    {
+        if (request()->header('token') != env('API_TOKEN', 'the-api-token')) {
+            return response()->json(['error' => 'unauthorized'], Response::HTTP_FORBIDDEN);
         }
+
         return $next($request);
     }
 }

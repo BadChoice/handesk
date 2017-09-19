@@ -2,42 +2,51 @@
 
 namespace App\Listeners;
 
-use App\Events\TicketSolved;
-use App\Events\TicketStatusUpdated;
-use App\Kpi\Kpi;
-use App\Kpi\ReopenedKpi;
-use App\Kpi\SolveKpi;
 use App\Ticket;
+use App\Kpi\Kpi;
 use Carbon\Carbon;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Kpi\SolveKpi;
+use App\Kpi\ReopenedKpi;
+use App\Events\TicketStatusUpdated;
 
 class UpdateStatusKpis
 {
-
-    public function handle(TicketStatusUpdated $event) {
+    public function handle(TicketStatusUpdated $event)
+    {
         $this->calculateSolvedKpi($event);
         $this->calculateReopenedKpi($event);
     }
 
-    private function calculateSolvedKpi($event) {
-        if($event->ticket->status != Ticket::STATUS_SOLVED) return;
+    private function calculateSolvedKpi($event)
+    {
+        if ($event->ticket->status != Ticket::STATUS_SOLVED) {
+            return;
+        }
 
-        if( ! SolveKpi::doesApply($event->ticket, $event->user, $event->previousStatus) ) return;
-        $time = $event->ticket->created_at->diffInMinutes( Carbon::now() );
-        SolveKpi::obtain ( $event->ticket->created_at, $event->user->id, Kpi::TYPE_USER )->addValue( $time );
+        if (! SolveKpi::doesApply($event->ticket, $event->user, $event->previousStatus)) {
+            return;
+        }
+        $time = $event->ticket->created_at->diffInMinutes(Carbon::now());
+        SolveKpi::obtain($event->ticket->created_at, $event->user->id, Kpi::TYPE_USER)->addValue($time);
 
-        if( ! $event->ticket->team_id) return;
-        SolveKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $time );
+        if (! $event->ticket->team_id) {
+            return;
+        }
+        SolveKpi::obtain($event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM)->addValue($time);
     }
 
-    private function calculateReopenedKpi($event){
+    private function calculateReopenedKpi($event)
+    {
         $score = ReopenedKpi::score($event->ticket, $event->previousStatus);
-        if( $score == 0) return;
+        if ($score == 0) {
+            return;
+        }
 
-        ReopenedKpi::obtain ( $event->ticket->created_at, $event->ticket->user_id, Kpi::TYPE_USER )->addValue( $score );
+        ReopenedKpi::obtain($event->ticket->created_at, $event->ticket->user_id, Kpi::TYPE_USER)->addValue($score);
 
-        if( ! $event->ticket->team_id) return;
-        ReopenedKpi::obtain ( $event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM )->addValue( $score );
+        if (! $event->ticket->team_id) {
+            return;
+        }
+        ReopenedKpi::obtain($event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM)->addValue($score);
     }
 }
