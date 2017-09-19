@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "setting"        => "Configuració|Configuracions",
+    'setting'        => 'Configuració|Configuracions',
 ];

@@ -2,7 +2,6 @@
 
 namespace App\Authenticatable;
 
-
 trait AuthenticatableRoles
 {
     /**
@@ -14,5 +13,4 @@ trait AuthenticatableRoles
             return $builder->where(static::$role);
         });
     }
-
 }
