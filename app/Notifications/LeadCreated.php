@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class LeadCreated extends Notification
@@ -13,7 +12,8 @@ class LeadCreated extends Notification
 
     public $lead;
 
-    public function __construct($lead) {
+    public function __construct($lead)
+    {
         $this->lead = $lead;
     }
 
@@ -21,17 +21,23 @@ class LeadCreated extends Notification
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
-    public function via($notifiable) {
-        if( isset($notifiable->settings) && $notifiable->settings->new_lead_notification == false ) return [];
-        return ( method_exists($notifiable, 'routeNotificationForSlack' ) && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
+    public function via($notifiable)
+    {
+        if (isset($notifiable->settings) && $notifiable->settings->new_lead_notification == false) {
+            return [];
+        }
+
+        return (method_exists($notifiable, 'routeNotificationForSlack') && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
     }
 
     /**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -39,8 +45,8 @@ class LeadCreated extends Notification
         return (new MailMessage)
                     ->replyTo(config('mail.fetch.username'))
                     ->view('emails.lead', [
-                        "title" => __("notification.newLeadCreatedDesc"),
-                        "lead" => $this->lead
+                        'title' => __('notification.newLeadCreatedDesc'),
+                        'lead'  => $this->lead,
                     ]);
     }
 
@@ -48,6 +54,7 @@ class LeadCreated extends Notification
      * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)

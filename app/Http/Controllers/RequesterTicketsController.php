@@ -6,8 +6,10 @@ use App\Ticket;
 
 class RequesterTicketsController extends Controller
 {
-    public function show($public_token) {
+    public function show($public_token)
+    {
         $ticket = Ticket::findWithPublicToken($public_token);
-        return view('requester.tickets.show', ["ticket" => $ticket ]);
+
+        return view('requester.tickets.show', ['ticket' => $ticket]);
     }
 }

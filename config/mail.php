@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@handesk.io'),
-        'name' => env('MAIL_FROM_NAME', 'Handesk'),
+        'name'    => env('MAIL_FROM_NAME', 'Handesk'),
     ],
 
     /*
@@ -103,8 +103,8 @@ return [
     'stream' => [
         'ssl' => [
             'allow_self_signed' => env('MAIL_SSLOPTIONS_ALLOW_SELF_SIGNED', false),
-            'verify_peer' => env('MAIL_SSLOPTIONS_VERIFY_PEER', true),
-            'verify_peer_name' => env('MAIL_SSLOPTIONS_VERIFY_PEER_NAME', true),
+            'verify_peer'       => env('MAIL_SSLOPTIONS_VERIFY_PEER', true),
+            'verify_peer_name'  => env('MAIL_SSLOPTIONS_VERIFY_PEER_NAME', true),
         ],
     ],
 
@@ -127,13 +127,13 @@ return [
         ],
     ],
 
-    "fetch" => [
-        "host" => env('MAIL_FETCH_HOST'),
-        "port" => env('MAIL_FETCH_PORT',110),
-        "username" => env('MAIL_FETCH_USERNAME','hi'),
-        "password" => env('MAIL_FETCH_PASSWORD'),
-        "replyAboveLine" => "##- Please type your reply above this line -##",
-        "options" => env('MAIL_FETCH_OPTIONS','/pop3'),
-    ]
+    'fetch' => [
+        'host'           => env('MAIL_FETCH_HOST'),
+        'port'           => env('MAIL_FETCH_PORT', 110),
+        'username'       => env('MAIL_FETCH_USERNAME', 'hi'),
+        'password'       => env('MAIL_FETCH_PASSWORD'),
+        'replyAboveLine' => '##- Please type your reply above this line -##',
+        'options'        => env('MAIL_FETCH_OPTIONS', '/pop3'),
+    ],
 
 ];

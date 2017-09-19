@@ -2,30 +2,33 @@
 
 namespace App\Jobs;
 
-use App\Mail\DailyTasksMail;
 use App\UserSettings;
+use App\Mail\DailyTasksMail;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Mail;
 
 class SendDailyTasksEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-
-    public function handle() {
-        $users = UserSettings::where('daily_tasks_notification',true)->get()->pluck('user');
-        $users->each(function($user){
+    public function handle()
+    {
+        $users = UserSettings::where('daily_tasks_notification', true)->get()->pluck('user');
+        $users->each(function ($user) {
             $this->sendDailyTasksEmailTo($user);
         });
     }
 
-    private function sendDailyTasksEmailTo($user){
+    private function sendDailyTasksEmailTo($user)
+    {
         $tasks = $user->todayTasks;
-        if($tasks->count() == 0) return;
-        Mail::to($user)->send( new DailyTasksMail( $tasks ) );
+        if ($tasks->count() == 0) {
+            return;
+        }
+        Mail::to($user)->send(new DailyTasksMail($tasks));
     }
 }

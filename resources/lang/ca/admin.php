@@ -1,6 +1,6 @@
 <?php
 
 return [
-    "admin"  => "Administració",
-    "config" => "Configuració",
+    'admin'  => 'Administració',
+    'config' => 'Configuració',
 ];

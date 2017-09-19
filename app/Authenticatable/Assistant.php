@@ -11,7 +11,8 @@ class Assistant extends User
 
     protected static $role = ['assistant' => true];
 
-    public static function notifyAll($notification){
-        Notification::send( Assistant::all() , $notification);
+    public static function notifyAll($notification)
+    {
+        Notification::send(self::all(), $notification);
     }
 }
