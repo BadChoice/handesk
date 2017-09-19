@@ -13,15 +13,15 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\TicketCreated' =>[
-            'App\Listeners\UpdateTicketCreationKpis'
+        'App\Events\TicketCreated' => [
+            'App\Listeners\UpdateTicketCreationKpis',
         ],
         'App\Events\TicketCommented' => [
             'App\Listeners\UpdateReplyKpis',
         ],
         'App\Events\TicketStatusUpdated' => [
             'App\Listeners\UpdateStatusKpis',
-        ]
+        ],
     ];
 
     /**

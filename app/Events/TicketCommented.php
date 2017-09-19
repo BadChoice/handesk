@@ -5,10 +5,7 @@ namespace App\Events;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class TicketCommented
 {
@@ -18,9 +15,10 @@ class TicketCommented
     public $comment;
     public $previousStatus;
 
-    public function __construct($ticket, $comment, $previousStatus) {
-        $this->ticket = $ticket;
-        $this->comment = $comment;
+    public function __construct($ticket, $comment, $previousStatus)
+    {
+        $this->ticket         = $ticket;
+        $this->comment        = $comment;
         $this->previousStatus = $previousStatus;
     }
 

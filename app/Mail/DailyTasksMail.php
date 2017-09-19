@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class DailyTasksMail extends Mailable
 {
@@ -13,7 +12,8 @@ class DailyTasksMail extends Mailable
 
     public $tasks;
 
-    public function __construct($tasks) {
+    public function __construct($tasks)
+    {
         $this->tasks = $tasks;
     }
 
@@ -22,9 +22,10 @@ class DailyTasksMail extends Mailable
      *
      * @return $this
      */
-    public function build() {
+    public function build()
+    {
         return $this->subject('Handesk: Daily tasks')
                     ->view('emails.tasks')
-                    ->with(["tasks" => $this->tasks]);
+                    ->with(['tasks' => $this->tasks]);
     }
 }

@@ -10,10 +10,10 @@
 |
 */
 
-Route::group(["namespace" => "Api"], function(){
-    Route::resource('tickets',                  "TicketsController", ["except" => "destroy"]);
-    Route::post('tickets/{ticket}/comments',    "CommentsController@store");
-    Route::post('tickets/{ticket}/assign',      "TicketAssignController@store");
+Route::group(['namespace' => 'Api'], function () {
+    Route::resource('tickets', 'TicketsController', ['except' => 'destroy']);
+    Route::post('tickets/{ticket}/comments', 'CommentsController@store');
+    Route::post('tickets/{ticket}/assign', 'TicketAssignController@store');
 
-    Route::resource('leads',                    "LeadsController", ["only" => "store"]);
+    Route::resource('leads', 'LeadsController', ['only' => 'store']);
 });
