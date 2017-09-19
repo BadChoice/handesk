@@ -40,7 +40,7 @@ class Comment extends BaseModel
             if ($this->ticket->team) {
                 $this->ticket->team->notify($newCommentNotification);
             }
-            if ( $this->shouldNotifyUser() ) {
+            if ($this->shouldNotifyUser()) {
                 $this->ticket->user->notify($newCommentNotification);
             }
             if ($this->ticket->requester && auth()->user()) {
