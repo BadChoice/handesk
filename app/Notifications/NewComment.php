@@ -2,8 +2,8 @@
 
 namespace App\Notifications;
 
-use App\Requester;
 use App\User;
+use App\Requester;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -63,7 +63,8 @@ class NewComment extends Notification
         return $mail;
     }
 
-    private function shouldUseAgentName(){
+    private function shouldUseAgentName()
+    {
         return $this->comment->author() instanceof User &&
                $this->comment->author()->email;
     }
