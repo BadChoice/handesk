@@ -1,4 +1,4 @@
-@if($attachments->count() )
+@if($attachments && $attachments->count() )
     <div class="mt2">
         @foreach( $attachments as $attachment)
             @icon(paperclip)
