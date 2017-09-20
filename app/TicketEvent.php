@@ -26,6 +26,6 @@ class TicketEvent extends BaseModel
 
     public function author()
     {
-        return $this->user ? : $this->ticket->requester;
+        return $this->user ?: $this->ticket->requester;
     }
 }
