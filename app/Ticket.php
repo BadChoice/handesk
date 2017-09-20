@@ -103,7 +103,7 @@ class Ticket extends BaseModel
         $previousStatus = $this->status;
         if ($newStatus && $newStatus != $previousStatus) {
             $this->updateStatus($newStatus);
-        } elseif (! $this->user && $this->status != static::STATUS_NEW) {
+        } elseif (! $user && $this->status != static::STATUS_NEW) {
             $this->updateStatus(static::STATUS_OPEN);
         } else {
             $this->touch();
