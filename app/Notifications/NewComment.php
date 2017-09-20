@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Requester;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -55,11 +56,16 @@ class NewComment extends Notification
                     'url'     => $notifiable instanceof Requester ? route('requester.tickets.show', $this->ticket->public_token) : route('tickets.show', $this->ticket),
                 ]
             );
-        if ($this->comment->author()->email) {
-            $mail->from($this->comment->author()->email, $this->comment->author()->name);
+        if ($this->shouldUseAgentName()) {
+            $mail->from(config('mail.fetch.username'), $this->comment->author()->name);
         }
 
         return $mail;
+    }
+
+    private function shouldUseAgentName(){
+        return $this->connection->author() instanceof User &&
+               $this->comment->author()->email;
     }
 
     public function toSlack($notifiable)
