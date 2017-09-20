@@ -64,7 +64,7 @@ class NewComment extends Notification
     }
 
     private function shouldUseAgentName(){
-        return $this->connection->author() instanceof User &&
+        return $this->comment->author() instanceof User &&
                $this->comment->author()->email;
     }
 
