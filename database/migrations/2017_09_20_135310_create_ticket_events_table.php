@@ -17,7 +17,7 @@ class CreateTicketEventsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('ticket_id');
             $table->unsignedInteger('user_id')->nullable();
-            $table->string('description');
+            $table->string('body');
             $table->timestamps();
         });
     }

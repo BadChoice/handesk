@@ -31,7 +31,7 @@ class TicketEventsTest extends TestCase
             $this->assertCount(1, $ticket->fresh()->events);
             tap($ticket->fresh()->events->first(), function($event){
                $this->assertEquals($this->agent->id, $event->user->id );
-               $this->assertEquals("Escalated", $event->description);
+               $this->assertEquals("Escalated", $event->body);
             });
     }
 
@@ -43,7 +43,7 @@ class TicketEventsTest extends TestCase
         $this->assertCount(1, $ticket->fresh()->events);
         tap($ticket->fresh()->events->first(), function($event){
             $this->assertEquals($this->agent->id, $event->user->id );
-            $this->assertEquals("De-Escalated", $event->description);
+            $this->assertEquals("De-Escalated", $event->body);
         });
     }
 
@@ -56,7 +56,7 @@ class TicketEventsTest extends TestCase
         $this->assertCount(1, $ticket->fresh()->events);
         tap($ticket->fresh()->events->first(), function($event){
             $this->assertEquals($this->agent->id, $event->user->id );
-            $this->assertEquals("Assigned to agent: agent 2", $event->description);
+            $this->assertEquals("Assigned to agent: agent 2", $event->body);
         });
     }
 
@@ -69,7 +69,7 @@ class TicketEventsTest extends TestCase
         $this->assertCount(1, $ticket->fresh()->events);
         tap($ticket->fresh()->events->first(), function($event){
             $this->assertEquals($this->agent->id, $event->user->id );
-            $this->assertEquals("Assigned to team: awesome team", $event->description);
+            $this->assertEquals("Assigned to team: awesome team", $event->body);
         });
     }
 
@@ -82,7 +82,7 @@ class TicketEventsTest extends TestCase
         $this->assertCount(1, $ticket->fresh()->events);
         tap($ticket->fresh()->events->first(), function($event){
             $this->assertEquals($this->agent->id, $event->user->id );
-            $this->assertEquals("Issue created", $event->description);
+            $this->assertEquals("Issue created", $event->body);
         });
 
     }
@@ -96,7 +96,7 @@ class TicketEventsTest extends TestCase
         $this->assertCount(1, $ticket->fresh()->events);
         tap($ticket->fresh()->events->first(), function($event){
             $this->assertEquals($this->agent->id, $event->user->id );
-            $this->assertEquals("Status updated: closed", $event->description);
+            $this->assertEquals("Status updated: closed", $event->body);
         });
     }
 
