@@ -191,6 +191,7 @@ class Ticket extends BaseModel
     public function updateStatus($status)
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
+        TicketEvent::make($this, "Status updated: " . $this->statusName() );
     }
 
     public function setLevel($level)
