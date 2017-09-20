@@ -19,8 +19,13 @@ class TicketEvent extends BaseModel
         return $this->belongsTo(User::class);
     }
 
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class);
+    }
+
     public function author()
     {
-        return $this->user;
+        return $this->user ? : $this->ticket->requester;
     }
 }
