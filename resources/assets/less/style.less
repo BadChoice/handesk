@@ -11,17 +11,26 @@
 @import "TagsInput";
 
 //* {  box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300|Open+Sans:400,400italic,700');
+
+@family-serif: "Open Sans", sans-serif;
+@family-heads: "Lato", sans-serif;
+
 
 // APP
 @sidebar-width:300px;
 
 body{
   margin:0;
-  font-family: Lato,sans-serif;
+  font-family: @family-serif;
   font-size: 14px;
   line-height: 1.42857143;
   font-weight: 100;
   color: @gray;
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.navbar-item,.navbar-link{
+    font-family: @family-heads;
 }
 
 a{
