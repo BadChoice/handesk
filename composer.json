@@ -14,7 +14,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4",
         "php-imap/php-imap": "^2.0",
-        "fzaninotto/faker": "^1.4",
+        "fzaninotto/faker": "^1.4"
     },
     "require-dev": {
         "mockery/mockery": "^0.9",
