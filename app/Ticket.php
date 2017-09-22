@@ -77,6 +77,11 @@ class Ticket extends BaseModel
         return $this->hasMany(Comment::class)->latest();
     }
 
+    public function events()
+    {
+        return $this->hasMany(TicketEvent::class)->latest();
+    }
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
@@ -103,7 +108,7 @@ class Ticket extends BaseModel
         $previousStatus = $this->status;
         if ($newStatus && $newStatus != $previousStatus) {
             $this->updateStatus($newStatus);
-        } elseif (! $this->user && $this->status != static::STATUS_NEW) {
+        } elseif (! $user && $this->status != static::STATUS_NEW) {
             $this->updateStatus(static::STATUS_OPEN);
         } else {
             $this->touch();
@@ -187,14 +192,18 @@ class Ticket extends BaseModel
     public function updateStatus($status)
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
+        TicketEvent::make($this, 'Status updated: '.$this->statusName());
     }
 
     public function setLevel($level)
     {
         $this->update(['level' => $level]);
         if ($level == 1) {
-            Assistant::notifyAll(new TicketEscalated($this));
+            TicketEvent::make($this, 'Escalated');
+
+            return Assistant::notifyAll(new TicketEscalated($this));
         }
+        TicketEvent::make($this, 'De-Escalated');
     }
 
     public function isEscalated()
@@ -257,6 +266,8 @@ class Ticket extends BaseModel
         );
         $this->addNote(auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}");
         //TODO: Notify somebody? if so, create the test
+        TicketEvent::make($this, 'Issue created');
+
         return $issue;
     }
 

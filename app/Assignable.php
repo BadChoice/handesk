@@ -14,6 +14,7 @@ trait Assignable
         }
         $this->user()->associate($user)->save();
         $user->notify($this->getAssignedNotification());
+        TicketEvent::make($this, "Assigned to agent: {$user->name}");
     }
 
     public function assignToTeam($team)
@@ -26,5 +27,6 @@ trait Assignable
         }
         $this->team()->associate($team)->save();
         $team->notify($this->getAssignedNotification());
+        TicketEvent::make($this, "Assigned to team: {$team->name}");
     }
 }
