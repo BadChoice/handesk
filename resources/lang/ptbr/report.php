@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'report'                    => 'Report|Reports',
-    'firstReplyTime'            => 'First reply time',
-    'solveTime'                 => 'Solve time',
-    'onTouchResolutionRatio'    => 'One touch resolution ratio',
-    'reopenedRatio'             => 'Reopened ratio',
-    'filter'                    => 'Filter',
+    'report'                    => 'Relatório|Relatórios',
+    'firstReplyTime'            => 'Tempo para primeira resposta',
+    'solveTime'                 => 'Tempo de solução',
+    'onTouchResolutionRatio'    => 'Taxa de resolução em um toque',
+    'reopenedRatio'             => 'Taxa de reabertura',
+    'filter'                    => 'Filtro',
 ];
