@@ -13,10 +13,10 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4",
-        "php-imap/php-imap": "^2.0"
+        "php-imap/php-imap": "^2.0",
+        "fzaninotto/faker": "^1.4"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^0.9",
         "phpunit/phpunit": "~6.3"
     },
