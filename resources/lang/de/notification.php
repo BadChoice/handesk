@@ -1,5 +1,5 @@
-<?php
 
+<?php
 return [
     'newLeadCreatedDesc'    => 'A new lead has been created',
     'leadAssigned'          => 'Lead assigned',
