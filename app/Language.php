@@ -9,6 +9,7 @@ class Language
     const CA = 'ca';
     const FR = 'fr';
     const DE = 'de';
+    const PTBR = 'pt-br';
 
     public static function available()
     {
@@ -18,6 +19,7 @@ class Language
             static::CA => __('languages.ca'),
             static::FR => __('languages.fr'),
             static::DE => __('languages.de'),
+            static::PTBR => __('languages.ptbr'),
         ];
     }
 
