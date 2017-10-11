@@ -97,4 +97,12 @@ class User extends Authenticatable
     {
         return $this->teamsTickets()->get();
     }
+
+    public function delete()
+    {
+        $this->tickets()->update(["user_id" => null]);
+        $this->leads()->update(["user_id" => null]);
+
+        return parent::delete();
+    }
 }

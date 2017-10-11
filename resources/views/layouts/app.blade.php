@@ -30,6 +30,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
+        //TODO: Move custom scripts to a file so it can be minified with laravel mix
         function copyToClipboard(element) {
             var $temp = $("<input>");
             $("body").append($temp);
@@ -44,6 +45,17 @@
             }
             $('#sidebar').animate({"left":position + "px"}, 200);
         }
+
+        var csrf_token = "{{ csrf_token() }}";
+        $(".delete-resource, .delete-resource-simple").on('click',function(e){
+            if (!confirm("Are you sure?")){ return false; }
+            else{
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $('<form action="' + url + '" method="POST"><input type="hidden" name="_method" value="DELETE"><input type="hidden" name="_token" value="' + csrf_token + '"></form>').appendTo('body').submit();
+            }
+        });
+
     </script>
     @yield('scripts')
 

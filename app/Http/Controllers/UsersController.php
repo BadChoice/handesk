@@ -13,6 +13,13 @@ class UsersController extends Controller
         return view('users.index', ['users' => $users]);
     }
 
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return back();
+    }
+
     public function impersonate(User $user)
     {
         auth()->loginUsingId($user->id);

@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
 
     Route::group(['middleware' => 'can:see-admin'], function () {
-        Route::resource('users', 'UsersController', ['only' => 'index']);
+        Route::resource('users', 'UsersController', ['only' => ['index', 'destroy']]);
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
     });
