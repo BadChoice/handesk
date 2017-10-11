@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'driver'      => 'bitbucket',
+    'driver'      => env('ISSUES_DRIVER', 'bitbucket'),
     'credentials' => [
         'driver'        => env('BITBUCKET_DRIVER', 'basic'), //basic, oauth
         'key'           => env('BITBUCKET_KEY'),           //oauth

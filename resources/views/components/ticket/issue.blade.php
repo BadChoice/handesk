@@ -1,4 +1,4 @@
-@if( count( config('issues.repositories')) > 0)
+@if( config('issues.driver') && count( config('issues.repositories')) > 0)
     @if(auth()->user()->assistant || auth()->user()->admin)
         @if($ticket->getIssueId())
             <div class="float-right mt-1 mr4 ml-3">
