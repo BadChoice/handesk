@@ -17,6 +17,6 @@ return [
     'reset'    => 'Sua senha foi resetada!',
     'sent'     => 'Nós enviamos ao seu email um link para resetar sua senha!',
     'token'    => 'Este token de reset de senha é inválido.',
-    'user'     => "Nós não podemos encontrar um usuário com este e-mail.",
+    'user'     => 'Nós não podemos encontrar um usuário com este e-mail.',
 
 ];

@@ -100,8 +100,8 @@ class User extends Authenticatable
 
     public function delete()
     {
-        $this->tickets()->update(["user_id" => null]);
-        $this->leads()->update(["user_id" => null]);
+        $this->tickets()->update(['user_id' => null]);
+        $this->leads()->update(['user_id' => null]);
 
         return parent::delete();
     }
