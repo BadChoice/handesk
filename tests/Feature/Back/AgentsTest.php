@@ -45,7 +45,6 @@ class AgentsTest extends TestCase
 
     /** @test */
     public function can_delete_agent(){
-        $this->withoutExceptionHandling();
         $admin = factory(Admin::class)->create();
         $agent = factory(User::class)->create();
         $agent->tickets()->create(
@@ -63,5 +62,17 @@ class AgentsTest extends TestCase
         $this->assertEquals(1, User::count());
         $this->assertNull(Ticket::first()->user_id);
         $this->assertNull(Lead::first()->user_id);
+    }
+
+    /** @test */
+    public function non_admin_cannot_delete_agents()
+    {
+        $nonAdmin = factory(User::class)->create();
+        $agent = factory(User::class)->create();
+
+        $response = $this->actingAs($nonAdmin)->delete("users/{$agent->id}");
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+        $this->assertEquals(2, User::count());
     }
 }
