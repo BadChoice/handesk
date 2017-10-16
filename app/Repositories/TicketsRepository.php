@@ -65,6 +65,7 @@ class TicketsRepository
     public function search($text)
     {
         $leadsQuery = auth()->user()->admin ? Ticket::query() : auth()->user()->teamsTickets();
+
         return $leadsQuery->where(function ($query) use ($text) {
             $query->where('title', 'like', "%{$text}%")->orWhere('body', 'like', "%{$text}%");
         });
