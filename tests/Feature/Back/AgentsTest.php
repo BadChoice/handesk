@@ -26,7 +26,8 @@ class AgentsTest extends TestCase
     use InteractsWithExceptionHandling;
 
     /** @test */
-    public function admin_can_see_agents(){
+    public function admin_can_see_agents()
+    {
         $admin = factory(Admin::class)->create();
         $agents = factory(User::class, 3)->create();
         $response = $this->actingAs($admin)->get('users');
@@ -36,7 +37,8 @@ class AgentsTest extends TestCase
     }
 
     /** @test */
-    public function non_admin_can_not_see_agents(){
+    public function non_admin_can_not_see_agents()
+    {
         $nonAdmin= factory(User::class)->create();
         $response = $this->actingAs($nonAdmin)->get('users');
 
@@ -44,7 +46,8 @@ class AgentsTest extends TestCase
     }
 
     /** @test */
-    public function can_delete_agent(){
+    public function can_delete_agent()
+    {
         $admin = factory(Admin::class)->create();
         $agent = factory(User::class)->create();
         $agent->tickets()->create(
