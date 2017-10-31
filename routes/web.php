@@ -20,7 +20,7 @@ Route::group(['prefix' => 'requester'], function () {
     Route::post('tickets/{token}/comments', 'RequesterCommentsController@store')->name('requester.comments.store');
 });
 
-Route::post('webhook', 'WebhookController@store');
+Route::post('webhook/bitbucket', 'WebhookController@store');
 
 Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::get('profile', 'ProfileController@show')->name('profile.show');
