@@ -6,7 +6,7 @@ use App\Ticket;
 
 class OneTouchResolutionKpi extends Kpi
 {
-    const KPI          = Kpi::KPI_ONE_TOUCH_RESOLUTION;
+    const KPI = Kpi::KPI_ONE_TOUCH_RESOLUTION;
 
     public static function doesApply($ticket, $comment)
     {

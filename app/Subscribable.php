@@ -19,9 +19,9 @@ trait Subscribable
 
     public function subscribeToMailchimp()
     {
-        $fullNameArray  = explode(' ', $this->getSubscribableName());
-        $firstName      = array_shift($fullNameArray);
-        $fullName       = join($fullNameArray, ' ');
+        $fullNameArray = explode(' ', $this->getSubscribableName());
+        $firstName     = array_shift($fullNameArray);
+        $fullName      = join($fullNameArray, ' ');
         foreach ($this->getSubscribableLists() as $listName => $listId) {
             dispatch(new SubscribeToMailchimp($listId, $this->getSubscribableEmail(), $firstName, $fullName));
         }

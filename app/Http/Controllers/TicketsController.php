@@ -10,9 +10,9 @@ class TicketsController extends Controller
     public function index(TicketsRepository $repository)
     {
         if (request('assigned')) {
-            $tickets  = $repository->assignedToMe();
+            $tickets = $repository->assignedToMe();
         } elseif (request('unassigned')) {
-            $tickets  = $repository->unassigned();
+            $tickets = $repository->unassigned();
         } elseif (request('recent')) {
             $tickets = $repository->recentlyUpdated();
         } elseif (request('solved')) {

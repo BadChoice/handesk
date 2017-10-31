@@ -41,8 +41,8 @@ class CreateTicketsFromNewEmails implements ShouldQueue
 
     private function addCommentFromMessage($message)
     {
-        $messageParser  = new IncomingMailCommentParser($message);
-        $ticket         = $messageParser->checkIfItIsACommentAndGetTheTicket();
+        $messageParser = new IncomingMailCommentParser($message);
+        $ticket        = $messageParser->checkIfItIsACommentAndGetTheTicket();
         if (! $ticket) {
             return false;
         }

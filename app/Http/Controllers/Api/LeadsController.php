@@ -12,9 +12,9 @@ class LeadsController extends ApiController
     public function store()
     {
         $this->validate(request(), [
-            'name'      => 'required|min:3',
-            'email'     => 'required|email',
-            'tags'      => 'required',
+            'name'  => 'required|min:3',
+            'email' => 'required|email',
+            'tags'  => 'required',
         ]);
 
         $lead = Lead::where('email', request('email'))->orWhere('phone', request('phone'))->first();
@@ -25,18 +25,18 @@ class LeadsController extends ApiController
         }
 
         $lead = Lead::create([
-            'email'         => request('email'),
-            'name'          => request('name'),
+            'email' => request('email'),
+            'name'  => request('name'),
 
-            'team_id'       => request('team_id'),
-            'username'      => request('username'),
-            'company'       => request('company'),
-            'city'          => request('city'),
-            'country'       => request('country'),
-            'phone'         => request('phone'),
-            'address'       => request('address'),
-            'postal_code'   => request('postal_code'),
-            'body'          => request('body'),
+            'team_id'     => request('team_id'),
+            'username'    => request('username'),
+            'company'     => request('company'),
+            'city'        => request('city'),
+            'country'     => request('country'),
+            'phone'       => request('phone'),
+            'address'     => request('address'),
+            'postal_code' => request('postal_code'),
+            'body'        => request('body'),
         ])->attachTags(request('tags'));
 
         $lead->subscribeToMailchimp();

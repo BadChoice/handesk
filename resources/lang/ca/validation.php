@@ -11,52 +11,52 @@ return [
     | such as the size rules. Feel free to tweak each of these messages.
     |
     */
-    'accepted'             => ':attribute ha de ser acceptat.',
-    'active_url'           => ':attribute no és un URL vàlid.',
-    'after'                => ':attribute ha de ser una data posterior a :date.',
-    'after_or_equal'       => ':attribute ha de ser una data posterior o igual a :date.',
-    'alpha'                => ':attribute només pot contenir lletres.',
-    'alpha_dash'           => ':attribute només por contenir lletres, números i guions.',
-    'alpha_num'            => ':attribute només pot contenir lletres i números.',
-    'array'                => ':attribute ha de ser un conjunt.',
-    'before'               => ':attribute ha de ser una data anterior a :date.',
-    'before_or_equal'      => ':attribute ha de ser una data anterior o igual a :date.',
-    'between'              => [
+    'accepted'        => ':attribute ha de ser acceptat.',
+    'active_url'      => ':attribute no és un URL vàlid.',
+    'after'           => ':attribute ha de ser una data posterior a :date.',
+    'after_or_equal'  => ':attribute ha de ser una data posterior o igual a :date.',
+    'alpha'           => ':attribute només pot contenir lletres.',
+    'alpha_dash'      => ':attribute només por contenir lletres, números i guions.',
+    'alpha_num'       => ':attribute només pot contenir lletres i números.',
+    'array'           => ':attribute ha de ser un conjunt.',
+    'before'          => ':attribute ha de ser una data anterior a :date.',
+    'before_or_equal' => ':attribute ha de ser una data anterior o igual a :date.',
+    'between'         => [
         'numeric' => ":attribute ha d'estar entre :min - :max.",
         'file'    => ':attribute ha de pesar entre :min - :max kilobytes.',
         'string'  => ':attribute ha de tenir entre :min - :max caràcters.',
         'array'   => ':attribute ha de tenir entre :min - :max ítems.',
     ],
-    'boolean'              => 'El camp :attribute ha de ser veritat o fals',
-    'confirmed'            => 'La confirmació de :attribute no coincideix.',
-    'date'                 => ':attribute no és una data vàlida.',
-    'date_format'          => ':attribute no correspon al format :format.',
-    'different'            => ':attribute i :other han de ser diferents.',
-    'digits'               => ':attribute ha de tenir :digits digits.',
-    'digits_between'       => ':attribute ha de tenir entre :min i :max digits.',
-    'dimensions'           => 'Les dimensions de la imatge :attribute no són vàlides.',
-    'distinct'             => 'El camp :attribute té un valor duplicat.',
-    'email'                => ':attribute no és un e-mail vàlid',
-    'exists'               => ':attribute és invàlid.',
-    'file'                 => 'El camp :attribute ha de ser un arxiu.',
-    'filled'               => 'El camp :attribute és obligatori.',
-    'image'                => ':attribute ha de ser una imatge.',
-    'in'                   => ':attribute és invàlid',
-    'in_array'             => 'El camp :attribute no existeix a :other.',
-    'integer'              => ':attribute ha de ser un nombre enter.',
-    'ip'                   => ':attribute ha de ser una adreça IP vàlida.',
-    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
-    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
-    'json'                 => 'El camp :attribute ha de contenir una cadena JSON vàlida.',
-    'max'                  => [
+    'boolean'        => 'El camp :attribute ha de ser veritat o fals',
+    'confirmed'      => 'La confirmació de :attribute no coincideix.',
+    'date'           => ':attribute no és una data vàlida.',
+    'date_format'    => ':attribute no correspon al format :format.',
+    'different'      => ':attribute i :other han de ser diferents.',
+    'digits'         => ':attribute ha de tenir :digits digits.',
+    'digits_between' => ':attribute ha de tenir entre :min i :max digits.',
+    'dimensions'     => 'Les dimensions de la imatge :attribute no són vàlides.',
+    'distinct'       => 'El camp :attribute té un valor duplicat.',
+    'email'          => ':attribute no és un e-mail vàlid',
+    'exists'         => ':attribute és invàlid.',
+    'file'           => 'El camp :attribute ha de ser un arxiu.',
+    'filled'         => 'El camp :attribute és obligatori.',
+    'image'          => ':attribute ha de ser una imatge.',
+    'in'             => ':attribute és invàlid',
+    'in_array'       => 'El camp :attribute no existeix a :other.',
+    'integer'        => ':attribute ha de ser un nombre enter.',
+    'ip'             => ':attribute ha de ser una adreça IP vàlida.',
+    'ipv4'           => 'The :attribute must be a valid IPv4 address.',
+    'ipv6'           => 'The :attribute must be a valid IPv6 address.',
+    'json'           => 'El camp :attribute ha de contenir una cadena JSON vàlida.',
+    'max'            => [
         'numeric' => ':attribute no ha de ser major a :max.',
         'file'    => ':attribute no ha de ser més gran que :max kilobytes.',
         'string'  => ':attribute no ha de ser més gran que :max characters.',
         'array'   => ':attribute no ha de tenir més de :max ítems.',
     ],
-    'mimes'                => ':attribute ha de ser un arxiu amb format: :values.',
-    'mimetypes'            => ':attribute ha de ser un arxiu amb format: :values.',
-    'min'                  => [
+    'mimes'     => ':attribute ha de ser un arxiu amb format: :values.',
+    'mimetypes' => ':attribute ha de ser un arxiu amb format: :values.',
+    'min'       => [
         'numeric' => "El tamany de :attribute ha de ser d'almenys :min.",
         'file'    => "El tamany de :attribute ha de ser d'almenys :min kilobytes.",
         'string'  => ':attribute ha de contenir almenys :min caràcters.',
@@ -80,11 +80,11 @@ return [
         'string'  => ':attribute ha de contenir :size caràcters.',
         'array'   => ':attribute ha de contenir :size ítems.',
     ],
-    'string'               => 'El camp :attribute ha de ser una cadena de caràcters.',
-    'timezone'             => 'El camp :attribute ha de ser una zona vàlida.',
-    'unique'               => ':attribute ja ha estat registrat.',
-    'uploaded'             => ':attribute ha fallat al pujar.',
-    'url'                  => 'El format :attribute és invàlid.',
+    'string'   => 'El camp :attribute ha de ser una cadena de caràcters.',
+    'timezone' => 'El camp :attribute ha de ser una zona vàlida.',
+    'unique'   => ':attribute ja ha estat registrat.',
+    'uploaded' => ':attribute ha fallat al pujar.',
+    'url'      => 'El format :attribute és invàlid.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -95,7 +95,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-    'custom'               => [
+    'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
@@ -110,7 +110,7 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-    'attributes'           => [
+    'attributes' => [
         'name'                  => 'nom',
         'username'              => 'usuari',
         'email'                 => 'correu electrònic',

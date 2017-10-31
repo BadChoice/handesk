@@ -6,7 +6,8 @@ class FakeIssueCreator implements IssueCreator
 {
     private $id;
 
-    public function __construct($id = 1) {
+    public function __construct($id = 1)
+    {
         $this->id = $id;
     }
 

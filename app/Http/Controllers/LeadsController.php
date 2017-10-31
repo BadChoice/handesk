@@ -16,7 +16,7 @@ class LeadsController extends Controller
         } elseif (request('failed')) {
             $leads = $repository->failed();
         } else {
-            $leads                              = $repository->all();
+            $leads = $repository->all();
         }
 
         if (request('team')) {

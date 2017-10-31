@@ -12,7 +12,7 @@ class TasksController extends Controller
             return ($task->datetime) ? $task->datetime->toDateString() : 1;
         });
 
-        return view('tasks.index', ['tasks' =>  $tasks]);
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     public function destroy(Task $task)
