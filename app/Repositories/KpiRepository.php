@@ -27,14 +27,14 @@ class KpiRepository
 
     public function __construct($startDate = null, $endDate = null)
     {
-        $this->startDate    = $startDate ?: Carbon::today()->firstOfMonth();
-        $this->endDate      = $endDate ?: Carbon::tomorrow();
+        $this->startDate = $startDate ?: Carbon::today()->firstOfMonth();
+        $this->endDate   = $endDate ?: Carbon::tomorrow();
     }
 
     public function forDates($start, $end)
     {
-        $this->startDate    = $start;
-        $this->endDate      = $end;
+        $this->startDate = $start;
+        $this->endDate   = $end;
 
         return $this;
     }
@@ -89,14 +89,14 @@ class KpiRepository
     protected function getAverageValues($functionName, $agent)
     {
         return [
-            'agentValue'      => $this->$functionName($agent),
-            'overallValue'    => $this->$functionName(),
+            'agentValue'   => $this->$functionName($agent),
+            'overallValue' => $this->$functionName(),
         ];
     }
 
     protected function ticketsQuery($agent = null)
     {
-        $query                             = Ticket::query();
+        $query = Ticket::query();
         if ($agent instanceof User) {
             $query = $query->where(['user_id' => $agent->id]);
         }

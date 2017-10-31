@@ -18,25 +18,25 @@ class Ticket extends BaseModel
 {
     use SoftDeletes, Taggable, Assignable, Subscribable;
 
-    const STATUS_NEW                = 1;
-    const STATUS_OPEN               = 2;
-    const STATUS_PENDING            = 3;
-    const STATUS_SOLVED             = 4;
-    const STATUS_CLOSED             = 5;
-    const STATUS_MERGED             = 6;
-    const STATUS_SPAM               = 7;
+    const STATUS_NEW     = 1;
+    const STATUS_OPEN    = 2;
+    const STATUS_PENDING = 3;
+    const STATUS_SOLVED  = 4;
+    const STATUS_CLOSED  = 5;
+    const STATUS_MERGED  = 6;
+    const STATUS_SPAM    = 7;
 
-    const PRIORITY_LOW              = 1;
-    const PRIORITY_NORMAL           = 2;
-    const PRIORITY_HIGH             = 3;
+    const PRIORITY_LOW    = 1;
+    const PRIORITY_NORMAL = 2;
+    const PRIORITY_HIGH   = 3;
 
     public static function createAndNotify($requester, $title, $body, $tags)
     {
-        $requester  = Requester::findOrCreate($requester['name'], $requester['email'] ?? null);
-        $ticket     = $requester->tickets()->create([
-            'title'         => $title,
-            'body'          => $body,
-            'public_token'  => str_random(24),
+        $requester = Requester::findOrCreate($requester['name'], $requester['email'] ?? null);
+        $ticket    = $requester->tickets()->create([
+            'title'        => $title,
+            'body'         => $body,
+            'public_token' => str_random(24),
         ])->attachTags($tags);
 
         tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
@@ -142,9 +142,9 @@ class Ticket extends BaseModel
         }
 
         $comment = $this->comments()->create([
-            'body'          => $body,
-            'user_id'       => $user ? $user->id : null,
-            'new_status'    => $newStatus ?: $this->status,
+            'body'       => $body,
+            'user_id'    => $user ? $user->id : null,
+            'new_status' => $newStatus ?: $this->status,
         ])->notifyNewComment();
         event(new TicketCommented($this, $comment, $previousStatus));
 
@@ -161,10 +161,10 @@ class Ticket extends BaseModel
             $this->touch();
         }
         $comment = $this->comments()->create([
-            'body'          => $body,
-            'user_id'       => $user->id,
-            'new_status'    => $this->status,
-            'private'       => true,
+            'body'       => $body,
+            'user_id'    => $user->id,
+            'new_status' => $this->status,
+            'private'    => true,
         ]);
         tap(new NewComment($this, $comment), function ($newCommentNotification) {
             if ($this->team) {

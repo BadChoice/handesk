@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'setting'        => 'Opções|Opções',
+    'setting' => 'Opções|Opções',
 ];

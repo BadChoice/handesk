@@ -10,11 +10,11 @@ class Lead extends BaseModel
 {
     use SoftDeletes, Taggable, Assignable, Subscribable;
 
-    const STATUS_NEW            = 1;
-    const STATUS_FIRST_CONTACT  = 2;
-    const STATUS_VISITED        = 3;
-    const STATUS_COMPLETED      = 4;
-    const STATUS_FAILED         = 5;
+    const STATUS_NEW           = 1;
+    const STATUS_FIRST_CONTACT = 2;
+    const STATUS_VISITED       = 3;
+    const STATUS_COMPLETED     = 4;
+    const STATUS_FAILED        = 5;
 
     public function team()
     {
@@ -65,11 +65,11 @@ class Lead extends BaseModel
     public static function availableStatus()
     {
         return [
-            static::STATUS_NEW              => 'new',
-            static::STATUS_FIRST_CONTACT    => 'first-contact',
-            static::STATUS_VISITED          => 'visited',
-            static::STATUS_COMPLETED        => 'completed',
-            static::STATUS_FAILED           => 'failed',
+            static::STATUS_NEW           => 'new',
+            static::STATUS_FIRST_CONTACT => 'first-contact',
+            static::STATUS_VISITED       => 'visited',
+            static::STATUS_COMPLETED     => 'completed',
+            static::STATUS_FAILED        => 'failed',
         ];
     }
 

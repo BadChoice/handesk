@@ -6,7 +6,7 @@ use App\Ticket;
 
 class ReopenedKpi extends Kpi
 {
-    const KPI          = Kpi::KPI_REOPENED;
+    const KPI = Kpi::KPI_REOPENED;
 
     public static function score($ticket, $previousStatus)
     {

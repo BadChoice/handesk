@@ -17,8 +17,8 @@ class NewComment extends Notification
 
     public function __construct($ticket, $comment)
     {
-        $this->ticket   = $ticket;
-        $this->comment  = $comment;
+        $this->ticket  = $ticket;
+        $this->comment = $comment;
     }
 
     /**

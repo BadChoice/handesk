@@ -12,11 +12,11 @@ class TicketsController extends ApiController
 {
     public function index()
     {
-        $requester                                        = Requester::whereName(request('requester'))->orWhere('email', '=', request('requester'))->firstOrFail();
+        $requester = Requester::whereName(request('requester'))->orWhere('email', '=', request('requester'))->firstOrFail();
         if (request('status') == 'solved') {
-            $tickets  = $requester->solvedTickets;
+            $tickets = $requester->solvedTickets;
         } elseif (request('status') == 'closed') {
-            $tickets  = $requester->closedTickets;
+            $tickets = $requester->closedTickets;
         } else {
             $tickets = $requester->openTickets;
         }
@@ -32,8 +32,8 @@ class TicketsController extends ApiController
     public function store()
     {
         $this->validate(request(), [
-            'requester'     => 'required|array',
-            'title'         => 'required|min:3',
+            'requester' => 'required|array',
+            'title'     => 'required|min:3',
         ]);
 
         $ticket = Ticket::createAndNotify(

@@ -17,10 +17,10 @@ return [
     'mailchimp' => [
         'api_key'     => env('MAILCHIMP_API_KEY'),
         'tag_list_id' => [
-            'xef'      => '499b95d54d',
-            'retail'   => '8012b3aeab',
-            'flow'     => 'c176e8feaf',
-            'web'      => 'ad27d6f6f8',
+            'xef'    => '499b95d54d',
+            'retail' => '8012b3aeab',
+            'flow'   => 'c176e8feaf',
+            'web'    => 'ad27d6f6f8',
         ],
     ],
 

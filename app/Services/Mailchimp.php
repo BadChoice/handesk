@@ -20,8 +20,8 @@ class Mailchimp
             'email_address' => $email,
             'status'        => 'subscribed',
             'merge_fields'  => [
-                'FNAME'         => $firstName,
-                'LNAME'         => $lastName,
+                'FNAME' => $firstName,
+                'LNAME' => $lastName,
             ],
         ]);
 

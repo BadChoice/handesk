@@ -18,7 +18,7 @@ class MailchimpFake extends Mailchimp
         if (! isset($this->subscribed[$email])) {
             $this->subscribed[$email] = [];
         }
-        $this->subscribed[$email][]                                      = $listId;
+        $this->subscribed[$email][] = $listId;
     }
 
     public function unsubscribe($listId, $email)
@@ -26,7 +26,7 @@ class MailchimpFake extends Mailchimp
         if (! isset($this->unsubscribed[$email])) {
             $this->unsubscribed[$email] = [];
         }
-        $this->unsubscribed[$email][]                                        = $listId;
+        $this->unsubscribed[$email][] = $listId;
     }
 
     public function assertSubscribed($email, $listId)

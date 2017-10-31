@@ -9,9 +9,9 @@ class Mailbox
 
     public function login($host, $port, $user, $pass, $folder = 'INBOX', $ssl = false, $options = null)
     {
-        $ssl              = ($ssl == false) ? '/novalidate-cert' : '';
-        $options          = $options ?: '/pop3';
-        $this->mailbox    = new \PhpImap\Mailbox('{'."$host:$port$options$ssl"."}$folder", $user, $pass, storage_path('app/mail_attachments'));
+        $ssl           = ($ssl == false) ? '/novalidate-cert' : '';
+        $options       = $options ?: '/pop3';
+        $this->mailbox = new \PhpImap\Mailbox('{'."$host:$port$options$ssl"."}$folder", $user, $pass, storage_path('app/mail_attachments'));
 
         return $this;
     }
