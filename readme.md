@@ -23,7 +23,8 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Can merge tickets       
 · Lead tasks, that can have a due date, and sending daily tasks email   
 · Create issues to your code repository directly from the ticket   
-· UI multi language support (default en, alternativ ca, de, fr, es)
+· Updating the ticket automatically when an issue is marked as resolved         
+· UI multi language support (default en, alternative ca, de, fr, es)    
 
 > Follow us on twitter @codepassion to stay tuned
 
@@ -79,6 +80,14 @@ BITBUCKET_PASSWORD=bitbucket-password-if-using-basic-auth
 ```
 
 And enter your repositories list in `config/issues.php` file, filling the `repositories` field. 
+
+You can event update the tickets automatically (adding a private note using bitbucket webhooks).
+You just need to go to your report webhooks settings and add a new webhook with the url
+
+`http://{handesk.io}/webhook/bitbucket`
+
+You just need to check the `issues updated` option
+
 
 #### Api Token
 Set your desired API token in the .env
