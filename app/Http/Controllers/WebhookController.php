@@ -21,6 +21,6 @@ class WebhookController extends Controller
             return response()->json("ok: no ticket with this issue");
         }
         $ticketEvent->ticket->addNote(Admin::first(), "Issue resolved");
-        return response()->json("ok");
+        return response()->json("ok: Ticket {$ticketEvent->ticket->id} updated");
     }
 }
