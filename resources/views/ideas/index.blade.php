@@ -5,7 +5,7 @@
     </div>
 
     <div class="m4">
-        <a class="button " href="{{ route("teams.create") }}">@icon(plus) {{ __('idea.new') }}</a>
+        <a class="button " href="{{ route("ideas.create") }}">@icon(plus) {{ __('idea.new') }}</a>
     </div>
 
     @paginator($ideas)

@@ -37,7 +37,7 @@ class Idea extends BaseModel
 
     public function score()
     {
-        return ($this->sales_impact + $this->current_impact) / ($this->development_effort + 1);
+        return (int)(($this->sales_impact + $this->current_impact) / ($this->development_effort/10 + 1));
     }
 
     public function scopePending($query)
