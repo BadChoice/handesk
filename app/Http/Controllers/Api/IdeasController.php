@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Idea;
-use App\Ticket;
 use App\Settings;
 use App\Requester;
 use Illuminate\Http\Response;
-use App\Notifications\TicketCreated;
 
 class IdeasController extends ApiController
 {
     public function index()
     {
         $requester = Requester::whereName(request('requester'))->orWhere('email', '=', request('requester'))->firstOrFail();
+
         return $this->respond($requester->ideas);
     }
 
@@ -30,6 +29,7 @@ class IdeasController extends ApiController
             request('tags')
         );
         $this->notifyDefault($idea);
+
         return $this->respond(['id' => $idea->id], Response::HTTP_CREATED);
     }
 

@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 use App\Authenticatable\Admin;
 use App\Notifications\IdeaCreated;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,20 +10,20 @@ class Idea extends BaseModel
 {
     use SoftDeletes, Taggable, Subscribable;
 
-    const STATUS_NEW        = 1;
-    const STATUS_ACCEPTED   = 2;
-    const STATUS_OPEN       = 3;
-    const STATUS_RESOLVED   = 4;
-    const STATUS_CLOSED     = 5;
-    const STATUS_DECLINED   = 6;
-    const STATUS_MERGED     = 7;
+    const STATUS_NEW      = 1;
+    const STATUS_ACCEPTED = 2;
+    const STATUS_OPEN     = 3;
+    const STATUS_RESOLVED = 4;
+    const STATUS_CLOSED   = 5;
+    const STATUS_DECLINED = 6;
+    const STATUS_MERGED   = 7;
 
     public static function createAndNotify($requester, $title, $body, $tags)
     {
         $requester = Requester::findOrCreate($requester['name'], $requester['email'] ?? null);
-        $idea    = $requester->ideas()->create([
-            'title'        => $title,
-            'body'         => $body,
+        $idea      = $requester->ideas()->create([
+            'title' => $title,
+            'body'  => $body,
         ])->attachTags($tags);
 
         tap(new IdeaCreated($idea), function ($newTicketNotification) use ($requester) {

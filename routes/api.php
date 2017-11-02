@@ -7,5 +7,5 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::resource('leads', 'LeadsController', ['only' => 'store']);
 
-    Route::resource('ideas', 'IdeasController', ['only' => ['store','index']]);
+    Route::resource('ideas', 'IdeasController', ['only' => ['store', 'index']]);
 });
