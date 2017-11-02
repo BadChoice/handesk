@@ -19,6 +19,7 @@ class CreateIdeasTable extends Migration
             $table->unsignedInteger('requester_id');
             $table->tinyInteger('status')->unsigned()->default(Idea::STATUS_NEW);
             $table->string('title');
+            $table->string('repository')->nullable();
             $table->date('due_date')->nullable();
             $table->text('body');
             $table->tinyInteger('development_effort')->unsigned()->default(0);

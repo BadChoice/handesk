@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Idea;
+use App\Rules\ValidRepository;
 use App\Settings;
 use App\Requester;
 use Illuminate\Http\Response;
@@ -21,11 +22,13 @@ class IdeasController extends ApiController
         $this->validate(request(), [
             'requester' => 'required|array',
             'title'     => 'required|min:3',
+            'repository' => new ValidRepository,
         ]);
         $idea = Idea::createAndNotify(
             request('requester'),
             request('title'),
             request('body'),
+            request('repository'),
             request('tags')
         );
         $this->notifyDefault($idea);

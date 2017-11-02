@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
     <div class="description">
-        <h3>Teams ( {{ $teams->count() }} )</h3>
+        <h3> {{ trans_choice('team.team', 2) }} ( {{ $teams->count() }} )</h3>
     </div>
 
     @if(auth()->user()->admin)
         <div class="m4">
-            <a class="button " href="{{ route("teams.create") }}">@icon(plus) New Team</a>
+            <a class="button " href="{{ route("teams.create") }}">@icon(plus) {{ __('team.new') }}</a>
         </div>
     @endif
 

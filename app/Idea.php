@@ -18,12 +18,13 @@ class Idea extends BaseModel
     const STATUS_DECLINED = 6;
     const STATUS_MERGED   = 7;
 
-    public static function createAndNotify($requester, $title, $body, $tags)
+    public static function createAndNotify($requester, $title, $body, $repository, $tags)
     {
         $requester = Requester::findOrCreate($requester['name'], $requester['email'] ?? null);
         $idea      = $requester->ideas()->create([
             'title' => $title,
             'body'  => $body,
+            'repository' => $repository,
         ])->attachTags($tags);
 
         tap(new IdeaCreated($idea), function ($newTicketNotification) use ($requester) {
@@ -32,6 +33,16 @@ class Idea extends BaseModel
         });
 
         return $idea;
+    }
+
+    public function score()
+    {
+        return ($this->sales_impact + $this->current_impact) / ($this->development_effort + 1);
+    }
+
+    public function scopePending($query)
+    {
+        return $query->whereStatus(Idea::STATUS_NEW);
     }
 
     public function tags()

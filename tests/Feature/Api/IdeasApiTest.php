@@ -31,6 +31,7 @@ class IdeasApiTest extends TestCase
             ],
             "title"         => "My super idea!",
             "body"          => "Why not making this and that",
+            "repository"    => "revo-pos/revo-back",
             "tags"          => ["sexy-idea"]
         ], $overrides);
     }
@@ -47,7 +48,8 @@ class IdeasApiTest extends TestCase
             ],
             "title"         => "My super idea!",
             "body"          => "Why not making this and that",
-            "tags"          => ["sexy-idea"]
+            "tags"          => ["sexy-idea"],
+            "repository"    => "revo-pos/revo-back",
         ],["token" => 'the-api-token']);
 
         $response->assertStatus( Response::HTTP_CREATED );
@@ -60,6 +62,7 @@ class IdeasApiTest extends TestCase
                 $this->assertEquals( $idea->requester_id, $requester->id);
             });
             $this->assertEquals ( $idea->title, "My super idea!");
+            $this->assertEquals ( $idea->repository, "revo-pos/revo-back");
             $this->assertEquals ( $idea->body, "Why not making this and that");
             $this->assertTrue   ( $idea->tags->pluck('name')->contains("sexy-idea") );
             $this->assertEquals( Idea::STATUS_NEW, $idea->status);
@@ -96,6 +99,27 @@ class IdeasApiTest extends TestCase
             "error"
         ]);
         $this->assertEquals(0, Idea::count() );
+    }
+
+    /** @test */
+    public function repository_must_be_valid(){
+        $response = $this->post('api/ideas',$this->validParams([
+            "repository" => "Invalid repo"
+        ]),["token" => 'the-api-token']);
+        $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
+        $response->assertJsonFragment([
+            "error"
+        ]);
+        $this->assertEquals(0, Idea::count() );
+    }
+
+    /** @test */
+    public function repository_is_not_required(){
+        $response = $this->post('api/ideas',$this->validParams([
+            "repository" => null
+        ]),["token" => 'the-api-token']);
+        $response->assertStatus( Response::HTTP_CREATED );
+        $this->assertEquals(1, Idea::count() );
     }
 
     /** @test */

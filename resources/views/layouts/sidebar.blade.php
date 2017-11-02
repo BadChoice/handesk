@@ -34,6 +34,12 @@
         @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
     </ul>
 
+    @if(auth()->user()->admin)
+        <br>
+        <h4> @icon(lightbulb-o) {{ trans_choice('idea.idea',2) }}</h4>
+            @include('components.sidebarItem', ["url" => route('ideas.index'),      "title" => trans_choice('idea.idea',        2) ])
+        <ul>
+    @endif
     <br>
     <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
     <ul>
