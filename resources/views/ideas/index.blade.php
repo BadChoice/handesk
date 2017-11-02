@@ -28,7 +28,11 @@
                 <td class="text-center"> {{ $idea->score() }}</td>
                 <td> {{ $idea->title }}</td>
                 <td> {{ $idea->requester->name      }}</td>
-                <td> {{ $idea->repository           }}</td>
+                <td>
+                    @if($idea->repository)
+                        {{ array_flip(config('issues.repositories'))[$idea->repository]           }}
+                    @endif
+                </td>
                 <td> {{ $idea->tagsString() }}</td>
                 <td> {{ $idea->created_at->diffForHumans() }}</td>
             </tr>
