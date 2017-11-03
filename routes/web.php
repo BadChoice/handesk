@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::group(['middleware' => 'can:see-admin'], function () {
         Route::resource('ideas', 'IdeasController');
         Route::resource('ideas/{idea}/tags', 'IdeaTagsController', ['only' => ['store', 'destroy'], 'as' => 'ideas']);
+        Route::post('ideas/{idea}/issue', 'IdeaIssueController@store')->name('ideas.issue.store');
 
         Route::resource('users', 'UsersController', ['only' => ['index', 'destroy']]);
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');

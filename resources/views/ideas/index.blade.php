@@ -26,12 +26,12 @@
         @foreach($ideas as $idea)
             <tr>
                 <td class="small"> @gravatar($idea->requester->email) </td>
-                <td class="text-center"> {{ $idea->score() }}</td>
+                <td><span class="label ticket-status-{{ $idea->statusName() }}">{{ __("idea." . $idea->statusName() )[0] }}</span> &nbsp;{{ $idea->score() }}</td>
                 <td> <a href="{{route('ideas.show', $idea)}}">{{ $idea->title }}</a></td>
                 <td> {{ $idea->requester->name      }}</td>
                 <td>
                     @if($idea->repository)
-                        {{ array_flip(config('issues.repositories'))[$idea->repository]           }}
+                        {{ array_flip(config('issues.repositories'))[$idea->repository] }}
                     @endif
                 </td>
                 <td> {{ $idea->tagsString() }}</td>

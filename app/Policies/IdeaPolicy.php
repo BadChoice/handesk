@@ -51,6 +51,11 @@ class IdeaPolicy
      */
     public function update(User $user, Idea $idea)
     {
-        //
+        return false;
+    }
+
+    public function createIssue(User $user, Idea $idea)
+    {
+        return false;
     }
 }

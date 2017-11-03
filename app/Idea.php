@@ -4,6 +4,7 @@ namespace App;
 
 use App\Authenticatable\Admin;
 use App\Notifications\IdeaCreated;
+use App\Services\IssueCreator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Idea extends BaseModel
@@ -76,5 +77,17 @@ class Idea extends BaseModel
             case static::STATUS_MERGED: return 'merged';
             case static::STATUS_DECLINED: return 'declined';
         }
+    }
+
+    public function createIssue(IssueCreator $issueCreator)
+    {
+        $issue = $issueCreator->createIssue(
+            $this->repository,
+            $this->title,
+            'Issue from idea: '.route('tickets.show', $this)."   \n\r". $this->body
+        );
+        $this->update(["issue_id" => $issue->local_id]);
+
+        return $issue;
     }
 }
