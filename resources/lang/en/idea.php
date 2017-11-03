@@ -10,4 +10,5 @@ return [
     'salesImpact'       => 'Sales Impact',
     'currentImpact'     => 'Current Impact',
     'edit'              => 'Edit',
+    'fromTicket'        => 'This ticket has been created as an idea'
 ];

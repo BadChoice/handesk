@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\TicketLanguageDetector;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
@@ -13,6 +14,7 @@ use App\Notifications\TicketCreated;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketEscalated;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
 
 class Ticket extends BaseModel
 {
@@ -75,6 +77,11 @@ class Ticket extends BaseModel
     public function commentsAndNotes()
     {
         return $this->hasMany(Comment::class)->latest();
+    }
+
+    public function commentsAndNotesAndEvents()
+    {
+        return $this->commentsAndNotes->toBase()->merge($this->events);
     }
 
     public function events()
@@ -299,5 +306,25 @@ class Ticket extends BaseModel
         $apiUrl = substr($issueNote->body, $start, $end - $start);
 
         return str_replace('api.', '', str_replace('1.0/repositories/', '', $apiUrl));
+    }
+
+    public function createIdea()
+    {
+        $idea = Idea::create([
+            "requester_id" => $this->requester_id,
+            "title" => $this->title,
+            "body" => $this->body
+        ]);
+        TicketEvent::make($this, "Idea created #{$idea->id}");
+        App::setLocale((new TicketLanguageDetector($this))->detect());
+        $this->addComment(auth()->user(), __('idea.fromTicket'), Ticket::STATUS_SOLVED);
+        return $idea;
+    }
+
+    public function getIdeaId()
+    {
+        $issueEvent = $this->events()->where('body','like','%Idea created%')->first();
+        if(! $issueEvent) return null;
+        return explode("#",$issueEvent->body)[1];
     }
 }

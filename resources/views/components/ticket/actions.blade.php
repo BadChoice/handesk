@@ -5,6 +5,7 @@
         {{ Form::close() }}
     </div>
 @else
+    @include('components.ticket.idea')
     @include('components.ticket.issue')
     @include('components.ticket.escalate')
 @endif

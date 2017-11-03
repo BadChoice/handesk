@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::delete('tickets/{ticket}/escalate', 'TicketsEscalateController@destroy')->name('tickets.escalate.destroy');
 
     Route::post('tickets/{ticket}/issue', 'TicketsIssueController@store')->name('tickets.issue.store');
+    Route::post('tickets/{ticket}/idea', 'TicketsIdeaController@store')->name('tickets.idea.store');
 
     Route::resource('leads', 'LeadsController');
     Route::get('leads/search/{text}', 'LeadsSearchController@index')->name('leads.search');

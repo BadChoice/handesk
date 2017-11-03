@@ -77,4 +77,9 @@ class TicketPolicy
     {
         return false;
     }
+
+    public function createIdea(User $user, Ticket $ticket)
+    {
+        return true;
+    }
 }

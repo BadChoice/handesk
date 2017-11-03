@@ -7,14 +7,15 @@
     "require": {
         "php": ">=7.0.0",
         "drewm/mailchimp-api": "^2.4",
+        "fzaninotto/faker": "^1.4",
         "guzzlehttp/guzzle": "^6.3",
         "guzzlehttp/oauth-subscriber": "^0.3",
         "khill/fontawesomephp": "^1.1",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4",
-        "php-imap/php-imap": "^2.0",
-        "fzaninotto/faker": "^1.4"
+        "patrickschur/language-detection": "^3.2",
+        "php-imap/php-imap": "^2.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9",
