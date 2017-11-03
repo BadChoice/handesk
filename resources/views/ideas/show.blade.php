@@ -12,8 +12,8 @@
 
         @can('update', $idea)
             <div class="float-right mt-4 mr4 ml-3">
-                <a class="button secondary" href="{{route('ideas.edit', $idea)}}"> @icon(pencil) {{ __('idea.edit') }} </a>
-                <a class="button secondary ml2" href="{{route('ideas.edit', $idea)}}"> @icon(bug) {{ __('ticket.createIssue') }} </a>
+                <a class="button secondary mr4 fs2" href="{{route('ideas.edit', $idea)}}"> @icon(pencil) {{ __('idea.edit') }} </a>
+                @include('components.idea.issue')
             </div>
         @endcan
     </div>
@@ -26,7 +26,7 @@
     <div class="comment new-comment">
         <table class="maxw600 no-padding">
             <tr><td> {{ trans_choice('ticket.tag',2) }}</td><td colspan="4"> <input id="tags" name="tags" value="{{ $idea->tagsString() }}"></td></tr>
-            <tr><td> {{ __('idea.repository') }} </td><td> {{ $idea->repository }} : {{ $idea->issue_id }} </td></tr>
+            <tr><td> {{ __('idea.repository') }} </td><td> {{ $idea->repositoryName() }} </td></tr>
             <tr><td> {{ __('idea.developmentEffort') }}</td><td><input name="development_effort" type="range" min="0" max="10" value="{{$idea->development_effort}}"></td></tr>
             <tr><td> {{ __('idea.salesImpact') }}</td><td><input name="sales_impact" type="range" min="0" max="10" value="{{$idea->sales_impact}}"></td></tr>
             <tr><td> {{ __('idea.currentImpact') }}</td><td><input name="current_impact" type="range" min="0" max="10" value="{{$idea->current_impact}}"></td></tr>

@@ -79,15 +79,25 @@ class Idea extends BaseModel
         }
     }
 
+    public function repositoryName()
+    {
+        if(!$this->repository) return "";
+        return array_flip(config('issues.repositories'))[$this->repository];
+    }
+
     public function createIssue(IssueCreator $issueCreator)
     {
         $issue = $issueCreator->createIssue(
             $this->repository,
             $this->title,
-            'Issue from idea: '.route('tickets.show', $this)."   \n\r". $this->body
+            'Issue from idea: '.route('idea.show', $this)."   \n\r". $this->body
         );
         $this->update(["issue_id" => $issue->local_id]);
 
         return $issue;
+    }
+
+    public function issueUrl(){
+        return "https://bitbucket.org/{$this->repository}/issues/{$this->issue_id}/";
     }
 }
