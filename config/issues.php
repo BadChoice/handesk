@@ -10,13 +10,13 @@ return [
         'password' => env('BITBUCKET_PASSWORD'),       //basic auth
     ],
     'repositories' => [
-        'Xef Back'    => 'revo-pos/revo-back',
-        'Xef App'     => 'revo-pos/revo-app',
-        'Retail Back' => 'revo-pos/revo-retail',
-        'Retail App'  => 'revo-pos/revo-retail-app',
-        'Flow Back'   => 'revo-pos/revo-flow-back',
-        'Flow App'    => 'revo-pos/revo-flow-app',
+        'Xef Back'      => 'revo-pos/revo-back',
+        'Xef App'       => 'revo-pos/revo-app',
+        'Retail Back'   => 'revo-pos/revo-retail',
+        'Retail App'    => 'revo-pos/revo-retail-app',
+        'Flow Back'     => 'revo-pos/revo-flow-back',
+        'Flow App'      => 'revo-pos/revo-flow-app',
         'In Touch Back' => 'revo-loyalty-app',
-        'In Touch App' => 'revo-loyalty',
+        'In Touch App'  => 'revo-loyalty',
     ],
 ];
