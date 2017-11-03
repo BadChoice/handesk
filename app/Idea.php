@@ -90,7 +90,7 @@ class Idea extends BaseModel
         $issue = $issueCreator->createIssue(
             $this->repository,
             $this->title,
-            'Issue from idea: '.route('idea.show', $this)."   \n\r". $this->body
+            'Issue from idea: '.route('ideas.show', $this)."   \n\r". $this->body
         );
         $this->update(["issue_id" => $issue->local_id]);
 
