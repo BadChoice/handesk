@@ -64,4 +64,17 @@ class Idea extends BaseModel
     {
         return $this->requester->name;
     }
+
+    public function statusName()
+    {
+        switch ($this->status) {
+            case static::STATUS_NEW: return 'new';
+            case static::STATUS_OPEN: return 'open';
+            case static::STATUS_ACCEPTED: return 'accepted';
+            case static::STATUS_RESOLVED: return 'solved';
+            case static::STATUS_CLOSED: return 'closed';
+            case static::STATUS_MERGED: return 'merged';
+            case static::STATUS_DECLINED: return 'declined';
+        }
+    }
 }

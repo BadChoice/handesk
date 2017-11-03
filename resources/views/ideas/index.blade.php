@@ -19,6 +19,7 @@
             <th> {{ trans_choice('idea.repository',1) }}        </th>
             <th> {{ trans_choice('ticket.tag',2) }}             </th>
             <th> {{ trans_choice('ticket.date',2) }}            </th>
+            <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +27,7 @@
             <tr>
                 <td class="small"> @gravatar($idea->requester->email) </td>
                 <td class="text-center"> {{ $idea->score() }}</td>
-                <td> {{ $idea->title }}</td>
+                <td> <a href="{{route('ideas.show', $idea)}}">{{ $idea->title }}</a></td>
                 <td> {{ $idea->requester->name      }}</td>
                 <td>
                     @if($idea->repository)
@@ -35,6 +36,11 @@
                 </td>
                 <td> {{ $idea->tagsString() }}</td>
                 <td> {{ $idea->created_at->diffForHumans() }}</td>
+                <td>
+                    @can('update', $idea)
+                        <a href="{{route('ideas.edit', $idea)}}">@icon(pencil)</a>
+                    @endcan
+                </td>
             </tr>
         @endforeach
         </tbody>

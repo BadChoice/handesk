@@ -16,7 +16,7 @@ class IdeasController extends Controller
     {
         $this->authorize('view', $idea);
 
-        return view('ideas.show', ['ticket' => $idea]);
+        return view('ideas.show', ['idea' => $idea]);
     }
 
     public function create()

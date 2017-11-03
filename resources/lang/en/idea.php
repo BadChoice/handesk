@@ -8,4 +8,5 @@ return [
     'developmentEffort' => 'Development effort',
     'salesImpact'       => 'Sales Impact',
     'currentImpact'     => 'Current Impact',
+    'edit'              => 'Edit',
 ];
