@@ -9,7 +9,7 @@ class IdeasController extends Controller
 {
     public function index()
     {
-        return view('ideas.index', ['ideas' => Idea::pending()->paginate(25) ]);
+        return view('ideas.index', ['ideas' => Idea::pending()->paginate(25)]);
     }
 
     public function show(Idea $idea)
@@ -31,16 +31,17 @@ class IdeasController extends Controller
             'title'              => 'required|min:3',
             'body'               => 'required',
             'repository'         => new ValidRepository,
-            "development_effort" => "integer|max:10|min:0",
-            "sales_impact"       => "integer|max:10|min:0",
-            "current_impact"     => "integer|max:10|min:0",
+            'development_effort' => 'integer|max:10|min:0',
+            'sales_impact'       => 'integer|max:10|min:0',
+            'current_impact'     => 'integer|max:10|min:0',
         ]);
         $idea = Idea::createAndNotify(request('requester'), request('title'), request('body'), request('repository'), request('tags'));
         $idea->update([
-            "development_effort" => request('development_effort'),
-            "sales_impact"       => request('sales_impact'),
-            "current_impact"     => request('current_impact'),
+            'development_effort' => request('development_effort'),
+            'sales_impact'       => request('sales_impact'),
+            'current_impact'     => request('current_impact'),
         ]);
+
         return redirect()->route('ideas.show', $idea);
     }
 }

@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidRepository implements Rule
 {
-
     public function __construct()
     {
     }
@@ -16,11 +15,15 @@ class ValidRepository implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
+     *
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        if ($value == null) return true;
+        if ($value == null) {
+            return true;
+        }
+
         return in_array($value, config('issues.repositories'));
     }
 

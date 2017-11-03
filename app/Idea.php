@@ -22,8 +22,8 @@ class Idea extends BaseModel
     {
         $requester = Requester::findOrCreate($requester['name'], $requester['email'] ?? null);
         $idea      = $requester->ideas()->create([
-            'title' => $title,
-            'body'  => $body,
+            'title'      => $title,
+            'body'       => $body,
             'repository' => $repository,
         ])->attachTags($tags);
 
@@ -37,12 +37,12 @@ class Idea extends BaseModel
 
     public function score()
     {
-        return (int)(($this->sales_impact + $this->current_impact) / ($this->development_effort/10 + 1));
+        return (int) (($this->sales_impact + $this->current_impact) / ($this->development_effort / 10 + 1));
     }
 
     public function scopePending($query)
     {
-        return $query->whereStatus(Idea::STATUS_NEW);
+        return $query->whereStatus(self::STATUS_NEW);
     }
 
     public function tags()
