@@ -1,4 +1,5 @@
 <?php
+
 return [
     'idea'              => 'Idea|Ideas',
     'new'               => 'New',

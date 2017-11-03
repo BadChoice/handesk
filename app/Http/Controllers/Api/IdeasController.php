@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Idea;
-use App\Rules\ValidRepository;
 use App\Settings;
 use App\Requester;
 use Illuminate\Http\Response;
+use App\Rules\ValidRepository;
 
 class IdeasController extends ApiController
 {
@@ -20,8 +20,8 @@ class IdeasController extends ApiController
     public function store()
     {
         $this->validate(request(), [
-            'requester' => 'required|array',
-            'title'     => 'required|min:3',
+            'requester'  => 'required|array',
+            'title'      => 'required|min:3',
             'repository' => new ValidRepository,
         ]);
         $idea = Idea::createAndNotify(

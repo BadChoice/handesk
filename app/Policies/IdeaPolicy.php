@@ -17,7 +17,6 @@ class IdeaPolicy
         }
     }
 
-
     /**
      * Determine whether the user can view the ticket.
      *
@@ -28,7 +27,6 @@ class IdeaPolicy
      */
     public function view(User $user, Idea $idea)
     {
-
     }
 
     /**
