@@ -3,8 +3,8 @@
 namespace App;
 
 use App\Authenticatable\Admin;
-use App\Notifications\IdeaCreated;
 use App\Services\IssueCreator;
+use App\Notifications\IdeaCreated;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Idea extends BaseModel
@@ -81,7 +81,10 @@ class Idea extends BaseModel
 
     public function repositoryName()
     {
-        if(!$this->repository) return "";
+        if (! $this->repository) {
+            return '';
+        }
+
         return array_flip(config('issues.repositories'))[$this->repository];
     }
 
@@ -90,14 +93,15 @@ class Idea extends BaseModel
         $issue = $issueCreator->createIssue(
             $this->repository,
             $this->title,
-            'Issue from idea: '.route('ideas.show', $this)."   \n\r". $this->body
+            'Issue from idea: '.route('ideas.show', $this)."   \n\r".$this->body
         );
-        $this->update(["issue_id" => $issue->local_id]);
+        $this->update(['issue_id' => $issue->local_id]);
 
         return $issue;
     }
 
-    public function issueUrl(){
+    public function issueUrl()
+    {
         return "https://bitbucket.org/{$this->repository}/issues/{$this->issue_id}/";
     }
 }

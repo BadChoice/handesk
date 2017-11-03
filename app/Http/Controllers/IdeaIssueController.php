@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Idea;
-use App\Ticket;
 use App\Services\IssueCreator;
 
 class IdeaIssueController extends Controller
