@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
-use App\Jobs\EmailParsers\NewCommentEmailParser;
-use App\Jobs\EmailParsers\NewIdeaEmailParser;
-use App\Jobs\EmailParsers\NewTicketEmailParser;
 use Illuminate\Bus\Queueable;
 use App\Services\Pop3\Mailbox;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Jobs\EmailParsers\NewIdeaEmailParser;
+use App\Jobs\EmailParsers\NewTicketEmailParser;
+use App\Jobs\EmailParsers\NewCommentEmailParser;
 
 class ParseNewEmails implements ShouldQueue
 {
@@ -30,14 +30,14 @@ class ParseNewEmails implements ShouldQueue
         $pop3->getMessages()->each(function ($message) use ($pop3) {
             $this->processMessage($message);
             $pop3->delete($message->id);
-            $this->messagesParsed ++;
+            $this->messagesParsed++;
         });
         $pop3->expunge();
     }
 
     private function processMessage($message)
     {
-        collect($this->handlers)->first(function($handler) use($message){
+        collect($this->handlers)->first(function ($handler) use ($message) {
             return (new $handler)->handle($message);
         });
     }

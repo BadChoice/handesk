@@ -10,5 +10,5 @@ return [
     'salesImpact'       => 'Impacte comercial',
     'currentImpact'     => 'Impacte actual',
     'edit'              => 'Editar',
-    'fromTicket'        => 'Aquest ticket s\'ha convertit en una idea'
+    'fromTicket'        => 'Aquest ticket s\'ha convertit en una idea',
 ];

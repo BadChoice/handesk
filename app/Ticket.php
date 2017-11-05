@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Services\TicketLanguageDetector;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
@@ -10,11 +9,12 @@ use App\Events\TicketCommented;
 use App\Notifications\NewComment;
 use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
+use Illuminate\Support\Facades\App;
 use App\Notifications\TicketCreated;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketEscalated;
+use App\Services\TicketLanguageDetector;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\App;
 
 class Ticket extends BaseModel
 {
@@ -311,20 +311,24 @@ class Ticket extends BaseModel
     public function createIdea()
     {
         $idea = Idea::create([
-            "requester_id" => $this->requester_id,
-            "title" => $this->title,
-            "body" => $this->body
+            'requester_id' => $this->requester_id,
+            'title'        => $this->title,
+            'body'         => $this->body,
         ]);
         TicketEvent::make($this, "Idea created #{$idea->id}");
         App::setLocale((new TicketLanguageDetector($this))->detect());
-        $this->addComment(auth()->user(), __('idea.fromTicket'), Ticket::STATUS_SOLVED);
+        $this->addComment(auth()->user(), __('idea.fromTicket'), self::STATUS_SOLVED);
+
         return $idea;
     }
 
     public function getIdeaId()
     {
-        $issueEvent = $this->events()->where('body','like','%Idea created%')->first();
-        if(! $issueEvent) return null;
-        return explode("#",$issueEvent->body)[1];
+        $issueEvent = $this->events()->where('body', 'like', '%Idea created%')->first();
+        if (! $issueEvent) {
+            return null;
+        }
+
+        return explode('#', $issueEvent->body)[1];
     }
 }

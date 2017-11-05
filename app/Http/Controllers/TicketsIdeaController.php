@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Idea;
 use App\Ticket;
-use App\Services\IssueCreator;
-use App\TicketEvent;
 
 class TicketsIdeaController extends Controller
 {
@@ -20,8 +18,8 @@ class TicketsIdeaController extends Controller
 
     private function validateItIsNotAnIdeaYet($ticket)
     {
-        if($ticket->getIdeaId()){
-            throw new \Exception("It has already been created as an idea");
+        if ($ticket->getIdeaId()) {
+            throw new \Exception('It has already been created as an idea');
         }
     }
 }

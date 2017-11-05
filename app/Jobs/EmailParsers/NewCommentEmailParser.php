@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Jobs\EmailParsers;
 
 use App\Attachment;
 use App\Services\Pop3\IncomingMailCommentParser;
 
-class NewCommentEmailParser{
-
+class NewCommentEmailParser
+{
     public function handle($message)
     {
         $messageParser = new IncomingMailCommentParser($message);
@@ -19,5 +20,4 @@ class NewCommentEmailParser{
 
         return true;
     }
-
 }
