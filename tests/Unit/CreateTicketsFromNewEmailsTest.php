@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Jobs\CreateTicketsFromNewEmails;
+use App\Jobs\ParseNewEmails;
 use App\Requester;
 use App\Services\Pop3\FakeMailbox;
 use App\Services\Pop3\FakeIncomingMail;
@@ -27,7 +27,7 @@ class CreateTicketsFromNewEmailsTest extends TestCase
         ];
         app()->instance(Mailbox::class, $fakePop);
 
-        dispatch( new CreateTicketsFromNewEmails() );
+        dispatch( new ParseNewEmails() );
 
         $this->assertEquals(2, Ticket::count());
         tap(Ticket::first(), function($ticket){
@@ -54,7 +54,7 @@ class CreateTicketsFromNewEmailsTest extends TestCase
 
         app()->instance(Mailbox::class, $fakePop);
 
-        dispatch( new CreateTicketsFromNewEmails() );
+        dispatch( new ParseNewEmails() );
 
         $this->assertEquals(1, Ticket::count());
 
@@ -86,7 +86,7 @@ class CreateTicketsFromNewEmailsTest extends TestCase
 
         app()->instance(Mailbox::class, $fakePop);
 
-        dispatch( new CreateTicketsFromNewEmails() );
+        dispatch( new ParseNewEmails() );
 
         $this->assertEquals(1, Ticket::count());
         $this->assertEquals(Ticket::STATUS_OPEN, $ticketThatWillGetTheCommentByMail->fresh()->status);

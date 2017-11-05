@@ -3,17 +3,10 @@
 namespace Tests\Feature;
 
 use App\Idea;
-use App\Notifications\NewComment;
-use App\Notifications\TicketEscalated;
-use App\Services\Bitbucket\Bitbucket;
-use App\Services\IssueCreator;
-use App\Team;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
-use Mockery;
-use Mockery\Mock;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -27,7 +20,8 @@ class TicketIdeaTest extends TestCase
         Notification::fake();
         $user = factory(User::class)->create();
         $ticket = factory(Ticket::class)->create([
-            "status" => Ticket::STATUS_OPEN
+            "status" => Ticket::STATUS_OPEN,
+            "body" => "An english body to make sure it is parsed as english"
         ]);
 
         $response = $this->actingAs($user)->post("tickets/{$ticket->id}/idea");
@@ -57,7 +51,7 @@ class TicketIdeaTest extends TestCase
     }
 
     /** @test */
-    public function the_idea_creted_text_uses_the_ticket_language()
+    public function the_idea_created_text_uses_the_ticket_language()
     {
         Notification::fake();
         $user = factory(User::class)->create();

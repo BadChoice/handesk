@@ -25,6 +25,9 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Create issues to your code repository directly from the ticket   
 · Updating the ticket automatically when an issue is marked as resolved         
 · UI multi language support (default en, alternative ca, de, fr, es)    
+· Roadmap module, you can create ideas that come from your customers or your own, give them deadlines and integrate them with your repository manager,
+you can even create ideas from support tickets so you never lose track.   
+· You can also create ideas by sending an email to you support accounts starting with `Idea:` it will create an idea instead of a ticket     
 
 > Follow us on twitter @codepassion to stay tuned
 
