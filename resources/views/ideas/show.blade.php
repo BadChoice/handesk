@@ -6,7 +6,7 @@
         </div>
 
         <h3>#{{ $idea->id }}. {{ $idea->title }} </h3>
-        @busy <span class="label ticket-status-{{ $idea->statusName() }}">{{ __("idea." . $idea->statusName() ) }} </span> &nbsp;
+        @busy <span class="label idea-status-{{ $idea->statusName() }}">{{ __("idea." . $idea->statusName() ) }} </span> &nbsp;
         <span class="date">{{  $idea->created_at->diffForHumans() }} · {{  $idea->requester->name }} &lt;{{$idea->requester->email}}&gt;</span>
         <h4> {{ __('idea.score') }}: {{ $idea->score() }} </h4>
 

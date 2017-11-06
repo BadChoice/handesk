@@ -3,7 +3,6 @@
 return [
     'idea'              => 'Idea|Idees',
     'pendingIdea'       => 'Idea pendent|Idees pendents',
-    'new'               => 'Nova',
     'score'             => 'Puntuació',
     'repository'        => 'Repositori',
     'roadmap'           => 'Roadmap',
@@ -13,6 +12,11 @@ return [
     'edit'              => 'Editar',
     'fromTicket'        => 'Aquest ticket s\'ha convertit en una idea',
     'save'              => 'Guardar',
+    'new'               => 'Nova',
+    'open'              => 'Oberta',
+    'closed'            => 'Tancada',
+    'solved'            => 'Solucionada',
     'accepted'          => 'Acceptada',
     'declined'          => 'Declinada',
+    'dueDate'           => 'Termini',
 ];
