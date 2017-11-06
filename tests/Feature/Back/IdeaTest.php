@@ -28,7 +28,7 @@ class IdeaTest extends TestCase
         $user = factory(User::class)->create(["admin" => true]);
         factory(Idea::class)->create(["status" => Idea::STATUS_NEW]);
 
-        $response = $this->actingAs($user)->get('ideas');
+        $response = $this->actingAs($user)->get('ideas?pending');
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertSee( Idea::first()->requester->name);
