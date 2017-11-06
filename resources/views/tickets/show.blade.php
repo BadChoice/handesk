@@ -39,7 +39,8 @@
             {{ Form::close() }}
         </div>
     @endif
-    @include('components.ticketComments', ["comments" => $ticket->commentsAndNotes->merge($ticket->events)->sortBy('created_at')->reverse() ])
+
+    @include('components.ticketComments', ["comments" => $ticket->commentsAndNotesAndEvents()->sortBy('created_at')->reverse() ])
 @endsection
 
 

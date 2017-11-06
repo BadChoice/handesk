@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::delete('tickets/{ticket}/escalate', 'TicketsEscalateController@destroy')->name('tickets.escalate.destroy');
 
     Route::post('tickets/{ticket}/issue', 'TicketsIssueController@store')->name('tickets.issue.store');
+    Route::post('tickets/{ticket}/idea', 'TicketsIdeaController@store')->name('tickets.idea.store');
 
     Route::resource('leads', 'LeadsController');
     Route::get('leads/search/{text}', 'LeadsSearchController@index')->name('leads.search');
@@ -56,6 +57,11 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('teams/{token}/join', 'TeamMembershipController@store')->name('membership.store');
 
     Route::group(['middleware' => 'can:see-admin'], function () {
+        Route::resource('ideas', 'IdeasController');
+        Route::get('roadmap', 'RoadmapController@index')->name('roadmap.index');
+        Route::resource('ideas/{idea}/tags', 'IdeaTagsController', ['only' => ['store', 'destroy'], 'as' => 'ideas']);
+        Route::post('ideas/{idea}/issue', 'IdeaIssueController@store')->name('ideas.issue.store');
+
         Route::resource('users', 'UsersController', ['only' => ['index', 'destroy']]);
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);

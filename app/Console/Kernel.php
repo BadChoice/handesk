@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CloseSolvedTickets::class,
-        Commands\CreateTicketsFromNewEmails::class,
+        Commands\ParseNewEmails::class,
         Commands\SendDailyTasksEmail::class,
     ];
 
@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('handesk:closeSolvedTickets')->dailyAt('23:55');
-        $schedule->command('handesk:createTicketsFromNewEmails')->everyMinute();
+        $schedule->command('handesk:parseNewEmails')->everyMinute();
         $schedule->command('handesk:sendDailyTasksEmail')->dailyAt('6:30');
     }
 
