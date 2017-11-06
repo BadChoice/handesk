@@ -18,7 +18,7 @@
                     <span class="label ticket-status-{{ $idea->statusName() }}">{{ $idea->statusName()[0] }} </span>
                     <a href="{{route('ideas.show', $idea)}}">{{ $idea->title }}</a>
                     <div class="lighter-gray mt2">
-                        ({{ $idea->score() }}) {{ $idea->repositoryName() }}
+                        ({{ $idea->score() }}) {{ $idea->repositoryName() }} {{ $idea->due_date }}
                     </div>
                 </div>
             @endforeach

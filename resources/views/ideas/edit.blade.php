@@ -19,6 +19,7 @@
             <tr><td> {{ trans_choice('ticket.tag',2) }}</td><td colspan="4"> <input id="tags" name="tags" value="{{ $idea->tagsString() }}"></td></tr>
             <tr><td> {{ __('ticket.body') }} </td><td><textarea name="body">{{$idea->body}}</textarea></td></tr>
 
+            <tr><td> {{__('idea.dueDate')}}</td><td><input type="date" name="due_date" value="{{$idea->due_date}}"></td></tr>
             <tr><td>{{ __('ticket.status') }}</td><td>
                     {{ Form::select("status", [
                         App\Idea::STATUS_NEW        => __("ticket.new"),

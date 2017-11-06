@@ -26,7 +26,7 @@ class IdeaTest extends TestCase
     /** @test */
     public function can_see_ideas(){
         $user = factory(User::class)->create(["admin" => true]);
-        factory(Idea::class)->create();
+        factory(Idea::class)->create(["status" => Idea::STATUS_NEW]);
 
         $response = $this->actingAs($user)->get('ideas');
 

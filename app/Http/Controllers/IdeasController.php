@@ -48,6 +48,7 @@ class IdeasController extends Controller
             'body'               => request('body'),
             'repository'         => request('repository'),
             'status'             => request('status'),
+            'due_date'           => request('due_date'),
             'development_effort' => request('development_effort'),
             'sales_impact'       => request('sales_impact'),
             'current_impact'     => request('current_impact'),
