@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
 
     Route::group(['middleware' => 'can:see-admin'], function () {
         Route::resource('ideas', 'IdeasController');
+        Route::get('roadmap', 'RoadmapController@index')->name('roadmap.index');
         Route::resource('ideas/{idea}/tags', 'IdeaTagsController', ['only' => ['store', 'destroy'], 'as' => 'ideas']);
         Route::post('ideas/{idea}/issue', 'IdeaIssueController@store')->name('ideas.issue.store');
 

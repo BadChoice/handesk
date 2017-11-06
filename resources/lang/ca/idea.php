@@ -2,6 +2,7 @@
 
 return [
     'idea'              => 'Idea|Idees',
+    'pendingIdea'       => 'Idea pendent|Idees pendents',
     'new'               => 'Nova',
     'score'             => 'Puntuació',
     'repository'        => 'Repositori',
@@ -11,4 +12,7 @@ return [
     'currentImpact'     => 'Impacte actual',
     'edit'              => 'Editar',
     'fromTicket'        => 'Aquest ticket s\'ha convertit en una idea',
+    'save'              => 'Guardar',
+    'accepted'          => 'Acceptada',
+    'declined'          => 'Declinada',
 ];

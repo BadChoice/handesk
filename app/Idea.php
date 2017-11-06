@@ -46,6 +46,20 @@ class Idea extends BaseModel
         return $query->whereStatus(self::STATUS_NEW);
     }
 
+    public function scopeOngoing($query)
+    {
+        return $query->where(function($query){
+            return $query->where('status',self::STATUS_OPEN)->orWhere('status',self::STATUS_ACCEPTED);
+        });
+    }
+
+    public function scopeRoadmap($query)
+    {
+        return $query->where(function($query){
+            return $query->where('status',self::STATUS_OPEN)->orWhere('status',self::STATUS_ACCEPTED)->orWhere('status', self::STATUS_RESOLVED);
+        });
+    }
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');

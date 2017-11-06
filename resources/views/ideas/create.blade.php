@@ -25,14 +25,8 @@
 
             <tr><td>{{ __('idea.repository') }}: </td><td>
                     {{ Form::select("repository", array_merge(["" => "--"], array_flip(config('issues.repositories')))) }}
-            </td></tr>
-            <tr><td>{{ __('ticket.status') }}: </td><td>
-                    {{ Form::select("status", [
-                        App\Idea::STATUS_NEW        => __("ticket.new"),
-                        App\Idea::STATUS_OPEN       => __("ticket.open"),
-                    ]) }}
-            <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.new') }}</button> </td>
-            </tr>
+            </td>
+            <tr><td><button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.new') }}</button> </td></tr>
         </table>
         {{ Form::close() }}
     </div>
