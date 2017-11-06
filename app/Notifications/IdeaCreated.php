@@ -26,7 +26,7 @@ class IdeaCreated extends Notification
      */
     public function via($notifiable)
     {
-        if (isset($notifiable->settings) && $notifiable->settings->ticket_created_notification == false) {
+        if (isset($notifiable->settings) && $notifiable->settings->new_idea_notification == false) {
             return [];
         }
 
@@ -43,12 +43,12 @@ class IdeaCreated extends Notification
     public function toMail($notifiable)
     {
         $mail = (new MailMessage)
-            ->subject(__('notification.newTicket').": #{$this->idea->id}: {$this->idea->title}")
+            ->subject(__('notification.newIdea').": #{$this->idea->id}: {$this->idea->title}")
             ->replyTo(config('mail.fetch.username'))
-            ->view('emails.ticket', [
-                    'title'  => __('notification.newTicketCreated'),
-                    'ticket' => $this->idea,
-                    'url'    => route('tickets.show', $this->idea),
+            ->view('emails.idea', [
+                    'title'  => __('notification.newIdeaCreated'),
+                    'idea' => $this->idea,
+                    'url'    => route('ideas.show', $this->idea),
                 ]
             );
         if ($this->idea->requester->email) {
@@ -61,7 +61,7 @@ class IdeaCreated extends Notification
     public function toSlack($notifiable)
     {
         return (new BaseTicketSlackMessage($this->idea, $notifiable))
-                ->content(__('notification.ticketCreated'));
+                ->content(__('notification.newIdeaCreated'));
     }
 
     /**

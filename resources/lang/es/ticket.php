@@ -45,5 +45,6 @@ return [
     'escalatedDesc'    => 'Este tíquet está <b>escalado</b>, todos los comentarios serán añadidos como notas privadas hasta que se desescale',
     'createIssue'      => 'Crear una incidencia',
     'seeIssue'         => 'Ver incidencia',
-
+    'createIdea'       => 'Crear Idea',
+    'seeIdea'          => 'Ver Idea',
 ];

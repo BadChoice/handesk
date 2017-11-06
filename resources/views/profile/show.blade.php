@@ -25,6 +25,7 @@
             <tr><td>{{ __('user.ticketUpdatedNotification') }}  </td><td> {{ Form::checkbox('ticket_updated_notification',true, $user->settings->ticket_updated_notification) }}</td></tr>
             <tr><td>{{ __('user.newLeadNotification')       }}  </td><td> {{ Form::checkbox('new_lead_notification',true, $user->settings->new_lead_notification) }}</td></tr>
             <tr><td>{{ __('user.leadAssignedNotification')  }}  </td><td> {{ Form::checkbox('lead_assigned_notification',true, $user->settings->lead_assigned_notification) }}</td></tr>
+            <tr><td>{{ __('user.newIdeaNotification')       }}  </td><td> {{ Form::checkbox('new_idea_notification',true, $user->settings->new_idea_notification) }}</td></tr>
             <tr><td>{{ __('user.dailyTasksNotification')    }}: </td><td> <input type="checkbox" name="daily_tasks_notification" @if( $user->settings->daily_tasks_notification ) checked @endif></td></tr>
             <tr><td></td></tr>
             <tr><td>{{ __('user.ticketsSignature')          }}: </td><td><textarea name="tickets_signature"> {{ $user->settings->tickets_signature }} </textarea> </td></tr>

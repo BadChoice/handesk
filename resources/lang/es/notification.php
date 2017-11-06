@@ -10,4 +10,6 @@ return [
     'ticketAssignedTo'   => 'Tíquet asignado a',
     'ticketUpdated'      => 'Tíquet actualizado',
     'ticketEscalated'    => 'Tíquet escalado',
+    'newIdea'            => 'Nueva idea',
+    'newIdeaCreated'     => 'Nueva idea',
 ];

@@ -10,4 +10,6 @@ return [
     'ticketAssignedTo'   => 'Tiquet assignat a',
     'ticketUpdated'      => 'Tiquet actualitzat',
     'ticketEscalated'    => 'Tiquet escalat',
+    'newIdea'            => 'Nova idea',
+    'newIdeaCreated'     => 'Nova idea',
 ];

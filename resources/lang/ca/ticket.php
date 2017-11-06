@@ -45,4 +45,6 @@ return [
     'escalatedDesc'    => 'Aquest tiquet està <b>escalat</b>, tots els comentaris seràn afegits com a notes privades fins que es des-escali',
     'createIssue'      => 'Crear una incidència',
     'seeIssue'         => 'Veure incidència',
+    'createIdea'       => 'Crear Idea',
+    'seeIdea'          => 'Veure Idea',
 ];

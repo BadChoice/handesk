@@ -19,4 +19,5 @@ return [
     'ticketUpdatedNotification'  => 'Ticket updated notification',
     'newLeadNotification'        => 'New lead notification',
     'leadAssignedNotification'   => 'Lead assigned notification',
+    'newIdeaNotification'        => 'New idea notification',
 ];
