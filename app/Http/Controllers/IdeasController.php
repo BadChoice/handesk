@@ -9,8 +9,10 @@ class IdeasController extends Controller
 {
     public function index()
     {
-        if(request('pending'))
+        if (request('pending')) {
             return view('ideas.index', ['ideas' => Idea::pending()->paginate(25)]);
+        }
+
         return view('ideas.index', ['ideas' => Idea::ongoing()->paginate(25)]);
     }
 
@@ -53,6 +55,7 @@ class IdeasController extends Controller
             'sales_impact'       => request('sales_impact'),
             'current_impact'     => request('current_impact'),
         ]);
+
         return redirect()->route('ideas.index');
     }
 

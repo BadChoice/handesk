@@ -48,15 +48,15 @@ class Idea extends BaseModel
 
     public function scopeOngoing($query)
     {
-        return $query->where(function($query){
-            return $query->where('status',self::STATUS_OPEN)->orWhere('status',self::STATUS_ACCEPTED);
+        return $query->where(function ($query) {
+            return $query->where('status', self::STATUS_OPEN)->orWhere('status', self::STATUS_ACCEPTED);
         });
     }
 
     public function scopeRoadmap($query)
     {
-        return $query->where(function($query){
-            return $query->where('status',self::STATUS_OPEN)->orWhere('status',self::STATUS_ACCEPTED)->orWhere('status', self::STATUS_RESOLVED);
+        return $query->where(function ($query) {
+            return $query->where('status', self::STATUS_OPEN)->orWhere('status', self::STATUS_ACCEPTED)->orWhere('status', self::STATUS_RESOLVED);
         });
     }
 
