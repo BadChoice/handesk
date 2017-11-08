@@ -17,7 +17,7 @@ class ApiAuth
      */
     public function handle($request, Closure $next)
     {
-        if (request()->header('token') != env('API_TOKEN', 'the-api-token')) {
+        if (request()->header('token') != config('handesk.api_token')) {
             return response()->json(['error' => 'unauthorized'], Response::HTTP_FORBIDDEN);
         }
 
