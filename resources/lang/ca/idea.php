@@ -20,12 +20,12 @@ Sempre que ho desitgis, podràs consultar el nostre full de ruta, amb la relaci�
 Gràcies per permetre\'ns crèixer amb tu. Les vostres aportacions són el nostre capital més valuós per millorar.
 
 El Equipo de REVO',
-    'save'              => 'Guardar',
-    'new'               => 'Nova',
-    'open'              => 'Oberta',
-    'closed'            => 'Tancada',
-    'solved'            => 'Solucionada',
-    'accepted'          => 'Acceptada',
-    'declined'          => 'Declinada',
-    'dueDate'           => 'Termini',
+    'save'     => 'Guardar',
+    'new'      => 'Nova',
+    'open'     => 'Oberta',
+    'closed'   => 'Tancada',
+    'solved'   => 'Solucionada',
+    'accepted' => 'Acceptada',
+    'declined' => 'Declinada',
+    'dueDate'  => 'Termini',
 ];

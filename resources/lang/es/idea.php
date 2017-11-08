@@ -20,12 +20,12 @@ Siempre que lo desees, podrás consultar nuestra Hoja de Ruta de Desarrollo (hip
 Gracias por permitirnos crecer contigo. Vuestras aportaciones son nuestro capital más valioso para mejorar.
 
 El Equipo de REVO',
-    'save'              => 'Guardar',
-    'new'               => 'Nueva',
-    'open'              => 'Abierta',
-    'closed'            => 'Cerrada',
-    'solved'            => 'Solucionada',
-    'accepted'          => 'Acceptada',
-    'declined'          => 'Declinada',
-    'dueDate'           => 'Plazo',
+    'save'     => 'Guardar',
+    'new'      => 'Nueva',
+    'open'     => 'Abierta',
+    'closed'   => 'Cerrada',
+    'solved'   => 'Solucionada',
+    'accepted' => 'Acceptada',
+    'declined' => 'Declinada',
+    'dueDate'  => 'Plazo',
 ];
