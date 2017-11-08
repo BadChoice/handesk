@@ -2,14 +2,14 @@
 
 return [
     'idea'              => 'Idea|Ideas',
-    'pendingIdea'       => 'Pending Idea|Pending Ideas',
-    'score'             => 'Score',
-    'repository'        => 'Repository',
+    'pendingIdea'       => 'Idea pendiente|Ideas pendientes',
+    'score'             => 'Puntuación',
+    'repository'        => 'Repositorio',
     'roadmap'           => 'Roadmap',
-    'developmentEffort' => 'Development effort',
-    'salesImpact'       => 'Sales Impact',
-    'currentImpact'     => 'Current Impact',
-    'edit'              => 'Edit',
+    'developmentEffort' => 'Esuerzo de desarrollo',
+    'salesImpact'       => 'Impacto comercial',
+    'currentImpact'     => 'Impacto actual',
+    'edit'              => 'Editar',
     'fromTicket'        => 'Notificación | Banco de Ideas REVO:
 Tu ticket se ha cerrado como incidencia y ha generado una sugerencia que irá directa al Banco de Ideas REVO.
 
@@ -20,12 +20,12 @@ Siempre que lo desees, podrás consultar nuestra Hoja de Ruta de Desarrollo (hip
 Gracias por permitirnos crecer contigo. Vuestras aportaciones son nuestro capital más valioso para mejorar.
 
 El Equipo de REVO',
-    'save'              => 'Save',
-    'new'               => 'New',
-    'open'              => 'Open',
-    'closed'            => 'Closed',
-    'solved'            => 'Solved',
-    'accepted'          => 'Accepted',
-    'declined'          => 'Declined',
-    'dueDate'           => 'Due date',
+    'save'              => 'Guardar',
+    'new'               => 'Nueva',
+    'open'              => 'Abierta',
+    'closed'            => 'Cerrada',
+    'solved'            => 'Solucionada',
+    'accepted'          => 'Acceptada',
+    'declined'          => 'Declinada',
+    'dueDate'           => 'Plazo',
 ];
