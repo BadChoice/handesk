@@ -29,7 +29,7 @@ class TicketIdeaTest extends TestCase
         $response->assertStatus( Response::HTTP_FOUND );
         $this->assertEquals(Ticket::STATUS_SOLVED, $ticket->fresh()->status);
         $this->assertEquals(1, $ticket->fresh()->commentsAndNotes->count() );
-        $this->assertContains("This ticket has been created as an idea", $ticket->fresh()->commentsAndNotes->first()->body);
+        $this->assertContains("Notification | REVO Ideas bucket", $ticket->fresh()->commentsAndNotes->first()->body);
         $this->assertContains("Idea created #1", $ticket->fresh()->events->first()->body);
         $this->assertEquals(1, Idea::count());
         $this->assertEquals(Idea::first()->title, $ticket->title);
@@ -63,6 +63,6 @@ class TicketIdeaTest extends TestCase
         $response = $this->actingAs($user)->post("tickets/{$ticket->id}/idea");
 
         $response->assertStatus( Response::HTTP_FOUND );
-        $this->assertContains("Aquest ticket s'ha convertit en una idea", $ticket->fresh()->commentsAndNotes->first()->body);
+        $this->assertContains("Notificació | Banc d'Idees REVO", $ticket->fresh()->commentsAndNotes->first()->body);
     }
 }

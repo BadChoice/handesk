@@ -10,14 +10,14 @@ return [
     'salesImpact'       => 'Sales Impact',
     'currentImpact'     => 'Current Impact',
     'edit'              => 'Edit',
-    'fromTicket'        => 'Notificación | Banco de Ideas REVO:
-Tu ticket se ha cerrado como incidencia y ha generado una sugerencia que irá directa al Banco de Ideas REVO.
+    'fromTicket'        => 'Notification | REVO Ideas bucket:
+Your ticket has been closed as an issue, and it has been created as an idea into REVO Ideas bucket.
 
-Todas las aportaciones depositadas en el Banco de Ideas REVO, serán analizadas por un Comité Multidisciplinar (compuesto por personas de nuestros departamentos de Desarrollo - Soporte - Comercial), que será el que valore la viabilidad de su implementación.
+All the ideas will be analized by REVO team, and evaluated its viability.
 
-Siempre que lo desees, podrás consultar nuestra Hoja de Ruta de Desarrollo (hipervínculo), con la relación actualizada de todas las propuestas aprobadas y la fecha estimada en la que se prevé cada implementación.
+You can always check our roadmap, with the updated status of all the ideas and its estimated due date.
 
-Gracias por permitirnos crecer contigo. Vuestras aportaciones son nuestro capital más valioso para mejorar.
+Thank you to let us grow with you..
 
 El Equipo de REVO',
     'save'              => 'Save',
