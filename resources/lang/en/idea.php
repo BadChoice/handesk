@@ -20,12 +20,12 @@ You can always check our roadmap, with the updated status of all the ideas and i
 Thank you to let us grow with you..
 
 El Equipo de REVO',
-    'save'              => 'Save',
-    'new'               => 'New',
-    'open'              => 'Open',
-    'closed'            => 'Closed',
-    'solved'            => 'Solved',
-    'accepted'          => 'Accepted',
-    'declined'          => 'Declined',
-    'dueDate'           => 'Due date',
+    'save'     => 'Save',
+    'new'      => 'New',
+    'open'     => 'Open',
+    'closed'   => 'Closed',
+    'solved'   => 'Solved',
+    'accepted' => 'Accepted',
+    'declined' => 'Declined',
+    'dueDate'  => 'Due date',
 ];

@@ -46,9 +46,9 @@ class IdeaCreated extends Notification
             ->subject(__('notification.newIdea').": #{$this->idea->id}: {$this->idea->title}")
             ->replyTo(config('mail.fetch.username'))
             ->view('emails.idea', [
-                    'title'  => __('notification.newIdeaCreated'),
-                    'idea' => $this->idea,
-                    'url'    => route('ideas.show', $this->idea),
+                    'title' => __('notification.newIdeaCreated'),
+                    'idea'  => $this->idea,
+                    'url'   => route('ideas.show', $this->idea),
                 ]
             );
         if ($this->idea->requester->email) {
