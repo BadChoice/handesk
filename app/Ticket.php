@@ -314,7 +314,7 @@ class Ticket extends BaseModel
             'requester_id' => $this->requester_id,
             'title'        => $this->title,
             'body'         => $this->body,
-        ])->attachTags(["ticket"]);
+        ])->attachTags(['ticket']);
         TicketEvent::make($this, "Idea created #{$idea->id}");
         App::setLocale((new TicketLanguageDetector($this))->detect());
         $this->addComment(auth()->user(), __('idea.fromTicket'), self::STATUS_SOLVED);
