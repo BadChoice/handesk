@@ -15,8 +15,6 @@ El teu tiquet s\'ha tancat i s\'ha generat una suggerència que anirà directame
 
 Totes les aportacions dipositades en el Banc d\'Idees REVO, seran analitzades per un Comitè Multidisciplinari (compost per persones dels nostres departaments Enginyeria - Suport - Comercial), que serà qui valorarà la viabilitat de la seva implementació.
 
-Sempre que ho desitgis, podràs consultar el nostre full de ruta, amb la relació actualitzada de totes les propostes aprovades i la data estimada en què es preveu cada implementació.
-
 Gràcies per permetre\'ns crèixer amb tu. Les vostres aportacions són el nostre capital més valuós per millorar.
 
 El Equipo de REVO',
