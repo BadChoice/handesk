@@ -15,8 +15,6 @@ Your ticket has been closed as an issue, and it has been created as an idea into
 
 All the ideas will be analized by REVO team, and evaluated its viability.
 
-You can always check our roadmap, with the updated status of all the ideas and its estimated due date.
-
 Thank you to let us grow with you..
 
 El Equipo de REVO',
