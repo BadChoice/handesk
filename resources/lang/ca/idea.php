@@ -17,7 +17,7 @@ Totes les aportacions dipositades en el Banc d\'Idees REVO, seran analitzades pe
 
 Gràcies per permetre\'ns crèixer amb tu. Les vostres aportacions són el nostre capital més valuós per millorar.
 
-El Equipo de REVO',
+L\'Equip de REVO',
     'save'     => 'Guardar',
     'new'      => 'Nova',
     'open'     => 'Oberta',
