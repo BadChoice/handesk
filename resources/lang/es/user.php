@@ -11,7 +11,7 @@ return [
     'newPassword'                => 'Nueva contraseña',
     'confirmPassword'            => 'Confirmar contraseña',
     'changePassword'             => 'Cambiar contraseña',
-    'ticketsSignature'           => 'Signatura de los tíquets',
+    'ticketsSignature'           => 'Firma de los tickets',
     'notification'               => 'Notificación|Notificaciones',
     'dailyTasksNotification'     => 'Notificación de tareas diarias',
     'newTicketNotification'      => 'Notificación de nuevo tíquet',
