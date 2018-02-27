@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('old_password', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, current($parameters));
         });
+
+        Validator::replacer('old_password', function ($message, $attribute, $rule, $parameters) {
+            return __('passwords.change_error');
+        });
     }
 
     /**
