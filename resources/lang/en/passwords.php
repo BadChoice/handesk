@@ -17,7 +17,7 @@ return [
     'reset'         => 'Your password has been reset!',
     'sent'          => 'We have e-mailed your password reset link!',
     'token'         => 'This password reset token is invalid.',
-    'user'          => "We can't find a user with that e-mail address.",
-    'change_error'  => "The password you entered did not match your current password."
+    'user'          => 'We can't find a user with that e-mail address.',
+    'change_error'  => 'The password you entered did not match your current password.',
 
 ];
