@@ -12,7 +12,7 @@ use App\Jobs\EmailParsers\NewIdeaEmailParser;
 use App\Jobs\EmailParsers\NewTicketEmailParser;
 use App\Jobs\EmailParsers\NewCommentEmailParser;
 
-class ParseNewEmails implements ShouldQueue
+class ParseNewEmails /*implements ShouldQueue*/
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
