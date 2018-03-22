@@ -34,7 +34,7 @@ class Ticket extends BaseModel
 
     public static function createAndNotify($requester, $title, $body, $tags)
     {
-        $requester = Requester::findOrCreate($requester['name'] ?? "Unknown", $requester['email'] ?? null);
+        $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $ticket    = $requester->tickets()->create([
             'title'        => $title,
             'body'         => $body,
