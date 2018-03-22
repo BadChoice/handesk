@@ -54,13 +54,14 @@ class Kpi extends BaseModel
 
     public function addValue($value)
     {
+        $newTotal = $this->total + $value;
         return static::where([
                 'date'        => $this->date,
                 'relation_id' => $this->relation_id,
                 'type'        => $this->type,
                 'kpi'         => $this->kpi,
             ])->update([
-                'total' => $this->total + $value,
+                'total' => $newTotal >= 0 ? $newTotal : 0,
                 'count' => $this->count + 1,
             ]);
     }
