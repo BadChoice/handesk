@@ -21,7 +21,7 @@ class Idea extends BaseModel
 
     public static function createAndNotify($requester, $title, $body, $repository, $tags)
     {
-        $requester = Requester::findOrCreate($requester['name'], $requester['email'] ?? null);
+        $requester = Requester::findOrCreate($requester['name'] ?? "Unknown", $requester['email'] ?? null);
         $idea      = $requester->ideas()->create([
             'title'      => $title,
             'body'       => $body,
