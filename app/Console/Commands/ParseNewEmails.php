@@ -11,8 +11,7 @@ class ParseNewEmails extends Command
 
     public function handle()
     {
-        $job = new \App\Jobs\ParseNewEmails;
-        dispatch($job);
-        $this->info('Done: '.$job->messagesParsed);
+        \App\Jobs\ParseNewEmails::dispatch();
+        $this->info('Done');
     }
 }
