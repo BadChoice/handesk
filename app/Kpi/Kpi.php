@@ -55,6 +55,7 @@ class Kpi extends BaseModel
     public function addValue($value)
     {
         $newTotal = $this->total + $value;
+
         return static::where([
                 'date'        => $this->date,
                 'relation_id' => $this->relation_id,
