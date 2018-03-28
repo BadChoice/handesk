@@ -6,5 +6,6 @@ return [
     'ca'   => 'Catalan',
     'fr'   => 'Francés',
     'de'   => 'Alemán',
+    'nl'   => 'Nederlands',
     'ptbr' => 'Portugués Brasileño',
 ];
