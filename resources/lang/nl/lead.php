@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'lead'       => 'Lead|Leads',
+    'newLead'    => 'Nieuwe lead',
+    'status'     => 'Status|Status',
+    'all'        => 'Alles|Alles',
+    'mine'       => 'Mijn lead|Mijn leads',
+    'company'    => 'Bedrijf',
+    'address'    => 'Adres',
+    'postalCode' => 'Postcode',
+    'username'   => 'Gebruikersnaam',
+    'name'       => 'Naam',
+    'phone'      => 'Telefoonnummer',
+    'email'      => 'Email',
+    'city'       => 'Plaats',
+    'country'    => 'Land',
+
+    'new'            => 'Nieuw',
+    'visited'        => 'Bezocht',
+    'first-contact'  => 'Eerste contact',
+    'completed'      => 'Afgerond',
+    'failed'         => 'Mislukt',
+    'task'           => 'Taak|Taken',
+    'due'            => 'Verlopen',
+    'complete'       => 'Afronden',
+    'todayTasks'     => 'Taken vandaag',
+    'todayTasksDesc' => 'Dit zijn de taken van vandaag voor jou:',
+    'search'         => 'Zoeken',
+];
