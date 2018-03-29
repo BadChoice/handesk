@@ -4,7 +4,7 @@ return [
     'team'                  => 'Team|Teams',
     'member'                => 'Lid|Liden',
     'invitationLink'        => 'Uitnodigingslink',
-    'invitationLinkDesc'    => "Nodig meer agenten uit voor dit team door deze link te verzenden. Als ze nog geen Handesk-account hebben, gebruikt u de registratielink",
+    'invitationLinkDesc'    => 'Nodig meer agenten uit voor dit team door deze link te verzenden. Als ze nog geen Handesk-account hebben, gebruikt u de registratielink',
     'join'                  => 'Deelnemen',
     'invitedTitle'          => 'U bent uitgenodigd om deel te nemen aan het :team team',
     'invitedDesc'           => 'Door lid te worden van dit team, kun je de support tickets zien en updaten, en ze toewijzen aan andere teamleden',
