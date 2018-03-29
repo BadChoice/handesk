@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'lead'       => 'Lead|Leads',
+    'newLead'    => 'Nouveau Lead',
+    'status'     => 'Status|Status',
+    'all'        => 'Tous|Tous',
+    'mine'       => 'Les miens|Les miens',
+    'company'    => 'Entreprise',
+    'address'    => 'Addresse',
+    'postalCode' => 'Code postal',
+    'username'   => 'Pseudo',
+    'name'       => 'Nom et prénom',
+    'phone'      => 'Téléphone',
+    'email'      => 'Email',
+    'city'       => 'Ville',
+    'country'    => 'Pays',
+
+    'new'            => 'Nouveau',
+    'visited'        => 'Visité',
+    'first-contact'  => 'Premier contact',
+    'completed'      => 'Completé',
+    'failed'         => 'Raté',
+    'task'           => 'Tache|Tache',
+    'due'            => 'dû',
+    'complete'       => 'Completé',
+    'todayTasks'     => 'Tâche du jour',
+    'todayTasksDesc' => 'Voici les tâches que vous avez pour ce jour:',
+    'search'         => 'Recherche',
+];
