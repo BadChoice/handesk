@@ -110,6 +110,8 @@ There is the `badchoice/handesk-php` package in packagist to easily talk with th
 ![Invitation screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/invitation.png)
 ![Email screenshot](https://raw.githubusercontent.com/BadChoice/handesk/master/resources/screenshots/email.png)
 
+## Community
+We have a slack channel at [https://handesk.slack.com/](https://handesk.slack.com)
 
 ## Development
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.   
