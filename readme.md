@@ -46,7 +46,7 @@ php artisan storage:link #if you use the local driver
 Alternatively, you can use the following [docker setup](https://github.com/BadChoice/handesk/blob/dev/docker-installation.md)
 
 
-> The default admin user is admin@handesk.com / admin
+> The default admin user is admin@handesk.io / admin
 > If you want email pulling, you need to enable the `imap` extension on php (note that on mac the php-cli runs very slow, you need to update your /etc/hosts file 
 
 ```
