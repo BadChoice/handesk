@@ -26,7 +26,7 @@ class ParseNewEmails implements ShouldQueue
 
     public function handle(Mailbox $pop3)
     {
-        $pop3->login(config('mail.fetch.host'), config('mail.fetch.port'), config('mail.fetch.username'), config('mail.fetch.password'), 'INBOX', false, config('mail.fetch.options'));
+        $pop3->login(config('mail.fetch.host'), config('mail.fetch.port'), config('mail.fetch.username'), config('mail.fetch.password'), 'INBOX', config('mail.fetch.useSSL'), config('mail.fetch.options'));
         $pop3->getMessages()->each(function ($message) use ($pop3) {
             $this->processMessage($message);
             $pop3->delete($message->id);
