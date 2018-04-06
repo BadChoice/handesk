@@ -1,15 +1,15 @@
-@extends('layouts.app')
+@extends('auth.layout')
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="center text-center mt5" style="max-width:300px">
+            <img src="{{url("images/handesk_full.png")}}" class="w80">
             <div class="panel panel-default">
                 <div class="panel-heading">Reset Password</div>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <p>{{ session('status') }}</p>
                         </div>
                     @endif
 
@@ -41,6 +41,5 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 @endsection
