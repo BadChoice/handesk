@@ -9,7 +9,8 @@ use Tests\TestCase;
 class MailchimpTest extends TestCase
 {
     /** @test */
-    public function can_subscribe_and_unsubscribe_to_mailchimp_list(){
+    public function can_subscribe_and_unsubscribe_to_mailchimp_list()
+    {
         $mailchimp = new Mailchimp();
         $this->assertTrue($mailchimp->unsubscribe("499b95d54d", "jordi.p@revo.works"));
 
