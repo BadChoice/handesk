@@ -9,7 +9,8 @@ use Tests\TestCase;
 class MailboxTest extends TestCase
 {
     /** @test */
-    public function can_fetch_from_pop3_account(){
+    public function can_fetch_from_pop3_account()
+    {
         /*$mailBox = new Mailbox();
         $mailBox->login( config('mail.fetch.host'), config('mail.fetch.port'), config('mail.fetch.username'), config('mail.fetch.password') );
         $messages = $mailBox->getMessages();
@@ -20,5 +21,4 @@ class MailboxTest extends TestCase
         //$mailBox->delete( $messages->first()->id ) ;
         //$mailbox->expunge();
     }
-
 }

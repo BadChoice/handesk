@@ -22,18 +22,20 @@ class IdeaIssueTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function setIssueCreatorMock($id = 12){
+    private function setIssueCreatorMock($id = 12)
+    {
         $issueCreator = Mockery::mock(Bitbucket::class);
-        $issueCreator->shouldReceive('createIssue')->andReturn( (object)[
+        $issueCreator->shouldReceive('createIssue')->andReturn((object)[
             "local_id"      => 12,
             "resource_uri"  => "1.0/repositories/issues/12",
             "links" => (object)["self" => (object)["href" => "http://fakeurl"]]
-        ] );
+        ]);
         app()->instance(IssueCreator::class, $issueCreator);
     }
 
     /** @test */
-    public function can_create_issue_from_idea(){
+    public function can_create_issue_from_idea()
+    {
         Notification::fake();
         $user   = factory(Admin::class)->create();
         $idea = factory(Idea::class)->create([
@@ -44,12 +46,13 @@ class IdeaIssueTest extends TestCase
 
         $response = $this->actingAs($user)->post("ideas/{$idea->id}/issue");
 
-        $response->assertStatus( Response::HTTP_FOUND );
-        $this->assertEquals(12, $idea->fresh()->issue_id );
+        $response->assertStatus(Response::HTTP_FOUND);
+        $this->assertEquals(12, $idea->fresh()->issue_id);
     }
 
     /** @test */
-    public function non_admin_cannot_create_issue_from_ticket(){
+    public function non_admin_cannot_create_issue_from_ticket()
+    {
         $user   = factory(User::class)->create();
         $idea = factory(Idea::class)->create([
             "repository" => "fake/repo"
@@ -57,11 +60,12 @@ class IdeaIssueTest extends TestCase
 
         $response = $this->actingAs($user)->post("ideas/{$idea->id}/issue");
 
-        $response->assertStatus( Response::HTTP_FORBIDDEN );
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
-    public function issue_can_not_be_created_twice(){
+    public function issue_can_not_be_created_twice()
+    {
         Notification::fake();
         $user   = factory(Admin::class)->create();
         $idea = factory(Idea::class)->create([
@@ -73,7 +77,7 @@ class IdeaIssueTest extends TestCase
 
         $response = $this->actingAs($user)->post("ideas/{$idea->id}/issue");
 
-        $response->assertStatus( Response::HTTP_INTERNAL_SERVER_ERROR );
-        $this->assertEquals(10, $idea->fresh()->issue_id );
+        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertEquals(10, $idea->fresh()->issue_id);
     }
 }

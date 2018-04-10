@@ -13,9 +13,10 @@ class TeamTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function admin_can_see_all_teams(){
+    public function admin_can_see_all_teams()
+    {
         $user = factory(User::class)->states("admin")->create();
-        $user->teams()->attach( factory(Team::class)->create(["name" => "Awesome team"]) );
+        $user->teams()->attach(factory(Team::class)->create(["name" => "Awesome team"]));
         factory(Team::class)->create(["name" => "Impressive team"]);
 
         $response = $this->actingAs($user)->get('teams');
@@ -26,9 +27,10 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function non_admin_can_see_only_his_teams(){
+    public function non_admin_can_see_only_his_teams()
+    {
         $user = factory(User::class)->create();
-        $user->teams()->attach( factory(Team::class)->create(["name" => "Awesome team"]) );
+        $user->teams()->attach(factory(Team::class)->create(["name" => "Awesome team"]));
         factory(Team::class)->create(["name" => "Impressive team"]);
 
         $response = $this->actingAs($user)->get('teams');
@@ -39,7 +41,8 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function an_user_can_see_the_join_page(){
+    public function an_user_can_see_the_join_page()
+    {
         $user = factory(User::class)->create();
         factory(Team::class)->create(["token" => "A_TOKEN"]);
 
@@ -50,18 +53,20 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function an_user_can_join_team_with_its_public_url(){
+    public function an_user_can_join_team_with_its_public_url()
+    {
         $user = factory(User::class)->create();
         $team = factory(Team::class)->create(["token" => "A_TOKEN"]);
 
         $response = $this->actingAs($user)->post('teams/A_TOKEN/join');
 
         $response->assertStatus(Response::HTTP_FOUND);
-        $this->assertTrue( $team->fresh()->members->contains($user) );
+        $this->assertTrue($team->fresh()->members->contains($user));
     }
 
     /** @test */
-    public function a_user_can_only_be_joined_once(){
+    public function a_user_can_only_be_joined_once()
+    {
         $user = factory(User::class)->create();
         $team = factory(Team::class)->create(["token" => "A_TOKEN"]);
         $team->members()->attach($user);
@@ -73,7 +78,8 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_create_teams(){
+    public function admin_can_create_teams()
+    {
         $user = factory(User::class)->states('admin')->create();
 
         $response = $this->actingAs($user)->post('teams', [
@@ -83,7 +89,7 @@ class TeamTest extends TestCase
         ]);
 
         $response->assertStatus(Response::HTTP_FOUND);
-        tap(Team::first(), function($team){
+        tap(Team::first(), function ($team) {
             $this->assertEquals("Awesome team", $team->name);
             $this->assertEquals("awesome@email.com", $team->email);
             $this->assertEquals("http://slack.com/webhook", $team->slack_webhook_url);
@@ -91,7 +97,8 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function non_admin_can_not_create_teams(){
+    public function non_admin_can_not_create_teams()
+    {
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->post('teams', [
@@ -101,22 +108,22 @@ class TeamTest extends TestCase
         ]);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
-        $this->assertNull( Team::first() );
+        $this->assertNull(Team::first());
     }
 
     /** @test */
-    public function can_see_team_agents(){
+    public function can_see_team_agents()
+    {
         $team  = factory(Team::class)->create();
         $user1 = factory(User::class)->create(["name" => "User 1"]);
         $user2 = factory(User::class)->create(["name" => "User 2"]);
-        $team->members()->attach( $user1 );
-        $team->members()->attach( $user2 );
+        $team->members()->attach($user1);
+        $team->members()->attach($user2);
 
         $response = $this->actingAs($user1)->get("teams/{$team->id}/agents");
 
-        $response->assertStatus( Response::HTTP_OK );
+        $response->assertStatus(Response::HTTP_OK);
         $response->assertSee("User 1");
         $response->assertSee("User 2");
-
     }
 }

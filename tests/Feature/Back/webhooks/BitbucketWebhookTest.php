@@ -18,7 +18,8 @@ class BitbucketWebhookTest extends TestCase
     use RefreshDatabase;
     use InteractsWithExceptionHandling;
 
-    private function getPayload($issueId, $repository, $newStatus = 'open'){
+    private function getPayload($issueId, $repository, $newStatus = 'open')
+    {
         return json_decode('{
                    "comment":{
                       "links":{
@@ -236,53 +237,52 @@ class BitbucketWebhookTest extends TestCase
     }
 
      /** @test */
-      public function a_not_resolved_issue_is_not_changed()
-      {
-          $payload = $this->getPayload(929, "revo-app", 'open');
+    public function a_not_resolved_issue_is_not_changed()
+    {
+        $payload = $this->getPayload(929, "revo-app", 'open');
 
-          $this->actingAs(factory(Admin::class)->create());
-          $ticket = factory(Ticket::class)->create();
-          $ticket->createIssue(new FakeIssueCreator(929), "revo-app");
-          $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
+        $this->actingAs(factory(Admin::class)->create());
+        $ticket = factory(Ticket::class)->create();
+        $ticket->createIssue(new FakeIssueCreator(929), "revo-app");
+        $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
 
-          $response = $this->post('webhook/bitbucket', $payload);
+        $response = $this->post('webhook/bitbucket', $payload);
 
-          $response->assertStatus(Response::HTTP_OK);
-          $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
-      }
+        $response->assertStatus(Response::HTTP_OK);
+        $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
+    }
 
        /** @test */
-        public function receiving_an_update_of_a_non_existing_issue_or_idea_does_not_crash()
-        {
-            $payload = $this->getPayload(929, "revo-app", 'resolved');
+    public function receiving_an_update_of_a_non_existing_issue_or_idea_does_not_crash()
+    {
+        $payload = $this->getPayload(929, "revo-app", 'resolved');
 
-            $response = $this->post('webhook/bitbucket', $payload);
+        $response = $this->post('webhook/bitbucket', $payload);
 
-            $response->assertStatus(Response::HTTP_OK);
-        }
+        $response->assertStatus(Response::HTTP_OK);
+    }
 
          /** @test */
-          public function receiving_an_invalid_payload_does_not_crash()
-          {
-              $response = $this->post('webhook/bitbucket', ["invalid" => "this is an invalid payload"]);
-              $response->assertStatus(Response::HTTP_OK);
-          }
+    public function receiving_an_invalid_payload_does_not_crash()
+    {
+        $response = $this->post('webhook/bitbucket', ["invalid" => "this is an invalid payload"]);
+        $response->assertStatus(Response::HTTP_OK);
+    }
 
            /** @test */
-            public function can_update_idea_status_from_webhook()
-            {
-                $idea = factory(Idea::class)->create([
-                    "repository" => "revo-pos/revo-app",
-                    "issue_id" => 929,
-                    "status" => Idea::STATUS_OPEN,
-                ]);
+    public function can_update_idea_status_from_webhook()
+    {
+        $idea = factory(Idea::class)->create([
+        "repository" => "revo-pos/revo-app",
+        "issue_id" => 929,
+        "status" => Idea::STATUS_OPEN,
+        ]);
 
-                $payload = $this->getPayload(929, "revo-app", 'closed');
+        $payload = $this->getPayload(929, "revo-app", 'closed');
 
-                $response = $this->post('webhook/bitbucket', $payload);
+        $response = $this->post('webhook/bitbucket', $payload);
 
-                $response->assertStatus(Response::HTTP_OK);
-                $this->assertEquals(Idea::STATUS_CLOSED, $idea->fresh()->status);
-            }
-
+        $response->assertStatus(Response::HTTP_OK);
+        $this->assertEquals(Idea::STATUS_CLOSED, $idea->fresh()->status);
+    }
 }
