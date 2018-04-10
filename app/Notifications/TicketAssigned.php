@@ -50,8 +50,7 @@ class TicketAssigned extends Notification implements ShouldQueue
                     'title'  => __('notification.ticketAssignedTo').' '.$notifiable->name,
                     'ticket' => $this->ticket,
                     'url'    => route('tickets.show', $this->ticket),
-            ]
-        );
+            ]);
         if ($this->ticket->requester->email) {
             $mail->from($this->ticket->requester->email, $this->ticket->requester->name);
         }

@@ -35,7 +35,9 @@ class MailchimpFake extends Mailchimp
             return PHPUnit::fail("{$email} has not been subscribed to {$listId}");
         }
         PHPUnit::assertTrue(
-            collect($this->subscribed[$email])->contains($listId), "{$email} has not been subscribed to {$listId}");
+            collect($this->subscribed[$email])->contains($listId),
+            "{$email} has not been subscribed to {$listId}"
+        );
     }
 
     public function assertUnsubscribed($email, $listId)
@@ -44,7 +46,9 @@ class MailchimpFake extends Mailchimp
             return PHPUnit::fail("{$email} has not been unsubscribed from {$listId}");
         }
         PHPUnit::assertTrue(
-            collect($this->unsubscribed[$email])->contains($listId), "{$email} has not been unsubscribed from {$listId}");
+            collect($this->unsubscribed[$email])->contains($listId),
+            "{$email} has not been unsubscribed from {$listId}"
+        );
     }
 
     public function assertNotSubscribed($email, $listId)
@@ -53,7 +57,9 @@ class MailchimpFake extends Mailchimp
             return PHPUnit::assertTrue(true);
         }
         PHPUnit::assertFalse(
-            collect($this->subscribed[$email])->contains($listId), "{$email} has been subscribed from {$listId}");
+            collect($this->subscribed[$email])->contains($listId),
+            "{$email} has been subscribed from {$listId}"
+        );
     }
 
     public function assertNotUnsubscribed($email, $listId)
@@ -62,6 +68,8 @@ class MailchimpFake extends Mailchimp
             return PHPUnit::assertTrue(true);
         }
         PHPUnit::assertFalse(
-            collect($this->unsubscribed[$email])->contains($listId), "{$email} has been unsubscribed from {$listId}");
+            collect($this->unsubscribed[$email])->contains($listId),
+            "{$email} has been unsubscribed from {$listId}"
+        );
     }
 }

@@ -17,7 +17,8 @@ class CreateIdeasFromNewEmailsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function does_create_tickets_from_new_emails(){
+    public function does_create_tickets_from_new_emails()
+    {
         Notification::fake();
         $fakePop = new FakeMailbox();
         $fakePop->messages = [
@@ -26,10 +27,10 @@ class CreateIdeasFromNewEmailsTest extends TestCase
         ];
         app()->instance(Mailbox::class, $fakePop);
 
-        dispatch( new ParseNewEmails() );
+        dispatch(new ParseNewEmails());
 
         $this->assertEquals(2, Idea::count());
-        tap(Idea::first(), function($idea){
+        tap(Idea::first(), function ($idea) {
             $this->assertEquals("Bruce Wayne", $idea->requester->name);
             $this->assertEquals("bruce@wayne.com", $idea->requester->email);
             $this->assertEquals("I'm batman", $idea->title);

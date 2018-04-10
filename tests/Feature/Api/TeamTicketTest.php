@@ -17,7 +17,8 @@ class TeamTicketTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function validParams($overrides = []){
+    private function validParams($overrides = [])
+    {
         return array_merge([
             "requester"     => [
                 "name" => "johndoe",
@@ -30,11 +31,12 @@ class TeamTicketTest extends TestCase
     }
 
     /** @test */
-    public function can_create_a_ticket(){
+    public function can_create_a_ticket()
+    {
         Notification::fake();
         $team = factory(Team::class)->create();
 
-        $response = $this->post('api/tickets',[
+        $response = $this->post('api/tickets', [
             "requester"     => [
                 "name" => "johndoe",
                 "email" => "john@doe.com"
@@ -43,22 +45,22 @@ class TeamTicketTest extends TestCase
             "body"          => "I can't log in into the application",
             "tags"          => ["xef"],
             "team_id"       => $team->id
-        ],["token" => 'the-api-token']);
+        ], ["token" => 'the-api-token']);
 
-        $response->assertStatus( Response::HTTP_CREATED );
+        $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJson(["data" => ["id" => 1]]);
 
-        tap( Ticket::first(), function($ticket) use($team) {
-            tap( Requester::first(), function($requester) use ($ticket){
+        tap(Ticket::first(), function ($ticket) use ($team) {
+            tap(Requester::first(), function ($requester) use ($ticket) {
                 $this->assertEquals($requester->name, "johndoe");
                 $this->assertEquals($requester->email, "john@doe.com");
-                $this->assertEquals( $ticket->requester_id, $requester->id);
+                $this->assertEquals($ticket->requester_id, $requester->id);
             });
-            $this->assertEquals ( $ticket->title, "App is not working");
-            $this->assertEquals ( $ticket->body, "I can't log in into the application");
-            $this->assertTrue   ( $ticket->tags->pluck('name')->contains("xef") );
-            $this->assertEquals( Ticket::STATUS_NEW, $ticket->status);
-            $this->assertTrue( $team->tickets->contains($ticket) );
+            $this->assertEquals($ticket->title, "App is not working");
+            $this->assertEquals($ticket->body, "I can't log in into the application");
+            $this->assertTrue($ticket->tags->pluck('name')->contains("xef"));
+            $this->assertEquals(Ticket::STATUS_NEW, $ticket->status);
+            $this->assertTrue($team->tickets->contains($ticket));
 
             Notification::assertSentTo(
                 [$team],
@@ -71,12 +73,13 @@ class TeamTicketTest extends TestCase
     }
 
     /** @test */
-    public function a_ticket_created_without_team_notifies_the_default_setting(){
+    public function a_ticket_created_without_team_notifies_the_default_setting()
+    {
         Notification::fake();
 
         $setting = factory(Settings::class)->create(["slack_webhook_url" => "http://fake-slack-webhook-url.com"]);
 
-        $response = $this->post('api/tickets',[
+        $response = $this->post('api/tickets', [
             "requester"     => [
                 "name" => "johndoe",
                 "email" => "john@doe.com"
@@ -85,12 +88,12 @@ class TeamTicketTest extends TestCase
             "body"          => "I can't log in into the application",
             "tags"          => ["xef"],
             "team_id"       => null
-        ],["token" => 'the-api-token']);
+        ], ["token" => 'the-api-token']);
 
-        $response->assertStatus( Response::HTTP_CREATED );
+        $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJson(["data" => ["id" => 1]]);
 
-        tap( Ticket::first(), function($ticket) use($setting) {
+        tap(Ticket::first(), function ($ticket) use ($setting) {
             Notification::assertSentTo(
                 [$setting],
                 TicketCreated::class,

@@ -51,7 +51,7 @@ class AgentsTest extends TestCase
         $admin = factory(Admin::class)->create();
         $agent = factory(User::class)->create();
         $agent->tickets()->create(
-          factory(Ticket::class)->make()->toArray()
+            factory(Ticket::class)->make()->toArray()
         );
         $agent->leads()->create(
             factory(Lead::class)->make()->toArray()

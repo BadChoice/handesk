@@ -14,8 +14,10 @@ class NewCommentEmailParser
         if (! $ticket) {
             return false;
         }
-        $comment = $ticket->addComment($messageParser->getUser($ticket),
-            $messageParser->getCommentBody());
+        $comment = $ticket->addComment(
+            $messageParser->getUser($ticket),
+            $messageParser->getCommentBody()
+        );
         Attachment::storeAttachmentsFromEmail($message, $comment);
 
         return true;

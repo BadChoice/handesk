@@ -8,12 +8,14 @@ use Illuminate\Http\Response;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class RegisterTest extends TestCase{
+class RegisterTest extends TestCase
+{
 
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_can_register(){
+    public function a_user_can_register()
+    {
         $team = factory(Team::class)->create(["token" => "TEAMTOKEN"]);
 
         $response = $this->post('register', [
@@ -31,7 +33,8 @@ class RegisterTest extends TestCase{
     }
 
     /** @test */
-    public function can_not_register_without_a_valid_token(){
+    public function can_not_register_without_a_valid_token()
+    {
         $response = $this->post('register', [
             "name"                  => "Peter parker",
             "email"                 => "peter@parker.com",
@@ -43,5 +46,4 @@ class RegisterTest extends TestCase{
         $response->assertSessionHasErrors("team_token");
         $this->assertEquals(0, User::count());
     }
-
 }

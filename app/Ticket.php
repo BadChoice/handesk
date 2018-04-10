@@ -162,8 +162,7 @@ class Ticket extends BaseModel
     {
         if (! $body) {
             return;
-        }
-        //if( ! $this->user && $user) { $this->user()->associate($user)->save(); }  //We don't want the notes to automatically assign the user
+        } //if( ! $this->user && $user) { $this->user()->associate($user)->save(); }  //We don't want the notes to automatically assign the user
         else {
             $this->touch();
         }
@@ -241,13 +240,20 @@ class Ticket extends BaseModel
     public function statusName()
     {
         switch ($this->status) {
-            case static::STATUS_NEW: return 'new';
-            case static::STATUS_OPEN: return 'open';
-            case static::STATUS_PENDING: return 'pending';
-            case static::STATUS_SOLVED: return 'solved';
-            case static::STATUS_CLOSED: return 'closed';
-            case static::STATUS_MERGED: return 'merged';
-            case static::STATUS_SPAM: return 'spam';
+            case static::STATUS_NEW:
+                return 'new';
+            case static::STATUS_OPEN:
+                return 'open';
+            case static::STATUS_PENDING:
+                return 'pending';
+            case static::STATUS_SOLVED:
+                return 'solved';
+            case static::STATUS_CLOSED:
+                return 'closed';
+            case static::STATUS_MERGED:
+                return 'merged';
+            case static::STATUS_SPAM:
+                return 'spam';
         }
     }
 
@@ -267,9 +273,9 @@ class Ticket extends BaseModel
     public function createIssue(IssueCreator $issueCreator, $repository)
     {
         $issue = $issueCreator->createIssue(
-                $repository,
-                $this->title,
-                'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
+            $repository,
+            $this->title,
+            'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
         );
         $this->addNote(auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}");
         //TODO: Notify somebody? if so, create the test

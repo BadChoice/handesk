@@ -44,10 +44,18 @@ class WebhookController extends Controller
             return null;
         }
         switch ($newStatus) {
-            case 'resolved': $idea->update(['status' => Idea::STATUS_RESOLVED]); break;
-            case 'open': $idea->update(['status' => Idea::STATUS_OPEN]); break;
-            case 'closed': $idea->update(['status' => Idea::STATUS_CLOSED]); break;
-            default: $idea->update(['status' => Idea::STATUS_NEW]); break;
+            case 'resolved':
+                $idea->update(['status' => Idea::STATUS_RESOLVED]);
+                break;
+            case 'open':
+                $idea->update(['status' => Idea::STATUS_OPEN]);
+                break;
+            case 'closed':
+                $idea->update(['status' => Idea::STATUS_CLOSED]);
+                break;
+            default:
+                $idea->update(['status' => Idea::STATUS_NEW]);
+                break;
         }
 
         return response()->json("ok: Idea {$idea->id} updated");

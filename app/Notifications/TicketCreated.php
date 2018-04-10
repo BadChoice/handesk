@@ -50,8 +50,7 @@ class TicketCreated extends Notification implements ShouldQueue
                     'title'  => __('notification.newTicketCreated'),
                     'ticket' => $this->ticket,
                     'url'    => route('tickets.show', $this->ticket),
-                ]
-            );
+                ]);
         if ($this->ticket->requester->email) {
             $mail->from($this->ticket->requester->email, $this->ticket->requester->name);
         }
