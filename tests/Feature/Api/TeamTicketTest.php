@@ -100,4 +100,69 @@ class TeamTicketTest extends TestCase
             );
         });
     }
+
+     /** @test */
+      public function can_get_open_team_tickets()
+      {
+          $team = factory(Team::class)->create();
+          factory(Ticket::class, 1)->create(["team_id" => $team->id, "status" => Ticket::STATUS_SOLVED]);
+          factory(Ticket::class, 2)->create(["team_id" => $team->id, "status" => Ticket::STATUS_CLOSED]);
+          factory(Ticket::class, 3)->create(["team_id" => $team->id, "status" => Ticket::STATUS_OPEN]);
+          factory(Ticket::class, 4)->create(["team_id" => $team->id, "status" => Ticket::STATUS_NEW]);
+
+          $response = $this->get("api/teams/{$team->id}/tickets",["token" => 'the-api-token']);
+
+          $response->assertStatus(Response::HTTP_OK);
+          $response->assertJsonStructure([
+              "data" => [
+                  "*" => [ "title", "status", "created_at", "updated_at" ]
+              ]
+          ]);
+
+          $responseJson = json_decode( $response->content() );
+          $this->assertCount(7, $responseJson->data);
+          $this->assertEquals(4, $responseJson->data[0]->id);
+      }
+
+    /** @test */
+    public function can_get_solved_team_tickets()
+    {
+        $team = factory(Team::class)->create();
+        factory(Ticket::class, 1)->create(["team_id" => $team->id, "status" => Ticket::STATUS_SOLVED]);
+        factory(Ticket::class, 2)->create(["team_id" => $team->id, "status" => Ticket::STATUS_CLOSED]);
+        factory(Ticket::class, 3)->create(["team_id" => $team->id, "status" => Ticket::STATUS_OPEN]);
+        factory(Ticket::class, 4)->create(["team_id" => $team->id, "status" => Ticket::STATUS_NEW]);
+
+        $response = $this->get("api/teams/{$team->id}/tickets?status=solved",["token" => 'the-api-token']);
+
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure([
+            "data" => [
+                "*" => [ "title", "status", "created_at", "updated_at" ]
+            ]
+        ]);
+
+        $responseJson = json_decode( $response->content() );
+        $this->assertCount(1, $responseJson->data);
+        $this->assertEquals(1, $responseJson->data[0]->id);
+    }
+
+    /** @test */
+    public function can_get_open_tickets_count()
+    {
+        $team = factory(Team::class)->create();
+        factory(Ticket::class, 1)->create(["team_id" => $team->id, "status" => Ticket::STATUS_SOLVED]);
+        factory(Ticket::class, 2)->create(["team_id" => $team->id, "status" => Ticket::STATUS_CLOSED]);
+        factory(Ticket::class, 3)->create(["team_id" => $team->id, "status" => Ticket::STATUS_OPEN]);
+        factory(Ticket::class, 4)->create(["team_id" => $team->id, "status" => Ticket::STATUS_NEW]);
+
+        $response = $this->get("api/teams/{$team->id}/tickets?count=true",["token" => 'the-api-token']);
+
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJson([
+            "data" => [
+                "count" => 7
+            ]
+        ]);
+    }
 }
