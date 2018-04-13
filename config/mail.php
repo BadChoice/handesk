@@ -133,6 +133,7 @@ return [
         'username'       => env('MAIL_FETCH_USERNAME', 'hi'),
         'password'       => env('MAIL_FETCH_PASSWORD'),
         'replyAboveLine' => '##- Please type your reply above this line -##',
+        'useSSL'         => env('MAIL_FETCH_USE_SSL', false),
         'options'        => env('MAIL_FETCH_OPTIONS', '/pop3'),
     ],
 
