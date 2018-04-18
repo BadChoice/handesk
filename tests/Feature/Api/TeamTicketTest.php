@@ -30,6 +30,26 @@ class TeamTicketTest extends TestCase
     }
 
     /** @test */
+    public function can_create_a_team()
+    {
+        $response = $this->post('api/teams',[
+            "name" => "team name",
+            "email" => "email@email.com",
+            "slack_webhook_url" => null
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus( Response::HTTP_CREATED );
+        $response->assertJson(["data" => ["id" => 1]]);
+
+        $this->assertEquals(1, Team::count());
+        tap (Team::first(), function($team) {
+             $this->assertEquals("team name", $team->name);
+             $this->assertEquals("email@email.com", $team->email);
+             $this->assertNull($team->slack_webhook_url);
+        });
+    }
+
+    /** @test */
     public function can_create_a_ticket(){
         Notification::fake();
         $team = factory(Team::class)->create();
