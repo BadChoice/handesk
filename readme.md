@@ -36,6 +36,7 @@ Its very simple, you just need to follow the standard Laravel installation
 
 ```shell
 git clone https://github.com/BadChoice/handesk.git
+cd handesk
 composer install
 # Setup your .env file to match you desired database
 php artisan key:generate
