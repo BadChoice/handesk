@@ -113,6 +113,7 @@ There is the `badchoice/handesk-php` package in packagist to easily talk with th
 
 ## Community
 We have a slack channel at [https://handesk.slack.com/](https://handesk.slack.com)
+And you can join with the following [invitation](https://handesk.slack.com/shared_invite/enQtMzQwMTg5ODkwNDUxLWVhYjFkNzNkMmE2NWUxYjcwZTNhMmM0M2M3NmVkMzdhNWI0NTU0ZGM0ODFlNTVlMGZhMTA0YzM0YjA3NjcxMTc)
 
 ## Development
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.   
