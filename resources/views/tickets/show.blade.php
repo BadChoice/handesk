@@ -19,7 +19,7 @@
         @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
         <div class="comment new-comment">
             {{ Form::open(["url" => route("comments.store", $ticket) , "files" => true, "id" => "comment-form"]) }}
-            <textarea name="body"></textarea>
+            <textarea id="comment-text-area" name="body"></textarea>
             @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
             {{ Form::hidden('new_status', $ticket->status, ["id" => "new_status"]) }}
             @if($ticket->isEscalated() )
@@ -51,5 +51,22 @@
             $("#new_status").val(new_status);
             $("#comment-form").submit();
         }
+        $("#comment-text-area").mention({
+            delimiter: '@',
+            users: [{
+                username: "ashley"
+            }, {
+                username: "rabbit"
+            }, {
+                username: "Rumba"
+            }, {
+                username: "Ready"
+            }, {
+                username: "roger"
+            }, {
+                username: "frecklefart123"
+            }]
+        });
+
     </script>
 @endsection
