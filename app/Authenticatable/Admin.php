@@ -13,6 +13,7 @@ class Admin extends User
 
     public static function notifyAll($notification, $except = null)
     {
-        Notification::send(self::all()->diff($except), $notification);
+        $admins = $except ? self::all()->diff($except) : self::all();
+        Notification::send($admins, $notification);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Notifications\CommentMention;
+use App\Services\Mentions;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
@@ -15,6 +17,7 @@ use App\Notifications\TicketAssigned;
 use App\Notifications\TicketEscalated;
 use App\Services\TicketLanguageDetector;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Notification;
 
 class Ticket extends BaseModel
 {
@@ -161,7 +164,7 @@ class Ticket extends BaseModel
     public function addNote($user, $body)
     {
         if (! $body) {
-            return;
+            return null;
         }
         //if( ! $this->user && $user) { $this->user()->associate($user)->save(); }  //We don't want the notes to automatically assign the user
         else {
@@ -173,11 +176,13 @@ class Ticket extends BaseModel
             'new_status' => $this->status,
             'private'    => true,
         ]);
-        tap(new NewComment($this, $comment), function ($newCommentNotification) {
+        tap(new NewComment($this, $comment), function ($newCommentNotification) use($comment) {
             if ($this->team) {
                 $this->team->notify($newCommentNotification);
             }
-            Admin::notifyAll($newCommentNotification);
+            $mentionedUsers = Mentions::usersIn($comment->body);
+            Notification::send($mentionedUsers, new CommentMention($this, $comment));
+            Admin::notifyAll($newCommentNotification, $mentionedUsers);
         });
 
         return $comment;
