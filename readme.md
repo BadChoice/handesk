@@ -16,11 +16,12 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Instant email/slack notifications when tickets are created/updated   
 · Everything is unlimited    
 · Lead management (With its API as well)   
-· Auto lead subscription to mailchimp based on its tags   
+· Auto lead subscription to mailChimp based on its tags   
 · Tickets reporting   
 · Tickets internal notes   
 · Tickets can be escalated, so assistants can comment on them to help the teams   
 · Can merge tickets       
+· Mention agents with @name so they get notified
 · Lead tasks, that can have a due date, and sending daily tasks email   
 · Create issues to your code repository directly from the ticket   
 · Updating the ticket automatically when an issue is marked as resolved         

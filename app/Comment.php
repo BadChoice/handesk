@@ -3,7 +3,10 @@
 namespace App;
 
 use App\Authenticatable\Admin;
+use App\Notifications\CommentMention;
 use App\Notifications\NewComment;
+use App\Services\Mentions;
+use Notification;
 
 class Comment extends BaseModel
 {
@@ -46,7 +49,9 @@ class Comment extends BaseModel
             if ($this->ticket->requester && auth()->user()) {
                 $this->ticket->requester->notify($newCommentNotification);
             }
-            Admin::notifyAll($newCommentNotification);
+            $mentionedUsers = Mentions::usersIn($this->body);
+            Notification::send($mentionedUsers, new CommentMention($this->ticket, $this));
+            Admin::notifyAll($newCommentNotification, $mentionedUsers);
         });
 
         return $this;

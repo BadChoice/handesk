@@ -49,6 +49,7 @@ class ProfileController extends Controller
             'new_lead_notification'        => $request->filled('new_lead_notification'),
             'lead_assigned_notification'   => $request->filled('lead_assigned_notification'),
             'daily_tasks_notification'     => $request->filled('daily_tasks_notification'),
+            'mention_notification'         => $request->filled('mention_notification'),
         ];
     }
 }

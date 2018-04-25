@@ -20,4 +20,5 @@ return [
     'newLeadNotification'        => 'Notificació de nou lead',
     'leadAssignedNotification'   => 'Notificació de lead assignat',
     'newIdeaNotification'        => 'Notificació de nova idea',
+    'mentionNotification'        => 'Notificació de mencions'
 ];

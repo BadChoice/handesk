@@ -46,6 +46,7 @@
 
 @section('scripts')
     @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket])
+
     <script>
         function setStatusAndSubmit(new_status){
             $("#new_status").val(new_status);
@@ -53,19 +54,11 @@
         }
         $("#comment-text-area").mention({
             delimiter: '@',
-            users: [{
-                username: "ashley"
-            }, {
-                username: "rabbit"
-            }, {
-                username: "Rumba"
-            }, {
-                username: "Ready"
-            }, {
-                username: "roger"
-            }, {
-                username: "frecklefart123"
-            }]
+            emptyQuery: true,
+            typeaheadOpts: {
+                items: 10 // Max number of items you want to show
+            },
+            users: {!! json_encode(App\Services\Mentions::arrayFor(auth()->user())) !!}
         });
 
     </script>

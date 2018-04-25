@@ -11,8 +11,8 @@ class Admin extends User
 
     protected static $role = ['admin' => true];
 
-    public static function notifyAll($notification)
+    public static function notifyAll($notification, $except = null)
     {
-        Notification::send(self::all(), $notification);
+        Notification::send(self::all()->diff($except), $notification);
     }
 }

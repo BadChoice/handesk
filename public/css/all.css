@@ -1061,9 +1061,13 @@ div.tagsinput span.tag {
 .typeahead li {
   padding-left: 8px;
   padding-right: 8px;
+  padding-top: 4px;
 }
 .typeahead .active {
   background-color: #46A5E0;
+}
+.typeahead .active .mention_name {
+  color: white;
 }
 .mention_name {
   font-size: 12px;
