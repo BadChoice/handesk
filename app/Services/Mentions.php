@@ -14,7 +14,7 @@ class Mentions
             return [
                 'username' => strtolower(str_replace(@' ', @'_', $user->name)),
                 'name'     => $user->name,
-                'image'    => gravatarUrl($user->email, 5),
+                'image'    => gravatarUrl($user->email, 20),
             ];
         });
     }
