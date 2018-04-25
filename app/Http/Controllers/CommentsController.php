@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Mentions;
 use App\Ticket;
 use App\Attachment;
 
