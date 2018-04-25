@@ -170,22 +170,12 @@ class Ticket extends BaseModel
         else {
             $this->touch();
         }
-        $comment = $this->comments()->create([
+        return $this->comments()->create([
             'body'       => $body,
             'user_id'    => $user->id,
             'new_status' => $this->status,
             'private'    => true,
-        ]);
-        tap(new NewComment($this, $comment), function ($newCommentNotification) use($comment) {
-            if ($this->team) {
-                $this->team->notify($newCommentNotification);
-            }
-            $mentionedUsers = Mentions::usersIn($comment->body);
-            Notification::send($mentionedUsers, new CommentMention($this, $comment));
-            Admin::notifyAll($newCommentNotification, $mentionedUsers);
-        });
-
-        return $comment;
+        ])->notifyNewNote();
     }
 
     public function merge($user, $tickets)

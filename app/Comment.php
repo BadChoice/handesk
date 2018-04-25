@@ -46,7 +46,7 @@ class Comment extends BaseModel
             if ($this->shouldNotifyUser()) {
                 $this->ticket->user->notify($newCommentNotification);
             }
-            if ($this->ticket->requester && auth()->user()) {
+            if ($this->shouldNotifyRequester()) {
                 $this->ticket->requester->notify($newCommentNotification);
             }
             $mentionedUsers = Mentions::usersIn($this->body);
@@ -57,8 +57,18 @@ class Comment extends BaseModel
         return $this;
     }
 
+    public function notifyNewNote()
+    {
+        return $this->notifyNewComment();
+    }
+
     private function shouldNotifyUser()
     {
         return $this->ticket->user && (! auth()->user() || auth()->user()->id != $this->ticket->user->id);
+    }
+
+    private function shouldNotifyRequester()
+    {
+        return !$this->private && $this->ticket->requester && auth()->user();
     }
 }
