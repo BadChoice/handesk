@@ -20,5 +20,5 @@ return [
     'newLeadNotification'        => 'New lead notification',
     'leadAssignedNotification'   => 'Lead assigned notification',
     'newIdeaNotification'        => 'New idea notification',
-    'mentionNotification'        => 'Mention Notification'
+    'mentionNotification'        => 'Mention Notification',
 ];

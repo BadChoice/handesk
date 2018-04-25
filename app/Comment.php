@@ -2,11 +2,11 @@
 
 namespace App;
 
-use App\Authenticatable\Admin;
-use App\Notifications\CommentMention;
-use App\Notifications\NewComment;
-use App\Services\Mentions;
 use Notification;
+use App\Services\Mentions;
+use App\Authenticatable\Admin;
+use App\Notifications\NewComment;
+use App\Notifications\CommentMention;
 
 class Comment extends BaseModel
 {
@@ -69,6 +69,6 @@ class Comment extends BaseModel
 
     private function shouldNotifyRequester()
     {
-        return !$this->private && $this->ticket->requester && auth()->user();
+        return ! $this->private && $this->ticket->requester && auth()->user();
     }
 }

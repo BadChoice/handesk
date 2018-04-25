@@ -2,13 +2,10 @@
 
 namespace App;
 
-use App\Notifications\CommentMention;
-use App\Services\Mentions;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
 use App\Events\TicketCommented;
-use App\Notifications\NewComment;
 use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
 use Illuminate\Support\Facades\App;
@@ -17,7 +14,6 @@ use App\Notifications\TicketAssigned;
 use App\Notifications\TicketEscalated;
 use App\Services\TicketLanguageDetector;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Notification;
 
 class Ticket extends BaseModel
 {
@@ -170,6 +166,7 @@ class Ticket extends BaseModel
         else {
             $this->touch();
         }
+
         return $this->comments()->create([
             'body'       => $body,
             'user_id'    => $user->id,
