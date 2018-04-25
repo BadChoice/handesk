@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
 use App\Events\TicketCommented;
-use App\Notifications\NewComment;
 use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
 use Illuminate\Support\Facades\App;
@@ -161,26 +160,19 @@ class Ticket extends BaseModel
     public function addNote($user, $body)
     {
         if (! $body) {
-            return;
+            return null;
         }
         //if( ! $this->user && $user) { $this->user()->associate($user)->save(); }  //We don't want the notes to automatically assign the user
         else {
             $this->touch();
         }
-        $comment = $this->comments()->create([
+
+        return $this->comments()->create([
             'body'       => $body,
             'user_id'    => $user->id,
             'new_status' => $this->status,
             'private'    => true,
-        ]);
-        tap(new NewComment($this, $comment), function ($newCommentNotification) {
-            if ($this->team) {
-                $this->team->notify($newCommentNotification);
-            }
-            Admin::notifyAll($newCommentNotification);
-        });
-
-        return $comment;
+        ])->notifyNewNote();
     }
 
     public function merge($user, $tickets)

@@ -19,7 +19,7 @@
         @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
         <div class="comment new-comment">
             {{ Form::open(["url" => route("comments.store", $ticket) , "files" => true, "id" => "comment-form"]) }}
-            <textarea name="body"></textarea>
+            <textarea id="comment-text-area" name="body"></textarea>
             @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
             {{ Form::hidden('new_status', $ticket->status, ["id" => "new_status"]) }}
             @if($ticket->isEscalated() )
@@ -46,10 +46,20 @@
 
 @section('scripts')
     @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket])
+
     <script>
         function setStatusAndSubmit(new_status){
             $("#new_status").val(new_status);
             $("#comment-form").submit();
         }
+        $("#comment-text-area").mention({
+            delimiter: '@',
+            emptyQuery: true,
+            typeaheadOpts: {
+                items: 10 // Max number of items you want to show
+            },
+            users: {!! json_encode(App\Services\Mentions::arrayFor(auth()->user())) !!}
+        });
+
     </script>
 @endsection

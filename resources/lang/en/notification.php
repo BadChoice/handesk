@@ -12,4 +12,5 @@ return [
     'ticketEscalated'    => 'Ticket escalated',
     'newIdea'            => 'New idea',
     'newIdeaCreated'     => 'New idea',
+    'mention'            => 'Mention',
 ];
