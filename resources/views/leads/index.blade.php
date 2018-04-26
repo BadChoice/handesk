@@ -8,7 +8,7 @@
         <a class="button " href="{{ route("leads.create") }}">@icon(plus) {{ __('lead.newLead') }}</a>
     </div>
     <div class="float-right mt-5 mr4">
-        <input id="searcher" placeholder="{{__('lead.search')}}" class="ml2">
+        <input id="searcher" placeholder="{{__('lead.search')}}" class="ml2 shadow-outer-3" style="border-color:#eee">
         <div class="inline ml-4">@icon(search)</div>
     </div>
 
