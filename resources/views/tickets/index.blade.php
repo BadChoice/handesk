@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="description">
-        <h3>Tickets ( {{ $tickets->count() }} )</h3>
+        <h3>{{ trans_choice('ticket.ticket', 2) }} ( {{ $tickets->count() }} )</h3>
     </div>
 
     <div class="m4">

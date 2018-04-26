@@ -38,6 +38,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, 'memberships')->withPivot('admin');
     }
 
+    public function macros()
+    {
+        return $this->hasMany(Macro::class);
+    }
+
     public function settings()
     {
         //return UserSettings::firstOrCreate(["user_id" => $this->id]);

@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::resource('leads/{lead}/tasks', 'LeadTasksController', ['only' => ['index', 'store', 'update', 'destroy'], 'as' => 'leads']);
 
     Route::resource('tasks', 'TasksController', ['only' => ['index', 'update', 'destroy']]);
+    Route::resource('macros', 'MacrosController', ['except' => 'edit']);
 
     Route::resource('teams', 'TeamsController');
     Route::get('teams/{team}/agents', 'TeamAgentsController@index')->name('teams.agents');
