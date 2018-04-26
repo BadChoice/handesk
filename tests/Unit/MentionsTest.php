@@ -16,9 +16,9 @@ class MentionsTest extends TestCase
      /** @test */
       public function can_find_mentions_in_text()
       {
-         $mentions = Mentions::findIn("this is a text with @some mentions and I @want_to make sure @them all are@found");
-         $this->assertCount(4, $mentions);
-         $this->assertEquals(["some", "want_to", "them", "found"], $mentions);
+         $mentions = Mentions::findIn("this is a text with @some mentions and I @want_to make sure @them all are@found @puigdellívol");
+         $this->assertCount(5, $mentions);
+         $this->assertEquals(["some", "want_to", "them", "found", "puigdellívol"], $mentions);
       }
 
        /** @test */
@@ -26,11 +26,13 @@ class MentionsTest extends TestCase
         {
             factory(User::class)->create(["name" => "WithCapitalLetters"]);
             factory(User::class)->create(["name" => "with spaces"]);
+            factory(User::class)->create(["name" => "WithÁcents"]);
 
-            $users = Mentions::findUsersFor(["WithCapitalLetters", "with_spaces", "non_existing"]); //Sqlite differenciates capital than non capital while mysql does not
-            $this->assertCount(2, $users);
+            $users = Mentions::findUsersFor(["WithCapitalLetters", "with_spaces", "non_existing", "WithÁcents"]); //Sqlite differenciates capital than non capital while mysql does not
+            $this->assertCount(3, $users);
             $this->assertEquals(1, $users[0]->id);
             $this->assertEquals(2, $users[1]->id);
+            $this->assertEquals(3, $users[2]->id);
         }
 
 }

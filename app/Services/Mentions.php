@@ -29,7 +29,7 @@ class Mentions
     public static function findIn($text)
     {
         $matches = null;
-        preg_match_all('/@([a-zA-Z0-9_]+|\\[[a-zA-Z0-9_]+\\])/', $text, $matches);
+        preg_match_all('/@([a-zA-Z0-9_-Á-ÿ]+|\\[[a-zA-Z0-9_-Á-ÿ]+\\])/', $text, $matches);
 
         return $matches[1];
     }
