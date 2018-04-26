@@ -8,6 +8,6 @@ class LeadsSearchController extends Controller
 {
     public function index(LeadsRepository $repository, $text)
     {
-        return view('leads.indexTable', ['leads' => $repository->search($text)->latest()->get()]);
+        return view('leads.indexTable', ['leads' => $repository->search($text)->latest()->paginate(50)]);
     }
 }
