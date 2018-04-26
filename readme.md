@@ -120,5 +120,7 @@ And you can join with the following [invitation](https://handesk.slack.com/share
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.   
 
 **PRs are welcome!**
- 
+
+## License
+Handesk is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). 
 
