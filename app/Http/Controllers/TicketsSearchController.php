@@ -8,6 +8,6 @@ class TicketsSearchController extends Controller
 {
     public function index(TicketsRepository $repository, $text)
     {
-        return view('tickets.indexTable', ['tickets' => $repository->search($text)->latest()->paginate(50)]);
+        return view('tickets.indexTable', ['tickets' => $repository->search($text)->latest('updated_at')->paginate(50)]);
     }
 }
