@@ -20,7 +20,7 @@ class CreateMacrosTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('team_id')->nullable();
 
-            $table->text("title");
+            $table->text('title');
             $table->text('body');
             $table->unsignedInteger('new_status')->nullable();
             $table->unsignedInteger('assign_id')->nullable();
