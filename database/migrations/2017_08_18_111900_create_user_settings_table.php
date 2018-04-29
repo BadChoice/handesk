@@ -25,6 +25,7 @@ class CreateUserSettingsTable extends Migration
             $table->boolean('new_lead_notification')->default(true);
             $table->boolean('lead_assigned_notification')->default(true);
             $table->boolean('new_idea_notification')->default(true);
+            $table->boolean('mention_notification')->default(true);
 
             $table->timestamps();
         });

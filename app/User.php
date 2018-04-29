@@ -58,6 +58,12 @@ class User extends Authenticatable
                 ->where('memberships.user_id', $this->id)->select('leads.*');
     }
 
+    public function teamsMembers()
+    {
+        return User::join('memberships', 'users.id', '=', 'memberships.user_id')
+                     ->whereIn('memberships.team_id', $this->teams->pluck('id'))->select('users.*');
+    }
+
     public function tasks()
     {
         return $this->hasMany(Task::class);

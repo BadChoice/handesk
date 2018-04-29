@@ -16,11 +16,12 @@ We will keep adding features as we need them, but our basic workflow is totally 
 · Instant email/slack notifications when tickets are created/updated   
 · Everything is unlimited    
 · Lead management (With its API as well)   
-· Auto lead subscription to mailchimp based on its tags   
+· Auto lead subscription to mailChimp based on its tags   
 · Tickets reporting   
 · Tickets internal notes   
 · Tickets can be escalated, so assistants can comment on them to help the teams   
 · Can merge tickets       
+· Mention agents with @name so they get notified
 · Lead tasks, that can have a due date, and sending daily tasks email   
 · Create issues to your code repository directly from the ticket   
 · Updating the ticket automatically when an issue is marked as resolved         
@@ -36,6 +37,7 @@ Its very simple, you just need to follow the standard Laravel installation
 
 ```shell
 git clone https://github.com/BadChoice/handesk.git
+cd handesk
 composer install
 # Setup your .env file to match you desired database
 php artisan key:generate
@@ -112,6 +114,7 @@ There is the `badchoice/handesk-php` package in packagist to easily talk with th
 
 ## Community
 We have a slack channel at [https://handesk.slack.com/](https://handesk.slack.com)
+And you can join with the following [invitation](https://handesk.slack.com/shared_invite/enQtMzQwMTg5ODkwNDUxLWVhYjFkNzNkMmE2NWUxYjcwZTNhMmM0M2M3NmVkMzdhNWI0NTU0ZGM0ODFlNTVlMGZhMTA0YzM0YjA3NjcxMTc)
 
 Join in with the following link
 
@@ -121,5 +124,7 @@ Join in with the following link
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.   
 
 **PRs are welcome!**
- 
+
+## License
+Handesk is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). 
 
