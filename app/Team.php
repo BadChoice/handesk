@@ -28,6 +28,11 @@ class Team extends BaseModel
         return $this->hasMany(Ticket::class);
     }
 
+    public function leads()
+    {
+        return $this->hasMany(Lead::class);
+    }
+
     public function openTickets()
     {
         return $this->tickets()->where('status', '<', Ticket::STATUS_SOLVED);

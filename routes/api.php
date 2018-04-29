@@ -6,6 +6,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('tickets/{ticket}/assign', 'TicketAssignController@store');
     Route::post('teams', 'TeamController@store');
     Route::get('teams/{team}/tickets', 'TeamTicketsController@index');
+    Route::get('teams/{team}/leads', 'TeamLeadsController@index');
 
     Route::resource('leads', 'LeadsController', ['only' => 'store']);
 

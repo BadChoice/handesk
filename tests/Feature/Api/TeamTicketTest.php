@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Lead;
 use App\Notifications\TicketAssigned;
 use App\Notifications\TicketCreated;
 use App\Requester;
@@ -182,6 +183,26 @@ class TeamTicketTest extends TestCase
         $response->assertJson([
             "data" => [
                 "count" => 7
+            ]
+        ]);
+    }
+
+    /** @test */
+    public function can_get_open_leads_count()
+    {
+        $team = factory(Team::class)->create();
+        factory(Lead::class, 1)->create(["team_id" => $team->id, "status" => Lead::STATUS_NEW]);
+        factory(Lead::class, 2)->create(["team_id" => $team->id, "status" => Lead::STATUS_FIRST_CONTACT]);
+        factory(Lead::class, 3)->create(["team_id" => $team->id, "status" => Lead::STATUS_VISITED]);
+        factory(Lead::class, 4)->create(["team_id" => $team->id, "status" => Lead::STATUS_COMPLETED]);
+        factory(Lead::class, 4)->create(["team_id" => $team->id, "status" => Lead::STATUS_FAILED]);
+
+        $response = $this->get("api/teams/{$team->id}/leads?count=true",["token" => 'the-api-token']);
+
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJson([
+            "data" => [
+                "count" => 6
             ]
         ]);
     }
