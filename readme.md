@@ -118,7 +118,7 @@ And you can join with the following [invitation](https://handesk.slack.com/share
 
 Join in with the following link
 
-[Join handesk slack](https://handesk.slack.com/shared_invite/enQtMzQwMTg5ODkwNDUxLWVhYjFkNzNkMmE2NWUxYjcwZTNhMmM0M2M3NmVkMzdhNWI0NTU0ZGM0ODFlNTVlMGZhMTA0YzM0YjA3NjcxMTc)
+[Join handesk slack](https://join.slack.com/t/handesk/shared_invite/enQtMzg4MzE4ODcwNzg2LWM5ODU5NDNlNGNkYmM0NzY5NGRlZjRkZDhjZmI2NTQ3NjY3Y2RkZjI1NTgwMzJiMzAzNTcxNDFmYzE5ZjQxNTY)
 
 ## Development
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.   
