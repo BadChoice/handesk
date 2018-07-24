@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\TicketFilters;
 use App\Requester;
 use App\Ticket;
 use App\Repositories\TicketsRepository;
@@ -25,6 +26,8 @@ class TicketsController extends Controller
         } else {
             $tickets = $repository->all();
         }
+
+        $tickets = (new TicketFilters)->apply($tickets, request()->all());
 
         if (request('team')) {
             $tickets = $tickets->where('tickets.team_id', request('team'));

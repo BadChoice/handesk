@@ -70,4 +70,5 @@ class TicketsRepository
             $query->where('title', 'like', "%{$text}%")->orWhere('body', 'like', "%{$text}%");
         });
     }
+
 }
