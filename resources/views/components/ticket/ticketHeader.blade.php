@@ -9,7 +9,7 @@
         </td>
         <td> {{ link_to_route('tickets.index', $ticket->requester->name, ["requester_id" => $ticket->requester_id] )           }}</td>
         <td> {{ link_to_route('tickets.index', nameOrDash( $ticket->team ), ["team_id" => $ticket->team_id] )           }}</td>
-        <td> {{ link_to_route('tickets.index', nameOrDash( $ticket->user ), ["team_id" => $ticket->user_id] )           }}</td>
+        <td> {{ link_to_route('tickets.index', nameOrDash( $ticket->user ), ["user_id" => $ticket->user_id] )           }}</td>
         <td class="hide-mobile"> {{ $ticket->created_at->diffForHumans()}}</td>
         <td class="hide-mobile"> {{ $ticket->updated_at->diffForHumans()}}</td>
 </tr>
