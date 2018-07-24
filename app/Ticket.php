@@ -27,9 +27,10 @@ class Ticket extends BaseModel
     const STATUS_MERGED  = 6;
     const STATUS_SPAM    = 7;
 
-    const PRIORITY_LOW    = 1;
-    const PRIORITY_NORMAL = 2;
-    const PRIORITY_HIGH   = 3;
+    const PRIORITY_LOW       = 1;
+    const PRIORITY_NORMAL    = 2;
+    const PRIORITY_HIGH      = 3;
+    const PRIORITY_BLOCKER   = 4;
 
     public static function createAndNotify($requester, $title, $body, $tags)
     {
@@ -240,6 +241,16 @@ class Ticket extends BaseModel
             case static::STATUS_CLOSED: return 'closed';
             case static::STATUS_MERGED: return 'merged';
             case static::STATUS_SPAM: return 'spam';
+        }
+    }
+
+    public function priorityName()
+    {
+        switch ($this->priority) {
+            case static::PRIORITY_LOW       : return 'low';
+            case static::PRIORITY_NORMAL    : return 'normal';
+            case static::PRIORITY_HIGH      : return 'high';
+            case static::PRIORITY_BLOCKER   : return 'blocker';
         }
     }
 
