@@ -78,12 +78,7 @@ class TicketsController extends Controller
             'priority'  => 'required|integer',
             //'title'      => 'required|min:3',
         ]);
-        $requester = request('requester');
-        $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
-        $ticket->update([
-            "priority" => request('priority'),
-            "requester_id" => $requester->id
-        ]);
+        $ticket->updateWith(request('requester'), request('priority'));
         return back();
     }
 }

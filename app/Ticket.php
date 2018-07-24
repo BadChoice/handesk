@@ -49,6 +49,15 @@ class Ticket extends BaseModel
         return $ticket;
     }
 
+    public function updateWith($requester, $priority) {
+        $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
+        $this->update([
+            "priority" => $priority,
+            "requester_id" => $requester->id
+        ]);
+        return $this;
+    }
+
     public static function findWithPublicToken($public_token)
     {
         return self::where('public_token', $public_token)->firstOrFail();
