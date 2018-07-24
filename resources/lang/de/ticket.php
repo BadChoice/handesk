@@ -43,4 +43,8 @@ return [
     'escalatedDesc'    => 'This ticket is <b>escalated</b>, all comments will be added as private notes until de-escalated',
     'createIssue'      => 'Create issue',
     'seeIssue'         => 'See Issue',
+    'low'              => 'Low*',
+    'normal'           => 'Normal*',
+    'high'             => 'High*',
+    'blocker'          => 'Blocker*'
 ];

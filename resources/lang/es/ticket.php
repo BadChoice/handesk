@@ -47,4 +47,8 @@ return [
     'seeIssue'         => 'Ver incidencia',
     'createIdea'       => 'Crear Idea',
     'seeIdea'          => 'Ver Idea',
+    'low'              => 'Baja',
+    'normal'           => 'Normal',
+    'high'             => 'Alta',
+    'blocker'          => 'Bloqueador'
 ];
