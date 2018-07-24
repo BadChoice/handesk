@@ -49,12 +49,14 @@ class Ticket extends BaseModel
         return $ticket;
     }
 
-    public function updateWith($requester, $priority) {
+    public function updateWith($requester, $priority)
+    {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $this->update([
-            "priority" => $priority,
-            "requester_id" => $requester->id
+            'priority'     => $priority,
+            'requester_id' => $requester->id,
         ]);
+
         return $this;
     }
 
@@ -256,10 +258,10 @@ class Ticket extends BaseModel
     public function priorityName()
     {
         switch ($this->priority) {
-            case static::PRIORITY_LOW       : return 'low';
-            case static::PRIORITY_NORMAL    : return 'normal';
-            case static::PRIORITY_HIGH      : return 'high';
-            case static::PRIORITY_BLOCKER   : return 'blocker';
+            case static::PRIORITY_LOW: return 'low';
+            case static::PRIORITY_NORMAL: return 'normal';
+            case static::PRIORITY_HIGH: return 'high';
+            case static::PRIORITY_BLOCKER: return 'blocker';
         }
     }
 

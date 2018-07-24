@@ -50,5 +50,5 @@ return [
     'low'              => 'Low*',
     'normal'           => 'Normal*',
     'high'             => 'High*',
-    'blocker'          => 'Blocker*'
+    'blocker'          => 'Blocker*',
 ];
