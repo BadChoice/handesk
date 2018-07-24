@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\TicketFilters;
-use App\Requester;
 use App\Ticket;
+use App\Requester;
+use App\Filters\TicketFilters;
 use App\Repositories\TicketsRepository;
 
 class TicketsController extends Controller
@@ -75,13 +75,15 @@ class TicketsController extends Controller
         return back();
     }
 
-    public function update(Ticket $ticket) {
+    public function update(Ticket $ticket)
+    {
         $this->validate(request(), [
             'requester' => 'required|array',
             'priority'  => 'required|integer',
             //'title'      => 'required|min:3',
         ]);
         $ticket->updateWith(request('requester'), request('priority'));
+
         return back();
     }
 }
