@@ -1,6 +1,7 @@
 @if($ticket->isEscalated() )
     @if($ticket->status < App\Ticket::STATUS_CLOSED)
-        <div class="p4 bg-danger white mt3 br1">
+        <br>
+        <div class="p4 bg-danger white mt4 br1 clear-both">
             {{ Form::open(["url" => route('tickets.escalate.destroy', $ticket), "method" => "delete" ]) }}
             @icon(flag) {!! __('ticket.escalatedDesc') !!}
             <button class="primary ml2">@icon(flag) {{ __('ticket.de-escalate') }}</button>

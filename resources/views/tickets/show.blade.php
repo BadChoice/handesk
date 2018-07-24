@@ -5,14 +5,14 @@
             <a href="{{ route('tickets.index') }}">{{ trans_choice('ticket.ticket', 2) }}</a>
         </div>
         <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
-        <div id="ticket-info" class="mb-4">
+        <div id="ticket-info" class="float-left">
             @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket." . $ticket->statusName() ) }}</span> &nbsp;
             @busy <span class="label ticket-priority-{{ $ticket->priorityName() }}">{{ __("ticket." . $ticket->priorityName() ) }}</span> &nbsp;
             <span class="date">{{  $ticket->created_at->diffForHumans() }} · {{  $ticket->requester->name }} &lt;{{$ticket->requester->email}}&gt;</span>
             <button class="ternary" onClick="$('#ticket-info').hide(); $('#ticket-edit').show()">@icon(pencil)</button>
             {{--<a class="ml4" title="Public Link" href="{{route('requester.tickets.show',$ticket->public_token)}}"> @icon(globe) </a>--}}
         </div>
-        <div id="ticket-edit" class="hidden mb-4">
+        <div id="ticket-edit" class="hidden" class="float-left">
             {{ Form::open(["url" => route("tickets.update", $ticket) ,"method" => "PUT"]) }}
             <select name="priority">
                 <option value="{{\App\Ticket::PRIORITY_LOW}}"  @if($ticket->priority == App\Ticket::PRIORITY_LOW) selected @endif         >{{ __("ticket.low") }}</option>
