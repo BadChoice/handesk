@@ -28,7 +28,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
