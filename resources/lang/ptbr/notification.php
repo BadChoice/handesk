@@ -10,4 +10,7 @@ return [
     'ticketAssignedTo'   => 'Ticket atribuído à',
     'ticketUpdated'      => 'Ticket atualizado',
     'ticketEscalated'    => 'Ticket escalado',
+    'newIdea'            => 'Nova ideia',
+    'newIdeaCreated'     => 'Nova ideia criada',
+    'mention'            => 'Menção',
 ];
