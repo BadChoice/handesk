@@ -1,4 +1,5 @@
 <?php
+
 return [
     'idea'              => 'Ideia|Ideias',
     'pendingIdea'       => 'Ideia Pendente|Ideias Pendentes',
