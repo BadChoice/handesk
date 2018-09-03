@@ -19,4 +19,6 @@ return [
     'ticketUpdatedNotification'  => 'Notificação de atualização de ticket',
     'newLeadNotification'        => 'Notificação de novo lead',
     'leadAssignedNotification'   => 'Notificação de associação de lead',
+    'newIdeaNotification'        => 'Notificação de nova ideia',
+    'mentionNotification'        => 'Notificação de menção',
 ];
