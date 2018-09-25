@@ -1348,16 +1348,16 @@
         },
         {
             "name": "patrickschur/language-detection",
-            "version": "v3.3.0",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/patrickschur/language-detection.git",
-                "reference": "21a2e7a1b9bf6bff578ac11c6dcf3d3668aeccdf"
+                "reference": "95b55109177d5c4bd6b1bec6e8835cd0df36ef5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/patrickschur/language-detection/zipball/21a2e7a1b9bf6bff578ac11c6dcf3d3668aeccdf",
-                "reference": "21a2e7a1b9bf6bff578ac11c6dcf3d3668aeccdf",
+                "url": "https://api.github.com/repos/patrickschur/language-detection/zipball/95b55109177d5c4bd6b1bec6e8835cd0df36ef5f",
+                "reference": "95b55109177d5c4bd6b1bec6e8835cd0df36ef5f",
                 "shasum": ""
             },
             "require": {
@@ -1390,7 +1390,7 @@
                 "detection",
                 "language"
             ],
-            "time": "2018-02-01T17:12:47+00:00"
+            "time": "2018-09-19T21:45:51+00:00"
         },
         {
             "name": "php-imap/php-imap",
