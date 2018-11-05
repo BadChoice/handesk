@@ -8,57 +8,75 @@
   float: left;
   background-color:@dark-gray;
   width: @sidebar-width;
-}
 
-.sidebar img{
-  margin-left: @size4 + @size4 + @size2;
-  .mb1;
-  height:59px;
-}
+  img{
+    margin-left: @size4 + @size4 + @size2;
+    .mb1;
+    height:59px;
+  }
 
-.sidebar h4{
-  .ml4;
-  color:@lighter-gray;
-}
+  h4{
+    .ml4;
+    color:@lighter-gray;
+    margin-top: 4vh;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid @light-gray;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 4px;
+    font-size: 12px;
+    cursor: default;
+    i{
+      font-size: 14px;
+    }
+  }
 
-.sidebar ul{
-}
+  ul{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
-.sidebar li{
-  .pl4; .pt2; .pr2;
-  list-style: none;
-  height:@size5 - @size2;
-}
+  li{
+    .pl4; .pr2;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    min-height: @size5 - @size4;
+    height: 6vh;
+    max-height: @size5 - @size2;
+    position: relative;
+    a{
+      color: @light-gray;
+      text-decoration: none;
+      display: block;
+      flex-grow: 1;
+    }
+    &.active{
+      background-color:@darkest-gray;
+      border-left:solid @size1 @brand-second;
+      padding-left: @size4 - @size1;
+      color:white;
+      a{
+        color:white;
+      }
+    }
+  }
+  .label{
+    .mr2;
+    font-size:12px;
+    background-color: @brand-second;
+    color:white;
+    padding: 2px 6px;
+    border-radius: 8px;
+  }
 
-.sidebar li a{
-  color: @light-gray;
-  text-decoration: none;
-}
-
-.sidebar li.active{
-  background-color:@darkest-gray;
-  border-left:solid @size1 @brand-second;
-  padding-left: @size4 - @size1;
-  color:white;
-}
-
-.sidebar li.active a{
-  color:white;
-}
-
-.sidebar .label{
-  float:right;
-  .mr2;
-  font-size:12px;
-  background-color: @brand-second;
-  color:white;
-}
-
-@media (max-width:@phone-max-size) {
-  .sidebar{
+  @media (max-width:@phone-max-size) {
     left: -@sidebar-width - 20;
     .shadow-outer-2;
     position:absolute;
     z-index:99;
   }
 }
+
+
