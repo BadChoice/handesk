@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 use App\Requester;
+use Illuminate\Http\Request;
 use App\Filters\TicketFilters;
 use App\Repositories\TicketsRepository;
-use Illuminate\Http\Request;
 
 class TicketsController extends Controller
 {
@@ -88,8 +88,9 @@ class TicketsController extends Controller
         return back();
     }
 
-    public function updateStatus(Request $request){
-        foreach ($request->input('tickets') as $ticketId){
+    public function updateStatus(Request $request)
+    {
+        foreach ($request->input('tickets') as $ticketId) {
             $ticket = Ticket::findOrFail($ticketId);
             $this->authorize('view', $ticket);
             $ticket->updateStatus($request->input('status'));
