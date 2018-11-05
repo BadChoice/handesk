@@ -87,13 +87,4 @@ class TicketsController extends Controller
 
         return back();
     }
-
-    public function updateStatus(Request $request)
-    {
-        foreach ($request->input('tickets') as $ticketId) {
-            $ticket = Ticket::findOrFail($ticketId);
-            $this->authorize('view', $ticket);
-            $ticket->updateStatus($request->input('status'));
-        }
-    }
 }
