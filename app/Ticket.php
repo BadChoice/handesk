@@ -36,7 +36,7 @@ class Ticket extends BaseModel
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $ticket    = $requester->tickets()->create([
-            'title'        => $title,
+            'title'        => substr($title, 0, 190),
             'body'         => $body,
             'public_token' => str_random(24),
         ])->attachTags($tags);
