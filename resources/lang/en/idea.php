@@ -10,14 +10,12 @@ return [
     'salesImpact'       => 'Sales Impact',
     'currentImpact'     => 'Current Impact',
     'edit'              => 'Edit',
-    'fromTicket'        => 'Notification | REVO Ideas bucket:
-Your ticket has been closed as an issue, and it has been created as an idea into REVO Ideas bucket.
+    'fromTicket'        => 'Notification | Ideas bucket:
+Your ticket has been closed as an issue, and it has been created as an idea into our Ideas bucket.
 
-All the ideas will be analized by REVO team, and evaluated its viability.
+All the ideas will be analized by our team, and evaluated its viability.
 
-Thank you to let us grow with you..
-
-El Equipo de REVO',
+Thank you to let us grow with you..',
     'save'     => 'Save',
     'new'      => 'New',
     'open'     => 'Open',
