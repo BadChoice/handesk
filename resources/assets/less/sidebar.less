@@ -38,14 +38,19 @@
   }
 
   li{
-    .pl4; .pt2; .pr2;
+    .pl4; .pr2;
     list-style: none;
-    height:@size5 - @size2;
+    display: flex;
+    align-items: center;
+    min-height: @size5 - @size4;
+    height: 6vh;
+    max-height: @size5 - @size2;
     position: relative;
     a{
       color: @light-gray;
       text-decoration: none;
       display: block;
+      flex-grow: 1;
     }
     &.active{
       background-color:@darkest-gray;
@@ -58,14 +63,12 @@
     }
   }
   .label{
-    position: absolute;
-    right: 0;
-    top: 0;
     .mr2;
-    .mt2;
     font-size:12px;
     background-color: @brand-second;
     color:white;
+    padding: 2px 6px;
+    border-radius: 8px;
   }
 
   @media (max-width:@phone-max-size) {
