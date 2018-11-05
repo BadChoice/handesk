@@ -6,6 +6,7 @@ use App\Ticket;
 use App\Requester;
 use App\Filters\TicketFilters;
 use App\Repositories\TicketsRepository;
+use Illuminate\Http\Request;
 
 class TicketsController extends Controller
 {
@@ -85,5 +86,13 @@ class TicketsController extends Controller
         $ticket->updateWith(request('requester'), request('priority'));
 
         return back();
+    }
+
+    public function updateStatus(Request $request){
+        foreach ($request->input('tickets') as $ticketId){
+            $ticket = Ticket::findOrFail($ticketId);
+            $this->authorize('view', $ticket);
+            $ticket->updateStatus($request->input('status'));
+        }
     }
 }
