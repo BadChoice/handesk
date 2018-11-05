@@ -1,33 +1,13 @@
 <script>
-    var mergin = false;
-    function onMergePressed(){
-        if( ! mergin) {
-            return startMergin();
-        }
-        merge();
-    }
-
-    function startMergin(){
-        mergin = true;
-        $("#mergeButton").removeClass("secondary");
-        $("#mergeButton").html("{{__('ticket.mergeDesc')}}");
-    }
-
-    function stopMergin(){
-      mergin = false;
-      $("#mergeButton").addClass("secondary");
-      $("#mergeButton").html("<?php echo e(__('ticket.merge')); ?>");
-    }
-
     function getSelectedTicketsIds(){
         return $("input[name^=selected]:checked").map(function() {
             return $(this).attr("meta:index");
         }).toArray();
     }
 
-    function merge(){
+    function mergeTickets(){
         var tickets = getSelectedTicketsIds();
-        if(tickets.length == 0) stopMergin(); return;
+        if(tickets.length == 0) return;
 
         var ticket = prompt("{{__('ticket.mergeDesc2')}}");
 

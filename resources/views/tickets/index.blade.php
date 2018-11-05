@@ -6,7 +6,7 @@
 
     <div class="m4">
         <a class="button " href="{{ route("tickets.create") }}">@icon(plus) {{ __('ticket.newTicket') }}</a>
-        <a class="button secondary" id="mergeButton" onclick="onMergePressed()"> {{ __('ticket.merge') }}</a>
+        <a class="button secondary" id="mergeButton" title="{{__('ticket.mergeDesc')}}" onclick="mergeTickets()"> {{ __('ticket.merge') }}</a>
         <div class="dropdown-wrapper">
             <span class="dropdown button secondary">Set Status for Tickets @icon(caret-down) </span>
             <ul class="dropdown-container">
