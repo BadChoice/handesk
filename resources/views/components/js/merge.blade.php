@@ -11,7 +11,12 @@
         mergin = true;
         $("#mergeButton").removeClass("secondary");
         $("#mergeButton").html("{{__('ticket.mergeDesc')}}");
-        $(".selector").show();
+    }
+
+    function stopMergin(){
+      mergin = false;
+      $("#mergeButton").addClass("secondary");
+      $("#mergeButton").html("<?php echo e(__('ticket.merge')); ?>");
     }
 
     function getSelectedTicketsIds(){
@@ -22,7 +27,7 @@
 
     function merge(){
         var tickets = getSelectedTicketsIds();
-        if(tickets.length == 0) return;
+        if(tickets.length == 0) stopMergin(); return;
 
         var ticket = prompt("{{__('ticket.mergeDesc2')}}");
 
