@@ -39,7 +39,6 @@
 @endsection
 
 @section('scripts')
-    @include('components.js.merge')
     @include('components.js.markMultiple')
     <script>
         $("#searcher").searcher('tickets/search/');
