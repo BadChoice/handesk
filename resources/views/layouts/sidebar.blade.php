@@ -11,13 +11,13 @@
         @include('layouts.sidebar.roadmap')
     @endif
 
-    <br>
+
     <h4> @icon(bar-chart) {{ trans_choice('report.report', 2) }}</h4>
     <ul>
         @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
     </ul>
 
-    <br>
+
     <h4> @icon(cog) {{ trans_choice('admin.admin',2) }}</h4>
     <ul>
         @include('components.sidebarItem', ["url" => route('teams.index'),      "title" => trans_choice('team.team',        2) ])
@@ -26,7 +26,7 @@
             @include('components.sidebarItem', ["url" => route('settings.edit', 1), "title" => trans_choice('setting.setting',  2) ])
         @endif
     </ul>
-    <br><br>
+    <br>
 </div>
 
 <div class="show-mobile absolute ml2 mt3 fs3">
