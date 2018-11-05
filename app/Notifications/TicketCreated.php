@@ -27,7 +27,7 @@ class TicketCreated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        if (isset($notifiable->settings) && $notifiable->settings->ticket_created_notification == false) {
+        if (isset($notifiable->settings) && $notifiable->settings->new_ticket_notification == false) {
             return [];
         }
 
