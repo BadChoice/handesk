@@ -2,12 +2,11 @@
 
 namespace App;
 
-use App\Notifications\RateTicket;
-use App\Notifications\TicketRatedNotification;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
 use App\Events\TicketCommented;
+use App\Notifications\RateTicket;
 use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
 use Illuminate\Support\Facades\App;
@@ -206,7 +205,7 @@ class Ticket extends BaseModel
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
         TicketEvent::make($this, 'Status updated: '.$this->statusName());
-        if ($status == Ticket::STATUS_SOLVED && ! $this->rating && config('handesk.sendRatingEmail')){
+        if ($status == Ticket::STATUS_SOLVED && ! $this->rating && config('handesk.sendRatingEmail')) {
             $this->requester->notify((new RateTicket($this))->delay(now()->addMinutes(60)));
         }
     }
@@ -216,8 +215,6 @@ class Ticket extends BaseModel
         $this->update(['priority' => $priority, 'updated_at' => Carbon::now()]);
         TicketEvent::make($this, 'Priority updated: '.$this->priorityName());
     }
-
-
 
     public function setLevel($level)
     {
