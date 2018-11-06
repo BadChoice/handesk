@@ -13,7 +13,6 @@ class Rating extends Field
 
     public function displayInEdit($object, $inline = false)
     {
-        return "";
+        return '';
     }
-
 }
