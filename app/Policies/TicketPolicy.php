@@ -12,7 +12,7 @@ class TicketPolicy
 
     public function before($user, $ability)
     {
-        if ($user->admin) {
+        if ($user->admin && $ability != 'delete') {
             return true;
         }
     }
@@ -72,6 +72,7 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket)
     {
+        return false;
     }
 
     public function assignToTeam(User $user, Ticket $ticket)

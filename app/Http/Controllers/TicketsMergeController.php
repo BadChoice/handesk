@@ -11,10 +11,11 @@ class TicketsMergeController extends Controller
         return view('tickets.merge');
     }
 
-    public function store()
+    //Now it is done with App\ThrustHelpers\Actions\MergeAction
+    /*public function store()
     {
         Ticket::findOrFail(request('ticket_id'))->merge(auth()->user(), request('tickets'));
 
         return redirect()->route('tickets.index');
-    }
+    }*/
 }
