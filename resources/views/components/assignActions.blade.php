@@ -13,7 +13,7 @@
                 <td>{{ __('ticket.assigned') }}:</td>
                 <td>{{ Form::select('user_id', App\Team::membersByTeam(), $object->user_id, ['class' => 'w100']) }}</td>
             @else
-                @if( $object->team )
+                @if ($object->team)
                     <td>{{ __('ticket.assigned') }}:</td>
                     <td>{{ Form::select('user_id', createSelectArray( $object->team->members, true), $object->user_id, ['class' => 'w100']) }}</td>
                 @endif
