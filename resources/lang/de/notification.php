@@ -10,4 +10,5 @@ return [
     'ticketAssignedTo'   => 'Ticket zugewiesen an',
     'ticketUpdated'      => 'Ticket aktualisiert',
     'ticketEscalated'    => 'Ticket eskaliert',
+    'rateTicket'         => 'Rate ticket*',
 ];

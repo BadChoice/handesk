@@ -13,4 +13,5 @@ return [
     'newIdea'            => 'Nova ideia',
     'newIdeaCreated'     => 'Nova ideia criada',
     'mention'            => 'Menção',
+    'rateTicket'         => 'Rate ticket*',
 ];

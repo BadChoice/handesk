@@ -12,4 +12,6 @@ return [
     'ticketEscalated'    => 'Ticket prioritaire',
     'newIdea'            => 'Nouvelle idée',
     'newIdeaCreated'     => 'Nouvelle idée',
+    'rateTicket'         => 'Rate ticket*',
+    'rateTicketDesc'    => 'Rate ticket desc*',
 ];
