@@ -8,7 +8,9 @@ class TicketsIndexQuery
 {
     public static function get(TicketsRepository $repository = null)
     {
-        if (! $repository) $repository = app(TicketsRepository::class);
+        if (! $repository) {
+            $repository = app(TicketsRepository::class);
+        }
 
         if (request('assigned')) {
             $tickets = $repository->assignedToMe();
@@ -31,6 +33,7 @@ class TicketsIndexQuery
         if (request('team')) {
             $tickets = $tickets->where('tickets.team_id', request('team'));
         }
+
         return $tickets;
     }
 }
