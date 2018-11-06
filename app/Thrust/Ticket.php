@@ -2,41 +2,41 @@
 
 namespace App\Thrust;
 
-use App\Repositories\TicketsIndexQuery;
-use App\ThrustHelpers\Actions\ChangePriority;
-use App\ThrustHelpers\Actions\ChangeStatus;
-use App\ThrustHelpers\Actions\MergeTickets;
-use App\ThrustHelpers\Actions\NewTicket;
-use App\ThrustHelpers\Fields\TicketStatusField;
-use App\ThrustHelpers\Filters\EscalatedFilter;
-use App\ThrustHelpers\Filters\PriorityFilter;
-use App\ThrustHelpers\Filters\StatusFilter;
-use BadChoice\Thrust\Fields\BelongsTo;
+use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
-use BadChoice\Thrust\Resource;
+use BadChoice\Thrust\Fields\BelongsTo;
+use App\Repositories\TicketsIndexQuery;
+use App\ThrustHelpers\Actions\NewTicket;
+use App\ThrustHelpers\Actions\ChangeStatus;
+use App\ThrustHelpers\Actions\MergeTickets;
+use App\ThrustHelpers\Filters\StatusFilter;
+use App\ThrustHelpers\Actions\ChangePriority;
+use App\ThrustHelpers\Filters\PriorityFilter;
+use App\ThrustHelpers\Filters\EscalatedFilter;
+use App\ThrustHelpers\Fields\TicketStatusField;
 
 class Ticket extends Resource
 {
-    public static $model = \App\Ticket::class;
+    public static $model  = \App\Ticket::class;
     public static $search = ['title', 'body'];
 
     public function fields()
     {
         return [
-            TicketStatusField::make('id' ,''),
-            Link::make('title' , __('ticket.subject'))->displayCallback(function($ticket){
-                return "#{$ticket->id} · ". str_limit($ticket->title, 25);
+            TicketStatusField::make('id', ''),
+            Link::make('title', __('ticket.subject'))->displayCallback(function ($ticket) {
+                return "#{$ticket->id} · ".str_limit($ticket->title, 25);
             })->route('tickets.show')->sortable(),
-            Link::make('requester.id', trans_choice('ticket.requester', 1))->displayCallback(function($ticket){
-                return $ticket->requester->name ?? "--";
+            Link::make('requester.id', trans_choice('ticket.requester', 1))->displayCallback(function ($ticket) {
+                return $ticket->requester->name ?? '--';
             })->link('tickets?requester_id={field}'),
-            Link::make('team.id', __('ticket.team'))->displayCallback(function($ticket){
-                return $ticket->team->name ?? "--";
+            Link::make('team.id', __('ticket.team'))->displayCallback(function ($ticket) {
+                return $ticket->team->name ?? '--';
             })->link('tickets?team_id={field}'),
             BelongsTo::make('user', __('ticket.assigned'))->allowNull(),
-            Link::make('user.id', trans_choice('ticket.user', 1))->displayCallback(function($ticket){
-                return $ticket->user->name ?? "--";
+            Link::make('user.id', trans_choice('ticket.user', 1))->displayCallback(function ($ticket) {
+                return $ticket->user->name ?? '--';
             })->link('tickets?user_id={field}'),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
@@ -60,7 +60,6 @@ class Ticket extends Resource
         ];
     }
 
-
     public function actions()
     {
         return [
@@ -78,5 +77,4 @@ class Ticket extends Resource
             new EscalatedFilter,
         ];
     }
-
 }

@@ -3,23 +3,21 @@
 namespace App\ThrustHelpers\Filters;
 
 use App\Ticket;
-use BadChoice\Thrust\Filters\QueryBuilder;
-use BadChoice\Thrust\Filters\SelectFilter;
 use Illuminate\Http\Request;
+use BadChoice\Thrust\Filters\SelectFilter;
 
 class EscalatedFilter extends SelectFilter
 {
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('level' , $value);
+        return $query->where('level', $value);
     }
 
     public function options()
     {
         return [
-            __("ticket.escalated") => 1,
-            __("ticket.nonEscalated") => 0,
+            __('ticket.escalated')    => 1,
+            __('ticket.nonEscalated') => 0,
         ];
     }
-
 }
