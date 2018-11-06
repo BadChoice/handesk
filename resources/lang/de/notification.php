@@ -11,4 +11,6 @@ return [
     'ticketUpdated'      => 'Ticket aktualisiert',
     'ticketEscalated'    => 'Ticket eskaliert',
     'rateTicket'         => 'Rate ticket*',
+    'rateTicketDesc'     => 'We would love to get your feedback about this ticket, just click the rating so we can keep improving!*',
+    'ticketRated'        => 'Ticket rated*',
 ];

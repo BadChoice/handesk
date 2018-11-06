@@ -13,6 +13,6 @@ return [
     'newIdea'            => 'Nouvelle idée',
     'newIdeaCreated'     => 'Nouvelle idée',
     'rateTicket'         => 'Rate ticket*',
-    'rateTicketDesc'    => 'Rate ticket desc*',
+    'rateTicketDesc'     => 'We would love to get your feedback about this ticket, just click the rating so we can keep improving!*',
     'ticketRated'        => 'Ticket rated*',
 ];

@@ -144,7 +144,7 @@ class KpiRepository
     {
         $kpi = (new RatedKpi)->forDates($this->startDate, $this->endDate);
         if (!$agent) {
-            return $kpi->forType(Kpi::TYPE_USER);raterater
+            return $kpi->forType(Kpi::TYPE_USER);
         }
         if ($agent instanceof User) {
             return $kpi->forUser(auth()->user());
