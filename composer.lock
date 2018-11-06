@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3df2b88af20828a9111279e6e7c22224",
+    "content-hash": "e7a900525f041d90f6cd41c74ce0fa1b",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -678,16 +678,16 @@
         },
         {
             "name": "khill/fontawesomephp",
-            "version": "1.1.5",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kevinkhill/FontAwesomePHP.git",
-                "reference": "8d26204b7e8091136c0ffe490b976ac50d01e6b7"
+                "reference": "324fdac57c319f7212d4be2e47f1d03c3f015e1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kevinkhill/FontAwesomePHP/zipball/8d26204b7e8091136c0ffe490b976ac50d01e6b7",
-                "reference": "8d26204b7e8091136c0ffe490b976ac50d01e6b7",
+                "url": "https://api.github.com/repos/kevinkhill/FontAwesomePHP/zipball/324fdac57c319f7212d4be2e47f1d03c3f015e1a",
+                "reference": "324fdac57c319f7212d4be2e47f1d03c3f015e1a",
                 "shasum": ""
             },
             "require-dev": {
@@ -723,7 +723,7 @@
                 }
             ],
             "description": "PHP wrapper library for the fantastic Font Awesome icon set.",
-            "time": "2018-02-05T17:31:32+00:00"
+            "time": "2018-06-19T17:27:46+00:00"
         },
         {
             "name": "laravel/framework",
