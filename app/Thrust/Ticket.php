@@ -2,7 +2,7 @@
 
 namespace App\Thrust;
 
-use App\Repositories\TicketsRepository;
+use App\Repositories\TicketsIndexQuery;
 use App\ThrustHelpers\Actions\ChangePriority;
 use App\ThrustHelpers\Actions\ChangeStatus;
 use App\ThrustHelpers\Actions\MergeTickets;
@@ -37,7 +37,7 @@ class Ticket extends Resource
 
     protected function getBaseQuery()
     {
-        return (new TicketsRepository)->all()->with($this->getWithFields())->latest('updated_at');
+        return TicketsIndexQuery::get()->with($this->getWithFields())->latest('updated_at');
     }
 
 
