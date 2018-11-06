@@ -6,7 +6,7 @@
         </div>
 
         <div style="border-bottom:1px solid #efefef; padding-bottom:10px; margin-left:20px; margin-top:20px;">
-            {{ $ticket->subject }}
+            {{ $ticket->title }} <br>
             {{__('notification.rateTicketDesc')}}
             <br>
             <a href="{{$url}}?rating=1">1</a>

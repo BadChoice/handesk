@@ -36,7 +36,7 @@ class TicketRatedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $mail = (new MailMessage)
+        return (new MailMessage)
             ->subject(__('notification.ticketRated').": #{$this->ticket->id}: {$this->ticket->title}")
             ->replyTo(config('mail.fetch.username'))
             ->view('emails.ticketRated', [
@@ -45,11 +45,6 @@ class TicketRatedNotification extends Notification
                     'url'    => route('tickets.show', $this->ticket),
                 ]
             );
-        if ($this->ticket->requester->email) {
-            $mail->from($this->ticket->requester->email, $this->ticket->requester->name);
-        }
-
-        return $mail;
     }
 
     public function toSlack($notifiable)

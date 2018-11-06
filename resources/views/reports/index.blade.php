@@ -18,7 +18,7 @@
                 <th> {{ trans_choice('ticket.unanswered',2) }}  </th>
                 <th> {{ trans_choice('ticket.open',2) }}        </th>
                 <th> {{ trans_choice('ticket.solved',2) }}      </th>
-                <th> {{ trans_choice('ticket.averageRating',2) }}      </th>
+                <th> {{ trans_choice('report.averageRating',2) }}      </th>
                 <th> {{ __('report.firstReplyTime') }}          </th>
                 <th> {{ __('report.solveTime') }}               </th>
                 <th> {{ __('report.onTouchResolutionRatio') }}  </th>

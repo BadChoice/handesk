@@ -14,4 +14,5 @@ return [
     'newIdeaCreated'     => 'Nouvelle idée',
     'rateTicket'         => 'Rate ticket*',
     'rateTicketDesc'    => 'Rate ticket desc*',
+    'ticketRated'        => 'Ticket rated*',
 ];

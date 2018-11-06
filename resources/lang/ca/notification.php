@@ -15,4 +15,5 @@ return [
     'mention'            => 'Menció',
     'rateTicket'         => 'Classifica el tiquet',
     'rateTicketDesc'    => 'Rate ticket desc*',
+    'ticketRated'        => 'Ticket classificat',
 ];
