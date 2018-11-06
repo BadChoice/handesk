@@ -212,6 +212,14 @@ class Ticket extends BaseModel
         TicketEvent::make($this, 'Priority updated: '.$this->priorityName());
     }
 
+    public function rate($rating)
+    {
+        if (! $rating) return false;
+        if ($rating < 0 || $rating > 5) return false;
+        if ($this->status != Ticket::STATUS_CLOSED) return false;
+        return $this->update(['rating' => $rating]);
+    }
+
     public function setLevel($level)
     {
         $this->update(['level' => $level]);
