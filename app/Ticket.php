@@ -206,6 +206,12 @@ class Ticket extends BaseModel
         TicketEvent::make($this, 'Status updated: '.$this->statusName());
     }
 
+    public function updatePriority($priority)
+    {
+        $this->update(['priority' => $priority, 'updated_at' => Carbon::now()]);
+        TicketEvent::make($this, 'Priority updated: '.$this->priorityName());
+    }
+
     public function setLevel($level)
     {
         $this->update(['level' => $level]);

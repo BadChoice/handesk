@@ -25,7 +25,10 @@ class ChangePriority extends Action
 
     public function handle(Collection $objects)
     {
-        $this->getAllObjectsQuery($objects)->update(['priority' => request('priority')]);
+        $objects->each(function($ticket){
+            if (! auth()->user()->can('update', $ticket)) return;
+            $ticket->updatePriority(request('priority'));
+        });
     }
 
 
