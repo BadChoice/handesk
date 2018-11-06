@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Notifications\RateTicket;
+use App\Notifications\TicketRatedNotification;
 use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
@@ -17,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel
 {
-    use SoftDeletes, Taggable, Assignable, Subscribable;
+    use SoftDeletes, Taggable, Assignable, Subscribable, Rateable;
 
     const STATUS_NEW     = 1;
     const STATUS_OPEN    = 2;
@@ -204,6 +206,9 @@ class Ticket extends BaseModel
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
         TicketEvent::make($this, 'Status updated: '.$this->statusName());
+        if ($status == Ticket::STATUS_CLOSED && ! $this->rating){
+            $this->requester->notify((new RateTicket($this))->delay(now()->addMinutes(60)));
+        }
     }
 
     public function updatePriority($priority)
@@ -212,13 +217,7 @@ class Ticket extends BaseModel
         TicketEvent::make($this, 'Priority updated: '.$this->priorityName());
     }
 
-    public function rate($rating)
-    {
-        if (! $rating) return false;
-        if ($rating < 0 || $rating > 5) return false;
-        if ($this->status != Ticket::STATUS_CLOSED) return false;
-        return $this->update(['rating' => $rating]);
-    }
+
 
     public function setLevel($level)
     {

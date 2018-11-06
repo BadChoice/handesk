@@ -20,4 +20,5 @@ return [
     'newLeadNotification'        => 'Nieuwe lead notificatie',
     'leadAssignedNotification'   => 'Lead toegewezen notificatie',
     'newIdeaNotification'        => 'Nieuw idee notificatie',
+    'ticketRatedNotification'    => 'Ticket classificat*',
 ];
