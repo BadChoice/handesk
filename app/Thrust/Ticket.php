@@ -35,7 +35,6 @@ class Ticket extends Resource
             Link::make('team.id', __('ticket.team'))->displayCallback(function ($ticket) {
                 return $ticket->team->name ?? '--';
             })->link('tickets?team_id={field}'),
-            BelongsTo::make('user', __('ticket.assigned'))->allowNull(),
             Link::make('user.id', trans_choice('ticket.user', 1))->displayCallback(function ($ticket) {
                 return $ticket->user->name ?? '--';
             })->link('tickets?user_id={field}'),
