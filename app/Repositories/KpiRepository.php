@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Kpi\RatedKpi;
 use App\Team;
 use App\User;
 use App\Ticket;
@@ -23,6 +24,7 @@ class KpiRepository
         Kpi::KPI_ONE_TOUCH_RESOLUTION => 'oneTouchResolutionKpi',
         Kpi::KPI_REOPENED             => 'reopenedKpi',
         Kpi::KPI_UNANSWERED_TICKETS   => 'unansweredTickets',
+        Kpi::KPI_RATING               => 'ratingKpi',
     ];
 
     public function __construct($startDate = null, $endDate = null)
@@ -79,6 +81,11 @@ class KpiRepository
         return $this->percentageKpi(ReopenedKpi::class, $agent, true);
     }
 
+    public function averageRating($agent = null)
+    {
+        return $this->kpiAverage(RatedKpi::class, $agent);
+    }
+
     public function average($kpi, $agent)
     {
         extract($this->getAverageValues($this->kpiFunctions[$kpi], $agent));
@@ -131,5 +138,17 @@ class KpiRepository
         }
 
         return toTime($kpi->forTeam($agent));
+    }
+
+    public function kpiAverage($kpi, $agent)
+    {
+        $kpi = (new RatedKpi)->forDates($this->startDate, $this->endDate);
+        if (!$agent) {
+            return $kpi->forType(Kpi::TYPE_USER);
+        }
+        if ($agent instanceof User) {
+            return $kpi->forUser(auth()->user());
+        }
+        return $kpi->forTeam($agent);
     }
 }

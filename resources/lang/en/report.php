@@ -7,4 +7,5 @@ return [
     'onTouchResolutionRatio' => 'One touch resolution ratio',
     'reopenedRatio'          => 'Reopened ratio',
     'filter'                 => 'Filter',
+    'averageRating'          => 'Average rating',
 ];

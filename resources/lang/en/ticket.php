@@ -51,4 +51,5 @@ return [
     'normal'           => 'Normal',
     'high'             => 'High',
     'blocker'          => 'Blocker',
+    'thanksForTheRating' => 'Thank you!'
 ];

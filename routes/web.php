@@ -18,6 +18,7 @@ Auth::routes();
 Route::group(['prefix' => 'requester'], function () {
     Route::get('tickets/{token}', 'RequesterTicketsController@show')->name('requester.tickets.show');
     Route::post('tickets/{token}/comments', 'RequesterCommentsController@store')->name('requester.comments.store');
+    Route::get('tickets/{token}/rate', 'RequesterTicketsController@rate')->name('requester.tickets.rate');
 });
 
 Route::post('webhook/bitbucket', 'WebhookController@store');

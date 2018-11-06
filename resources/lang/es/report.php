@@ -7,4 +7,5 @@ return [
     'onTouchResolutionRatio' => 'Ratio de resolución en un clic',
     'reopenedRatio'          => 'Ratio de reaperturas',
     'filter'                 => 'Filtro',
+    'averageRating'          => 'Media de clasificación',
 ];
