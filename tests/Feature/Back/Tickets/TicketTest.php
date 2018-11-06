@@ -8,6 +8,7 @@ use App\Notifications\TicketEscalated;
 use App\Services\Bitbucket\Bitbucket;
 use App\Services\IssueCreator;
 use App\Team;
+use App\ThrustHelpers\Actions\MergeTickets;
 use App\Ticket;
 use App\User;
 use Illuminate\Http\Response;
@@ -228,9 +229,10 @@ class TicketTest extends TestCase
         $user    = factory(User::class)->states(['admin'])->create();
         $tickets = factory(Ticket::class, 4)->create();
 
-        $response = $this->actingAs($user)->post("tickets/merge", ["ticket_id" => 1, "tickets" => [2, 3]]);
+        $this->actingAs($user);
+        request()->merge(['ticket_id' => 1]);
+        (new MergeTickets)->handle(Ticket::whereIn('id', [2, 3])->get());
 
-        $response->assertStatus(Response::HTTP_FOUND);
         $this->assertEquals(Ticket::STATUS_MERGED, $tickets[1]->fresh()->status);
         $this->assertEquals(Ticket::STATUS_MERGED, $tickets[2]->fresh()->status);
     }
