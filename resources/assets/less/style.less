@@ -1,19 +1,26 @@
-@import "Hurricane/Hurricane";
-@import "Hurricane/Hurricane-Basic";
-@import "Hurricane/Hurricane-Dropdown";
-@import "Hurricane/Hurricane-Tables";
-@import "Hurricane/Hurricane-Grid";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Variables";
+@import "variables";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Basic";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Inputs";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Tables";
+//@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Buttons";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Cards";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Grid";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Dropdown";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Sort";
 
 @import "table";
 @import "sidebar";
 @import "inputs";
 @import "ticketEvent";
 @import "TagsInput";
+@import "popup";
 
 @import "libs/mention.js/recommended-styles";
 
 //* {  box-sizing: border-box; }
-@import url('https://fonts.googleapis.com/css?family=Lato:300,300italic,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:200,300,300italic,700');
 
 @family-serif: "Lato", sans-serif;
 @family-heads: "Lato", sans-serif;
@@ -30,6 +37,7 @@ body{
   font-weight: 300;
   color: @gray;
 }
+
 
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.navbar-item,.navbar-link{
     font-family: @family-heads;
@@ -73,7 +81,30 @@ a{
   .pt1; .pr3; .pb3; .pl4;
 }
 
-.description h3{
+.description .actions{
+  background-color:white;
+}
+
+.thrust-main-actions{
+  margin-top:20px;
+  margin-bottom:30px;
+}
+
+.thrust-actions{
+  margin:-40px 8px auto;
+}
+
+.resourceSearch input{
+  width: 300px;
+  .shadow-outer-3;
+  border-color: #eee;
+}
+
+.resourceSearch i{
+  .o50;
+}
+
+.description h3, .description .title{
   font-weight:200;
   .fs3;
 }
@@ -250,6 +281,10 @@ button:focus {outline:0;}
   }
 }
 
+.show-mobile{
+  display:none;
+}
+
 @media (max-width: @phone-max-size) {
   .content{
     margin-left:0px;
@@ -273,5 +308,11 @@ button:focus {outline:0;}
     .ml4;
     .mb4;
   }
+  .hide-mobile{
+    display:none;
+  }
 
+  .show-mobile{
+    display:unset;
+  }
 }

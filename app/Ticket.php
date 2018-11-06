@@ -242,9 +242,9 @@ class Ticket extends BaseModel
         return ! in_array($this->status, [self::STATUS_CLOSED, self::STATUS_MERGED]);
     }
 
-    public function statusName()
+    public static function statusNameFor($status)
     {
-        switch ($this->status) {
+        switch ($status) {
             case static::STATUS_NEW: return 'new';
             case static::STATUS_OPEN: return 'open';
             case static::STATUS_PENDING: return 'pending';
@@ -255,14 +255,24 @@ class Ticket extends BaseModel
         }
     }
 
-    public function priorityName()
+    public function statusName()
     {
-        switch ($this->priority) {
+        return static::statusNameFor($this->status);
+    }
+
+    public static function priorityNameFor($priority)
+    {
+        switch ($priority) {
             case static::PRIORITY_LOW: return 'low';
             case static::PRIORITY_NORMAL: return 'normal';
             case static::PRIORITY_HIGH: return 'high';
             case static::PRIORITY_BLOCKER: return 'blocker';
         }
+    }
+
+    public function priorityName()
+    {
+        return static::priorityNameFor($this->priority);
     }
 
     public function getSubscribableEmail()

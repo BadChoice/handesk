@@ -2,42 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Ticket;
-use App\Requester;
-use Illuminate\Http\Request;
-use App\Filters\TicketFilters;
+use App\Repositories\TicketsIndexQuery;
 use App\Repositories\TicketsRepository;
+use App\Ticket;
+use BadChoice\Thrust\Controllers\ThrustController;
 
 class TicketsController extends Controller
 {
-    public function index(TicketsRepository $repository)
+    public function index()
     {
-        if (request('assigned')) {
-            $tickets = $repository->assignedToMe();
-        } elseif (request('unassigned')) {
-            $tickets = $repository->unassigned();
-        } elseif (request('recent')) {
-            $tickets = $repository->recentlyUpdated();
-        } elseif (request('solved')) {
-            $tickets = $repository->solved();
-        } elseif (request('closed')) {
-            $tickets = $repository->closed();
-        } elseif (request('escalated')) {
-            $tickets = $repository->escalated();
-        } else {
-            $tickets = $repository->all();
-        }
-
-        $tickets = (new TicketFilters)->apply($tickets, request()->all());
-
-        if (request('team')) {
-            $tickets = $tickets->where('tickets.team_id', request('team'));
-        }
-
-        $tickets = $tickets->select('tickets.*')->latest('updated_at');
-
-        return view('tickets.index', ['tickets' => $tickets->paginate(25, ['tickets.user_id'])]);
+        return (new ThrustController)->index('tickets');
     }
+
+    /*public function index(TicketsRepository $repository)
+    {
+        $ticketsQuery = TicketsIndexQuery::get($repository);
+        $ticketsQuery = $ticketsQuery->select('tickets.*')->latest('updated_at');
+
+        return view('tickets.index', ['tickets' => $ticketsQuery->paginate(25, ['tickets.user_id'])]);
+    }*/
 
     public function show(Ticket $ticket)
     {
