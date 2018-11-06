@@ -1,8 +1,14 @@
-@import "Hurricane/Hurricane";
-@import "Hurricane/Hurricane-Basic";
-@import "Hurricane/Hurricane-Dropdown";
-@import "Hurricane/Hurricane-Tables";
-@import "Hurricane/Hurricane-Grid";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Variables";
+@import "variables";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Basic";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Inputs";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Tables";
+//@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Buttons";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Cards";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Grid";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Dropdown";
+@import "../../../vendor/badchoice/Hurricane/src/Hurricane-Sort";
 
 @import "table";
 @import "sidebar";
@@ -30,6 +36,7 @@ body{
   font-weight: 300;
   color: @gray;
 }
+
 
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.navbar-item,.navbar-link{
     font-family: @family-heads;
@@ -250,6 +257,10 @@ button:focus {outline:0;}
   }
 }
 
+.show-mobile{
+  display:none;
+}
+
 @media (max-width: @phone-max-size) {
   .content{
     margin-left:0px;
@@ -273,5 +284,11 @@ button:focus {outline:0;}
     .ml4;
     .mb4;
   }
+  .hide-mobile{
+    display:none;
+  }
 
+  .show-mobile{
+    display:unset;
+  }
 }

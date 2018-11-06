@@ -30,7 +30,7 @@ function setupFormLoadingImage(){
     });
 }
 
-$('.dropdown').click(function() {
+/*$('.dropdown').click(function() {
     $(this).next('.dropdown-container-inverse').toggle();
     $(this).next('.dropdown-container').toggle();
-});
+});*/
