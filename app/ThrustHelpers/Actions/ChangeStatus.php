@@ -28,7 +28,10 @@ class ChangeStatus extends Action
 
     public function handle(Collection $objects)
     {
-        $this->getAllObjectsQuery($objects)->update(['status' => request('status')]);
+        $objects->each(function($ticket){
+            if (! auth()->user()->can('update', $ticket)) return;
+            $ticket->updateStatus(request('status'));
+        });
     }
 
 
