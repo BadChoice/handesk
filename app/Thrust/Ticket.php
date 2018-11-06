@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use App\ThrustHelpers\Fields\Rating;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -38,6 +39,7 @@ class Ticket extends Resource
             Link::make('user.id', trans_choice('ticket.user', 1))->displayCallback(function ($ticket) {
                 return $ticket->user->name ?? '--';
             })->link('tickets?user_id={field}'),
+            Rating::make('rating', ''),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
         ];

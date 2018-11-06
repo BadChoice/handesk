@@ -5,6 +5,9 @@
             <a href="{{ route('tickets.index') }}">{{ trans_choice('ticket.ticket', 2) }}</a>
         </div>
         <h3>#{{ $ticket->id }}. {{ $ticket->title }} </h3>
+        <div class="mb2">
+            @include('components.ticket.rating')
+        </div>
         <div id="ticket-info" class="float-left">
             @busy <span class="label ticket-status-{{ $ticket->statusName() }}">{{ __("ticket." . $ticket->statusName() ) }}</span> &nbsp;
             @busy <span class="label ticket-priority-{{ $ticket->priorityName() }}">{{ __("ticket." . $ticket->priorityName() ) }}</span> &nbsp;
