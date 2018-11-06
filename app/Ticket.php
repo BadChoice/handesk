@@ -206,7 +206,7 @@ class Ticket extends BaseModel
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
         TicketEvent::make($this, 'Status updated: '.$this->statusName());
-        if ($status == Ticket::STATUS_CLOSED && ! $this->rating){
+        if ($status == Ticket::STATUS_SOLVED && ! $this->rating){
             $this->requester->notify((new RateTicket($this))->delay(now()->addMinutes(60)));
         }
     }

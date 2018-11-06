@@ -87,7 +87,7 @@ class TicketRatingTest extends TestCase
         $ticket = factory(Ticket::class)->create(["requester_id" => $requester->id, "public_token" => "TOKEN"]);
 
         $this->actingAs($user);
-        $ticket->updateStatus(Ticket::STATUS_CLOSED);
+        $ticket->updateStatus(Ticket::STATUS_SOLVED);
 
         Notification::assertSentTo($requester, RateTicket::class,
             function ($notification, $channels) use ($ticket) {
@@ -105,7 +105,7 @@ class TicketRatingTest extends TestCase
         $ticket = factory(Ticket::class)->create(["requester_id" => $requester->id, "public_token" => "TOKEN", "rating" => 2]);
 
         $this->actingAs($user);
-        $ticket->updateStatus(Ticket::STATUS_CLOSED);
+        $ticket->updateStatus(Ticket::STATUS_SOLVED);
 
         Notification::assertNotSentTo($requester, RateTicket::class,
             function ($notification, $channels) use ($ticket) {

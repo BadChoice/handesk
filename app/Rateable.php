@@ -12,7 +12,7 @@ trait Rateable
     {
         if (! $rating) return false;
         if ($rating < 0 || $rating > 5) return false;
-        if ($this->status != Ticket::STATUS_CLOSED) return false;
+        if ($this->status != Ticket::STATUS_SOLVED && $this->status != Ticket::STATUS_CLOSED) return false;
         if ($this->rating) return false;
         return true;
     }
