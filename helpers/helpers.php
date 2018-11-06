@@ -22,7 +22,8 @@ function nameOrDash($object)
 
 function icon($icon)
 {
-    return FA::icon($icon);
+    //return FA::icon($icon);
+    return "<i class='fa fa-{$icon}'></i>";
 }
 
 function gravatar($email, $size = 30)
