@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ticket;
 use App\Requester;
+use Illuminate\Http\Request;
 use App\Filters\TicketFilters;
 use App\Repositories\TicketsRepository;
 
