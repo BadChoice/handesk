@@ -20,17 +20,3 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
-
-//
-setupFormLoadingImage();
-function setupFormLoadingImage(){
-    $('form').submit(function(event){
-        $('.busy').show('fast');
-        return true;
-    });
-}
-
-/*$('.dropdown').click(function() {
-    $(this).next('.dropdown-container-inverse').toggle();
-    $(this).next('.dropdown-container').toggle();
-});*/
