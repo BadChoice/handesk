@@ -5,16 +5,22 @@ namespace App\Http\Controllers;
 use App\Repositories\TicketsIndexQuery;
 use App\Repositories\TicketsRepository;
 use App\Ticket;
+use BadChoice\Thrust\Controllers\ThrustController;
 
 class TicketsController extends Controller
 {
-    public function index(TicketsRepository $repository)
+    public function index()
+    {
+        return (new ThrustController)->index('tickets');
+    }
+
+    /*public function index(TicketsRepository $repository)
     {
         $ticketsQuery = TicketsIndexQuery::get($repository);
         $ticketsQuery = $ticketsQuery->select('tickets.*')->latest('updated_at');
 
         return view('tickets.index', ['tickets' => $ticketsQuery->paginate(25, ['tickets.user_id'])]);
-    }
+    }*/
 
     public function show(Ticket $ticket)
     {
