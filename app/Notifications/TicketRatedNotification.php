@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class TicketRatedNotification extends Notification
@@ -50,7 +49,7 @@ class TicketRatedNotification extends Notification
     public function toSlack($notifiable)
     {
         return (new BaseTicketSlackMessage($this->ticket, $notifiable))
-            ->content(__('notification.ticketRated') . ': ' . $this->ticket->rating);
+            ->content(__('notification.ticketRated').': '.$this->ticket->rating);
     }
 
     /**

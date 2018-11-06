@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Kpi\RatedKpi;
 use App\Team;
 use App\User;
 use App\Ticket;
 use App\Kpi\Kpi;
 use Carbon\Carbon;
+use App\Kpi\RatedKpi;
 use App\Kpi\SolveKpi;
 use App\Kpi\ReopenedKpi;
 use App\Kpi\FirstReplyKpi;
@@ -143,12 +143,13 @@ class KpiRepository
     public function kpiAverage($kpi, $agent)
     {
         $kpi = (new RatedKpi)->forDates($this->startDate, $this->endDate);
-        if (!$agent) {
+        if (! $agent) {
             return $kpi->forType(Kpi::TYPE_USER);
         }
         if ($agent instanceof User) {
             return $kpi->forUser(auth()->user());
         }
+
         return $kpi->forTeam($agent);
     }
 }

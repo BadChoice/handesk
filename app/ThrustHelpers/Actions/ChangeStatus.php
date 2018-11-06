@@ -27,7 +27,7 @@ class ChangeStatus extends Action
 
     public function handle(Collection $objects)
     {
-        $objects->filter(function($ticket) {
+        $objects->filter(function ($ticket) {
             return auth()->user()->can('update', $ticket);
         })->each->updateStatus(request('status'));
     }

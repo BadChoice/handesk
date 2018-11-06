@@ -23,8 +23,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\UpdateStatusKpis',
         ],
         'App\Events\TicketRated' => [
-            'App\Listeners\UpdateRatedKpi'
-        ]
+            'App\Listeners\UpdateRatedKpi',
+        ],
     ];
 
     /**
