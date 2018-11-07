@@ -20,6 +20,8 @@ class Ticket extends Resource
 {
     public static $model  = \App\Ticket::class;
     public static $search = ['title', 'body'];
+    public static $defaultSort = 'updated_at';
+    public static $defaultOrder = 'desc';
 
     public function fields()
     {
@@ -45,7 +47,7 @@ class Ticket extends Resource
 
     protected function getBaseQuery()
     {
-        return TicketsIndexQuery::get()->with($this->getWithFields())->latest('updated_at');
+        return TicketsIndexQuery::get()->with($this->getWithFields());
     }
 
     public function update($id, $newData)

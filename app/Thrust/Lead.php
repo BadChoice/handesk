@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use App\Repositories\LeadsIndexQuery;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -17,6 +18,8 @@ class Lead extends Resource
 {
     public static $model  = \App\Lead::class;
     public static $search = ['name', 'company', 'email', 'body', 'address', 'city', 'country', 'phone'];
+    public static $defaultSort = 'updated_at';
+    public static $defaultOrder = 'desc';
 
     public function fields()
     {
@@ -37,6 +40,12 @@ class Lead extends Resource
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
         ];
     }
+
+    protected function getBaseQuery()
+    {
+        return LeadsIndexQuery::get()->with($this->getWithFields());
+    }
+
 
     public function filters()
     {

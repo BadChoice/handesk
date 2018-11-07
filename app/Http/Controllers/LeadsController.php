@@ -3,26 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Lead;
+use App\Repositories\LeadsIndexQuery;
 use App\Repositories\LeadsRepository;
 
 class LeadsController extends Controller
 {
     public function index(LeadsRepository $repository)
     {
-        if (request('mine')) {
-            $leads = $repository->assignedToMe();
-        } elseif (request('completed')) {
-            $leads = $repository->completed();
-        } elseif (request('failed')) {
-            $leads = $repository->failed();
-        } else {
-            $leads = $repository->all();
-        }
-
-        if (request('team')) {
-            $leads = $leads->where('leads.team_id', request('team'));
-        }
-
+        $leads = LeadsIndexQuery::get($repository);
         return view('leads.index', ['leads' => $leads->latest()->paginate(25)]);
     }
 

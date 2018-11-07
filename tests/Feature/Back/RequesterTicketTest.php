@@ -52,6 +52,7 @@ class RequesterTicketTest extends TestCase
 
     /** @test */
     public function a_requester_can_comment_and_solve_a_ticket(){
+        Notification::fake();
         $ticket = factory(Ticket::class)->create(["public_token" => "A_PUBLIC_TOKEN"]);
 
         $response = $this->post("requester/tickets/A_PUBLIC_TOKEN/comments", ["body" => "new comment", "solved" => true]);

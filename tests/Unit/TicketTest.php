@@ -74,6 +74,7 @@ class TicketTest extends TestCase
 
    /** @test */
    public function adding_an_empty_comment_just_changes_the_status(){
+       Notification::fake();
        $user    = factory(User::class)->create();
        $ticket = factory(Ticket::class)->create(["status" => Ticket::STATUS_NEW]);
 
