@@ -2,6 +2,10 @@
 
 namespace App\Thrust;
 
+use App\ThrustHelpers\Actions\NewLead;
+use App\ThrustHelpers\Fields\Status;
+use App\ThrustHelpers\Fields\Tasks;
+use App\ThrustHelpers\Filters\LeadStatusFilter;
 use BadChoice\Thrust\Fields\BelongsTo;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Email;
@@ -28,8 +32,8 @@ class Lead extends Resource
             HasMany::make('tags'),
             BelongsTo::make('team'),
             BelongsTo::make('user'),
-            Text::make('status')->sortable(),
-            HasMany::make('tasks', trans_choice('lead.task', 2)),
+            Status::make('status')->sortable(),
+            Tasks::make('tasks', trans_choice('lead.task', 2)),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
         ];
@@ -37,13 +41,15 @@ class Lead extends Resource
 
     public function filters()
     {
-        return [];
+        return [
+            new LeadStatusFilter,
+        ];
     }
 
     public function mainActions()
     {
         return [
-
+            new NewLead,
         ];
     }
 
