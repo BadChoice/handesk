@@ -11,6 +11,7 @@ class LeadsController extends Controller
     public function index(LeadsRepository $repository)
     {
         $leads = LeadsIndexQuery::get($repository);
+
         return view('leads.index', ['leads' => $leads->latest()->paginate(25)]);
     }
 

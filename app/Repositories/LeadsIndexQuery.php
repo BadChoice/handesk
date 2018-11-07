@@ -6,7 +6,9 @@ class LeadsIndexQuery
 {
     public static function get(LeadsRepository $repository = null)
     {
-        if (! $repository) $repository = app(LeadsRepository::class);
+        if (! $repository) {
+            $repository = app(LeadsRepository::class);
+        }
 
         if (request('mine')) {
             $leads = $repository->assignedToMe();
@@ -21,6 +23,7 @@ class LeadsIndexQuery
         if (request('team')) {
             $leads = $leads->where('leads.team_id', request('team'));
         }
+
         return $leads;
     }
 }

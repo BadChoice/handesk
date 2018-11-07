@@ -2,7 +2,6 @@
 
 namespace App\Thrust;
 
-use App\Repositories\LeadsIndexQuery;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -10,15 +9,16 @@ use BadChoice\Thrust\Fields\Email;
 use App\ThrustHelpers\Fields\Tasks;
 use App\ThrustHelpers\Fields\Status;
 use BadChoice\Thrust\Fields\HasMany;
+use App\Repositories\LeadsIndexQuery;
 use App\ThrustHelpers\Actions\NewLead;
 use BadChoice\Thrust\Fields\BelongsTo;
 use App\ThrustHelpers\Filters\LeadStatusFilter;
 
 class Lead extends Resource
 {
-    public static $model  = \App\Lead::class;
-    public static $search = ['name', 'company', 'email', 'body', 'address', 'city', 'country', 'phone'];
-    public static $defaultSort = 'updated_at';
+    public static $model        = \App\Lead::class;
+    public static $search       = ['name', 'company', 'email', 'body', 'address', 'city', 'country', 'phone'];
+    public static $defaultSort  = 'updated_at';
     public static $defaultOrder = 'desc';
 
     public function fields()
@@ -45,7 +45,6 @@ class Lead extends Resource
     {
         return LeadsIndexQuery::get()->with($this->getWithFields());
     }
-
 
     public function filters()
     {
