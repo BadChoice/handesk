@@ -2,30 +2,29 @@
 
 namespace App\Thrust;
 
-use App\ThrustHelpers\Actions\NewLead;
-use App\ThrustHelpers\Fields\Status;
-use App\ThrustHelpers\Fields\Tasks;
-use App\ThrustHelpers\Filters\LeadStatusFilter;
-use BadChoice\Thrust\Fields\BelongsTo;
-use BadChoice\Thrust\Fields\Date;
-use BadChoice\Thrust\Fields\Email;
-use BadChoice\Thrust\Fields\HasMany;
-use BadChoice\Thrust\Fields\Link;
-use BadChoice\Thrust\Fields\Text;
 use BadChoice\Thrust\Resource;
+use BadChoice\Thrust\Fields\Date;
+use BadChoice\Thrust\Fields\Link;
+use BadChoice\Thrust\Fields\Email;
+use App\ThrustHelpers\Fields\Tasks;
+use App\ThrustHelpers\Fields\Status;
+use BadChoice\Thrust\Fields\HasMany;
+use App\ThrustHelpers\Actions\NewLead;
+use BadChoice\Thrust\Fields\BelongsTo;
+use App\ThrustHelpers\Filters\LeadStatusFilter;
 
 class Lead extends Resource
 {
-    public static $model = \App\Lead::class;
+    public static $model  = \App\Lead::class;
     public static $search = ['name', 'company', 'email', 'body', 'address', 'city', 'country', 'phone'];
 
     public function fields()
     {
         return [
-            Link::make('id', __('lead.company'))->link('/leads/{field}')->displayCallback(function($lead){
+            Link::make('id', __('lead.company'))->link('/leads/{field}')->displayCallback(function ($lead) {
                 return $lead->company;
             }),
-            Link::make('id', __('lead.name'))->link('/leads/{field}')->displayCallback(function($lead){
+            Link::make('id', __('lead.name'))->link('/leads/{field}')->displayCallback(function ($lead) {
                 return $lead->name;
             }),
             Email::make('email')->sortable(),
@@ -57,6 +56,4 @@ class Lead extends Resource
     {
         return [];
     }
-
-
 }
