@@ -6,7 +6,6 @@ use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
 use App\ThrustHelpers\Fields\Rating;
-use BadChoice\Thrust\Fields\BelongsTo;
 use App\Repositories\TicketsIndexQuery;
 use App\ThrustHelpers\Actions\NewTicket;
 use App\ThrustHelpers\Actions\ChangeStatus;
