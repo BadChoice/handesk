@@ -33,7 +33,7 @@ trait Rateable
         }
 
         $this->update(['rating' => $rating]);
-        TicketEvent::make($this, 'Ticket rated with:'.$rating);
+        TicketEvent::make($this, 'Ticket rated with: '.$rating);
         tap(new TicketRatedNotification($this), function ($notification) {
             if ($this->user) {
                 $this->user->notify($notification);
