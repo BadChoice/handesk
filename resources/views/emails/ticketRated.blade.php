@@ -11,6 +11,9 @@
             {{ $ticket->rating }}
         </div>
 
+        <div style="margin-top:40px">
+            <a href="{{$url}}">View the ticket in Handesk</a>
+        </div>
 
         <span style="color:white">ticket-id:{{$ticket->id}}.</span>
 
