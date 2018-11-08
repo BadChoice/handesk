@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use BadChoice\Thrust\Fields\Gravatar;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -24,6 +25,7 @@ class Lead extends Resource
     public function fields()
     {
         return [
+            Gravatar::make('email', '')->withDefault('https://raw.githubusercontent.com/BadChoice/handesk/master/public/images/default-avatar.png'),
             Link::make('id', __('lead.company'))->link('/leads/{field}')->displayCallback(function ($lead) {
                 return $lead->company;
             }),

@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use BadChoice\Thrust\Fields\Gravatar;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -26,6 +27,7 @@ class Ticket extends Resource
     public function fields()
     {
         return [
+            //Gravatar::make('requester.email')->withDefault('https://raw.githubusercontent.com/BadChoice/handesk/master/public/images/default-avatar.png'),
             TicketStatusField::make('id', ''),
             Link::make('title', __('ticket.subject'))->displayCallback(function ($ticket) {
                 return "#{$ticket->id} · ".str_limit($ticket->title, 25);

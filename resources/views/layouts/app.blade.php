@@ -17,7 +17,7 @@
 <body>
     <div id="app">
         <div id="popup" class="popup">
-            <div id="popupContent">hola</div>
+            <div id="popupContent"></div>
         </div>
 {{--        @include('layouts.header')--}}
         @include('layouts.tinyHeader')
