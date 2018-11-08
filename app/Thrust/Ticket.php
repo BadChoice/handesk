@@ -2,11 +2,11 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Fields\Gravatar;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
 use App\ThrustHelpers\Fields\Rating;
+use BadChoice\Thrust\Fields\Gravatar;
 use App\Repositories\TicketsIndexQuery;
 use App\ThrustHelpers\Actions\NewTicket;
 use App\ThrustHelpers\Actions\ChangeStatus;

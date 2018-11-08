@@ -2,7 +2,6 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Fields\Gravatar;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -11,6 +10,7 @@ use App\ThrustHelpers\Fields\Tasks;
 use App\ThrustHelpers\Fields\Status;
 use BadChoice\Thrust\Fields\HasMany;
 use App\Repositories\LeadsIndexQuery;
+use BadChoice\Thrust\Fields\Gravatar;
 use App\ThrustHelpers\Actions\NewLead;
 use BadChoice\Thrust\Fields\BelongsTo;
 use App\ThrustHelpers\Filters\LeadStatusFilter;
