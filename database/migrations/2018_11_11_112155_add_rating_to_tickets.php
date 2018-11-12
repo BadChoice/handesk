@@ -17,7 +17,7 @@ class AddRatingToTickets extends Migration
             $table->tinyInteger('rating')->after('level')->nullable();
         });
 
-        Schema::create('user_settings', function (Blueprint $table) {
+        Schema::table('user_settings', function (Blueprint $table) {
             $table
                 ->boolean('ticket_rated_notification')
                 ->after('mention_notification')
@@ -36,7 +36,7 @@ class AddRatingToTickets extends Migration
             $table->dropColumn('rating');
         });
 
-        Schema::create('user_settings', function (Blueprint $table) {
+        Schema::table('user_settings', function (Blueprint $table) {
             $table->dropColumn('ticket_rated_notification');
         });
     }
