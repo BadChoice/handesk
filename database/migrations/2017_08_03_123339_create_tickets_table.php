@@ -25,7 +25,6 @@ class CreateTicketsTable extends Migration
             $table->tinyInteger('status')->default(Ticket::STATUS_NEW);
             $table->tinyInteger('priority')->default(Ticket::PRIORITY_NORMAL);
             $table->tinyInteger('level')->default(0);
-            $table->tinyInteger('rating')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
