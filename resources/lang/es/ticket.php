@@ -52,4 +52,5 @@ return [
     'high'               => 'Alta',
     'blocker'            => 'Bloqueador',
     'thanksForTheRating' => '¡Muchas gracias!',
+    'rated'              => 'Clasificado',
 ];

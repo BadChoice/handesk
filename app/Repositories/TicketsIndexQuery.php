@@ -24,6 +24,8 @@ class TicketsIndexQuery
             $tickets = $repository->closed();
         } elseif (request('escalated')) {
             $tickets = $repository->escalated();
+        } elseif (request('rated')) {
+            $tickets = $repository->rated();
         } else {
             $tickets = $repository->all();
         }

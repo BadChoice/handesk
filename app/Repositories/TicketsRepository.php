@@ -62,6 +62,15 @@ class TicketsRepository
         return auth()->user()->teamsTickets()->where('status', '=', Ticket::STATUS_CLOSED);
     }
 
+    public function rated()
+    {
+        if (auth()->user()->admin) {
+            return Ticket::whereNotNull('rating');
+        }
+
+        return auth()->user()->teamsTickets()->whereNotNull('rating');
+    }
+
     public function search($text)
     {
         $leadsQuery = auth()->user()->admin ? Ticket::query() : auth()->user()->teamsTickets();

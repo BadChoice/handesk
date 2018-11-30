@@ -52,4 +52,5 @@ return [
     'high'               => 'High*',
     'blocker'            => 'Blocker*',
     'thanksForTheRating' => 'Thank you!*',
+    'rated'              => 'Rated*',
 ];
