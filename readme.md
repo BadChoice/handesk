@@ -129,3 +129,4 @@ We try to follow a TDD approach as well as some mixed functional CSS for the fro
 ## License
 Handesk is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). 
 
+Special thanks to [Jetbrians](https://www.jetbrains.com) for their support to open source projects!
