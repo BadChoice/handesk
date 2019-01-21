@@ -20,7 +20,7 @@ use App\ThrustHelpers\Fields\TicketStatusField;
 class Ticket extends Resource
 {
     public static $model        = \App\Ticket::class;
-    public static $search       = ['title', 'body', 'tags'];
+    public static $search       = ['title', 'body', 'tags.name'];
     public static $defaultSort  = 'updated_at';
     public static $defaultOrder = 'desc';
 
