@@ -18,7 +18,7 @@ use App\ThrustHelpers\Filters\LeadStatusFilter;
 class Lead extends Resource
 {
     public static $model        = \App\Lead::class;
-    public static $search       = ['name', 'company', 'email', 'body', 'address', 'city', 'country', 'phone'];
+    public static $search       = ['name', 'company', 'email', 'body', 'address', 'city', 'country', 'phone', 'tags'];
     public static $defaultSort  = 'updated_at';
     public static $defaultOrder = 'desc';
 
