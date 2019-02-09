@@ -45,6 +45,8 @@ return [
     'escalatedDesc'      => 'Este ticket está <b>escalado</b>, todos os comentarios deverão ser adicionados as notas privadas até que ele seja desescalado',
     'createIssue'        => 'Criar pendência',
     'seeIssue'           => 'Ver pendência',
+    'createIdea'         => 'Criar ideia',
+    'seeIdea'            => 'Ver ideia',
     'low'                => 'Low*',
     'normal'             => 'Normal*',
     'high'               => 'High*',
