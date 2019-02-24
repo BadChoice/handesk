@@ -6,6 +6,7 @@ use App\Ticket;
 use App\Repositories\TicketsIndexQuery;
 use App\Repositories\TicketsRepository;
 use BadChoice\Thrust\Controllers\ThrustController;
+use GuzzleHttp\Client;
 
 class TicketsController extends Controller
 {
@@ -48,10 +49,32 @@ class TicketsController extends Controller
         if (request('team_id')) {
             $ticket->assignToTeam(request('team_id'));
         }
-
+        $this->notificationToolBox($ticket);
         return redirect()->route('tickets.show', $ticket);
     }
+    protected function notificationToolBox($data)
+    {
+        try {
+            $client = new Client();
+            $api_url = getenv('NOTIFICATION_API');
+            $api_token = getenv('NOTIFICATION_API_TOKEN');
+            $response = $client->get($api_url, [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$api_token
+                ],
+                'query'=>[
+                  'type'=>'ticket',
+                  'data'=>json_encode($data)
+                ]
+            ]);
+            \Log::info($response->getBody());
 
+            return true;
+        } catch (\Exception $e) {
+            \Log::info($e->getMessage());
+            return false;
+        }
+    }
     public function reopen(Ticket $ticket)
     {
         $ticket->updateStatus(Ticket::STATUS_OPEN);

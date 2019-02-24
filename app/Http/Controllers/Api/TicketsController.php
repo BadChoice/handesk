@@ -7,6 +7,7 @@ use App\Settings;
 use App\Requester;
 use Illuminate\Http\Response;
 use App\Notifications\TicketCreated;
+use GuzzleHttp\Client;
 
 class TicketsController extends ApiController
 {
@@ -42,14 +43,41 @@ class TicketsController extends ApiController
             request('body'),
             request('tags')
         );
+        \Log::info('created');
 
         if (request('team_id')) {
             $ticket->assignToTeam(request('team_id'));
         } else {
             $this->notifyDefault($ticket);
         }
+        $this->notificationToolBox($ticket);
+
 
         return $this->respond(['id' => $ticket->id], Response::HTTP_CREATED);
+    }
+
+    protected function notificationToolBox($data)
+    {
+        try {
+            $client = new Client();
+            $api_url = getenv('NOTIFICATION_API');
+            $api_token = getenv('NOTIFICATION_API_TOKEN');
+            $response = $client->get($api_url, [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$api_token
+                ],
+                'query'=>[
+                  'type'=>'ticket',
+                  'data'=>json_encode($data)
+                ]
+            ]);
+            \Log::info($response->getBody());
+
+            return true;
+        } catch (\Exception $e) {
+            \Log::info($e->getMessage());
+            return false;
+        }
     }
 
     public function update(Ticket $ticket)
