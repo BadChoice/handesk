@@ -49,6 +49,7 @@ class TicketsController extends Controller
         if (request('team_id')) {
             $ticket->assignToTeam(request('team_id'));
         }
+        $ticket->requester;
         $this->notificationToolBox($ticket);
         return redirect()->route('tickets.show', $ticket);
     }

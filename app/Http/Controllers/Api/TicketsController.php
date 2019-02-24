@@ -43,13 +43,13 @@ class TicketsController extends ApiController
             request('body'),
             request('tags')
         );
-        \Log::info('created');
 
         if (request('team_id')) {
             $ticket->assignToTeam(request('team_id'));
         } else {
             $this->notifyDefault($ticket);
         }
+        $ticket->requester;
         $this->notificationToolBox($ticket);
 
 
