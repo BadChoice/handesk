@@ -50,10 +50,11 @@ class TicketsController extends Controller
             $ticket->assignToTeam(request('team_id'));
         }
         $ticket->requester;
+        $ticket->user;
         $this->notificationToolBox($ticket);
         return redirect()->route('tickets.show', $ticket);
     }
-    protected function notificationToolBox($data)
+    protected function notificationToolBox($data, $message = 'New ticket has been created!')
     {
         try {
             $client = new Client();
@@ -65,11 +66,10 @@ class TicketsController extends Controller
                 ],
                 'query'=>[
                   'type'=>'ticket',
+                  'message'=>$message,
                   'data'=>json_encode($data)
                 ]
             ]);
-            \Log::info($response->getBody());
-
             return true;
         } catch (\Exception $e) {
             \Log::info($e->getMessage());
@@ -79,7 +79,10 @@ class TicketsController extends Controller
     public function reopen(Ticket $ticket)
     {
         $ticket->updateStatus(Ticket::STATUS_OPEN);
-
+        $ticket->updateWith(request('requester'), request('priority'));
+        $ticket->requester;
+        $ticket->user;
+        $this->notificationToolBox($ticket, $ticket->title.' has been reopened!');
         return back();
     }
 
@@ -91,7 +94,9 @@ class TicketsController extends Controller
             //'title'      => 'required|min:3',
         ]);
         $ticket->updateWith(request('requester'), request('priority'));
-
+        $ticket->requester;
+        $ticket->user;
+        $this->notificationToolBox($ticket, $ticket->title.' has been updated!');
         return back();
     }
 }

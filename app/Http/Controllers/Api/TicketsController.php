@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Ticket;
 use App\Settings;
+use App\User;
 use App\Requester;
 use Illuminate\Http\Response;
 use App\Notifications\TicketCreated;
@@ -13,14 +14,27 @@ class TicketsController extends ApiController
 {
     public function index()
     {
-        $requester = Requester::whereName(request('requester'))->orWhere('email', '=', request('requester'))->firstOrFail();
-        if (request('status') == 'solved') {
-            $tickets = $requester->solvedTickets;
-        } elseif (request('status') == 'closed') {
-            $tickets = $requester->closedTickets;
-        } else {
-            $tickets = $requester->openTickets;
+        try {
+            $requester = Requester::whereName(request('requester'))->orWhere('email', '=', request('requester'))->firstOrFail();
+
+            if (request('status') == 'solved') {
+                $tickets = $requester->solvedTickets;
+            } elseif (request('status') == 'closed') {
+                $tickets = $requester->closedTickets;
+            } else {
+                $tickets = $requester->openTickets;
+            }
+
+            $user = User::where('name', request('requester'))->orWhere('email', request('requester'))->firstOrFail();
+            $assignedTickets = $user->tickets;
+            if (count($assignedTickets)) {
+                $tickets = $tickets->merge($assignedTickets);
+            }
+        } catch (\Exception $e) {
+            \Log::info($e->getMessage());
         }
+
+
 
         return $this->respond($tickets);
     }
@@ -50,13 +64,12 @@ class TicketsController extends ApiController
             $this->notifyDefault($ticket);
         }
         $ticket->requester;
+        $ticket->user;
         $this->notificationToolBox($ticket);
-
-
         return $this->respond(['id' => $ticket->id], Response::HTTP_CREATED);
     }
 
-    protected function notificationToolBox($data)
+    protected function notificationToolBox($data, $message = 'New ticket has been created!')
     {
         try {
             $client = new Client();
@@ -68,6 +81,7 @@ class TicketsController extends ApiController
                 ],
                 'query'=>[
                   'type'=>'ticket',
+                  'message'=>$message,
                   'data'=>json_encode($data)
                 ]
             ]);
@@ -83,7 +97,9 @@ class TicketsController extends ApiController
     public function update(Ticket $ticket)
     {
         $ticket->updateStatus(request('status'));
-
+        $ticket->requester;
+        $ticket->user;
+        $this->notificationToolBox($ticket, $ticket->title.' has been updated!');
         return $this->respond(['id' => $ticket->id], Response::HTTP_OK);
     }
 
