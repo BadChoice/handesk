@@ -13,7 +13,7 @@ class AddRatingToTickets extends Migration
      */
     public function up()
     {
-        /*Schema::table('tickets', function (Blueprint $table) {
+        Schema::table('tickets', function (Blueprint $table) {
             $table->tinyInteger('rating')->after('level')->nullable();
         });
 
@@ -22,7 +22,7 @@ class AddRatingToTickets extends Migration
                 ->boolean('ticket_rated_notification')
                 ->after('mention_notification')
                 ->default(true);
-        });*/
+        });
     }
 
     /**
