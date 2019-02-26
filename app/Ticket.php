@@ -300,13 +300,15 @@ class Ticket extends BaseModel
     //========================================================
     public function createIssue(IssueCreator $issueCreator, $repository)
     {
+        $repo = explode('/', $repository);
         $issue = $issueCreator->createIssue(
-                $repository,
+                $repo[0],
+                $repo[1],
                 $this->title,
                 'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
         );
-        $this->addNote(auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}");
-        //TODO: Notify somebody? if so, create the test
+        $issueUrl = "https://bitbucket.org/{$repository}/issues/{$issue->local_id}";
+        $this->addNote(auth()->user(), "Issue created {$issueUrl} with id #{$issue->local_id}");
         TicketEvent::make($this, "Issue created #{$issue->local_id} at {$repository}");
 
         return $issue;
@@ -337,9 +339,7 @@ class Ticket extends BaseModel
         }
         $start  = strpos($issueNote->body, 'https://');
         $end    = strpos($issueNote->body, 'with id');
-        $apiUrl = substr($issueNote->body, $start, $end - $start);
-
-        return str_replace('api.', '', str_replace('', '', $apiUrl));
+        return substr($issueNote->body, $start, $end - $start);
     }
 
     public function createIdea()
