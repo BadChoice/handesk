@@ -11,11 +11,19 @@ class FakeIssueCreator implements IssueCreator
         $this->id = $id;
     }
 
-    public function createIssue($repository, $title, $body)
+    public function createIssue($account, $repoSlug, $title, $content, $extra = [])
     {
         return (object) [
             'resource_uri' => "https://fakeissuer.com/issue/{$this->id}",
             'local_id'     => $this->id,
         ];
+    }
+
+    public function createComment($account, $repoSlug, $id, $comment)
+    {
+    }
+
+    public function updateIssue($account, $repoSlug, $id, $fields)
+    {
     }
 }
