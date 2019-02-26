@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Ticket;
 use App\Attachment;
-use GuzzleHttp\Client;
+use App\Events\ApiNotificationEvent;
+use App\Ticket;
 
 class CommentsController extends Controller
 {
@@ -22,31 +22,11 @@ class CommentsController extends Controller
         }
         $ticket->user;
         $ticket->requester;
-        $message = ['title'=>auth()->user()->name.' has been comment','content'=>request('body')];
-        $this->notificationToolBox($ticket, $message);
+        $data = ['title' => auth()->user()->name . ' has been comment', 'content' => request('body')];
+        $data['data'] = json_encode($ticket);
+        $data['type'] = 'comment';
+        event(new ApiNotificationEvent($data));
         return redirect()->route('tickets.index');
     }
 
-    protected function notificationToolBox($data, $message = [])
-    {
-        try {
-            $client = new Client();
-            $api_url = getenv('NOTIFICATION_API');
-            $api_token = getenv('NOTIFICATION_API_TOKEN');
-            $response = $client->get($api_url, [
-                'headers' => [
-                    'Authorization' => 'Bearer '.$api_token
-                ],
-                'query'=>[
-                  'type'=>'comment',
-                  'title'=>$message['title'],
-                  'content'=>$message['content'],
-                  'data'=>json_encode($data)
-                ]
-            ]);
-            return true;
-        } catch (\Exception $e) {
-            return false;
-        }
-    }
 }

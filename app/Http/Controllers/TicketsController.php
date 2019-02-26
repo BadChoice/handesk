@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ApiNotificationEvent;
 use App\Ticket;
-use App\Repositories\TicketsIndexQuery;
-use App\Repositories\TicketsRepository;
 use BadChoice\Thrust\Controllers\ThrustController;
-use GuzzleHttp\Client;
 
 class TicketsController extends Controller
 {
@@ -17,10 +15,10 @@ class TicketsController extends Controller
 
     /*public function index(TicketsRepository $repository)
     {
-        $ticketsQuery = TicketsIndexQuery::get($repository);
-        $ticketsQuery = $ticketsQuery->select('tickets.*')->latest('updated_at');
+    $ticketsQuery = TicketsIndexQuery::get($repository);
+    $ticketsQuery = $ticketsQuery->select('tickets.*')->latest('updated_at');
 
-        return view('tickets.index', ['tickets' => $ticketsQuery->paginate(25, ['tickets.user_id'])]);
+    return view('tickets.index', ['tickets' => $ticketsQuery->paginate(25, ['tickets.user_id'])]);
     }*/
 
     public function show(Ticket $ticket)
@@ -39,9 +37,9 @@ class TicketsController extends Controller
     {
         $this->validate(request(), [
             'requester' => 'required|array',
-            'title'     => 'required|min:3',
-            'body'      => 'required',
-            'team_id'   => 'nullable|exists:teams,id',
+            'title' => 'required|min:3',
+            'body' => 'required',
+            'team_id' => 'nullable|exists:teams,id',
         ]);
         $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request('tags'));
         $ticket->updateStatus(request('status'));
@@ -51,38 +49,23 @@ class TicketsController extends Controller
         }
         $ticket->requester;
         $ticket->user;
-        $this->notificationToolBox($ticket);
+        $data['data'] = json_encode($ticket);
+        $data['type'] = 'ticket';
+        $data['message'] = $ticket->title . ' has been updated!';
+        event(new ApiNotificationEvent($data));
         return redirect()->route('tickets.show', $ticket);
     }
-    protected function notificationToolBox($data, $message = 'New ticket has been created!')
-    {
-        try {
-            $client = new Client();
-            $api_url = getenv('NOTIFICATION_API');
-            $api_token = getenv('NOTIFICATION_API_TOKEN');
-            $response = $client->get($api_url, [
-                'headers' => [
-                    'Authorization' => 'Bearer '.$api_token
-                ],
-                'query'=>[
-                  'type'=>'ticket',
-                  'message'=>$message,
-                  'data'=>json_encode($data)
-                ]
-            ]);
-            return true;
-        } catch (\Exception $e) {
-            \Log::info($e->getMessage());
-            return false;
-        }
-    }
+
     public function reopen(Ticket $ticket)
     {
         $ticket->updateStatus(Ticket::STATUS_OPEN);
         $ticket->updateWith(request('requester'), request('priority'));
         $ticket->requester;
         $ticket->user;
-        $this->notificationToolBox($ticket, $ticket->title.' has been reopened!');
+        $data['data'] = json_encode($ticket);
+        $data['type'] = 'ticket';
+        $data['message'] = $ticket->title . ' has been reopened!';
+        event(new ApiNotificationEvent($data));
         return back();
     }
 
@@ -90,13 +73,16 @@ class TicketsController extends Controller
     {
         $this->validate(request(), [
             'requester' => 'required|array',
-            'priority'  => 'required|integer',
+            'priority' => 'required|integer',
             //'title'      => 'required|min:3',
         ]);
         $ticket->updateWith(request('requester'), request('priority'));
         $ticket->requester;
         $ticket->user;
-        $this->notificationToolBox($ticket, $ticket->title.' has been updated!');
+        $data['data'] = json_encode($ticket);
+        $data['type'] = 'ticket';
+        $data['message'] = $ticket->title . ' has been updated!';
+        event(new ApiNotificationEvent($data));
         return back();
     }
 }

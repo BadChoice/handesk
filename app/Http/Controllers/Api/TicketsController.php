@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Ticket;
-use App\Settings;
-use App\User;
-use App\Requester;
-use Illuminate\Http\Response;
+use App\Events\ApiNotificationEvent;
 use App\Notifications\TicketCreated;
-use GuzzleHttp\Client;
+use App\Requester;
+use App\Settings;
+use App\Ticket;
+use App\User;
+use function GuzzleHttp\json_encode;
+use Illuminate\Http\Response;
 
 class TicketsController extends ApiController
 {
@@ -34,8 +35,6 @@ class TicketsController extends ApiController
             \Log::info($e->getMessage());
         }
 
-
-
         return $this->respond($tickets);
     }
 
@@ -48,7 +47,7 @@ class TicketsController extends ApiController
     {
         $this->validate(request(), [
             'requester' => 'required|array',
-            'title'     => 'required|min:3',
+            'title' => 'required|min:3',
         ]);
 
         $ticket = Ticket::createAndNotify(
@@ -65,33 +64,12 @@ class TicketsController extends ApiController
         }
         $ticket->requester;
         $ticket->user;
-        $this->notificationToolBox($ticket);
+        $data['data'] = json_encode($ticket);
+        $data['type'] = 'ticket';
+        $data['message'] = 'New ticket has been created!';
+        event(new ApiNotificationEvent($data));
+
         return $this->respond(['id' => $ticket->id], Response::HTTP_CREATED);
-    }
-
-    protected function notificationToolBox($data, $message = 'New ticket has been created!')
-    {
-        try {
-            $client = new Client();
-            $api_url = getenv('NOTIFICATION_API');
-            $api_token = getenv('NOTIFICATION_API_TOKEN');
-            $response = $client->get($api_url, [
-                'headers' => [
-                    'Authorization' => 'Bearer '.$api_token
-                ],
-                'query'=>[
-                  'type'=>'ticket',
-                  'message'=>$message,
-                  'data'=>json_encode($data)
-                ]
-            ]);
-            \Log::info($response->getBody());
-
-            return true;
-        } catch (\Exception $e) {
-            \Log::info($e->getMessage());
-            return false;
-        }
     }
 
     public function update(Ticket $ticket)
@@ -99,7 +77,10 @@ class TicketsController extends ApiController
         $ticket->updateStatus(request('status'));
         $ticket->requester;
         $ticket->user;
-        $this->notificationToolBox($ticket, $ticket->title.' has been updated!');
+        $data['data'] = json_encode($ticket);
+        $data['type'] = 'ticket';
+        $data['message'] = $ticket->title . ' has been updated!';
+        event(new ApiNotificationEvent($data));
         return $this->respond(['id' => $ticket->id], Response::HTTP_OK);
     }
 
