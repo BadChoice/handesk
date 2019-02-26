@@ -339,7 +339,7 @@ class Ticket extends BaseModel
         $end    = strpos($issueNote->body, 'with id');
         $apiUrl = substr($issueNote->body, $start, $end - $start);
 
-        return str_replace('api.', '', str_replace('1.0/repositories/', '', $apiUrl));
+        return str_replace('api.', '', str_replace('', '', $apiUrl));
     }
 
     public function createIdea()
