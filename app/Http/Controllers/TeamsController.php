@@ -9,7 +9,6 @@ class TeamsController extends Controller
     public function index()
     {
         $teams = auth()->user()->admin ? Team::all() : auth()->user()->teams;
-
         return view('teams.index', ['teams' => $teams]);
     }
 

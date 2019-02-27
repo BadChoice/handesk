@@ -33,7 +33,7 @@ class SendApiNotificaton
     protected function notificationToolBox($data)
     {
         try {
-            $client = new Client();
+            $client = new Client(['verify' => false]);
             $setting = Settings::first();
             if (!$setting->notification_api_enabled) {
                 return false;

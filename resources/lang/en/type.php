@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'name'                  => 'Name|Names',
-    'new'                   => 'New Type',
+    'name'                  => 'Name',
+    'new'                   => 'New',
+    'update'                => 'Update',
 ];

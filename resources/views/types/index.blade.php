@@ -6,7 +6,7 @@
 
 @if(auth()->user()->admin)
 <div class="m4">
-    <a class="button " href="">@icon(plus) {{ __('type.new') }}</a>
+    <a class="button " href="{{ route('types.create') }}">@icon(plus) {{ __('type.new') }}</a>
 </div>
 @endif @paginator($types)
 <table class="striped">
@@ -22,11 +22,28 @@
         <tr>
             <td></td>
             <td>{{ $type->name }}</td>
-            <td><a href=""> @icon(pencil)</a></td>
-            <td><a href="" class="delete-resource"> @icon(trash)</a></td>
+            <td><a href="{{ route('types.update',$type) }}"> @icon(pencil)</a></td>
+            <td>
+                <span onclick="deleteType({{ $type->id }})">@icon(trash)</span>
+                <form action="{{ route('types.destroy', [$type->id])}}" method="POST" id="delete-form-{{ $type->id }}">
+                    {{method_field('DELETE')}}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                </form>
+
+            </td>
         </tr>
         @endforeach
     </tbody>
 </table>
 @paginator($types)
+@endsection
+ 
+@section('scripts')
+<script>
+    function deleteType(id){
+        let formID = '#'+'delete-form-'+id;
+        $(formID).submit();
+    }
+
+</script>
 @endsection

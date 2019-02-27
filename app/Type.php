@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class Type extends Model
+class Type extends BaseModel
 {
-    //
+    use Notifiable;
 }
