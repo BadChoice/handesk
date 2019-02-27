@@ -48,3 +48,10 @@
     </table>
 </div>
 @endsection
+ 
+@section('scripts')
+<script>
+    $.switcher('input[type=checkbox]');
+
+</script>
+@endsection
