@@ -1,5 +1,6 @@
 {
     "/../resources/assets/css/style.css": "/../resources/assets/css/style.css",
+    "/css/app.css": "/css/app.css",
     "/js/app.js": "/js/app.js",
     "/js/moment.js": "/js/moment.js",
     "/css/all.css": "/css/all.css"

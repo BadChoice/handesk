@@ -22,14 +22,13 @@
         <tr>
             <td></td>
             <td>{{ $type->name }}</td>
-            <td><a href="{{ route('types.update',$type) }}"> @icon(pencil)</a></td>
+            <td><a class="action-icon" href="{{ route('types.update',$type) }}"> @icon(pencil)</a></td>
             <td>
-                <span onclick="deleteType({{ $type->id }})">@icon(trash)</span>
+                <span class="action-icon" onclick="deleteType({{ $type->id }})">@icon(trash)</span>
                 <form action="{{ route('types.destroy', [$type->id])}}" method="POST" id="delete-form-{{ $type->id }}">
                     {{method_field('DELETE')}}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 </form>
-
             </td>
         </tr>
         @endforeach
@@ -42,8 +41,30 @@
 <script>
     function deleteType(id){
         let formID = '#'+'delete-form-'+id;
-        $(formID).submit();
+        $.confirm({
+            title: 'Confirm!',
+            closeIcon: true,
+            boxWidth: '500px',
+            icon: 'fa fa-warning',
+            content: 'Are you sure remove this type?',
+            useBootstrap: false,
+            buttons: {
+                confirm: function () {
+                    $(formID).submit();
+                },
+                cancel: function () {
+                   
+                }
+               
+            }
+        });
+       
     }
 
 </script>
+<style>
+    .action-icon {
+        cursor: pointer;
+    }
+</style>
 @endsection

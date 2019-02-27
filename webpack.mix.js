@@ -14,7 +14,7 @@ let mix = require("laravel-mix");
 mix
   .babel(
     [
-      //'resources/assets/js/app.js',
+      "resources/assets/js/app.js",
       "vendor/badchoice/thrust/src/resources/js/thrust.min.js",
       "resources/assets/js/utils.js",
       "resources/assets/js/libs/jquery.tagsinput.min.js", //http://xoxco.com/projects/code/tagsinput/
@@ -32,4 +32,4 @@ mix
     ],
     "public/css/all.css"
   )
-  .sass("resources/sass/app.scss", "public/css");
+  .sass("resources/assets/sass/app.scss", "public/css");
