@@ -10,7 +10,7 @@
 <div class="description mt4">
     <table class="w50">
         <tr>
-            <td>Api token:</td>
+            <td>Handesk API Token:</td>
             <td>
                 <span id="api-token">
                     {{ config('handesk.api_token') }}
@@ -21,25 +21,25 @@
         {{ Form::open(["url" => route('settings.update',$settings), "method" => "PUT"]) }}
         <tr>
             <td>{{ __("team.slack_webhook_url") }}: </td>
-            <td class="w60"><input class="w100" name="slack_webhook_url" value="{{$settings->slack_webhook_url}}"></td>
+            <td class="w60"><input class="w100" name="slack_webhook_url" placeholder="https://hooks.slack.com/services" value="{{$settings->slack_webhook_url}}"></td>
         </tr>
         <tr>
-            <td>Notification Url: </td>
-            <td class="w60"><input class="w100" name="notification_api_url" value="{{$settings->notification_api_url}}"></td>
+            <td colspan="2"> <span class="lighter-gray fs2">{{ __('team.slack_webhook_urlDesc') }}</span></td>
         </tr>
         <tr>
-            <td>Notification API Token: </td>
-            <td class="w60"><input class="w100" name="notification_api_token" value="{{$settings->notification_api_token}}"></td>
-        </tr>
-        <tr>
-            <td>Notification Enabled: </td>
+            <td>Outbound Notification Status: </td>
             <td class="w60">
                 <input class="actionCheckbox" {{ $settings->notification_api_enabled?'checked':'' }} type="checkbox" name="notification_api_enabled"
                 value="1" >
             </td>
         </tr>
         <tr>
-            <td colspan="2"> <span class="lighter-gray fs2">{{ __('team.slack_webhook_urlDesc') }}</span></td>
+            <td>Outbound Notification Endpoint: </td>
+            <td class="w60"><input class="w100" name="notification_api_url" placeholder="https://application.io/callbacks" value="{{$settings->notification_api_url}}"></td>
+        </tr>
+        <tr>
+            <td>Outbound Notification API Token: </td>
+            <td class="w60"><input class="w100" name="notification_api_token" placeholder="21kjb242jb123jb5hj123jb" value="{{$settings->notification_api_token}}"></td>
         </tr>
         <tr>
             <td><button class="ph4 uppercase">@busy {{ __('ticket.update') }}</button></td>

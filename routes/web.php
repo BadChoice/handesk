@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
         Route::resource('users', 'UsersController', ['only' => ['index', 'destroy']]);
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
+        Route::resource('types', 'TypesController', ['only' => ['index', 'store', 'update', 'destroy']]);
     });
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');
