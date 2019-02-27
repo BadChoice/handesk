@@ -2,36 +2,37 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Resource;
-use BadChoice\Thrust\Fields\Date;
-use BadChoice\Thrust\Fields\Link;
-use App\ThrustHelpers\Fields\Rating;
-use BadChoice\Thrust\Fields\Gravatar;
 use App\Repositories\TicketsIndexQuery;
-use App\ThrustHelpers\Actions\NewTicket;
+use App\ThrustHelpers\Actions\ChangePriority;
 use App\ThrustHelpers\Actions\ChangeStatus;
 use App\ThrustHelpers\Actions\MergeTickets;
-use App\ThrustHelpers\Filters\StatusFilter;
-use App\ThrustHelpers\Actions\ChangePriority;
-use App\ThrustHelpers\Filters\PriorityFilter;
-use App\ThrustHelpers\Filters\EscalatedFilter;
+use App\ThrustHelpers\Actions\NewTicket;
+use App\ThrustHelpers\Fields\Rating;
 use App\ThrustHelpers\Fields\TicketStatusField;
+use App\ThrustHelpers\Filters\EscalatedFilter;
+use App\ThrustHelpers\Filters\PriorityFilter;
+use App\ThrustHelpers\Filters\StatusFilter;
+use App\Thrust\Fields\BelongsTo;
+use BadChoice\Thrust\Fields\Date;
+use BadChoice\Thrust\Fields\Link;
+use BadChoice\Thrust\Resource;
 
 class Ticket extends Resource
 {
-    public static $model        = \App\Ticket::class;
-    public static $search       = ['title', 'body', 'tags.name'];
-    public static $defaultSort  = 'updated_at';
+    public static $model = \App\Ticket::class;
+    public static $search = ['title', 'body', 'tags.name'];
+    public static $defaultSort = 'updated_at';
     public static $defaultOrder = 'desc';
 
     public function fields()
     {
         return [
-            //Gravatar::make('requester.email')->withDefault('https://raw.githubusercontent.com/BadChoice/handesk/master/public/images/default-avatar.png'),
+            // Gravatar::make('requester.email')->withDefault('https://raw.githubusercontent.com/BadChoice/handesk/master/public/images/default-avatar.png'),
             TicketStatusField::make('id', ''),
             Link::make('title', __('ticket.subject'))->displayCallback(function ($ticket) {
-                return "#{$ticket->id} · ".str_limit($ticket->title, 25);
+                return "#{$ticket->id} · " . str_limit($ticket->title, 25);
             })->route('tickets.show')->sortable(),
+            BelongsTo::make('type', 'Type'),
             Link::make('requester.id', trans_choice('ticket.requester', 1))->displayCallback(function ($ticket) {
                 return $ticket->requester->name ?? '--';
             })->link('tickets?requester_id={field}'),

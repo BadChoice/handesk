@@ -2,45 +2,45 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use App\Authenticatable\Admin;
-use App\Services\IssueCreator;
-use App\Events\TicketCommented;
-use App\Notifications\RateTicket;
 use App\Authenticatable\Assistant;
+use App\Events\TicketCommented;
 use App\Events\TicketStatusUpdated;
-use Illuminate\Support\Facades\App;
-use App\Notifications\TicketCreated;
+use App\Notifications\RateTicket;
 use App\Notifications\TicketAssigned;
+use App\Notifications\TicketCreated;
 use App\Notifications\TicketEscalated;
+use App\Services\IssueCreator;
 use App\Services\TicketLanguageDetector;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
 
 class Ticket extends BaseModel
 {
     use SoftDeletes, Taggable, Assignable, Subscribable, Rateable;
 
-    const STATUS_NEW     = 1;
-    const STATUS_OPEN    = 2;
+    const STATUS_NEW = 1;
+    const STATUS_OPEN = 2;
     const STATUS_PENDING = 3;
-    const STATUS_SOLVED  = 4;
-    const STATUS_CLOSED  = 5;
-    const STATUS_MERGED  = 6;
-    const STATUS_SPAM    = 7;
+    const STATUS_SOLVED = 4;
+    const STATUS_CLOSED = 5;
+    const STATUS_MERGED = 6;
+    const STATUS_SPAM = 7;
 
-    const PRIORITY_LOW       = 1;
-    const PRIORITY_NORMAL    = 2;
-    const PRIORITY_HIGH      = 3;
-    const PRIORITY_BLOCKER   = 4;
+    const PRIORITY_LOW = 1;
+    const PRIORITY_NORMAL = 2;
+    const PRIORITY_HIGH = 3;
+    const PRIORITY_BLOCKER = 4;
 
     public static function createAndNotify($requester, $title, $body, $tags, $type)
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
-        $ticket    = $requester->tickets()->create([
-            'title'        => substr($title, 0, 190),
-            'body'         => $body,
+        $ticket = $requester->tickets()->create([
+            'title' => substr($title, 0, 190),
+            'body' => $body,
             'public_token' => str_random(24),
-            'type_id'      => $type
+            'type_id' => $type,
         ])->attachTags($tags);
 
         tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
@@ -55,7 +55,7 @@ class Ticket extends BaseModel
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $this->update([
-            'priority'     => $priority,
+            'priority' => $priority,
             'requester_id' => $requester->id,
         ]);
 
@@ -75,6 +75,11 @@ class Ticket extends BaseModel
     public function requester()
     {
         return $this->belongsTo(Requester::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 
     public function team()
@@ -162,8 +167,8 @@ class Ticket extends BaseModel
         }
 
         $comment = $this->comments()->create([
-            'body'       => $body,
-            'user_id'    => $user ? $user->id : null,
+            'body' => $body,
+            'user_id' => $user ? $user->id : null,
             'new_status' => $newStatus ?: $this->status,
         ])->notifyNewComment();
         event(new TicketCommented($this, $comment, $previousStatus));
@@ -182,10 +187,10 @@ class Ticket extends BaseModel
         }
 
         return $this->comments()->create([
-            'body'       => $body,
-            'user_id'    => $user->id,
+            'body' => $body,
+            'user_id' => $user->id,
             'new_status' => $this->status,
-            'private'    => true,
+            'private' => true,
         ])->notifyNewNote();
     }
 
@@ -347,8 +352,8 @@ class Ticket extends BaseModel
         if (!$issueNote) {
             return null;
         }
-        $start  = strpos($issueNote->body, 'https://');
-        $end    = strpos($issueNote->body, 'with id');
+        $start = strpos($issueNote->body, 'https://');
+        $end = strpos($issueNote->body, 'with id');
         $apiUrl = substr($issueNote->body, $start, $end - $start);
 
         return str_replace('api.', '', str_replace('1.0/repositories/', '', $apiUrl));
@@ -358,8 +363,8 @@ class Ticket extends BaseModel
     {
         $idea = Idea::create([
             'requester_id' => $this->requester_id,
-            'title'        => $this->title,
-            'body'         => $this->body,
+            'title' => $this->title,
+            'body' => $this->body,
         ])->attachTags(['ticket']);
         TicketEvent::make($this, "Idea created #{$idea->id}");
         App::setLocale((new TicketLanguageDetector($this))->detect());

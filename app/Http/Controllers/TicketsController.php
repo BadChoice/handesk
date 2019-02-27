@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ApiNotificationEvent;
 use App\Ticket;
+use App\Type;
 use BadChoice\Thrust\Controllers\ThrustController;
 
 class TicketsController extends Controller
@@ -24,8 +25,9 @@ class TicketsController extends Controller
     public function show(Ticket $ticket)
     {
         $this->authorize('view', $ticket);
+        $types = Type::all();
 
-        return view('tickets.show', ['ticket' => $ticket]);
+        return view('tickets.show', ['ticket' => $ticket, 'types' => $types]);
     }
 
     public function create()

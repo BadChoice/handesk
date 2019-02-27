@@ -17,15 +17,18 @@
     <div id="ticket-edit" class="hidden" class="float-left">
         {{ Form::open(["url" => route("tickets.update", $ticket) ,"method" => "PUT"]) }}
         <!-- TODO: make this pull from the database. -->
-        <select name="type">
-            <option value="" selected ></option>
-        </select>
+
         <select name="priority">
-                <option value="{{\App\Ticket::PRIORITY_LOW}}"  @if($ticket->priority == App\Ticket::PRIORITY_LOW) selected @endif         >{{ __("ticket.low") }}</option>
-                <option value="{{\App\Ticket::PRIORITY_NORMAL}}"  @if($ticket->priority == App\Ticket::PRIORITY_NORMAL) selected @endif   >{{ __("ticket.normal") }}</option>
-                <option value="{{\App\Ticket::PRIORITY_HIGH}}"  @if($ticket->priority == App\Ticket::PRIORITY_HIGH) selected @endif       >{{ __("ticket.high") }}</option>
-                <option value="{{\App\Ticket::PRIORITY_BLOCKER}}"  @if($ticket->priority == App\Ticket::PRIORITY_BLOCKER) selected @endif >{{ __("ticket.blocker") }}</option>
-            </select>
+            <option value="{{\App\Ticket::PRIORITY_LOW}}"  @if($ticket->priority == App\Ticket::PRIORITY_LOW) selected @endif         >{{ __("ticket.low") }}</option>
+            <option value="{{\App\Ticket::PRIORITY_NORMAL}}"  @if($ticket->priority == App\Ticket::PRIORITY_NORMAL) selected @endif   >{{ __("ticket.normal") }}</option>
+            <option value="{{\App\Ticket::PRIORITY_HIGH}}"  @if($ticket->priority == App\Ticket::PRIORITY_HIGH) selected @endif       >{{ __("ticket.high") }}</option>
+            <option value="{{\App\Ticket::PRIORITY_BLOCKER}}"  @if($ticket->priority == App\Ticket::PRIORITY_BLOCKER) selected @endif >{{ __("ticket.blocker") }}</option>
+        </select>
+        <select name="type_id">
+            @foreach ($types as $type)
+            <option value="{{ $type->id}}" {{ $type->id==$ticket->type_id?'selected':'' }} >{{ $type->name }}</option>                
+            @endforeach
+        </select>
         <input name="requester[name]" value="{{  $ticket->requester->name }}">
         <input name="requester[email]" value="{{$ticket->requester->email}}">
         <button> {{ __("ticket.update")}} </button> {{ Form::close() }}
