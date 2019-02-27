@@ -72,6 +72,13 @@ MAIL_FETCH_USERNAME=hello@handesk.com
 MAIL_FETCH_PASSWORD=secret-password   
 ````
 
+### Sidebar
+You can toggle the visibility of `leads` and `ideas` in the `config/handesk.php` file.
+```
+'leads'    => env('HANDESK_LEADS_ENABLED', true),
+'roadmap'  => env('HANDESK_ROADMAP_ENABLED', true),
+```
+
 #### Mailchimp
 Set your mailchimp key in .env
 `MAILCHIMP_API_KEY=448027f3acac5594605be3adf78be862-us15`
