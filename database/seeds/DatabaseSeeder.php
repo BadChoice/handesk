@@ -1,8 +1,7 @@
 <?php
 
-use App\Team;
+use App\Type;
 use App\User;
-use App\Ticket;
 use App\Settings;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +23,9 @@ class DatabaseSeeder extends Seeder
 
         Settings::create();
 
+        factory(Type::class)->create([
+            'name'    => 'Trouble',
+        ]);
         /*$teams = factory(Team::class,4)->create();
         $teams->each(function($team){
             $team->memberships()->create([

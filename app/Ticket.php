@@ -33,13 +33,14 @@ class Ticket extends BaseModel
     const PRIORITY_HIGH      = 3;
     const PRIORITY_BLOCKER   = 4;
 
-    public static function createAndNotify($requester, $title, $body, $tags)
+    public static function createAndNotify($requester, $title, $body, $tags, $type)
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $ticket    = $requester->tickets()->create([
             'title'        => substr($title, 0, 190),
             'body'         => $body,
             'public_token' => str_random(24),
+            'type_id'      => $type
         ])->attachTags($tags);
 
         tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
@@ -127,7 +128,7 @@ class Ticket extends BaseModel
         $previousStatus = $this->status;
         if ($newStatus && $newStatus != $previousStatus) {
             $this->updateStatus($newStatus);
-        } elseif (! $user && $this->status != static::STATUS_NEW) {
+        } elseif (!$user && $this->status != static::STATUS_NEW) {
             $this->updateStatus(static::STATUS_OPEN);
         } else {
             $this->touch();
@@ -139,7 +140,7 @@ class Ticket extends BaseModel
 
     private function associateUserIfNecessary($user)
     {
-        if (! $this->user && $user) {
+        if (!$this->user && $user) {
             $this->user()->associate($user)->save();
         }
     }
@@ -156,7 +157,7 @@ class Ticket extends BaseModel
         }
         $previousStatus = $this->updateStatusFromComment($user, $newStatus);
         $this->associateUserIfNecessary($user);
-        if (! $body) {
+        if (!$body) {
             return;
         }
 
@@ -172,7 +173,7 @@ class Ticket extends BaseModel
 
     public function addNote($user, $body)
     {
-        if (! $body) {
+        if (!$body) {
             return null;
         }
         //if( ! $this->user && $user) { $this->user()->associate($user)->save(); }  //We don't want the notes to automatically assign the user
@@ -204,8 +205,8 @@ class Ticket extends BaseModel
     public function updateStatus($status)
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
-        TicketEvent::make($this, 'Status updated: '.$this->statusName());
-        if ($status == Ticket::STATUS_SOLVED && ! $this->rating && config('handesk.sendRatingEmail')) {
+        TicketEvent::make($this, 'Status updated: ' . $this->statusName());
+        if ($status == Ticket::STATUS_SOLVED && !$this->rating && config('handesk.sendRatingEmail')) {
             $this->requester->notify((new RateTicket($this))->delay(now()->addMinutes(60)));
         }
     }
@@ -213,7 +214,7 @@ class Ticket extends BaseModel
     public function updatePriority($priority)
     {
         $this->update(['priority' => $priority, 'updated_at' => Carbon::now()]);
-        TicketEvent::make($this, 'Priority updated: '.$this->priorityName());
+        TicketEvent::make($this, 'Priority updated: ' . $this->priorityName());
     }
 
     public function setLevel($level)
@@ -249,19 +250,26 @@ class Ticket extends BaseModel
 
     public function canBeEdited()
     {
-        return ! in_array($this->status, [self::STATUS_CLOSED, self::STATUS_MERGED]);
+        return !in_array($this->status, [self::STATUS_CLOSED, self::STATUS_MERGED]);
     }
 
     public static function statusNameFor($status)
     {
         switch ($status) {
-            case static::STATUS_NEW: return 'new';
-            case static::STATUS_OPEN: return 'open';
-            case static::STATUS_PENDING: return 'pending';
-            case static::STATUS_SOLVED: return 'solved';
-            case static::STATUS_CLOSED: return 'closed';
-            case static::STATUS_MERGED: return 'merged';
-            case static::STATUS_SPAM: return 'spam';
+            case static::STATUS_NEW:
+                return 'new';
+            case static::STATUS_OPEN:
+                return 'open';
+            case static::STATUS_PENDING:
+                return 'pending';
+            case static::STATUS_SOLVED:
+                return 'solved';
+            case static::STATUS_CLOSED:
+                return 'closed';
+            case static::STATUS_MERGED:
+                return 'merged';
+            case static::STATUS_SPAM:
+                return 'spam';
         }
     }
 
@@ -273,10 +281,14 @@ class Ticket extends BaseModel
     public static function priorityNameFor($priority)
     {
         switch ($priority) {
-            case static::PRIORITY_LOW: return 'low';
-            case static::PRIORITY_NORMAL: return 'normal';
-            case static::PRIORITY_HIGH: return 'high';
-            case static::PRIORITY_BLOCKER: return 'blocker';
+            case static::PRIORITY_LOW:
+                return 'low';
+            case static::PRIORITY_NORMAL:
+                return 'normal';
+            case static::PRIORITY_HIGH:
+                return 'high';
+            case static::PRIORITY_BLOCKER:
+                return 'blocker';
         }
     }
 
@@ -301,9 +313,9 @@ class Ticket extends BaseModel
     public function createIssue(IssueCreator $issueCreator, $repository)
     {
         $issue = $issueCreator->createIssue(
-                $repository,
-                $this->title,
-                'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
+            $repository,
+            $this->title,
+            'Issue from ticket: ' . route('tickets.show', $this) . "   \n\r" . $this->body
         );
         $this->addNote(auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}");
         //TODO: Notify somebody? if so, create the test
@@ -322,7 +334,7 @@ class Ticket extends BaseModel
     public function getIssueId()
     {
         $issueNote = $this->findIssueNote();
-        if (! $issueNote) {
+        if (!$issueNote) {
             return null;
         }
 
@@ -332,7 +344,7 @@ class Ticket extends BaseModel
     public function issueUrl()
     {
         $issueNote = $this->findIssueNote();
-        if (! $issueNote) {
+        if (!$issueNote) {
             return null;
         }
         $start  = strpos($issueNote->body, 'https://');
@@ -359,7 +371,7 @@ class Ticket extends BaseModel
     public function getIdeaId()
     {
         $issueEvent = $this->events()->where('body', 'like', '%Idea created%')->first();
-        if (! $issueEvent) {
+        if (!$issueEvent) {
             return null;
         }
 
