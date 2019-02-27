@@ -77,9 +77,10 @@ class TicketsController extends Controller
         $this->validate(request(), [
             'requester' => 'required|array',
             'priority' => 'required|integer',
+            'type_id' => 'required',
             //'title'      => 'required|min:3',
         ]);
-        $ticket->updateWith(request('requester'), request('priority'));
+        $ticket->updateWith(request('requester'), request('priority'), request('type_id'));
         $ticket->requester;
         $ticket->user;
         $data['data'] = json_encode($ticket);
