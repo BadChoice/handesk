@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\ApiNotificationEvent;
+use App\Thrust\Fields\TimeTracker;
 use App\Ticket;
+use App\TimeTracker as TT;
+use App\TimeTrackerLog;
 use App\Type;
 use BadChoice\Thrust\Controllers\ThrustController;
+use Illuminate\Support\Facades\Request;
 
 class TicketsController extends Controller
 {
@@ -57,6 +61,46 @@ class TicketsController extends Controller
         $data['message'] = $ticket->title . ' has been updated!';
         event(new ApiNotificationEvent($data));
         return redirect()->route('tickets.show', $ticket);
+    }
+
+    public function updateTimeTracker(Ticket $ticket, Request $request)
+    {
+        try {
+            $status = request('status');
+            $timeTracker = $ticket->timeTracker;
+            if (!isset($timeTracker->id)) {
+                $timeTracker = new TT();
+                $timeTracker->ticket_id = $ticket->id;
+            }
+            $current_timestamp = date_timestamp_get(date_create());
+            switch ($status) {
+                case '0':
+                    $timeTracker->status = $status;
+                    $duration = $current_timestamp - $timeTracker->latest_start;
+                    $timeTracker->total = $timeTracker->total - $timeTracker->latest_start + $current_timestamp;
+                    TimeTrackerLog::create([
+                        'time_tracker_id' => $timeTracker->id,
+                        'duration' => $duration,
+                        'start' => $timeTracker->latest_start,
+                    ]);
+
+                    $timeTracker->save();
+                    break;
+                case '1':
+                case '2':
+                    $timeTracker->status = 1;
+                    $timeTracker->latest_start = $current_timestamp;
+                    $timeTracker->save();
+                    break;
+                default:
+                    break;
+            }
+        } catch (\Throwable $th) {
+            \Log::error($th->getMessage());
+        }
+
+        return back();
+
     }
 
     public function reopen(Ticket $ticket)

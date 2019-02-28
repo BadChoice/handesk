@@ -13,6 +13,8 @@ use App\ThrustHelpers\Filters\EscalatedFilter;
 use App\ThrustHelpers\Filters\PriorityFilter;
 use App\ThrustHelpers\Filters\StatusFilter;
 use App\Thrust\Fields\BelongsTo;
+use App\Thrust\Fields\TimeTracker;
+use BadChoice\Thrust\Fields\CheckSwitch;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
 use BadChoice\Thrust\Resource;
@@ -33,6 +35,8 @@ class Ticket extends Resource
                 return "#{$ticket->id} · " . str_limit($ticket->title, 25);
             })->route('tickets.show')->sortable(),
             BelongsTo::make('type', 'Type'),
+            TimeTracker::make('timeTracker', 'Tracked Time'),
+            CheckSwitch::make('is_trackable', 'Trackable'),
             Link::make('requester.id', trans_choice('ticket.requester', 1))->displayCallback(function ($ticket) {
                 return $ticket->requester->name ?? '--';
             })->link('tickets?requester_id={field}'),

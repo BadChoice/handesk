@@ -87,7 +87,10 @@ class Ticket extends BaseModel
     {
         return $this->belongsTo(Team::class);
     }
-
+    public function timeTracker()
+    {
+        return $this->hasOne(TimeTracker::class);
+    }
     public function comments()
     {
         return $this->commentsAndNotes()->where('private', false);
