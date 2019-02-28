@@ -38,6 +38,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/jquery-confirm.min.js') }}"></script>
     <script src="{{ asset('js/jquery.switcher.min.js') }}"></script>
     @yield('scripts')

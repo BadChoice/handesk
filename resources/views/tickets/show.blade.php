@@ -84,20 +84,36 @@
 @section('scripts')
     @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object"
 => $ticket])
-
 <script>
+    window.timestampVal = $('#total_time_stamp').val();
     function setStatusAndSubmit(new_status){
-            $("#new_status").val(new_status);
-            $("#comment-form").submit();
+        $("#new_status").val(new_status);
+        $("#comment-form").submit();
+    }
+    $("#comment-text-area").mention({
+        delimiter: '@',
+        emptyQuery: true,
+        typeaheadOpts: {
+            items: 10 // Max number of items you want to show
+        },
+        users: {!! json_encode(App\Services\Mentions::arrayFor(auth()->user())) !!}
+    });
+    setInterval(function(){
+        let status = $("#total_time_stamp").attr("data-status");
+        timestampVal++;
+        var duration = moment.duration(timestampVal, 'seconds'); 
+        if(status!='0'){
+            $('#total_timer_container').text(formatTime(duration.hours()) + ":" + formatTime(duration.minutes())+ ":" + formatTime(duration.seconds()));
         }
-        $("#comment-text-area").mention({
-            delimiter: '@',
-            emptyQuery: true,
-            typeaheadOpts: {
-                items: 10 // Max number of items you want to show
-            },
-            users: {!! json_encode(App\Services\Mentions::arrayFor(auth()->user())) !!}
-        });
+    },1000)
+
+    function formatTime(value){
+        if(value < 10){
+            return '0' + value;
+        }else{
+            return value
+        }
+    }
 
 </script>
 @endsection
