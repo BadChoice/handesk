@@ -51,7 +51,7 @@ class Ticket extends BaseModel
         return $ticket;
     }
 
-    public function updateWith($requester, $priority, $type)
+    public function updateWith($requester, $priority, $type = 0)
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $this->update([
