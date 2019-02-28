@@ -75,22 +75,11 @@ class TicketsController extends Controller
             $current_timestamp = date_timestamp_get(date_create());
             switch ($status) {
                 case '0':
-                    $timeTracker->status = $status;
-                    $duration = $current_timestamp - $timeTracker->latest_start;
-                    $timeTracker->total = $timeTracker->total - $timeTracker->latest_start + $current_timestamp;
-                    TimeTrackerLog::create([
-                        'time_tracker_id' => $timeTracker->id,
-                        'duration' => $duration,
-                        'start' => $timeTracker->latest_start,
-                    ]);
-
-                    $timeTracker->save();
+                    $timeTracker->stop();
                     break;
                 case '1':
                 case '2':
-                    $timeTracker->status = 1;
-                    $timeTracker->latest_start = $current_timestamp;
-                    $timeTracker->save();
+                    $timeTracker->start();
                     break;
                 default:
                     break;

@@ -15,6 +15,13 @@ class ThrustActionsController extends Controller
     {
         $resource = Thrust::make($resourceName);
         $object = $resource->find($id);
+        if ($resourceName == "tickets" && $field == 'is_trackable') {
+
+            if (isset($object->timeTracker->id)) {
+                $object->timeTracker->stop();
+            }
+
+        }
         $object->update([$field => !$object->{$field}]);
         return back();
     }

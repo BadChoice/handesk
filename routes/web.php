@@ -73,4 +73,6 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');
     Route::post('thrust/{resourceName}/actions', 'ThrustActionsController@perform')->name('thrust.actions.perform');
+    Route::get('thrust/{resourceName}/{id}/toggle/{field}', 'ThrustActionsController@toggle')->name('thrust.toggle');
+
 });
