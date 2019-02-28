@@ -57,7 +57,7 @@ class Ticket extends BaseModel
         $this->update([
             'priority' => $priority,
             'requester_id' => $requester->id,
-            'type_id' => $type??$this->type_id,
+            'type_id' => $type ?? $this->type_id,
         ]);
 
         return $this;
@@ -260,6 +260,17 @@ class Ticket extends BaseModel
     public function canBeEdited()
     {
         return !in_array($this->status, [self::STATUS_CLOSED, self::STATUS_MERGED]);
+    }
+
+    public function canTrackTime()
+    {
+        $type = $this->type;
+        if (!isset($type->id)) {
+            return false;
+
+        } else {
+            return $type->is_trackable;
+        }
     }
 
     public static function statusNameFor($status)

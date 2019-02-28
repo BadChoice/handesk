@@ -30,11 +30,13 @@ class TimeTracker extends Relationship
             $param = '?status=2';
             $action = '<a class="action-tracker"  href="' . $url . $param . '"><i class="fa fa-play " aria-hidden="true"></i></a>';
         }
-        if (!$object->is_trackable) {
-            $action = '';
+        $action = '';
+
+        if (!$object->canTrackTime()) {
+            return '<span class="label ticket-priority-normal">--</span>';
 
         }
-        return '<span class="label ticket-priority-normal">' . $display_time . '</span>' . $action;
+        return '<span class="label ticket-priority-normal">' . $display_time . '</span>';
     }
 
     public function displayInEdit($object, $inline = false)

@@ -55,3 +55,34 @@ function toPercentage($value, $inverse = false)
 {
     return ($inverse ? 1 - $value : $value) * 100;
 }
+
+if (!function_exists('makeTimeTrackableField')) {
+
+    function makeTimeTrackableField($object)
+    {
+        $display_time = '';
+        $time_tracker = $object->timeTracker;
+        $action = '';
+        $url = route('tickets.time.tracker.update', $object->id);
+
+        if (isset($time_tracker->id)) {
+            $tt_status = $time_tracker->status;
+            $display_time = date('H:i:s', $time_tracker->total);
+            if ($tt_status) {
+                $param = '?status=0';
+                $action = '<a class="action-tracker" href="' . $url . $param . '" ><i class="fa fa-stop " aria-hidden="true"></i></a>';
+            } else {
+                $param = '?status=1';
+                $action = '<a class="action-tracker" href="' . $url . $param . '" ><i class="fa fa-play " aria-hidden="true"></i></a>';
+            }
+        } else {
+            $display_time = '00:00:00';
+            $param = '?status=2';
+            $action = '<a class="action-tracker"  href="' . $url . $param . '"><i class="fa fa-play " aria-hidden="true"></i></a>';
+        }
+        if (!$object->is_trackable) {
+            $action = '';
+        }
+        return '<span class="label ticket-priority-normal">' . $display_time . '</span>' . $action;
+    }
+}

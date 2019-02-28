@@ -37,9 +37,16 @@
     <br>
     @include('components.ticket.merged')
 </div>
-
-
-@if( $ticket->canBeEdited() )
+@if( $ticket->canTrackTime() )
+<div class="description actions comment">
+    <table class="w50">
+        <tr>
+            <td class="small"> {{ __("type.isTrackable") }}:</td>
+            <td colspan="2">{!! makeTimeTrackableField($ticket) !!}</td>
+        </tr>
+    </table>
+</div>
+@endif @if( $ticket->canBeEdited() )
     @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
 <div class="comment new-comment">
     {{ Form::open(["url" => route("comments.store", $ticket) , "files" => true, "id" => "comment-form"]) }}
