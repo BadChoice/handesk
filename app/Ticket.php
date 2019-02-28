@@ -57,7 +57,7 @@ class Ticket extends BaseModel
         $this->update([
             'priority' => $priority,
             'requester_id' => $requester->id,
-            'type_id' => $type,
+            'type_id' => $type??$this->type_id,
         ]);
 
         return $this;
