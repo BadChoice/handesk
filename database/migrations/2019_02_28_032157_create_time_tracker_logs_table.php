@@ -15,6 +15,7 @@ class CreateTimeTrackerLogsTable extends Migration
     {
         Schema::create('time_tracker_logs', function (Blueprint $table) {
             $table->increments('id');
+            $table->engine = "MyISAM";
             $table->integer('time_tracker_id')->unsigned()->index();
             $table->foreign('time_tracker_id')->references('id')->on('time_trackers')->onDelete('cascade');
             $table->integer('start')->default(0);
