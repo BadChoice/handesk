@@ -10,7 +10,7 @@
 <div class="description mt4">
     <table class="w50">
         <tr>
-            <td>Handesk API Token:</td>
+            <td>Handesk API token:</td>
             <td>
                 <span id="api-token">
                     {{ config('handesk.api_token') }}
@@ -27,18 +27,18 @@
             <td colspan="2"> <span class="lighter-gray fs2">{{ __('team.slack_webhook_urlDesc') }}</span></td>
         </tr>
         <tr>
-            <td>Outbound Notification Status: </td>
+            <td>Outbound notification status: </td>
             <td class="w60">
                 <input class="actionCheckbox" {{ $settings->notification_api_enabled?'checked':'' }} type="checkbox" name="notification_api_enabled"
                 value="1" >
             </td>
         </tr>
         <tr>
-            <td>Outbound Notification Endpoint: </td>
+            <td>Outbound notification endpoint: </td>
             <td class="w60"><input class="w100" name="notification_api_url" placeholder="https://application.io/callbacks" value="{{$settings->notification_api_url}}"></td>
         </tr>
         <tr>
-            <td>Outbound Notification API Token: </td>
+            <td>Outbound notification API token: </td>
             <td class="w60"><input class="w100" name="notification_api_token" placeholder="21kjb242jb123jb5hj123jb" value="{{$settings->notification_api_token}}"></td>
         </tr>
         <tr>
