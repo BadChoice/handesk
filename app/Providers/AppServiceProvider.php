@@ -20,7 +20,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        require_once base_path().'/helpers/helpers.php';
 
         Validator::extend('old_password', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, current($parameters));

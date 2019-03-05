@@ -8,4 +8,5 @@ return [
     'de'   => 'Alemão',
     'nl'   => 'Nederlands',
     'ptbr' => 'Português Brasileiro',
+    'tr'   => 'Turco',
 ];

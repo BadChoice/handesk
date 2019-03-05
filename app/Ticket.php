@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Services\IssueCreator;
 use App\Events\TicketCommented;
+use App\Notifications\RateTicket;
 use App\Authenticatable\Assistant;
 use App\Events\TicketStatusUpdated;
 use Illuminate\Support\Facades\App;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends BaseModel
 {
-    use SoftDeletes, Taggable, Assignable, Subscribable;
+    use SoftDeletes, Taggable, Assignable, Subscribable, Rateable;
 
     const STATUS_NEW     = 1;
     const STATUS_OPEN    = 2;
@@ -36,7 +37,7 @@ class Ticket extends BaseModel
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $ticket    = $requester->tickets()->create([
-            'title'        => $title,
+            'title'        => substr($title, 0, 190),
             'body'         => $body,
             'public_token' => str_random(24),
             'team_id'      => Settings::defaultTeamId(),
@@ -205,6 +206,15 @@ class Ticket extends BaseModel
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
         TicketEvent::make($this, 'Status updated: '.$this->statusName());
+        if ($status == Ticket::STATUS_SOLVED && ! $this->rating && config('handesk.sendRatingEmail')) {
+            $this->requester->notify((new RateTicket($this))->delay(now()->addMinutes(60)));
+        }
+    }
+
+    public function updatePriority($priority)
+    {
+        $this->update(['priority' => $priority, 'updated_at' => Carbon::now()]);
+        TicketEvent::make($this, 'Priority updated: '.$this->priorityName());
     }
 
     public function setLevel($level)
@@ -243,9 +253,9 @@ class Ticket extends BaseModel
         return ! in_array($this->status, [self::STATUS_CLOSED, self::STATUS_MERGED]);
     }
 
-    public function statusName()
+    public static function statusNameFor($status)
     {
-        switch ($this->status) {
+        switch ($status) {
             case static::STATUS_NEW: return 'new';
             case static::STATUS_OPEN: return 'open';
             case static::STATUS_PENDING: return 'pending';
@@ -256,14 +266,24 @@ class Ticket extends BaseModel
         }
     }
 
-    public function priorityName()
+    public function statusName()
     {
-        switch ($this->priority) {
+        return static::statusNameFor($this->status);
+    }
+
+    public static function priorityNameFor($priority)
+    {
+        switch ($priority) {
             case static::PRIORITY_LOW: return 'low';
             case static::PRIORITY_NORMAL: return 'normal';
             case static::PRIORITY_HIGH: return 'high';
             case static::PRIORITY_BLOCKER: return 'blocker';
         }
+    }
+
+    public function priorityName()
+    {
+        return static::priorityNameFor($this->priority);
     }
 
     public function getSubscribableEmail()
@@ -281,13 +301,15 @@ class Ticket extends BaseModel
     //========================================================
     public function createIssue(IssueCreator $issueCreator, $repository)
     {
+        $repo  = explode('/', $repository);
         $issue = $issueCreator->createIssue(
-                $repository,
+                $repo[0],
+                $repo[1],
                 $this->title,
                 'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
         );
-        $this->addNote(auth()->user(), "Issue created https://bitbucket.org{$issue->resource_uri} with id #{$issue->local_id}");
-        //TODO: Notify somebody? if so, create the test
+        $issueUrl = "https://bitbucket.org/{$repository}/issues/{$issue->local_id}";
+        $this->addNote(auth()->user(), "Issue created {$issueUrl} with id #{$issue->local_id}");
         TicketEvent::make($this, "Issue created #{$issue->local_id} at {$repository}");
 
         return $issue;
@@ -318,9 +340,8 @@ class Ticket extends BaseModel
         }
         $start  = strpos($issueNote->body, 'https://');
         $end    = strpos($issueNote->body, 'with id');
-        $apiUrl = substr($issueNote->body, $start, $end - $start);
 
-        return str_replace('api.', '', str_replace('1.0/repositories/', '', $apiUrl));
+        return substr($issueNote->body, $start, $end - $start);
     }
 
     public function createIdea()

@@ -104,8 +104,10 @@ class Idea extends BaseModel
 
     public function createIssue(IssueCreator $issueCreator)
     {
+        $repo  = explode('/', $this->repository);
         $issue = $issueCreator->createIssue(
-            $this->repository,
+            $repo[0],
+            $repo[1],
             $this->title,
             'Issue from idea: '.route('ideas.show', $this)."   \n\r".$this->body
         );

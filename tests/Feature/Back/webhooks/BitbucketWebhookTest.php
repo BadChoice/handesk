@@ -127,7 +127,7 @@ class BitbucketWebhookTest extends TestCase
                       "watches":1,
                       "priority":"major",
                       "assignee":null,
-                      "state":"open",
+                      "state":"'.$newStatus.'",
                       "version":{
                          "name":"2.0",
                          "links":{
@@ -221,34 +221,34 @@ class BitbucketWebhookTest extends TestCase
     public function can_receive_a_resolved_issue_and_ticket_is_updated()
     {
         Notification::fake();
-        $payload = $this->getPayload(929, "revo-app", 'resolved');
+        $payload = $this->getPayload(929, "revo-pos/revo-app", 'resolved');
 
         $this->actingAs(factory(Admin::class)->create());
         $ticket = factory(Ticket::class)->create();
-        $ticket->createIssue(new FakeIssueCreator(929), "revo-app");
+        $ticket->createIssue(new FakeIssueCreator(929), "revo-pos/revo-app");
         $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
 
         $response = $this->post('webhook/bitbucket', $payload);
 
         $response->assertStatus(Response::HTTP_OK);
         $this->assertCount(2, $ticket->fresh()->commentsAndNotes);
-        $this->assertEquals("Issue resolved", $ticket->commentsAndNotes[1]->body);
+        $this->assertEquals("Issue status updated to resolved", $ticket->commentsAndNotes[1]->body);
     }
 
      /** @test */
-      public function a_not_resolved_issue_is_not_changed()
+      public function a_not_resolved_issue_updates_status()
       {
-          $payload = $this->getPayload(929, "revo-app", 'open');
+          $payload = $this->getPayload(929, "revo-pos/revo-app", 'open');
 
           $this->actingAs(factory(Admin::class)->create());
           $ticket = factory(Ticket::class)->create();
-          $ticket->createIssue(new FakeIssueCreator(929), "revo-app");
+          $ticket->createIssue(new FakeIssueCreator(929), "revo-pos/revo-app");
           $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
 
           $response = $this->post('webhook/bitbucket', $payload);
 
           $response->assertStatus(Response::HTTP_OK);
-          $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
+          $this->assertCount(2, $ticket->fresh()->commentsAndNotes);
       }
 
        /** @test */

@@ -44,5 +44,14 @@ return [
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'bitbucket' => [
+        'oauth' => [
+            'key'    => env('BITBUCKET_OAUTH_KEY'),
+            'secret' => env('BITBUCKET_OAUTH_SECRET'),
+        ],
+        'user'            => env('BITBUCKET_USER'),
+        'password'        => env('BITBUCKET_PASSWORD'),
+        'developersGroup' => 'Developers',
+    ],
 
 ];

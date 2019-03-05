@@ -1,13 +1,16 @@
 
 <?php
 return [
-    'newLeadCreatedDesc' => 'A new lead has been created',
-    'leadAssigned'       => 'Lead assigned',
-    'newTicketCreated'   => 'New ticket created',
-    'newTicket'          => 'New ticket',
-    'ticketCreated'      => 'Ticket created',
-    'ticketAssigned'     => 'Ticket assigned',
-    'ticketAssignedTo'   => 'Ticket assigned to',
-    'ticketUpdated'      => 'Ticket updated',
-    'ticketEscalated'    => 'Ticket escalated',
+    'newLeadCreatedDesc' => 'Ein neuer Lead wurde erstellt',
+    'leadAssigned'       => 'Lead zugewiesen',
+    'newTicketCreated'   => 'Neues Ticket erstellt',
+    'newTicket'          => 'Neues Ticket',
+    'ticketCreated'      => 'Ticket erstellt',
+    'ticketAssigned'     => 'Ticket zugewiesen',
+    'ticketAssignedTo'   => 'Ticket zugewiesen an',
+    'ticketUpdated'      => 'Ticket aktualisiert',
+    'ticketEscalated'    => 'Ticket eskaliert',
+    'rateTicket'         => 'Rate ticket*',
+    'rateTicketDesc'     => 'We would love to get your feedback about this ticket, just click the rating so we can keep improving!*',
+    'ticketRated'        => 'Ticket rated*',
 ];

@@ -29,7 +29,7 @@ class TicketIdeaTest extends TestCase
         $response->assertStatus( Response::HTTP_FOUND );
         $this->assertEquals(Ticket::STATUS_SOLVED, $ticket->fresh()->status);
         $this->assertEquals(1, $ticket->fresh()->commentsAndNotes->count() );
-        $this->assertContains("Notification | REVO Ideas bucket", $ticket->fresh()->commentsAndNotes->first()->body);
+        $this->assertContains("Notification | Ideas bucket", $ticket->fresh()->commentsAndNotes->first()->body);
         $this->assertContains("Idea created #1", $ticket->fresh()->events->first()->body);
         $this->assertEquals(1, Idea::count());
         $this->assertEquals(Idea::first()->title, $ticket->title);

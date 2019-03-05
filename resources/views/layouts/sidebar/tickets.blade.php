@@ -10,4 +10,5 @@
     @include('components.sidebarItem', ["url" => route('tickets.index') . "?recent=true",       "title" => __('ticket.recent'),     "count" => $repository->recentlyUpdated()   ->count()])
     @include('components.sidebarItem', ["url" => route('tickets.index') . "?solved=true",       "title" => __('ticket.solved')])
     @include('components.sidebarItem', ["url" => route('tickets.index') . "?closed=true",       "title" => __('ticket.closed')])
+    @include('components.sidebarItem', ["url" => route('tickets.index') . "?rated=true",       "title" => __('ticket.rated')])
 </ul>
