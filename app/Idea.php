@@ -104,7 +104,7 @@ class Idea extends BaseModel
 
     public function createIssue(IssueCreator $issueCreator)
     {
-        $repo = explode('/', $this->repository);
+        $repo  = explode('/', $this->repository);
         $issue = $issueCreator->createIssue(
             $repo[0],
             $repo[1],

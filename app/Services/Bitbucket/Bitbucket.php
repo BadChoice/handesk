@@ -2,14 +2,10 @@
 
 namespace App\Services\Bitbucket;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
 use App\Services\IssueCreator;
-use GuzzleHttp\Subscriber\Oauth\Oauth1;
 
 class Bitbucket implements IssueCreator
 {
-
     protected $auth;
     protected static $oauthParameters;
 
@@ -27,13 +23,14 @@ class Bitbucket implements IssueCreator
     {
         $issue = new \Bitbucket\API\Repositories\Issues();
         $this->setAuth($issue);
+
         return $this->parseResponse(
             $issue->create($account, $repoSlug, array_merge([
                 'title'     => $title,
                 'content'   => $content,
                 'kind'      => 'task',
                 'priority'  => 'major',
-                'status'    => 'new'
+                'status'    => 'new',
             ], $extra))
         );
     }
@@ -42,6 +39,7 @@ class Bitbucket implements IssueCreator
     {
         $issue = new \Bitbucket\API\Repositories\Issues();
         $this->setAuth($issue);
+
         return $this->parseResponse(
             $issue->update($account, $repoSlug, $id, $fields)
         );
@@ -51,6 +49,7 @@ class Bitbucket implements IssueCreator
     {
         $issue = new \Bitbucket\API\Repositories\Issues();
         $this->setAuth($issue);
+
         return $this->parseResponse(
             $issue->comments()->create($account, $repoSlug, $id, $comment)
         );

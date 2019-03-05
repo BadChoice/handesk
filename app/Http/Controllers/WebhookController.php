@@ -28,6 +28,7 @@ class WebhookController extends Controller
         $ticketEvent = TicketEvent::where('body', "Issue created #{$issue_id} at {$repository}")->first();
         if (! $ticketEvent) {
             \Log::info("Issue updated: {$issue_id} at {$repository} not found");
+
             return response()->json('ok: no ticket with this issue');
         }
         \Log::info("Issue updated: Adding note to ticket {$ticketEvent->ticket->id}");

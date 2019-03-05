@@ -300,7 +300,7 @@ class Ticket extends BaseModel
     //========================================================
     public function createIssue(IssueCreator $issueCreator, $repository)
     {
-        $repo = explode('/', $repository);
+        $repo  = explode('/', $repository);
         $issue = $issueCreator->createIssue(
                 $repo[0],
                 $repo[1],
@@ -339,6 +339,7 @@ class Ticket extends BaseModel
         }
         $start  = strpos($issueNote->body, 'https://');
         $end    = strpos($issueNote->body, 'with id');
+
         return substr($issueNote->body, $start, $end - $start);
     }
 
