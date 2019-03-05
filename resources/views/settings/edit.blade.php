@@ -23,7 +23,7 @@
             <td>{{ __("setting.default_team_id") }}: </td>
             <td class="w60">
                 <select name="default_team_id">
-                    <option value="0">NONE</option> 
+                    <option value="">NONE</option> 
                     @foreach ($teams as $team)
                     <option value="{{$team->id}}" @if($settings->default_team_id==$team->id) selected @endif>{{$team->id}} - {{$team->name}}</option>    
                     @endforeach

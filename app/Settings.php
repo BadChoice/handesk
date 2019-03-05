@@ -20,7 +20,7 @@ class Settings extends BaseModel
         return null;
     }
     // Return default team id for incoming tickets
-    public static function defaultTeam()
+    public static function defaultTeamId()
     {   
         return Settings::first()->default_team_id;
     }
