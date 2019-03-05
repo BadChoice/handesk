@@ -46,11 +46,11 @@ return [
     ],
     'bitbucket' => [
         'oauth' => [
-            'key' => env('BITBUCKET_OAUTH_KEY'),
+            'key'    => env('BITBUCKET_OAUTH_KEY'),
             'secret' => env('BITBUCKET_OAUTH_SECRET'),
         ],
-        'user' => env('BITBUCKET_USER'),
-        'password' => env('BITBUCKET_PASSWORD'),
+        'user'            => env('BITBUCKET_USER'),
+        'password'        => env('BITBUCKET_PASSWORD'),
         'developersGroup' => 'Developers',
     ],
 
