@@ -22,6 +22,22 @@
                 <td> {{ $user->name }}</td>
                 <td> {{ $user->email }}</td>
                 <td> {{ implode(", ", $user->teams->pluck('name')->toArray() ) }}</td>
+                <td> <a href="{{ route('users.changerole', [$user,0]) }}"> 
+                    @if ($user->admin) 
+                    remove admin
+                    @else
+                    become admin
+                    @endif 
+                    </a>
+                </td>
+                <td> <a href="{{ route('users.changerole', [$user,1]) }}"> 
+                    @if ($user->assistant) 
+                    remove assistant
+                    @else
+                    become assistant
+                    @endif 
+                    </a>
+                </td>
                 <td> <a href="{{ route('users.impersonate', $user) }}"> @icon(key) </a></td>
                 <td> <a href="{{ route('users.destroy', $user) }}" class="delete-resource"> @icon(trash)</a></td>
             </tr>
