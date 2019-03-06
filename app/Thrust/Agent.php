@@ -6,6 +6,7 @@ use App\ThrustHelpers\Actions\NewUser;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Email;
 use BadChoice\Thrust\Fields\HasMany;
+use BadChoice\Thrust\Fields\Link;
 use BadChoice\Thrust\Fields\Text;
 use BadChoice\Thrust\Resource;
 
@@ -24,13 +25,14 @@ class Agent extends Resource
             HasMany::make('teams'),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
+            Link::make('id', 'impersonate')->route('users.impersonate')->icon('key'),
         ];
     }
 
     public function mainActions()
     {
         return [
-            new NewUser,
+            //new NewUser, //Not working yet all new agents are created with invitation link
         ];
     }
 
