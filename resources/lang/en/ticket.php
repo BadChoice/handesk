@@ -3,6 +3,7 @@
 return [
     'all'        => 'All',
     'ticket'     => 'Ticket|Tickets',
+    'agent'      => 'Agent|Agents',
     'assigned'   => 'Assigned',
     'myTickets'  => 'My Tickets',
     'newTicket'  => 'New Ticket',

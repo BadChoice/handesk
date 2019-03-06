@@ -157,6 +157,7 @@ class Ticket extends BaseModel
         }
         $previousStatus = $this->updateStatusFromComment($user, $newStatus);
         $this->associateUserIfNecessary($user);
+
         if (! $user || ! $body || $body === $user->settings->tickets_signature) {
             return null;
         }
