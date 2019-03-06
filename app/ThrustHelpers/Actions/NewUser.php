@@ -8,6 +8,6 @@ class NewUser extends MainAction
 {
     public function display($resourceName, $parent_id = null)
     {
-        return "<a class='button' href=".route('teams.create').'> '.icon('plus').' '.__('user.newUser').'</a>';
+        return "<a class='button' href=".route('users.create').'> '.icon('plus').' '.__('user.newUser').'</a>';
     }
 }
