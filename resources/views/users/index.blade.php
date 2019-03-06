@@ -12,6 +12,8 @@
             <th> {{ trans_choice('team.name',1) }}      </th>
             <th> {{ trans_choice('team.email',2) }}     </th>
             <th> {{ trans_choice('team.team',2) }}      </th>
+            <th> {{ trans('team.admin') }} {{ trans('team.role') }}     </th>
+            <th> {{ trans('team.assistant') }} {{ trans('team.role') }}      </th>
             <th colspan="2"></th>
         </tr>
         </thead>
