@@ -2,12 +2,12 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Fields\HasMany;
-use BadChoice\Thrust\Resource;
-use BadChoice\Thrust\Fields\Date;
-use BadChoice\Thrust\Fields\Link;
-use BadChoice\Thrust\Fields\Email;
 use App\ThrustHelpers\Actions\NewUser;
+use BadChoice\Thrust\Fields\Date;
+use BadChoice\Thrust\Fields\Email;
+use BadChoice\Thrust\Fields\HasMany;
+use BadChoice\Thrust\Fields\Text;
+use BadChoice\Thrust\Resource;
 
 class Agent extends Resource
 {
@@ -19,14 +19,11 @@ class Agent extends Resource
     public function fields()
     {
         return [
-            Link::make('name', __('user.name'))->displayCallback(function ($user) {
-                return $user->name ?? '--';
-            }),
+            Text::make('name', __('user.name'))->sortable(),
             Email::make('email', __('user.email'))->sortable(),
             HasMany::make('teams'),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
-            
         ];
     }
 
