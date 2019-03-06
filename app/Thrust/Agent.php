@@ -10,7 +10,7 @@ use App\ThrustHelpers\Actions\NewUser;
 
 class Agent extends Resource
 {
-    public static $model        = \App\Users::class;
+    public static $model        = \App\User::class;
     public static $search       = ['name', 'email'];
     public static $defaultSort  = 'updated_at';
     public static $defaultOrder = 'desc';
@@ -26,11 +26,6 @@ class Agent extends Resource
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
             
         ];
-    }
-
-    protected function getBaseQuery()
-    {   
-        return \App\User::with($this->getWithFields());
     }
 
     public function mainActions()
