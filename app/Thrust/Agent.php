@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use BadChoice\Thrust\Fields\HasMany;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -22,6 +23,7 @@ class Agent extends Resource
                 return $user->name ?? '--';
             }),
             Email::make('email', __('user.email'))->sortable(),
+            HasMany::make('teams'),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
             
