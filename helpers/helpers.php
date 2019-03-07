@@ -64,7 +64,7 @@ if (!function_exists('makeTimeTrackableField')) {
         $time_tracker = $object->timeTracker;
         $action = '';
         $url = route('tickets.time.tracker.update', $object->id);
-        $timestamp = $time_tracker->total;
+        $timestamp = isset($time_tracker->total)?$time_tracker->total:0;
         if (isset($time_tracker->id)) {
             $tt_status = $time_tracker->status;
             $display_time = date('H:i:s', $time_tracker->total);
@@ -78,6 +78,7 @@ if (!function_exists('makeTimeTrackableField')) {
             }
         } else {
             $display_time = '00:00:00';
+            $tt_status = 0;
             $param = '?status=2';
             $action = '<a class="action-tracker"  href="' . $url . $param . '"><i class="fa fa-play " aria-hidden="true"></i></a>';
         }
