@@ -82,7 +82,7 @@ if (!function_exists('makeTimeTrackableField')) {
             $param = '?status=2';
             $action = '<a class="action-tracker"  href="' . $url . $param . '"><i class="fa fa-play " aria-hidden="true"></i></a>';
         }
-        if (!$object->is_trackable) {
+        if (!$object->canTrackTime()) {
             $action = '';
         }
         return '<input id="total_time_stamp" type="hidden" data-status="' . $tt_status . '" value="' . $timestamp . '"></input><span id="total_timer_container"  class="label ticket-priority-normal">' . $display_time . '</span>' . $action;
