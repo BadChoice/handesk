@@ -32,7 +32,7 @@ class Agent extends Resource
     public function mainActions()
     {
         return [
-            //new NewUser, //Not working yet all new agents are created with invitation link
+            new NewUser, //Not working yet all new agents are created with invitation link
         ];
     }
 
