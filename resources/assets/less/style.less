@@ -27,10 +27,10 @@
 
 
 // APP
-@sidebar-width:300px;
+@sidebar-width: 300px;
 
-body{
-  margin:0;
+body {
+  margin: 0;
   font-family: @family-serif;
   font-size: 14px;
   line-height: 1.42857143;
@@ -39,229 +39,282 @@ body{
 }
 
 
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.navbar-item,.navbar-link{
-    font-family: @family-heads;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.navbar-item,
+.navbar-link {
+  font-family: @family-heads;
 }
 
-a{
+a {
   .text-decoration-none;
-  color:@brand-second;
+  color: @brand-second;
 }
 
-.gravatar{
+.gravatar {
   border-radius: 50%;
 }
 
-.tinyHeader{
+.tinyHeader {
   position: absolute;
   right: 35px;
   top: 20px;
 }
 
-.content{
+.content {
   .pt4;
   margin-left: @sidebar-width;
-  overflow:auto;
+  overflow: auto;
 }
 
-.comment{
-  .ph4; .pv4;
+.comment {
+  .ph4;
+  .pv4;
   .bb;
-  min-height:50px;
+  min-height: 50px;
 }
 
-.new-comment textarea{
-  .br2;  .mb2; .p2;
+.new-comment textarea {
+  .br2;
+  .mb2;
+  .p2;
   .w100;
-  height:60px;
-  border:1px solid @lighter-gray;
+  height: 60px;
+  border: 1px solid @lighter-gray;
 }
 
-.description{
-  .pt1; .pr3; .pb3; .pl4;
+.description {
+  .pt1;
+  .pr3;
+  .pb3;
+  .pl4;
 }
 
-.description .actions{
-  background-color:white;
+.description .actions {
+  background-color: white;
 }
 
-.thrust-main-actions{
-  margin-top:20px;
-  margin-bottom:30px;
+.thrust-main-actions {
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-.thrust-actions{
-  margin:-40px 8px auto;
+.thrust-actions {
+  margin: -40px 8px auto;
 }
 
-.resourceSearch input{
+.resourceSearch input {
   width: 300px;
   .shadow-outer-3;
   border-color: #eee;
 }
 
-.resourceSearch i{
+.resourceSearch i {
   .o50;
 }
 
-.description h3, .description .title{
-  font-weight:200;
+.description h3,
+.description .title {
+  font-weight: 200;
   .fs3;
 }
 
-.label{
+.label {
   .br1;
   .uppercase;
-  .ph2; .pv1;
-  font-size:10px;
+  .ph2;
+  .pv1;
+  font-size: 10px;
 }
 
-.label a{
-  color:white;
+.label a {
+  color: white;
 }
 
-.ticket-status-new{
-  .white; .bg-danger;
+.ticket-status-new {
+  .white;
+  .bg-danger;
 }
 
-.ticket-status-open{
-  .white;  background-color:pink;
+.ticket-status-open {
+  .white;
+  background-color: pink;
 }
 
-.ticket-status-pending{
-  .white;  background-color:orange;
+.ticket-status-pending {
+  .white;
+  background-color: orange;
 }
 
-.ticket-status-solved{
-  .white; .bg-success;
+.ticket-status-solved {
+  .white;
+  .bg-success;
 }
 
-.ticket-status-closed{
-  background-color:light-gray;  .white;
+.ticket-status-closed {
+  background-color: light-gray;
+  .white;
 }
 
-.ticket-priority-low{
-  background-color:gray;  .white;
+.ticket-priority-low {
+  background-color: gray;
+  .white;
 }
 
-.ticket-priority-normal{
-  .white; .bg-success;
+.ticket-priority-normal {
+  .white;
+  .bg-success;
 }
 
-.ticket-priority-high{
-  .white;  background-color:orange;
+.ticket-priority-high {
+  .white;
+  background-color: orange;
 }
 
-.ticket-priority-blocker{
-  .white; .bg-danger;
+.ticket-priority-blocker {
+  .white;
+  .bg-danger;
 
 }
 
-.lead-status-new{
-  .bold; .white;  background-color:black;
+.lead-status-new {
+  .bold;
+  .white;
+  background-color: black;
 }
 
-.lead-status-first-contact{
-  .bold; .white;  background-color:gray;
+.lead-status-first-contact {
+  .bold;
+  .white;
+  background-color: gray;
 }
 
-.lead-status-visited{
-  .bold;  .white;  background-color:orange;
+.lead-status-visited {
+  .bold;
+  .white;
+  background-color: orange;
 }
 
-.lead-status-completed{
-  .bold; .white;  .bg-success;
+.lead-status-completed {
+  .bold;
+  .white;
+  .bg-success;
 }
 
-.lead-status-failed{
-  .bold;  .white;  .bg-danger
+.lead-status-failed {
+  .bold;
+  .white;
+  .bg-danger
 }
 
-.idea-status-new{
-  .white; .bg-danger;
+.idea-status-new {
+  .white;
+  .bg-danger;
 }
 
-.idea-status-declined{
-  .white; .bg-danger;
+.idea-status-declined {
+  .white;
+  .bg-danger;
 }
 
-.idea-status-open{
-  .white;  background-color:pink;
+.idea-status-open {
+  .white;
+  background-color: pink;
 }
 
-.idea-status-accepted{
-  .white;  background-color:lightblue;
+.idea-status-accepted {
+  .white;
+  background-color: lightblue;
 }
 
-.idea-status-pending{
-  .white;  background-color:orange;
+.idea-status-pending {
+  .white;
+  background-color: orange;
 }
 
-.idea-status-solved{
-  .white; .bg-success;
+.idea-status-solved {
+  .white;
+  .bg-success;
 }
 
-.idea-status-closed{
-  background-color:gray;  .white;
+.idea-status-closed {
+  background-color: gray;
+  .white;
 }
 
-.note{
+.note {
   background-color: #FFF9E4;
 }
 
-.button{
-  background-color:@brand;
-  color:white;
-  border:none;
+.button {
+  background-color: @brand;
+  color: white;
+  border: none;
   cursor: pointer;
-  .p2;  .br1;  .shadow-hard;  .relative;
+  .p2;
+  .br1;
+  .shadow-hard;
+  .relative;
 }
 
-.button:active, button:active{
-  top:2px;
+.button:active,
+button:active {
+  top: 2px;
   .shadow0;
 }
 
-.secondary{
-  border:solid 1px lighten(@brand-second,20);
-  background-color:transparent;
+.secondary {
+  border: solid 1px lighten(@brand-second, 20);
+  background-color: transparent;
   color: @brand-second;
-  font-weight:200;
+  font-weight: 200;
   .shadow0;
-  top:1px;
+  top: 1px;
 }
 
-.ternary{
-  background-color:transparent;
+.ternary {
+  background-color: transparent;
   color: @brand-second;
   border-color: @lighter-gray;
-  font-weight:200;
+  font-weight: 200;
   .shadow0;
-  top:1px;
+  top: 1px;
 }
 
-button{
+button {
   .button;
 }
 
-button:focus {outline:0;}
+button:focus {
+  outline: 0;
+}
 
-.actions{
+.actions {
   .pt3;
   background-color: @broken-white;
 }
 
-.date{
+.date {
   color: @lighter-gray;
 }
 
-.pagination li{
+.pagination li {
   list-style: none;
   display: inline-block;
   .mr2;
 }
 
-.caret-down{
+.caret-down {
   padding: 6px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -269,50 +322,71 @@ button:focus {outline:0;}
   vertical-align: text-top;
 }
 
-.pagination{
-  .ml4; .mb-2;
+.pagination {
+  .ml4;
+  .mb-2;
 }
 
-.dropdown-wrapper{
+.dropdown-wrapper {
   display: inline-block;
   position: relative;
-  .button, button{
+
+  .button,
+  button {
     display: inline-block;
   }
 }
 
-.show-mobile{
-  display:none;
+.show-mobile {
+  display: none;
 }
 
 @media (max-width: @phone-max-size) {
-  .content{
-    margin-left:0px;
+  .content {
+    margin-left: 0px;
   }
-  .tinyHeader{
+
+  .tinyHeader {
     right: 5px;
     top: 10px;
   }
 
-  .description{
+  .description {
     .pb0;
     .pl2;
   }
 
-  .description h3{
-    margin-top:-16px;
+  .description h3 {
+    margin-top: -16px;
     .ml4;
   }
-  .breadcrumb{
-    margin-top:-13px;
+
+  .breadcrumb {
+    margin-top: -13px;
     .ml4;
     .mb4;
   }
-  .hide-mobile{
-    display:none;
+
+  .hide-mobile {
+    display: none;
   }
 
-  .show-mobile{
-    display:unset;
+  .show-mobile {
+    display: unset;
   }
+}
+
+.action-tracker {
+  background-color: #33BC8C;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.label.ticket-priority {
+  font-size: 13px;
 }

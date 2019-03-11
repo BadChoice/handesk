@@ -2151,3 +2151,16 @@ button:focus {
     display: unset;
   }
 }
+.action-tracker {
+  background-color: #33BC8C;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.label.ticket-priority {
+  font-size: 13px;
+}

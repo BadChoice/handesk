@@ -34,7 +34,7 @@ class Ticket extends Resource
                 return "#{$ticket->id} · " . str_limit($ticket->title, 25);
             })->route('tickets.show')->sortable(),
             BelongsTo::make('type', 'Type'),
-            TimeTracker::make('timeTracker', 'Tracked Time'),
+            // TimeTracker::make('timeTracker', 'Tracked Time'),
             // CheckSwitch::make('is_trackable', 'Trackable'),
             Link::make('requester.id', trans_choice('ticket.requester', 1))->displayCallback(function ($ticket) {
                 return $ticket->requester->name ?? '--';

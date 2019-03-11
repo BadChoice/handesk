@@ -85,6 +85,6 @@ if (!function_exists('makeTimeTrackableField')) {
         if (!$object->canTrackTime()) {
             $action = '';
         }
-        return '<input id="total_time_stamp" type="hidden" data-status="' . $tt_status . '" value="' . $timestamp . '"></input><span id="total_timer_container"  class="label ticket-priority-normal">' . $display_time . '</span>' . $action;
+        return '<input id="total_time_stamp" type="hidden" data-status="' . $tt_status . '" value="' . $timestamp . '"></input><span id="total_timer_container"  class="label ticket-priority">' . $display_time . '</span>' . $action;
     }
 }
