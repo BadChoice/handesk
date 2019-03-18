@@ -91,4 +91,19 @@ class TicketsController extends ApiController
             $setting->notify(new TicketCreated($ticket));
         }
     }
+    public function updateRating($ticket)
+    {
+        try {
+            $rating = request('rating');
+            $rating = is_numeric($rating) ? $rating : 0;
+            $ticket = Ticket::findOrFail($ticket);
+            $ticket->rating = $rating;
+            $ticket->save();
+            return response()->json([], 200);
+        } catch (\Throwable $th) {
+            return response()->json([], 500);
+            //throw $th;
+        }
+
+    }
 }
