@@ -51,12 +51,13 @@ class Ticket extends BaseModel
         return $ticket;
     }
 
-    public function updateWith($requester, $priority)
+    public function updateWith($requester, $priority, $ticket_type_id)
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $this->update([
-            'priority'     => $priority,
-            'requester_id' => $requester->id,
+            'priority'       => $priority,
+            'requester_id'   => $requester->id,
+            'ticket_type_id' => $ticket_type_id,
         ]);
 
         return $this;
@@ -115,6 +116,10 @@ class Ticket extends BaseModel
     public function mergedTickets()
     {
         return $this->belongsToMany(self::class, 'merged_tickets', 'ticket_id', 'merged_ticket_id');
+    }
+
+    public function type(){
+        return $this->belongsTo(TicketType::class, 'ticket_type_id');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use App\ThrustHelpers\Filters\TicketTypeFilter;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -79,6 +80,7 @@ class Ticket extends Resource
             new StatusFilter,
             new PriorityFilter,
             new EscalatedFilter,
+            new TicketTypeFilter,
         ];
     }
 
