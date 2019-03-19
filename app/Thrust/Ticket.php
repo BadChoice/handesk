@@ -2,7 +2,6 @@
 
 namespace App\Thrust;
 
-use App\ThrustHelpers\Filters\TicketTypeFilter;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -17,6 +16,7 @@ use App\ThrustHelpers\Actions\ChangePriority;
 use App\ThrustHelpers\Filters\PriorityFilter;
 use App\ThrustHelpers\Filters\EscalatedFilter;
 use App\ThrustHelpers\Fields\TicketStatusField;
+use App\ThrustHelpers\Filters\TicketTypeFilter;
 
 class Ticket extends Resource
 {

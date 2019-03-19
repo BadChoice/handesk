@@ -53,5 +53,5 @@ return [
     'blocker'            => 'Bloquejant',
     'thanksForTheRating' => 'Moltes gràcies!',
     'rated'              => 'Classificats',
-    'ticketType'         => 'Tipo de tickets'
+    'ticketType'         => 'Tipo de tickets',
 ];

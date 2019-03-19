@@ -64,7 +64,7 @@ class TicketsController extends Controller
         $this->validate(request(), [
             'requester' => 'required|array',
             'priority'  => 'required|integer',
-            'type'      => 'integer'
+            'type'      => 'integer',
             //'title'      => 'required|min:3',
         ]);
         $ticket->updateWith(request('requester'), request('priority'), request('type'));

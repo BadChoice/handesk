@@ -118,7 +118,8 @@ class Ticket extends BaseModel
         return $this->belongsToMany(self::class, 'merged_tickets', 'ticket_id', 'merged_ticket_id');
     }
 
-    public function type(){
+    public function type()
+    {
         return $this->belongsTo(TicketType::class, 'ticket_type_id');
     }
 
