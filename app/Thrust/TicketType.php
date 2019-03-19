@@ -16,7 +16,7 @@ class TicketType extends Resource
         return [
             Text::make('name'),
             Color::make('color'),
-            Text::make('tickets_count'),
+            Text::make('tickets_count')->onlyInIndex(),
         ];
     }
 
