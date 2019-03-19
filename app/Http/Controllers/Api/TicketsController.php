@@ -106,4 +106,24 @@ class TicketsController extends ApiController
         }
 
     }
+
+    public function assignTicket($id)
+    {
+        try {
+            $ticket = Ticket::findOrFail($id);
+
+            if (request('team_id')) {
+                $this->authorize('assignToTeam', $ticket);
+                $ticket->assignToTeam(request('team_id'));
+            }
+            if (request('user_id')) {
+                $ticket->assignTo(request('user_id'));
+            }
+            return response()->json([]);
+        } catch (\Throwable $th) {
+            return response()->json([], 500);
+        }
+
+    }
+
 }
