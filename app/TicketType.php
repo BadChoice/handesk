@@ -16,6 +16,7 @@ class TicketType extends BaseModel
     public function delete()
     {
         $this->tickets()->update(['ticket_type_id' => null]);
+
         return parent::delete();
     }
 }

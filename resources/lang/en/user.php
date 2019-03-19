@@ -22,5 +22,5 @@ return [
     'newIdeaNotification'        => 'New idea notification',
     'mentionNotification'        => 'Mention Notification',
     'ticketRatedNotification'    => 'Ticket rated',
-    'newUser'                   => 'New user',
+    'newUser'                    => 'New user',
 ];
