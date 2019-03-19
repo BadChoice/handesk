@@ -24,7 +24,7 @@
         @if(auth()->user()->admin)
             @include('components.sidebarItem', ["url" => route('users.index'),      "title" => trans_choice('ticket.user',      2) ])
             @include('components.sidebarItem', ["url" => route('settings.edit', 1), "title" => trans_choice('setting.setting',  2) ])
-            @include('components.sidebarItem', ["url" => route('ticketTypes.index', 1), "title" => trans_choice('setting.ticketType',  2) ])
+            @include('components.sidebarItem', ["url" => route('ticketTypes.index', 1), "title" => trans_choice('ticket.ticketType',  2) ])
         @endif
     </ul>
     <br>
