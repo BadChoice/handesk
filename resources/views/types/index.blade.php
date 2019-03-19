@@ -14,7 +14,6 @@
         <tr>
             <th class="small"></th>
             <th> {{ trans_choice('type.name',1) }} </th>
-            <th> {{ trans_choice('type.isTrackable',1) }} </th>
             <th colspan="2">Actions</th>
         </tr>
     </thead>
@@ -23,9 +22,6 @@
         <tr>
             <td></td>
             <td>{{ $type->name }}</td>
-            <td><input class="actionCheckbox" {{ $type->is_trackable? 'checked': '' }} disabled type="checkbox" name="is_trackable"
-                value="1">
-            </td>
             <td><a class="action-icon" href="{{ route('types.update',$type) }}"> @icon(pencil)</a></td>
             <td>
                 <span class="action-icon" onclick="deleteType({{ $type->id }})">@icon(trash)</span>

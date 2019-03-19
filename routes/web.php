@@ -36,8 +36,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('tickets/{ticket}/comments', 'CommentsController@store')->name('comments.store');
     Route::resource('tickets/{ticket}/tags', 'TicketsTagsController', ['only' => ['store', 'destroy'], 'as' => 'tickets']);
     Route::post('tickets/{ticket}/reopen', 'TicketsController@reopen')->name('tickets.reopen');
-    Route::get('tickets/{ticket}/update-time-tracker', 'TicketsController@updateTimeTracker')->name('tickets.time.tracker.update');
-    
+
     Route::post('tickets/{ticket}/escalate', 'TicketsEscalateController@store')->name('tickets.escalate.store');
     Route::delete('tickets/{ticket}/escalate', 'TicketsEscalateController@destroy')->name('tickets.escalate.destroy');
 

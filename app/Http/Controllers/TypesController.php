@@ -28,7 +28,6 @@ class TypesController extends Controller
         $this->authorize('create', Type::class);
         Type::create([
             'name' => request('name'),
-            'is_trackable' => request('is_trackable'),
         ]);
 
         return redirect()->route('types.index');
@@ -38,8 +37,6 @@ class TypesController extends Controller
     {
         $type->update([
             'name' => request('name'),
-            'is_trackable' => request('is_trackable') ?? 0,
-
         ]);
 
         return redirect()->route('types.index');
