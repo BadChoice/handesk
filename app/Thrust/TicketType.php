@@ -3,6 +3,7 @@
 namespace App\Thrust;
 
 use BadChoice\Thrust\Fields\Color;
+use BadChoice\Thrust\Fields\HasMany;
 use BadChoice\Thrust\Fields\Text;
 use BadChoice\Thrust\Resource;
 
@@ -15,9 +16,13 @@ class TicketType extends Resource
     {
         return [
             Text::make('name'),
-            Color::make('color')
+            Color::make('color'),
+            Text::make('tickets_count'),
         ];
     }
 
-
+    protected function getBaseQuery()
+    {
+        return parent::getBaseQuery()->withCount('tickets');
+    }
 }
