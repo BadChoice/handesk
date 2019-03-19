@@ -9,7 +9,7 @@ class AddTypeIdToTickets extends Migration
     public function up()
     {
         Schema::table('tickets', function (Blueprint $table) {
-            $table->integer('ticket_type_id')->nullable();
+            $table->integer('ticket_type_id')->unsigned()->nullable();
         });
     }
 
