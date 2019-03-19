@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Type;
 use App\Ticket;
+use App\TimeTrackerLog;
+use App\TimeTracker as TT;
+use App\Thrust\Fields\TimeTracker;
 use App\Repositories\TicketsIndexQuery;
 use App\Repositories\TicketsRepository;
+use Illuminate\Support\Facades\Request;
 use BadChoice\Thrust\Controllers\ThrustController;
 
 class TicketsController extends Controller
@@ -26,7 +31,9 @@ class TicketsController extends Controller
     {
         $this->authorize('view', $ticket);
 
-        return view('tickets.show', ['ticket' => $ticket]);
+        $types = Type::all();
+        
+        return view('tickets.show', ['ticket' => $ticket, 'types' => $types]);
     }
 
     public function create()
@@ -41,8 +48,9 @@ class TicketsController extends Controller
             'title'     => 'required|min:3',
             'body'      => 'required',
             'team_id'   => 'nullable|exists:teams,id',
+            'type_id' => 'nullable|exists:types,id',
         ]);
-        $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request('tags'));
+        $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request('tags'), request('type_id'));
         $ticket->updateStatus(request('status'));
 
         if (request('team_id')) {
@@ -66,7 +74,7 @@ class TicketsController extends Controller
             'priority'  => 'required|integer',
             //'title'      => 'required|min:3',
         ]);
-        $ticket->updateWith(request('requester'), request('priority'));
+        $ticket->updateWith(request('requester'), request('priority'), request('type_id'));
 
         return back();
     }

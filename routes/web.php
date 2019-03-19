@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
         Route::post('users/store', 'UsersController@store')->name('user.store');
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
+        Route::resource('types', 'TypesController');
     });
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');
