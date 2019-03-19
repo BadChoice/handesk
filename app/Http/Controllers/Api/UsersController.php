@@ -10,9 +10,9 @@ class UsersController extends ApiController
     public function getUsers()
     {
         try {
-            return response()->json(User::all());
+            return response()->json(User::with('teams')->get());
         } catch (\Throwable $th) {
-            return response()->json([], 500);
+            return response()->json(['message' => $th->getMessage()], 500);
         }
     }
 }
