@@ -16,6 +16,7 @@ use App\ThrustHelpers\Actions\ChangePriority;
 use App\ThrustHelpers\Filters\PriorityFilter;
 use App\ThrustHelpers\Filters\EscalatedFilter;
 use App\ThrustHelpers\Fields\TicketStatusField;
+use App\ThrustHelpers\Filters\TicketTypeFilter;
 
 class Ticket extends Resource
 {
@@ -79,6 +80,7 @@ class Ticket extends Resource
             new StatusFilter,
             new PriorityFilter,
             new EscalatedFilter,
+            new TicketTypeFilter,
         ];
     }
 

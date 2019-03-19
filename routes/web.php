@@ -65,10 +65,11 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
         Route::resource('ideas/{idea}/tags', 'IdeaTagsController', ['only' => ['store', 'destroy'], 'as' => 'ideas']);
         Route::post('ideas/{idea}/issue', 'IdeaIssueController@store')->name('ideas.issue.store');
 
-        Route::resource('users', 'UsersController', ['only' => ['index', 'destroy','create']]);
+        Route::resource('users', 'UsersController', ['only' => ['index', 'destroy', 'create']]);
         Route::post('users/store', 'UsersController@store')->name('user.store');
         Route::get('users/{user}/impersonate', 'UsersController@impersonate')->name('users.impersonate');
         Route::resource('settings', 'SettingsController', ['only' => ['edit', 'update']]);
+        Route::get('ticketTypes', 'TicketTypesController@index')->name('ticketTypes.index');
     });
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');

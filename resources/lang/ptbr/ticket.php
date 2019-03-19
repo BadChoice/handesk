@@ -53,4 +53,5 @@ return [
     'blocker'            => 'Clítico*',
     'thanksForTheRating' => 'Obrigado*',
     'rated'              => 'Avaliado*',
+    'ticketType'         => 'Ticket types*',
 ];
