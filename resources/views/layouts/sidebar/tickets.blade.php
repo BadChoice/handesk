@@ -11,4 +11,5 @@
     @include('components.sidebarItem', ["url" => route('tickets.index') . "?solved=true",       "title" => __('ticket.solved')])
     @include('components.sidebarItem', ["url" => route('tickets.index') . "?closed=true",       "title" => __('ticket.closed')])
     @include('components.sidebarItem', ["url" => route('tickets.index') . "?rated=true",       "title" => __('ticket.rated')])
+    @include('components.sidebarItem', ["url" => route('requesters.index') ,                    "title" => trans_choice('ticket.requester', 2)])
 </ul>

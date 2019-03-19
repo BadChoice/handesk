@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::post('tickets/{ticket}/issue', 'TicketsIssueController@store')->name('tickets.issue.store');
     Route::post('tickets/{ticket}/idea', 'TicketsIdeaController@store')->name('tickets.idea.store');
 
+    Route::get('requesters', 'RequestersController@index')->name('requesters.index');
+
     Route::resource('leads', 'LeadsController');
     Route::get('leads/search/{text}', 'LeadsSearchController@index')->name('leads.search');
     Route::post('leads/{lead}/assign', 'LeadAssignController@store')->name('leads.assign');

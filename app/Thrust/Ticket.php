@@ -81,4 +81,14 @@ class Ticket extends Resource
             new EscalatedFilter,
         ];
     }
+
+    public function canDelete($object)
+    {
+        return false;
+    }
+
+    public function canEdit($object)
+    {
+        return false;
+    }
 }

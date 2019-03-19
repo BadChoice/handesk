@@ -40,4 +40,14 @@ class Agent extends Resource
     {
         return [];
     }
+
+    public function canDelete($object)
+    {
+        return false;
+    }
+
+    public function canEdit($object)
+    {
+        return false;
+    }
 }
