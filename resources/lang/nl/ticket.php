@@ -53,4 +53,5 @@ return [
     'blocker'            => 'Blocker*',
     'thanksForTheRating' => 'Thank you!*',
     'rated'              => 'Rated*',
+    'ticketType'         => 'Ticket types*'
 ];

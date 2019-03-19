@@ -52,4 +52,5 @@ return [
     'high'               => 'Yüksek',
     'blocker'            => 'Engelleyici',
     'thanksForTheRating' => 'Teşekkürler!',
+    'ticketType'         => 'Ticket types*'
 ];
