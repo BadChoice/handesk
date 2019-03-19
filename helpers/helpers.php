@@ -55,3 +55,36 @@ function toPercentage($value, $inverse = false)
 {
     return  ($inverse ? 1 - $value : $value) * 100;
 }
+
+if (!function_exists('makeTimeTrackableField')) {
+
+    function makeTimeTrackableField($object)
+    {
+        $display_time = '';
+        $time_tracker = $object->timeTracker;
+        $action = '';
+        $url = route('tickets.time.tracker.update', $object->id);
+        $timestamp = isset($time_tracker->total) ? $time_tracker->total : 0;
+        if (isset($time_tracker->id)) {
+            $tt_status = $time_tracker->status;
+            $display_time = date('H:i:s', $time_tracker->total);
+
+            if ($tt_status) {
+                $param = '?status=0';
+                $action = '<a class="action-tracker" href="' . $url . $param . '" >Pause</a>';
+            } else {
+                $param = '?status=1';
+                $action = '<a class="action-tracker" href="' . $url . $param . '" >Resume</a>';
+            }
+        } else {
+            $display_time = '00:00:00';
+            $tt_status = 0;
+            $param = '?status=2';
+            $action = '<a class="action-tracker"  href="' . $url . $param . '">Resume</a>';
+        }
+        if (!$object->canTrackTime()) {
+            $action = '';
+        }
+        return '<input id="total_time_stamp" type="hidden" data-status="' . $tt_status . '" value="' . $timestamp . '"></input><span id="total_timer_container"  class="label ticket-priority">' . $display_time . '</span>' . $action;
+    }
+}

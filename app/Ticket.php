@@ -33,13 +33,14 @@ class Ticket extends BaseModel
     const PRIORITY_HIGH      = 3;
     const PRIORITY_BLOCKER   = 4;
 
-    public static function createAndNotify($requester, $title, $body, $tags)
+    public static function createAndNotify($requester, $title, $body, $tags, $type)
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $ticket    = $requester->tickets()->create([
             'title'        => substr($title, 0, 190),
             'body'         => $body,
             'public_token' => str_random(24),
+            'type_id' => $type,
             'team_id'      => Settings::defaultTeamId(),
         ])->attachTags($tags);
 
@@ -51,12 +52,13 @@ class Ticket extends BaseModel
         return $ticket;
     }
 
-    public function updateWith($requester, $priority)
+    public function updateWith($requester, $priority, $type = 0)
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
         $this->update([
             'priority'     => $priority,
             'requester_id' => $requester->id,
+            'type_id' => $type ?? $this->type_id,
         ]);
 
         return $this;
@@ -75,6 +77,16 @@ class Ticket extends BaseModel
     public function requester()
     {
         return $this->belongsTo(Requester::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    public function timeTracker()
+    {
+        return $this->hasOne(TimeTracker::class);
     }
 
     public function team()
@@ -254,6 +266,17 @@ class Ticket extends BaseModel
         return ! in_array($this->status, [self::STATUS_CLOSED, self::STATUS_MERGED]);
     }
 
+    public function canTrackTime()
+    {
+        $type = $this->type;
+        if (!isset($type->id)) {
+            return false;
+
+        } else {
+            return $type->is_trackable;
+        }
+    }
+    
     public static function statusNameFor($status)
     {
         switch ($status) {
