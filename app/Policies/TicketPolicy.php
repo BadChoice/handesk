@@ -77,6 +77,7 @@ class TicketPolicy
 
     public function assignToTeam(User $user, Ticket $ticket)
     {
+        return true;
     }
 
     public function createIssue(User $user, Ticket $ticket)
