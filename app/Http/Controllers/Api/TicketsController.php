@@ -166,7 +166,7 @@ class TicketsController extends ApiController
     public function updateTracker($id)
     {
         try {
-            $ticket  = Ticket::with('requester', 'user', 'type', 'timeTracker')->findOrFail($id);
+            $ticket  = Ticket::with('requester', 'user', 'comments', 'type', 'timeTracker')->findOrFail($id);
             $status = request('status');
             $timeTracker = $ticket->timeTracker;
             if (!isset($timeTracker->id)) {
