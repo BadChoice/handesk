@@ -5,7 +5,7 @@ use App\Requester;
 
 $factory->define(Requester::class, function (Faker\Generator $faker) {
     return [
-        'name'  => $faker->word,
+        'name'  => $faker->name,
         'email' => $faker->safeEmail,
     ];
 });

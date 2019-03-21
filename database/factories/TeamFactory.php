@@ -5,7 +5,8 @@ use App\Team;
 
 $factory->define(Team::class, function (Faker\Generator $faker) {
     return [
-        'name'  => $faker->word,
+        'name'  => $faker->jobTitle,
+        'email'  => $faker->companyEmail,
         'token' => str_random(24),
     ];
 });

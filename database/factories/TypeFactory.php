@@ -5,6 +5,6 @@ use App\Type;
 
 $factory->define(Type::class, function (Faker\Generator $faker) {
     return [
-        'name'  => $faker->word,
+        'name'  => $faker->company,
     ];
 });
