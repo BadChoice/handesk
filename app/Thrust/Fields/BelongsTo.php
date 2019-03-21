@@ -20,7 +20,7 @@ class BelongsTo extends Relationship
         $relation = $this->getValue($object);
         $relationName = $this->getRelationName($object);
         if (!$this->withLink) {
-            return '<span class="label ticket-priority-normal">' . $relationName . '</span>';
+            return  $relationName ;
         }
         if (!$relation) {
             return '--';
