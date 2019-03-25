@@ -19,6 +19,14 @@ use App\TimeTracker as TT;
 
 class TicketsController extends ApiController
 {
+    const STATUS_NEW = 1;
+    const STATUS_OPEN = 2;
+    const STATUS_PENDING = 3;
+    const STATUS_SOLVED = 4;
+    const STATUS_CLOSED = 5;
+    const STATUS_MERGED = 6;
+    const STATUS_SPAM = 7;
+
     public function index()
     {
         try {
@@ -28,11 +36,11 @@ class TicketsController extends ApiController
                 $teams = $user->teams;
                 $tickets = collect([]);
                 foreach ($teams as $key => $team) {
-                    $tickets = $tickets->merge($team->tickets()->with('requester', 'user', 'type', 'timeTracker')->get());
+                    $tickets = $tickets->merge($team->tickets()->with('requester', 'user', 'type', 'timeTracker')->whereNotIn('status', [ self::STATUS_CLOSED, self::STATUS_SOLVED])->get());
                     \Log::info($team->tickets);
                 }
             } else {
-                $tickets = $user->tickets()->with('requester', 'user', 'type', 'timeTracker')->get();
+                $tickets = $user->tickets()->with('requester', 'user', 'type', 'timeTracker')->whereNotIn('status', [ self::STATUS_CLOSED, self::STATUS_SOLVED])->get();
             }
         } catch (\Throwable $th) {
             return $this->respond($th->getMessage(), 404);

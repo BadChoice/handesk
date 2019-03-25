@@ -26,6 +26,7 @@ class CommentsController extends Controller
         $data['data'] = json_encode($ticket);
         $data['type'] = 'comment';
         $data['comment'] = $comment;
+        $data['ticket_status'] = request('new_status');
         event(new ApiNotificationEvent($data));
         return redirect()->route('tickets.index');
     }
