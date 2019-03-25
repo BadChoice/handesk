@@ -25,8 +25,8 @@ class CommentsController extends Controller
         $data = ['title' => auth()->user()->name . ' has been comment', 'content' => request('body')];
         $data['data'] = json_encode($ticket);
         $data['type'] = 'comment';
+        $data['comment'] = $comment;
         event(new ApiNotificationEvent($data));
         return redirect()->route('tickets.index');
     }
-
 }
