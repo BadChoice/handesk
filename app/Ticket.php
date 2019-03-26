@@ -15,6 +15,7 @@ use App\Services\TicketLanguageDetector;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
+use App\Events\ApiNotificationEvent;
 
 class Ticket extends BaseModel
 {
@@ -214,6 +215,15 @@ class Ticket extends BaseModel
     public function updateStatus($status)
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
+       
+        if (isset($this->user->email)) {
+            $this-> requester;
+            $data['data'] = json_encode($this);
+            $data['type'] = 'ticket';
+            $data['message'] = 'this is update tickets';
+            $data['username']= $this->user->email;
+            event(new ApiNotificationEvent($data));
+        }
         TicketEvent::make($this, 'Status updated: ' . $this->statusName());
         if ($status == Ticket::STATUS_SOLVED && !$this->rating && config('handesk.sendRatingEmail')) {
             $this->requester->notify((new RateTicket($this))->delay(now()->addMinutes(60)));
@@ -267,7 +277,6 @@ class Ticket extends BaseModel
         $type = $this->type;
         if (!isset($type->id)) {
             return false;
-
         } else {
             return $type->is_trackable;
         }
