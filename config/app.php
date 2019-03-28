@@ -181,6 +181,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Khill\FontAwesome\Laravel\FontAwesomeServiceProvider::class,
+        \SocialiteProviders\Manager\ServiceProvider::class,
 
     ],
 
