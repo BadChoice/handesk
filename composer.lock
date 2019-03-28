@@ -237,16 +237,16 @@
         },
         {
             "name": "drewm/mailchimp-api",
-            "version": "v2.5.1",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drewm/mailchimp-api.git",
-                "reference": "40296b5ea9d8b53e6478891e11dff30c1ef96cdc"
+                "reference": "3e290e5640f56292b06403f3f4d3574e1e777948"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drewm/mailchimp-api/zipball/40296b5ea9d8b53e6478891e11dff30c1ef96cdc",
-                "reference": "40296b5ea9d8b53e6478891e11dff30c1ef96cdc",
+                "url": "https://api.github.com/repos/drewm/mailchimp-api/zipball/3e290e5640f56292b06403f3f4d3574e1e777948",
+                "reference": "3e290e5640f56292b06403f3f4d3574e1e777948",
                 "shasum": ""
             },
             "require": {
@@ -277,7 +277,7 @@
             ],
             "description": "Super-simple, minimum abstraction MailChimp API v3 wrapper",
             "homepage": "https://github.com/drewm/mailchimp-api",
-            "time": "2019-03-19T11:43:38+00:00"
+            "time": "2019-03-26T09:00:38+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2807,7 +2807,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
