@@ -1,4 +1,5 @@
 <?php
+use App\Events\TicketNotificationEvent;
 
 Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
     Route::resource('tickets', 'TicketsController', ['except' => 'destroy']);
@@ -19,4 +20,9 @@ Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
 
 Route::group(['namespace' => 'Azure', 'middleware' => 'azure.api', 'prefix'=>'azure'], function () {
     Route::resource('ticket', 'TicketController');
+    Route::get('counter/ticket', 'TicketController@calculatingCounter');
+});
+
+Route::get('/socket', function () {
+    event(new TicketNotificationEvent('c696c4fb-e742-4945-bc5b-c9bc257dbbdb'));
 });

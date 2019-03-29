@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
 use App\Events\ApiNotificationEvent;
+use App\Events\TicketNotificationEvent;
 
 class Ticket extends BaseModel
 {
@@ -215,7 +216,7 @@ class Ticket extends BaseModel
     public function updateStatus($status)
     {
         $this->update(['status' => $status, 'updated_at' => Carbon::now()]);
-       
+
         if (isset($this->user->email)) {
             $this-> requester;
             $data['data'] = json_encode($this);

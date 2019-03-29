@@ -118,4 +118,29 @@ class TicketController extends Controller
     {
         //
     }
+    public function calculatingCounter()
+    {
+        try {
+            $user = auth()->user();
+            $type = request('type');
+
+            $teams = $user->teams;
+            $team_ids = $teams->map(function ($t) {
+                return $t->id;
+            });
+            $teams_tickets = collect([]);
+            foreach ($teams as $key => $team) {
+                $teams_tickets = $teams_tickets->merge($team->tickets()
+                    ->with('requester', 'user', 'type', 'timeTracker')
+                    ->whereNotIn('status', [self::STATUS_CLOSED, self::STATUS_SOLVED])
+                    ->get());
+            }
+            $teams_counter = count($teams_tickets);
+            $tickets = $user->tickets()->with('requester', 'user', 'type', 'timeTracker')->whereNotIn('status', [self::STATUS_CLOSED, self::STATUS_SOLVED])->get();
+            $counter = count($tickets);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 404);
+        }
+        return response()->json(['ticket'=>$counter, 'teams'=>$teams_counter, 'teamIds'=>$team_ids]);
+    }
 }

@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use function GuzzleHttp\json_decode;
 use Illuminate\Support\Facades\Validator;
 use App\TimeTracker as TT;
+use App\Events\TicketNotificationEvent;
 
 class TicketsController extends ApiController
 {
@@ -125,9 +126,14 @@ class TicketsController extends ApiController
             if (request('team_id')) {
                 $this->authorize('assignToTeam', $ticket);
                 $ticket->assignToTeam(request('team_id'));
+                $teamUsers =  $ticket->team->members;
+                foreach ($teamUsers as $key => $user) {
+                    event(new TicketNotificationEvent($user->azure_id));
+                }
             }
             if (request('user_id')) {
                 $ticket->assignTo(request('user_id'));
+                event(new TicketNotificationEvent($ticket->user->azure_id));
             }
             return response()->json([]);
         } catch (\Throwable $th) {
