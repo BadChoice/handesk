@@ -16,3 +16,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
     Route::resource('leads', 'LeadsController', ['only' => 'store']);
     Route::resource('ideas', 'IdeasController', ['only' => ['store', 'index']]);
 });
+
+Route::group(['namespace' => 'Azure', 'middleware' => 'azure.api', 'prefix'=>'azure'], function () {
+    Route::resource('ticket', 'TicketController');
+});
