@@ -99,7 +99,7 @@ class Idea extends BaseModel
             return '';
         }
 
-        return array_flip(config('issues.repositories'))[$this->repository];
+        return array_flip(config('issues.repositories'))[$this->repository] ?? $this->repository;
     }
 
     public function createIssue(IssueCreator $issueCreator)
