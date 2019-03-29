@@ -42,7 +42,6 @@ class Ticket extends BaseModel
             'public_token' => str_random(24),
             'team_id'      => Settings::defaultTeamId(),
         ])->attachTags($tags);
-
         tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester) {
             Admin::notifyAll($newTicketNotification);
             $requester->notify($newTicketNotification);
