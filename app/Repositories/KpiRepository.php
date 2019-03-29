@@ -83,7 +83,7 @@ class KpiRepository
 
     public function averageRating($agent = null)
     {
-        return $this->kpiAverage(RatedKpi::class, $agent);
+        return number_format($this->kpiAverage(RatedKpi::class, $agent), 2);
     }
 
     public function average($kpi, $agent)
