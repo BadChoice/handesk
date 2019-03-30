@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Thrust\Metrics\NewTicketsMetric;
+use App\Thrust\Metrics\SolvedMetric;
 use Carbon\Carbon;
 use App\Repositories\KpiRepository;
 
@@ -17,7 +18,11 @@ class ReportsController extends Controller
     }
 
     public function index2(){
-        $metric = (new NewTicketsMetric)->calculate();
-        return view('thrust::metrics.trendMetric', ['metric' => $metric]);
+        return view('reports.index2',[
+           'metrics' => [
+               (new SolvedMetric),
+               (new NewTicketsMetric),
+           ]
+        ]);
     }
 }
