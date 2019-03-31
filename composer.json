@@ -4,19 +4,10 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../packages/thrust",
-            "options" : {
-                "symlink" : true
-            }
-        }
-    ],
     "require": {
         "php": ">=7.0.0",
         "badchoice/hurricane": "^1.0",
-        "badchoice/thrust": "dev-feature/metrics",
+        "badchoice/thrust": "^0.4",
         "drewm/mailchimp-api": "^2.4",
         "fzaninotto/faker": "^1.4",
         "guzzlehttp/guzzle": "^6.3",

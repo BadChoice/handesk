@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10f38287d89cdf5594a3de4efb5e1f6d",
+    "content-hash": "982460b0f022fca469490741262247bf",
     "packages": [
         {
             "name": "badchoice/hurricane",
@@ -36,12 +36,17 @@
         },
         {
             "name": "badchoice/thrust",
-            "version": "dev-feature/metrics",
+            "version": "0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BadChoice/thrust.git",
+                "reference": "8e621ebb2e2f95d0647f295d9c1804799062d391"
+            },
             "dist": {
-                "type": "path",
-                "url": "../packages/thrust",
-                "reference": "03a2846bb1c5b3ac1647a8b259a44643c6f2c4af",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/BadChoice/thrust/zipball/8e621ebb2e2f95d0647f295d9c1804799062d391",
+                "reference": "8e621ebb2e2f95d0647f295d9c1804799062d391",
+                "shasum": ""
             },
             "require": {
                 "intervention/image": "2.*",
@@ -63,6 +68,7 @@
                     "BadChoice\\Thrust\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -73,9 +79,7 @@
                 }
             ],
             "description": "A simple resource crud generator",
-            "transport-options": {
-                "symlink": true
-            }
+            "time": "2019-03-31T14:46:12+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1304,16 +1308,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.50",
+            "version": "1.0.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "dab4e7624efa543a943be978008f439c333f2249"
+                "reference": "755ba7bf3fb9031e6581d091db84d78275874396"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dab4e7624efa543a943be978008f439c333f2249",
-                "reference": "dab4e7624efa543a943be978008f439c333f2249",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/755ba7bf3fb9031e6581d091db84d78275874396",
+                "reference": "755ba7bf3fb9031e6581d091db84d78275874396",
                 "shasum": ""
             },
             "require": {
@@ -1384,7 +1388,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-02-01T08:50:36+00:00"
+            "time": "2019-03-30T13:22:34+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5008,9 +5012,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "badchoice/thrust": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
