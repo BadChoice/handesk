@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "982460b0f022fca469490741262247bf",
+    "content-hash": "b412885bb135c8f43dbdf44e3463edd0",
     "packages": [
         {
             "name": "badchoice/hurricane",
@@ -36,17 +36,12 @@
         },
         {
             "name": "badchoice/thrust",
-            "version": "0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BadChoice/thrust.git",
-                "reference": "8e621ebb2e2f95d0647f295d9c1804799062d391"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BadChoice/thrust/zipball/8e621ebb2e2f95d0647f295d9c1804799062d391",
+                "type": "path",
+                "url": "../packages/thrust",
                 "reference": "8e621ebb2e2f95d0647f295d9c1804799062d391",
-                "shasum": ""
+                "shasum": null
             },
             "require": {
                 "intervention/image": "2.*",
@@ -68,7 +63,6 @@
                     "BadChoice\\Thrust\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -79,7 +73,9 @@
                 }
             ],
             "description": "A simple resource crud generator",
-            "time": "2019-03-31T14:46:12+00:00"
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -5012,7 +5008,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "badchoice/thrust": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

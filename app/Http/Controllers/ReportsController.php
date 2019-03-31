@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Thrust\Metrics\NewTicketsByMonthMetric;
 use App\Thrust\Metrics\NewTicketsMetric;
+use App\Thrust\Metrics\RatingAverageMetric;
 use App\Thrust\Metrics\SolvedMetric;
 use App\Thrust\Metrics\TeamTicketsMetric;
 use App\Thrust\Metrics\TicketsCountMetric;
@@ -24,8 +26,10 @@ class ReportsController extends Controller
         return view('reports.analytics',[
            'metrics' => [
                (new TicketsCountMetric),
+               (new RatingAverageMetric),
                (new SolvedMetric),
                (new NewTicketsMetric),
+               (new NewTicketsByMonthMetric),
                (new TicketTypeMetric),
                (new TeamTicketsMetric)
            ]
