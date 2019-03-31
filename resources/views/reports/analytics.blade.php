@@ -4,9 +4,7 @@
 
     </div>
     <div class="grid mt4">
-        @foreach($metrics as $metric)
-           @include('thrust::metrics.panel', ['metric' => $metric])
-        @endforeach
+        @each('thrust::metrics.panel', $metrics, 'metric')
     </div>
 @stop
 

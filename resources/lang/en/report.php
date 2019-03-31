@@ -8,4 +8,5 @@ return [
     'reopenedRatio'          => 'Reopened ratio',
     'filter'                 => 'Filter',
     'averageRating'          => 'Average rating',
+    'analytics'              => 'Analytics',
 ];

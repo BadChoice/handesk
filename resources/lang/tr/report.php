@@ -8,4 +8,5 @@ return [
     'reopenedRatio'          => 'Tekrar açılma oranı',
     'filter'                 => 'Filtre',
     'averageRating'          => 'Ortalama oran',
+    'analytics'              => 'Analytics*',
 ];

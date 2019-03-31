@@ -15,6 +15,9 @@
     <h4> @icon(bar-chart) {{ trans_choice('report.report', 2) }}</h4>
     <ul>
         @include('components.sidebarItem', ["url" => route('reports.index'), "title" => trans_choice('report.report', 2) ])
+        @if (auth()->user()->admin)
+            @include('components.sidebarItem', ["url" => route('reports.analytics'), "title" => trans_choice('report.analytics', 1) ])
+        @endif
     </ul>
 
 

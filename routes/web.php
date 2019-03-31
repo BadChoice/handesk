@@ -73,5 +73,5 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     });
 
     Route::get('reports', 'ReportsController@index')->name('reports.index');
-    Route::get('reports2', 'ReportsController@index2')->name('reports.index');
+    Route::get('analytics', 'ReportsController@analytics')->name('reports.analytics');
 });
