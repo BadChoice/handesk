@@ -10,6 +10,7 @@
         "badchoice/thrust": "^0.3.7",
         "drewm/mailchimp-api": "^2.4",
         "fzaninotto/faker": "^1.4",
+        "graham-campbell/github": "^7.6",
         "guzzlehttp/guzzle": "^6.3",
         "guzzlehttp/oauth-subscriber": "^0.3",
         "khill/fontawesomephp": "^1.0",
@@ -18,6 +19,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4",
         "patrickschur/language-detection": "^3.2",
+        "php-http/guzzle6-adapter": "^1.1",
         "php-imap/php-imap": "^2.0",
         "predis/predis": "^1.1",
         "socialiteproviders/microsoft-azure": "^3.0"

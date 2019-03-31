@@ -178,7 +178,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        GrahamCampbell\GitHub\GitHubServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Khill\FontAwesome\Laravel\FontAwesomeServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
@@ -233,6 +233,7 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'GitHub' => GrahamCampbell\GitHub\Facades\GitHub::class,
     ],
 
 ];

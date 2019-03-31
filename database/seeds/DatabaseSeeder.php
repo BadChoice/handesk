@@ -28,19 +28,19 @@ class DatabaseSeeder extends Seeder
         factory(Type::class)->create([
             'name'    => 'Trouble',
         ]);
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 10; $i++) {
             factory(User::class)->create();
+        }
+        for ($i=0; $i < 50; $i++) {
             factory(Ticket::class)->create();
         }
 
-        $teams = factory(Team::class, 4)->create();
+        $teams = factory(Team::class, 5)->create();
         $teams->each(function ($team) {
             $team->memberships()->create([
                 "user_id" => factory(User::class)->create()->id
             ]);
             $team->tickets()->createMany(factory(Ticket::class, 4)->make()->toArray());
         });
-
-        factory(Ticket::class)->create();
     }
 }

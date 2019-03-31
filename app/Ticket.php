@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
 use App\Events\ApiNotificationEvent;
 use App\Events\TicketNotificationEvent;
+use App\Services\GitHubService;
 
 class Ticket extends BaseModel
 {
@@ -49,6 +50,10 @@ class Ticket extends BaseModel
             Admin::notifyAll($newTicketNotification);
             $requester->notify($newTicketNotification);
         });
+        if ($ticket->containTag('toolbox')) {
+            $github = new GitHubService();
+            $github->createIssue($ticket);
+        }
 
         return $ticket;
     }
@@ -144,6 +149,10 @@ class Ticket extends BaseModel
         } else {
             $this->touch();
         }
+        if ($this->containTag('toolbox')) {
+            $github = new GitHubService();
+            $github->updateIssue($this);
+        }
         event(new TicketStatusUpdated($this, $user, $previousStatus));
 
         return $previousStatus;
@@ -178,7 +187,10 @@ class Ticket extends BaseModel
             'new_status' => $newStatus ?: $this->status,
         ])->notifyNewComment();
         event(new TicketCommented($this, $comment, $previousStatus));
-
+        if ($this->containTag('toolbox')) {
+            $github = new GitHubService();
+            $github->addComment($comment);
+        }
         return $comment;
     }
 
@@ -228,6 +240,10 @@ class Ticket extends BaseModel
         TicketEvent::make($this, 'Status updated: ' . $this->statusName());
         if ($status == Ticket::STATUS_SOLVED && !$this->rating && config('handesk.sendRatingEmail')) {
             $this->requester->notify((new RateTicket($this))->delay(now()->addMinutes(60)));
+        }
+        if ($this->containTag('toolbox')) {
+            $github = new GitHubService();
+            $github->updateIssue($this);
         }
     }
 
@@ -396,6 +412,17 @@ class Ticket extends BaseModel
         $this->addComment(auth()->user(), __('idea.fromTicket'), self::STATUS_SOLVED);
 
         return $idea;
+    }
+
+    public function containTag($tag)
+    {
+        $tags = $this->tags;
+        foreach ($tags as $key => $t) {
+            if ($tag == strtolower($t->name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getIdeaId()

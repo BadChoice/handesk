@@ -1,5 +1,6 @@
 <?php
 use App\Events\TicketNotificationEvent;
+use GrahamCampbell\GitHub\Facades\GitHub;
 
 Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
     Route::resource('tickets', 'TicketsController', ['except' => 'destroy']);
@@ -24,5 +25,10 @@ Route::group(['namespace' => 'Azure', 'middleware' => 'azure.api', 'prefix'=>'az
 });
 
 Route::get('/socket', function () {
-    event(new TicketNotificationEvent('c696c4fb-e742-4945-bc5b-c9bc257dbbdb'));
+    $data = GitHub::connection('main')->issues()->comments()
+    ->create('loveunCG', 'smartApp', 14, array('body' => 'The issue body'));
+    // $data = GitHub::connection('main')->issues()->labels()
+    // ->add('loveunCG', 'smartApp', 10, 'ToolBox');
+    return response()->json($data);
+    // event(new TicketNotificationEvent('c696c4fb-e742-4945-bc5b-c9bc257dbbdb'));
 });

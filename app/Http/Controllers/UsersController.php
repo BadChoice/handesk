@@ -16,14 +16,12 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-
         return back();
     }
 
     public function impersonate(User $user)
     {
         auth()->loginUsingId($user->id);
-
         return redirect()->route('tickets.index');
     }
 }
