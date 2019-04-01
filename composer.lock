@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b412885bb135c8f43dbdf44e3463edd0",
+    "content-hash": "f7183364468ea9770e0cbdee1bf0b02d",
     "packages": [
         {
             "name": "badchoice/hurricane",
@@ -36,12 +36,17 @@
         },
         {
             "name": "badchoice/thrust",
-            "version": "dev-master",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BadChoice/thrust.git",
+                "reference": "0c08b0c53896be9f4a0678110f6c1c9f769c91e2"
+            },
             "dist": {
-                "type": "path",
-                "url": "../packages/thrust",
-                "reference": "8e621ebb2e2f95d0647f295d9c1804799062d391",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/BadChoice/thrust/zipball/0c08b0c53896be9f4a0678110f6c1c9f769c91e2",
+                "reference": "0c08b0c53896be9f4a0678110f6c1c9f769c91e2",
+                "shasum": ""
             },
             "require": {
                 "intervention/image": "2.*",
@@ -63,6 +68,7 @@
                     "BadChoice\\Thrust\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -73,9 +79,7 @@
                 }
             ],
             "description": "A simple resource crud generator",
-            "transport-options": {
-                "symlink": true
-            }
+            "time": "2019-04-01T08:00:11+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -5008,9 +5012,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "badchoice/thrust": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
