@@ -16,5 +16,4 @@ class TicketsCountMetric extends ValueMetric
     {
         return 'tickets-count';
     }
-
 }
