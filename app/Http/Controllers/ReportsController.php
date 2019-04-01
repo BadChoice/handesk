@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Thrust\Metrics\NewTicketsByMonthMetric;
-use App\Thrust\Metrics\NewTicketsMetric;
-use App\Thrust\Metrics\RatingAverageMetric;
-use App\Thrust\Metrics\SolvedMetric;
-use App\Thrust\Metrics\TeamTicketsMetric;
-use App\Thrust\Metrics\TicketsCountMetric;
-use App\Thrust\Metrics\TicketTypeMetric;
 use Carbon\Carbon;
 use App\Repositories\KpiRepository;
+use App\Thrust\Metrics\SolvedMetric;
+use App\Thrust\Metrics\NewTicketsMetric;
+use App\Thrust\Metrics\TicketTypeMetric;
+use App\Thrust\Metrics\TeamTicketsMetric;
+use App\Thrust\Metrics\TicketsCountMetric;
+use App\Thrust\Metrics\RatingAverageMetric;
+use App\Thrust\Metrics\NewTicketsByMonthMetric;
 
 class ReportsController extends Controller
 {
@@ -22,8 +22,9 @@ class ReportsController extends Controller
         return view('reports.index', ['repository' => $repository->forDates($startDate, $endDate)]);
     }
 
-    public function analytics(){
-        return view('reports.analytics',[
+    public function analytics()
+    {
+        return view('reports.analytics', [
            'metrics' => [
                (new TicketsCountMetric),
                (new RatingAverageMetric),
@@ -31,8 +32,8 @@ class ReportsController extends Controller
                (new NewTicketsMetric),
                (new NewTicketsByMonthMetric),
                (new TicketTypeMetric),
-               (new TeamTicketsMetric)
-           ]
+               (new TeamTicketsMetric),
+           ],
         ]);
     }
 }

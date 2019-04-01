@@ -16,7 +16,6 @@ class NewTicketsByMonthMetric extends TrendMetric
 
     public function uriKey()
     {
-        return "tickets-by-month";
+        return 'tickets-by-month';
     }
-
 }

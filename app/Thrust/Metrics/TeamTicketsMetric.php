@@ -16,5 +16,4 @@ class TeamTicketsMetric extends PartitionMetric
     {
         return 'team-tickets';
     }
-
 }
