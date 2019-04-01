@@ -3,7 +3,6 @@
 namespace App\Thrust\Metrics;
 
 use App\Ticket;
-use App\TicketType;
 use BadChoice\Thrust\Metrics\PartitionMetric;
 
 class TicketTypeMetric extends PartitionMetric
@@ -17,5 +16,4 @@ class TicketTypeMetric extends PartitionMetric
     {
         return 'tickets-type';
     }
-
 }

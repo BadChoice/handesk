@@ -2,8 +2,8 @@
 
 namespace App\Thrust\Metrics;
 
-use BadChoice\Thrust\Metrics\TrendMetric;
 use App\Ticket;
+use BadChoice\Thrust\Metrics\TrendMetric;
 
 class NewTicketsMetric extends TrendMetric
 {

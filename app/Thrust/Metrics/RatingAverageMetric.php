@@ -14,7 +14,6 @@ class RatingAverageMetric extends ValueMetric
 
     public function uriKey()
     {
-        return "rating-average";
+        return 'rating-average';
     }
-
 }
