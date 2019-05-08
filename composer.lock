@@ -118,16 +118,16 @@
         },
         {
             "name": "badchoice/thrust",
-            "version": "0.4.8",
+            "version": "0.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BadChoice/thrust.git",
-                "reference": "d6d66cace786de80f67e96eb9a505b2aea432446"
+                "reference": "4ffe66bca2e593f74af882121f9cb69a46cbc9d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BadChoice/thrust/zipball/d6d66cace786de80f67e96eb9a505b2aea432446",
-                "reference": "d6d66cace786de80f67e96eb9a505b2aea432446",
+                "url": "https://api.github.com/repos/BadChoice/thrust/zipball/4ffe66bca2e593f74af882121f9cb69a46cbc9d4",
+                "reference": "4ffe66bca2e593f74af882121f9cb69a46cbc9d4",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,7 @@
                 }
             ],
             "description": "A simple resource crud generator",
-            "time": "2019-04-13T09:28:59+00:00"
+            "time": "2019-05-07T15:32:56+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2991,7 +2991,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
