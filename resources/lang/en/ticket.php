@@ -5,6 +5,7 @@ return [
     'ticket'     => 'Ticket|Tickets',
     'agent'      => 'Agent|Agents',
     'assigned'   => 'Assigned',
+    'email' => 'Email Address',
     'myTickets'  => 'My Tickets',
     'newTicket'  => 'New Ticket',
     'unassigned' => 'Unassigned',

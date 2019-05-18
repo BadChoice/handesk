@@ -39,6 +39,15 @@ class TicketsRepository
         return auth()->user()->teamsTickets()->where('status', '<', Ticket::STATUS_SOLVED);
     }
 
+    public function pending()
+    {
+        if (auth()->user()->admin) {
+            return Ticket::where('status', '=', Ticket::STATUS_PENDING);
+        }
+
+        return auth()->user()->teamsTickets()->where('status', '=', Ticket::STATUS_PENDING);
+    }
+
     public function recentlyUpdated()
     {
         return $this->all()->whereRaw("tickets.updated_at > '".Carbon::parse('-1 days')->toDateTimeString()."'");
