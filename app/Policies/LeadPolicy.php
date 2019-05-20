@@ -17,6 +17,11 @@ class LeadPolicy
         }
     }
 
+    public function index()
+    {
+        return true;
+    }
+
     public function view(User $user, Lead $lead)
     {
         return  $lead->user_id == $user->id ||

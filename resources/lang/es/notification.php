@@ -13,4 +13,7 @@ return [
     'newIdea'            => 'Nueva idea',
     'newIdeaCreated'     => 'Nueva idea',
     'mention'            => 'Mención',
+    'rateTicket'         => 'Clasifica el tiquet',
+    'rateTicketDesc'     => 'Nos encantaría saber tu feedback sobre este tiquet. Simplemente pulsa sobre el número para ayudarnos a seguir mejorando!',
+    'ticketRated'        => 'Tiquet clasificado',
 ];

@@ -20,4 +20,5 @@ return [
     'newLeadNotification'        => 'Notification à chaque nouveau lead',
     'leadAssignedNotification'   => 'Notification à chaque nouvel assignation de lead',
     'newIdeaNotification'        => 'Notification à chaque nouvel idée',
+    'ticketRatedNotification'    => 'Ticket classificat*',
 ];

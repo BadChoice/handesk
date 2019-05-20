@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'lead'       => 'Müşteri Adayları',
+    'newLead'    => 'Yeni Müşteri Adayı',
+    'status'     => 'Durumlar|Durumlar',
+    'all'        => 'Tümü|Tümü',
+    'mine'       => 'Benimkiler|Benimkiler',
+    'company'    => 'Şirket',
+    'address'    => 'Adres',
+    'postalCode' => 'Posta Kodu',
+    'username'   => 'Kullanıcı adı',
+    'name'       => 'İsim',
+    'phone'      => 'Telefon',
+    'email'      => 'E-Posta',
+    'city'       => 'Şehir',
+    'country'    => 'Ülke',
+
+    'new'            => 'Yeni',
+    'visited'        => 'Ziyaret',
+    'first-contact'  => 'İlk İletişim',
+    'completed'      => 'Tamamlandı',
+    'failed'         => 'Başarısız',
+    'task'           => 'Görev|Görevler',
+    'due'            => 'Bitiş',
+    'complete'       => 'Tamamla',
+    'todayTasks'     => 'Bugünün Görevleri',
+    'todayTasksDesc' => 'Bugünkü görevleriniz:',
+    'search'         => 'Ara',
+];

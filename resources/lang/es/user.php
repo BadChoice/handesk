@@ -21,4 +21,5 @@ return [
     'leadAssignedNotification'   => 'Notificación de lead asignado',
     'newIdeaNotification'        => 'Notificación de nueva idea',
     'mentionNotification'        => 'Notificación de mención',
+    'ticketRatedNotification'    => 'Ticket clasificado',
 ];

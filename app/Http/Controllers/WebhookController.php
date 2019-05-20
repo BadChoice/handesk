@@ -12,8 +12,8 @@ class WebhookController extends Controller
     {
         //dd(request()->all());
         $issueId    = request('issue')['id'];
-        $repository = request('repository')['name'];
-        $newStatus  = request('changes')['status']['new'];
+        $repository = request('repository')['full_name'];
+        $newStatus  = request('issue')['state'];
 
         $result = $this->findAndUpdateIdeas($issueId, $repository, $newStatus);
         if ($result) {
@@ -25,14 +25,14 @@ class WebhookController extends Controller
 
     private function findAndUpdateTickets($issue_id, $repository, $newStatus)
     {
-        if ($newStatus != 'resolved') {
-            return response()->json('ok: not updating anything');
-        }
         $ticketEvent = TicketEvent::where('body', "Issue created #{$issue_id} at {$repository}")->first();
         if (! $ticketEvent) {
+            \Log::info("Issue updated: {$issue_id} at {$repository} not found");
+
             return response()->json('ok: no ticket with this issue');
         }
-        $ticketEvent->ticket->addNote(Admin::first(), 'Issue resolved');
+        \Log::info("Issue updated: Adding note to ticket {$ticketEvent->ticket->id}");
+        $ticketEvent->ticket->addNote(Admin::first(), "Issue status updated to {$newStatus}");
 
         return response()->json("ok: Ticket {$ticketEvent->ticket->id} updated");
     }

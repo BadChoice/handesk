@@ -10,4 +10,10 @@ return [
     'ticketAssignedTo'   => 'Ticket atribuído à',
     'ticketUpdated'      => 'Ticket atualizado',
     'ticketEscalated'    => 'Ticket escalado',
+    'newIdea'            => 'Nova ideia',
+    'newIdeaCreated'     => 'Nova ideia criada',
+    'mention'            => 'Menção',
+    'rateTicket'         => 'Avaliar ticket*',
+    'rateTicketDesc'     => 'Gostaríamos muito de receber seus comentários sobre este ticket, basta clicar na classificação para continuar melhorando!*',
+    'ticketRated'        => 'Ticket avaliado*',
 ];

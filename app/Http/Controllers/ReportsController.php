@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Repositories\KpiRepository;
+use App\Thrust\Metrics\SolvedMetric;
+use App\Thrust\Metrics\NewTicketsMetric;
+use App\Thrust\Metrics\TicketTypeMetric;
+use App\Thrust\Metrics\TeamTicketsMetric;
+use App\Thrust\Metrics\TicketsCountMetric;
+use App\Thrust\Metrics\RatingAverageMetric;
+use App\Thrust\Metrics\NewTicketsByMonthMetric;
 
 class ReportsController extends Controller
 {
@@ -13,5 +20,20 @@ class ReportsController extends Controller
         $endDate   = request('endDate') ?: Carbon::now()->endOfMonth();
 
         return view('reports.index', ['repository' => $repository->forDates($startDate, $endDate)]);
+    }
+
+    public function analytics()
+    {
+        return view('reports.analytics', [
+           'metrics' => [
+               (new TicketsCountMetric),
+               (new RatingAverageMetric),
+               (new SolvedMetric),
+               (new NewTicketsMetric),
+               (new NewTicketsByMonthMetric),
+               (new TicketTypeMetric),
+               (new TeamTicketsMetric),
+           ],
+        ]);
     }
 }

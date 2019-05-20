@@ -16,7 +16,11 @@ return [
         'Retail App'    => 'revo-pos/revo-retail-app',
         'Flow Back'     => 'revo-pos/revo-flow-back',
         'Flow App'      => 'revo-pos/revo-flow-app',
-        'In Touch Back' => 'revo-loyalty-app',
-        'In Touch App'  => 'revo-loyalty',
+        'In Touch Back' => 'revo-pos/revo-loyalty-app',
+        'In Touch App'  => 'revo-pos/revo-loyalty',
+        'mPos'          => 'revo-pos/revo-mpos',
+        'Kds'           => 'revo-pos/revo-kds',
+        'Revo Stock'    => 'revo-pos/revo-stock',
+        'Revo Control'  => 'revo-pos/revo-control',
     ],
 ];

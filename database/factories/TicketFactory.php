@@ -13,3 +13,9 @@ $factory->define(Ticket::class, function (Faker\Generator $faker) {
         'public_token' => str_random(24),
     ];
 });
+
+$factory->state(Ticket::class, 'closed', function ($faker) {
+    return [
+        'status' => Ticket::STATUS_CLOSED,
+    ];
+});

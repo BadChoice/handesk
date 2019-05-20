@@ -2,20 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use App\User;
+use BadChoice\Thrust\Controllers\ThrustController;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::with('teams')->paginate(25);
-
-        return view('users.index', ['users' => $users]);
+        return (new ThrustController)->index('agent');
+        // $users = User::with('teams')->paginate(25);
+        // return view('users.index', ['users' => $users]);
     }
 
     public function destroy(User $user)
     {
         $user->delete();
+
+        return back();
+    }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store()
+    {
+        $this->validate(request(), [
+            'name'     => 'required|min:3',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ]);
+        User::create([
+            'name'     => request('name'),
+            'email'    => request('email'),
+            'password' => Hash::make(request('password')),
+        ]);
 
         return back();
     }

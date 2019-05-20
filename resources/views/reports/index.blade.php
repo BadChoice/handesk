@@ -18,6 +18,7 @@
                 <th> {{ trans_choice('ticket.unanswered',2) }}  </th>
                 <th> {{ trans_choice('ticket.open',2) }}        </th>
                 <th> {{ trans_choice('ticket.solved',2) }}      </th>
+                <th> {{ trans_choice('report.averageRating',2) }}      </th>
                 <th> {{ __('report.firstReplyTime') }}          </th>
                 <th> {{ __('report.solveTime') }}               </th>
                 <th> {{ __('report.onTouchResolutionRatio') }}  </th>
@@ -30,13 +31,14 @@
             <td>  {{ $repository->unansweredTickets( auth()->user() ) }}   </td>
             <td>  {{ $repository->openTickets( auth()->user() ) }}   </td>
             <td>  {{ $repository->solvedTickets( auth()->user() ) }}   </td>
+            <td>  {{ $repository->averageRating( auth()->user() ) }}  @icon(star) </td>
             <td>
                 {{ $repository->firstReplyKpi(auth()->user()) }}
                 @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_FIRST_REPLY, auth()->user())  ])
             </td>
             <td>
                 {{ $repository->solveKpi(auth()->user()) }}
-                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, auth()->user()) ])
+{{--                @include('components.increment',["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, auth()->user()) ])--}}
             </td>
             <td>
                 {{ $repository->oneTouchResolutionKpi( auth()->user() ) }} %
@@ -54,6 +56,7 @@
             <td>  {{ $repository->unansweredTickets( $team ) }}   </td>
             <td>  {{ $repository->openTickets( $team ) }}   </td>
             <td>  {{ $repository->solvedTickets( $team ) }}   </td>
+            <td>  {{ $repository->averageRating( $team ) }}  @icon(star) </td>
 
             <td>
                 {{ $repository->firstReplyKpi(auth()->user()) }}
@@ -61,7 +64,7 @@
             </td>
             <td>
                 {{ $repository->solveKpi($team) }}
-                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, $team) ])
+{{--                @include('components.increment', ["value" => $repository->average(App\Kpi\Kpi::KPI_SOLVED, $team) ])--}}
             </td>
             <td>
                 {{ $repository->oneTouchResolutionKpi( $team ) }} %
@@ -79,6 +82,7 @@
             <td>  @if(auth()->user()->admin ){{ $repository->unansweredTickets( ) }}  @endif </td>
             <td>  @if(auth()->user()->admin ){{ $repository->openTickets( ) }}  @endif </td>
             <td>  @if(auth()->user()->admin ){{ $repository->solvedTickets( ) }}  @endif </td>
+            <td>  @if(auth()->user()->admin ){{ $repository->averageRating( ) }} @icon(star)  @endif </td>
             <td>  {{$repository->firstReplyKpi() }}</td>
             <td>  {{ $repository->solveKpi() }}     </td>
             <td>  {{ $repository->oneTouchResolutionKpi( ) }} %        </td>

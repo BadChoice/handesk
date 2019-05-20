@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'you'                        => 'Siz',
+    'name'                       => 'İsim',
+    'email'                      => 'E-Posta',
+    'profile'                    => 'Profil',
+    'language'                   => 'Dil',
+    'password'                   => 'Şifre',
+    'oldPassword'                => 'Eski Şifre',
+    'newPassword'                => 'Yeni Şifre',
+    'confirmPassword'            => 'Şifreyi Onayla',
+    'changePassword'             => 'Şifre Değiştir',
+    'ticketsSignature'           => 'Talep İmzası',
+    'notification'               => 'Bildirim|Bildirimler',
+    'dailyTasksNotification'     => 'Günlük görev bildirimleri',
+    'newTicketNotification'      => 'Yeni talep bildirimi',
+    'ticketAssignedNotification' => 'Talep atama bildirimi',
+    'ticketUpdatedNotification'  => 'Talep güncelleme bildirimi',
+    'newLeadNotification'        => 'Yeni müşteri bildirimi',
+    'leadAssignedNotification'   => 'Müşteri atama bildirimi',
+    'newIdeaNotification'        => 'Yeni fikir bildirimi',
+    'mentionNotification'        => 'Bahsetme bildirimi',
+    'ticketRatedNotification'    => 'Talep Oran Bilirimi',
+];

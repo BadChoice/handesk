@@ -11,7 +11,7 @@ class CommentsController extends ApiController
     {
         $comment = $ticket->addComment(null, request('body'), request('new_status'));
         if (! $comment) {
-            $this->respond(['id' => null, 'message' => 'Can not create a comment with empty body'], Response::HTTP_OK);
+            return $this->respond(['id' => null, 'message' => 'Can not create a comment with empty body'], Response::HTTP_OK);
         }
 
         return $this->respond(['id' => $comment->id], Response::HTTP_CREATED);

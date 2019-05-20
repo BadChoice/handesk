@@ -62,6 +62,14 @@ return [
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
+        'google' => [
+            'driver' => 'google',
+            'key'    => env('GC_KEY'),
+            'secret' => env('GC_SECRET'),
+            'region' => env('GC_REGION'),
+            'bucket' => env('GC_BUCKET'),
+//            'endpoint' => 'https://storage.googleapis.com'
+        ],
 
     ],
 

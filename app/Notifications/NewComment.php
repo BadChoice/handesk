@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Team;
 use App\User;
 use App\Requester;
 use Illuminate\Bus\Queueable;
