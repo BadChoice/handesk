@@ -13,6 +13,7 @@ Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
     Route::resource('ideas', 'IdeasController', ['only' => ['store', 'index']]);
 });
 
+Route::post('agent/login', 'Api\AgentController@login');
 Route::group(['namespace' => 'Api', 'prefix' => 'agent', 'middleware' => 'apiAuthAgent'], function () {
     Route::resource('tickets', 'AgentController', ['only' => 'index']);
 });
