@@ -16,6 +16,20 @@ class AgentTicketsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function can_login()
+    {
+        factory(User::class)->create(['email' => 'admin@handesk.io', 'password' => bcrypt('the-password'), 'token' => 'agent-token', 'admin' => true]);
+
+        $response = $this->post("api/agent/login", ["email" => 'admin@handesk.io', 'password' => 'the-password']);
+
+        $response->assertJsonStructure([
+            "data" => [
+                "name", "token", "email", "locale"
+            ]
+        ]);
+    }
+
+    /** @test */
     public function can_get_all_open_tickets(){
         factory(User::class)->create(['token' => 'agent-token', 'admin' => true]);
         $requester = factory(Requester::class)->create(["name" => "requesterName" ]);

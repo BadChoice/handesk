@@ -12,11 +12,7 @@ class AgentController extends ApiController
     {
         $credentials = request()->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return $this->respond([
-                "data" => [
-                    auth()->user()
-                ]
-            ]);
+            return $this->respond(auth()->user());
         }
         return $this->respondError("Invalid credentials");
     }
