@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'apiAuth'    => Middleware\ApiAuth::class,
+        'azure.api' => \App\Http\Middleware\CheckAzureAuth::class,
         'userLocale' => Middleware\UserLocale::class,
     ];
 }

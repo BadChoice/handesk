@@ -28,6 +28,13 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ApiNotificationEvent' => [
             'App\Listeners\SendApiNotificaton',
         ],
+        'App\Events\TicketNotificationEvent' => [
+            'App\Listeners\SendNotificationTicket',
+        ],
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+                // add your listeners (aka providers) here
+                'SocialiteProviders\\Azure\\AzureExtendSocialite@handle',
+        ],
     ];
 
     /**
