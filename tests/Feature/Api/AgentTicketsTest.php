@@ -49,4 +49,21 @@ class AgentTicketsTest extends TestCase
         $this->assertCount(5, $responseJson->data);
         $this->assertEquals(1, $responseJson->data[0]->id);
     }
+
+    /** @test */
+    public function can_get_ticket_comments()
+    {
+        factory(User::class)->create(['token' => 'agent-token', 'admin' => true]);
+        $requester = factory(Requester::class)->create(["name" => "requesterName" ]);
+        $ticket = factory(Ticket::class)->create(["requester_id" => $requester->id]);
+        factory(Comment::class, 3)->create(['ticket_id' => $ticket->id]);
+
+        $response = $this->get("api/agent/tickets/{$ticket->id}/comments", ["token" => 'agent-token']);
+
+        $response->assertJsonStructure([
+            "data" => [
+                "*" => [ "body", "user_id", "author", "created_at"]
+            ]
+        ]);
+    }
 }
