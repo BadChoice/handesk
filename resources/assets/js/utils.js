@@ -1,10 +1,12 @@
-setupFormLoadingImage();
+//Already included in "vendor/badchoice/thrust/src/resources/js/thrust.min.js"
+/*
 function setupFormLoadingImage(){
     $('form').submit(function(event){
         $('.busy').show('fast');
         return true;
     });
 }
+*/
 
 function copyToClipboard(element) {
     var $temp = $("<input>");
