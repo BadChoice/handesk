@@ -21,7 +21,7 @@ class GetTicketsTest extends TestCase
         factory(Ticket::class,2)->create(["requester_id" => $requester->id, "status" => Ticket::STATUS_SOLVED]);
         factory(Ticket::class,2)->create();
 
-        $response = $this->get("api/tickets?requester=requesterName",["token" => 'the-api-token']);
+        $response = $this->get("api/tickets?requester=requesterName", ["token" => 'the-api-token']);
 
         $response->assertJsonStructure([
             "data" => [
@@ -105,4 +105,5 @@ class GetTicketsTest extends TestCase
         $response = $this->get("api/tickets/{$ticket->id}",["token" => 'the-api-token']);
         $this->assertCount(2, $response->json()["data"]["comments"] );
     }
+
 }
