@@ -10,10 +10,12 @@ use App\Ticket;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 
 class AgentTicketsTest extends TestCase
 {
     use RefreshDatabase;
+
 
     /** @test */
     public function can_login()
@@ -65,5 +67,49 @@ class AgentTicketsTest extends TestCase
                 "*" => [ "body", "user_id", "author", "created_at"]
             ]
         ]);
+    }
+
+    /** @test */
+    public function can_comment_a_ticket()
+    {
+        Notification::fake();
+        factory(User::class)->create(['token' => 'agent-token', 'admin' => true]);
+        $requester = factory(Requester::class)->create(["name" => "requesterName" ]);
+        $ticket = factory(Ticket::class)->create(["requester_id" => $requester->id]);
+        factory(Comment::class, 3)->create(['ticket_id' => $ticket->id]);
+
+        $response = $this->post("api/agent/tickets/{$ticket->id}/comments", ["body" => "hello baby", "private" => false], ["token" => 'agent-token']);
+
+        $response->assertJsonStructure([
+            "data" => [
+                "id" 
+            ]
+        ]);
+
+        $this->assertCount(4, $ticket->fresh()->comments);
+        $this->assertEquals("hello baby", $ticket->fresh()->comments[3]->body);
+        $this->assertEquals(0, $ticket->fresh()->comments[3]->private);
+    }
+
+    /** @test */
+    public function can_comment_a_ticket_as_note()
+    {
+        Notification::fake();
+        factory(User::class)->create(['token' => 'agent-token', 'admin' => true]);
+        $requester = factory(Requester::class)->create(["name" => "requesterName" ]);
+        $ticket = factory(Ticket::class)->create(["requester_id" => $requester->id]);
+        factory(Comment::class, 3)->create(['ticket_id' => $ticket->id]);
+
+        $response = $this->post("api/agent/tickets/{$ticket->id}/comments", ["body" => "hello baby", "private" => true], ["token" => 'agent-token']);
+
+        $response->assertJsonStructure([
+            "data" => [
+                "id" 
+            ]
+        ]);
+
+        $this->assertCount(4, $ticket->fresh()->comments);
+        $this->assertEquals("hello baby", $ticket->fresh()->comments[3]->body);
+        $this->assertEquals(1, $ticket->fresh()->comments[3]->private);
     }
 }
