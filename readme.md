@@ -6,7 +6,7 @@ have multiple teams, with multiple users, easy and efficient reporting by all/te
 
 [Landing page: http://handesk.io](http://handesk.io)
 
-Check out the screenshots to see how nice it looks, and feel fee to contribute by sending us PRs.
+Check out the screenshots to see how nice it looks, and feel free to contribute by sending us PRs.
 We will keep adding features as we need them, but our basic workflow is totally covered :D
 
 ## Features
