@@ -108,8 +108,8 @@ class AgentTicketsTest extends TestCase
             ]
         ]);
 
-        $this->assertCount(4, $ticket->fresh()->comments);
-        $this->assertEquals("hello baby", $ticket->fresh()->comments[3]->body);
-        $this->assertEquals(1, $ticket->fresh()->comments[3]->private);
+        $this->assertCount(4, $ticket->fresh()->commentsAndNotes);
+        $this->assertEquals("hello baby", $ticket->fresh()->commentsAndNotes[3]->body);
+        $this->assertEquals(1, $ticket->fresh()->commentsAndNotes[3]->private);
     }
 }

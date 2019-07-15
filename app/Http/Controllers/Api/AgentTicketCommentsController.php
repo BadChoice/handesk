@@ -12,7 +12,7 @@ class AgentTicketCommentsController extends ApiController
         if (! auth()->user()->can('view', $ticket)) {
             return $this->respondError("You don't have access to this ticket");
         }
-        return $this->respond($ticket->comments);
+        return $this->respond($ticket->commentsAndNotes);
     }
 
     public function store(Ticket $ticket) {    	
