@@ -4,6 +4,7 @@ namespace App\Services\Bitbucket;
 
 use App\Services\IssueCreator;
 use App\Services\IssueTrackerException;
+use Bitbucket\API\Authentication\Basic;
 use Bitbucket\API\Http\Listener\OAuth2Listener;
 use Bitbucket\API\Repositories\Issues;
 
@@ -19,7 +20,7 @@ class Bitbucket implements IssueCreator
 
     public function __construct()
     {
-        $this->auth = new \Bitbucket\API\Authentication\Basic(config('services.bitbucket.user'), config('services.bitbucket.password'));
+        $this->auth = new Basic(config('services.bitbucket.user'), config('services.bitbucket.password'));
     }
 
     public function createIssue($account, $repoSlug, $title, $content, $extra = [])
