@@ -314,8 +314,8 @@ class Ticket extends BaseModel
                 $this->title,
                 'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
         );
-        $issueUrl = "https://bitbucket.org/{$repository}/issues/{$issue->local_id}";
-        $this->addNote(auth()->user(), "Issue created {$issueUrl} with id #{$issue->local_id}");
+        $issueUrl = "https://bitbucket.org/{$repository}/issues/{$issue->id}";
+        $this->addNote(auth()->user(), "Issue created {$issueUrl} with id #{$issue->id}");
         TicketEvent::make($this, "Issue created #{$issue->local_id} at {$repository}");
 
         return $issue;
