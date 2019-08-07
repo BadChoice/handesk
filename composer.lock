@@ -91,16 +91,16 @@
         },
         {
             "name": "badchoice/hurricane",
-            "version": "1.0.2",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BadChoice/hurricane.git",
-                "reference": "6ae52f69c4fe3663fcd16ef83d66f465da0e5b49"
+                "reference": "5d9a4217463e0cbe1bbd3d2f73f7b906dcdf728b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BadChoice/hurricane/zipball/6ae52f69c4fe3663fcd16ef83d66f465da0e5b49",
-                "reference": "6ae52f69c4fe3663fcd16ef83d66f465da0e5b49",
+                "url": "https://api.github.com/repos/BadChoice/hurricane/zipball/5d9a4217463e0cbe1bbd3d2f73f7b906dcdf728b",
+                "reference": "5d9a4217463e0cbe1bbd3d2f73f7b906dcdf728b",
                 "shasum": ""
             },
             "type": "library",
@@ -115,7 +115,7 @@
                 }
             ],
             "description": "Simple css atomic framework",
-            "time": "2018-10-24T10:56:53+00:00"
+            "time": "2019-08-05T07:14:56+00:00"
         },
         {
             "name": "badchoice/thrust",
@@ -927,8 +927,8 @@
             "authors": [
                 {
                     "name": "Gary Jones",
-                    "email": "gary@garyjones.co.uk",
-                    "role": "developer"
+                    "role": "developer",
+                    "email": "gary@garyjones.co.uk"
                 },
                 {
                     "name": "Alexandre Eher",
@@ -936,8 +936,8 @@
                 },
                 {
                     "name": "Jacob Kiers",
-                    "email": "jacob@alphacomm.nl",
-                    "role": "developer"
+                    "role": "developer",
+                    "email": "jacob@alphacomm.nl"
                 },
                 {
                     "name": "Andy Smith",
@@ -1081,8 +1081,8 @@
             "authors": [
                 {
                     "name": "Kevin Hill",
-                    "email": "kevinkhill@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "kevinkhill@gmail.com"
                 }
             ],
             "description": "PHP wrapper library for the fantastic Font Awesome icon set.",
@@ -3050,7 +3050,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -3723,8 +3723,8 @@
             "authors": [
                 {
                     "name": "Tijs Verkoyen",
-                    "email": "css_to_inline_styles@verkoyen.eu",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "css_to_inline_styles@verkoyen.eu"
                 }
             ],
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
@@ -4086,18 +4086,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -4368,8 +4368,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -4419,8 +4419,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -4461,8 +4461,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Simple template engine.",
@@ -4510,8 +4510,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Utility class for timing",
@@ -5212,8 +5212,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
