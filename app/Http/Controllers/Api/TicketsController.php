@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Repositories\TicketsRepository;
 use App\Ticket;
 use App\Settings;
 use App\Requester;

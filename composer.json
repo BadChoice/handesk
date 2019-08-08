@@ -4,13 +4,19 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://BadChoice@bitbucket.org/BadChoice/bitbucket-api-fork.git"
+        }
+    ],
     "require": {
         "php": ">=7.0.0",
         "badchoice/hurricane": "^1.0",
         "badchoice/thrust": "^0.4.1",
         "drewm/mailchimp-api": "^2.4",
         "fzaninotto/faker": "^1.4",
-        "gentle/bitbucket-api": "^1.1",
+        "gentle/bitbucket-api": "dev-develop",
         "guzzlehttp/guzzle": "^6.3",
         "guzzlehttp/oauth-subscriber": "^0.3",
         "khill/fontawesomephp": "^1.0",

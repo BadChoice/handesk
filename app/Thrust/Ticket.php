@@ -2,6 +2,7 @@
 
 namespace App\Thrust;
 
+use App\ThrustHelpers\Filters\TitleFilter;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -77,6 +78,7 @@ class Ticket extends Resource
     public function filters()
     {
         return [
+            new TitleFilter,
             new StatusFilter,
             new PriorityFilter,
             new EscalatedFilter,
