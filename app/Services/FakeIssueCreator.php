@@ -15,7 +15,7 @@ class FakeIssueCreator implements IssueCreator
     {
         return (object) [
             'resource_uri' => "https://fakeissuer.com/issue/{$this->id}",
-            'local_id'     => $this->id,
+            'id'     => $this->id,
         ];
     }
 

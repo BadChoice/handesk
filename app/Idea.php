@@ -111,7 +111,7 @@ class Idea extends BaseModel
             $this->title,
             'Issue from idea: '.route('ideas.show', $this)."   \n\r".$this->body
         );
-        $this->update(['issue_id' => $issue->local_id]);
+        $this->update(['issue_id' => $issue->id]);
 
         return $issue;
     }
