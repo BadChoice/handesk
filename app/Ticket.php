@@ -316,8 +316,7 @@ class Ticket extends BaseModel
         );
         $issueUrl = "https://bitbucket.org/{$repository}/issues/{$issue->id}";
         $this->addNote(auth()->user(), "Issue created {$issueUrl} with id #{$issue->id}");
-        TicketEvent::make($this, "Issue created #{$issue->local_id} at {$repository}");
-
+        TicketEvent::make($this, "Issue created #{$issue->id} at {$repository}");
         return $issue;
     }
 

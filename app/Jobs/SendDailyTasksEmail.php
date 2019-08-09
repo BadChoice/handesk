@@ -18,7 +18,7 @@ class SendDailyTasksEmail implements ShouldQueue
     public function handle()
     {
         $users = UserSettings::where('daily_tasks_notification', true)->get()->pluck('user');
-        $users->each(function ($user) {
+        $users->filter()->each(function ($user) {
             $this->sendDailyTasksEmailTo($user);
         });
     }

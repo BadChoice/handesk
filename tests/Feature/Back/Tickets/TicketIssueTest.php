@@ -23,7 +23,7 @@ class TicketIssueTest extends TestCase
     private function setIssueCreatorMock(){
         $issueCreator = Mockery::mock(Bitbucket::class);
         $issueCreator->shouldReceive('createIssue')->andReturn( (object)[
-            "local_id"      => 12,
+            "id"      => 12,
             "resource_uri"  => "1.0/repositories/issues/12",
             "links" => (object)["self" => (object)["href" => "http://fakeurl"]]
         ] );

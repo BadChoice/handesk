@@ -18,6 +18,6 @@ class BitbucketTest extends TestCase
 
         $repo = 'revo-pos/revo-back';
         $issue = (new Bitbucket)->createIssue($repo, 'test issue', 'this is a test issue');
-        $this->assertTrue(is_numeric($issue->local_id));
+        $this->assertTrue(is_numeric($issue->id));
     }
 }
