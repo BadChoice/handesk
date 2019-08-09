@@ -14,8 +14,8 @@ class FakeIssueCreator implements IssueCreator
     public function createIssue($account, $repoSlug, $title, $content, $extra = [])
     {
         return (object) [
-            'resource_uri' => "https://fakeissuer.com/issue/{$this->id}",
-            'id'     => $this->id,
+            'resource_uri'  => "https://fakeissuer.com/issue/{$this->id}",
+            'id'            => $this->id,
         ];
     }
 
