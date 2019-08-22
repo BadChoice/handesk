@@ -294,7 +294,7 @@ class BitbucketWebhookTest extends TestCase
                 $ticket->createIssue(new FakeIssueCreator(513), "revo-pos/revo-retail");
                 $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
 
-                $response = $this->call('POST','webhook/bitbucket', [], [], [], [], $payload);
+                $response = $this->call('POST','webhook/bitbucket', [], [], [], ["HTTP_Content-Type" => "application/json"], $payload);
 
                 $response->assertStatus(Response::HTTP_OK);
                 $this->assertCount(2, $ticket->fresh()->commentsAndNotes);

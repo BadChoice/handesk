@@ -22,7 +22,7 @@ class WebhookController extends Controller
             $repository = $payload->repository->full_name;
             $newStatus  = $payload->issue->state;
             $comment    = $payload->comment->content->raw;
-            //dd($issueId, $repository, $newStatus, $comment);
+//            dd($issueId, $repository, $newStatus, $comment);
         }
 
         $result = $this->findAndUpdateIdeas($issueId, $repository, $newStatus, $comment);
