@@ -285,4 +285,19 @@ class BitbucketWebhookTest extends TestCase
                 $this->assertEquals(Idea::STATUS_CLOSED, $idea->fresh()->status);
             }
 
+            /** @test */
+            public function can_parse_a_null_comment()
+            {
+                $payload = file_get_contents(base_path() . "/tests/Feature/Back/webhooks/null_content_webhook_payload.json");
+                $this->actingAs(factory(Admin::class)->create());
+                $ticket = factory(Ticket::class)->create();
+                $ticket->createIssue(new FakeIssueCreator(513), "revo-pos/revo-retail");
+                $this->assertCount(1, $ticket->fresh()->commentsAndNotes);
+
+                $response = $this->call('POST','webhook/bitbucket', [], [], [], [], $payload);
+
+                $response->assertStatus(Response::HTTP_OK);
+                $this->assertCount(2, $ticket->fresh()->commentsAndNotes);
+            }
+
 }

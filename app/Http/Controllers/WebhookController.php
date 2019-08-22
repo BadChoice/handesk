@@ -16,6 +16,15 @@ class WebhookController extends Controller
         $newStatus  = request('issue')['state'];
         $comment    = request('comment')['content']['raw'];
 
+        if (! $issueId) {
+            $payload    = json_decode(request()->getContent());
+            $issueId    = $payload->issue->id;
+            $repository = $payload->repository->full_name;
+            $newStatus  = $payload->issue->state;
+            $comment    = $payload->comment->content->raw;
+            //dd($issueId, $repository, $newStatus, $comment);
+        }
+
         $result = $this->findAndUpdateIdeas($issueId, $repository, $newStatus, $comment);
         if ($result) {
             return $result;

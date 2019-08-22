@@ -1,0 +1,196 @@
+{
+  "comment": {
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail/issues/513/comments/53540923"
+      },
+      "html": {
+        "href": "https://bitbucket.org/revo-pos/revo-retail/issues/513#comment-53540923"
+      }
+    },
+    "content": {
+      "raw": null,
+      "markup": "markdown",
+      "html": "",
+      "type": "rendered"
+    },
+    "created_on": "2019-08-22T07:34:55.759113+00:00",
+    "user": {
+      "display_name": "Jordi Puigdellívol",
+      "account_id": "557058:1ed68706-8e6a-4226-9c00-878030ad69b6",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/users/%7B4f024e7b-f697-4151-81e0-1a5178f8c6d4%7D"
+        },
+        "html": {
+          "href": "https://bitbucket.org/%7B4f024e7b-f697-4151-81e0-1a5178f8c6d4%7D/"
+        },
+        "avatar": {
+          "href": "https://secure.gravatar.com/avatar/fc1372d8be069c087aa149dcb5d6f18a?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJP-2.png"
+        }
+      },
+      "nickname": "BadChoice",
+      "type": "user",
+      "uuid": "{4f024e7b-f697-4151-81e0-1a5178f8c6d4}"
+    },
+    "updated_on": null,
+    "type": "issue_comment",
+    "id": 53540923
+  },
+  "issue": {
+    "priority": "major",
+    "kind": "task",
+    "repository": {
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail"
+        },
+        "html": {
+          "href": "https://bitbucket.org/revo-pos/revo-retail"
+        },
+        "avatar": {
+          "href": "https://bytebucket.org/ravatar/%7Bc2f565ee-3a81-4a81-82e1-3c9f9eed4a6e%7D?ts=default"
+        }
+      },
+      "type": "repository",
+      "name": "revo-retail",
+      "full_name": "revo-pos/revo-retail",
+      "uuid": "{c2f565ee-3a81-4a81-82e1-3c9f9eed4a6e}"
+    },
+    "links": {
+      "attachments": {
+        "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail/issues/513/attachments"
+      },
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail/issues/513"
+      },
+      "watch": {
+        "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail/issues/513/watch"
+      },
+      "comments": {
+        "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail/issues/513/comments"
+      },
+      "html": {
+        "href": "https://bitbucket.org/revo-pos/revo-retail/issues/513/privilegios-back-solo-empleados-surt-acces"
+      },
+      "vote": {
+        "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail/issues/513/vote"
+      }
+    },
+    "reporter": {
+      "display_name": "Jordi Puigdellívol",
+      "account_id": "557058:1ed68706-8e6a-4226-9c00-878030ad69b6",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/users/%7B4f024e7b-f697-4151-81e0-1a5178f8c6d4%7D"
+        },
+        "html": {
+          "href": "https://bitbucket.org/%7B4f024e7b-f697-4151-81e0-1a5178f8c6d4%7D/"
+        },
+        "avatar": {
+          "href": "https://secure.gravatar.com/avatar/fc1372d8be069c087aa149dcb5d6f18a?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJP-2.png"
+        }
+      },
+      "nickname": "BadChoice",
+      "type": "user",
+      "uuid": "{4f024e7b-f697-4151-81e0-1a5178f8c6d4}"
+    },
+    "title": "Privilegios Back solo empleados surt acces no autoritzat al fer login",
+    "component": null,
+    "votes": 0,
+    "watches": 1,
+    "content": {
+      "raw": "Issue from ticket: https://handesk.revo.works/tickets/6486   \n\rBuenos días, \r\nAl crear un perfil de privilegios del back para que tenga acceso unicamente a empleados, al acceder con un usuario con esos privilegios devuelve \"error 403. No autorizado tu licencia no permite esta funcionalidad, actualiza tu plan para poder utilizarla.\" si se le añade algún privilegio más, accede sin problemas.",
+      "markup": "markdown",
+      "html": "<p>Issue from ticket: <a href=\"https://handesk.revo.works/tickets/6486\" rel=\"nofollow\" class=\"ap-connect-link\">https://handesk.revo.works/tickets/6486</a>   </p>\n<p>Buenos días, \nAl crear un perfil de privilegios del back para que tenga acceso unicamente a empleados, al acceder con un usuario con esos privilegios devuelve \"error 403. No autorizado tu licencia no permite esta funcionalidad, actualiza tu plan para poder utilizarla.\" si se le añade algún privilegio más, accede sin problemas.</p>",
+      "type": "rendered"
+    },
+    "assignee": null,
+    "state": "new",
+    "version": null,
+    "edited_on": null,
+    "created_on": "2019-08-21T15:26:38.533662+00:00",
+    "milestone": null,
+    "updated_on": "2019-08-22T07:34:55.721527+00:00",
+    "type": "issue",
+    "id": 513
+  },
+  "changes": {
+    "status": {
+      "new": "new",
+      "old": "open"
+    }
+  },
+  "repository": {
+    "scm": "git",
+    "website": "",
+    "name": "revo-retail",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/revo-pos/revo-retail"
+      },
+      "html": {
+        "href": "https://bitbucket.org/revo-pos/revo-retail"
+      },
+      "avatar": {
+        "href": "https://bytebucket.org/ravatar/%7Bc2f565ee-3a81-4a81-82e1-3c9f9eed4a6e%7D?ts=default"
+      }
+    },
+    "project": {
+      "key": "PROJ",
+      "type": "project",
+      "uuid": "{d8b27801-7e0f-4a66-a7da-753cac54307c}",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/teams/revo-pos/projects/PROJ"
+        },
+        "html": {
+          "href": "https://bitbucket.org/account/user/revo-pos/projects/PROJ"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/user/revo-pos/projects/PROJ/avatar/32"
+        }
+      },
+      "name": "RevoRetail"
+    },
+    "full_name": "revo-pos/revo-retail",
+    "owner": {
+      "username": "revo-pos",
+      "display_name": "Revo",
+      "type": "team",
+      "uuid": "{6fa4ada1-2d50-4aaf-94bc-5fffb9d4504f}",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/teams/%7B6fa4ada1-2d50-4aaf-94bc-5fffb9d4504f%7D"
+        },
+        "html": {
+          "href": "https://bitbucket.org/%7B6fa4ada1-2d50-4aaf-94bc-5fffb9d4504f%7D/"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/revo-pos/avatar/"
+        }
+      }
+    },
+    "type": "repository",
+    "is_private": true,
+    "uuid": "{c2f565ee-3a81-4a81-82e1-3c9f9eed4a6e}"
+  },
+  "actor": {
+    "display_name": "Jordi Puigdellívol",
+    "account_id": "557058:1ed68706-8e6a-4226-9c00-878030ad69b6",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/users/%7B4f024e7b-f697-4151-81e0-1a5178f8c6d4%7D"
+      },
+      "html": {
+        "href": "https://bitbucket.org/%7B4f024e7b-f697-4151-81e0-1a5178f8c6d4%7D/"
+      },
+      "avatar": {
+        "href": "https://secure.gravatar.com/avatar/fc1372d8be069c087aa149dcb5d6f18a?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FJP-2.png"
+      }
+    },
+    "nickname": "BadChoice",
+    "type": "user",
+    "uuid": "{4f024e7b-f697-4151-81e0-1a5178f8c6d4}"
+  }
+}
