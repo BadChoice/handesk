@@ -54,4 +54,5 @@ return [
     'thanksForTheRating' => 'Moltes gràcies!',
     'rated'              => 'Classificats',
     'ticketType'         => 'Tipo de tickets',
+    'needSubject'       => "Fa falta l'asumpte",
 ];

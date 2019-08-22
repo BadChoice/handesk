@@ -5,17 +5,23 @@
                 <a class="button fs2 secondary" href="{{$ticket->issueUrl()}}" target="_blank"> @icon(bug) {{ __('ticket.seeIssue') }}</a>
             </div>
         @else
-            <div class="float-right mt-2 mr4 ml-3">
-            <button class="secondary dropdown"> @icon(bug) {{ __('ticket.createIssue') }}</button>
-            <ul class="dropdown-container p4">
-                @foreach(config('issues.repositories') as $name => $repo)
-                    <li><a class="pointer" onClick="createIssueToRepo('{{$repo}}')"> {{ $name }}</a></li>
-                @endforeach
-            </ul>
-            {{ Form::open(["url" => route('tickets.issue.store', $ticket), "id" => "issue-form"]) }}
-                {{ Form::hidden('repository',"", ["id" => "issue-repository"]) }}
-            {{ Form::close() }}
-            </div>
+            @if($ticket->subject && $ticket->summary)
+                <div class="float-right mt-2 mr4 ml-3">
+                <button class="secondary dropdown"> @icon(bug) {{ __('ticket.createIssue') }}</button>
+                <ul class="dropdown-container p4">
+                    @foreach(config('issues.repositories') as $name => $repo)
+                        <li><a class="pointer" onClick="createIssueToRepo('{{$repo}}')"> {{ $name }}</a></li>
+                    @endforeach
+                </ul>
+                {{ Form::open(["url" => route('tickets.issue.store', $ticket), "id" => "issue-form"]) }}
+                    {{ Form::hidden('repository',"", ["id" => "issue-repository"]) }}
+                {{ Form::close() }}
+                </div>
+            @else
+                <div class="float-right mt-2 mr4 ml-3">
+                    <button class="secondary"> @icon(bug) {{ __('ticket.needSubject') }}</button>
+                </div>
+            @endif
         @endif
     @endif
 

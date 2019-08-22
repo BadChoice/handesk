@@ -53,4 +53,5 @@ return [
     'blocker'            => 'Engelleyici',
     'thanksForTheRating' => 'Teşekkürler!',
     'ticketType'         => 'Ticket types*',
+    'needSubject'       => "Subject needed*",
 ];
