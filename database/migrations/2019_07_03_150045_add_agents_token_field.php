@@ -13,7 +13,7 @@ class AddAgentsTokenField extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->string('token', 60)->unique()->nullable();
         });
     }

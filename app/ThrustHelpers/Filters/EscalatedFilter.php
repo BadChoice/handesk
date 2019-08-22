@@ -2,7 +2,6 @@
 
 namespace App\ThrustHelpers\Filters;
 
-use App\Ticket;
 use Illuminate\Http\Request;
 use BadChoice\Thrust\Filters\SelectFilter;
 

@@ -3,10 +3,10 @@
 namespace App\Services\Bitbucket;
 
 use App\Services\IssueCreator;
+use Bitbucket\API\Repositories\Issues;
 use App\Services\IssueTrackerException;
 use Bitbucket\API\Authentication\Basic;
 use Bitbucket\API\Http\Listener\OAuth2Listener;
-use Bitbucket\API\Repositories\Issues;
 
 class Bitbucket implements IssueCreator
 {
@@ -63,11 +63,12 @@ class Bitbucket implements IssueCreator
     {
         $response = json_decode($response->getContent());
 //        dd($response);
-        if (isset($response->type) && $response->type == 'error'){
-            throw new IssueTrackerException($response->error->message . ':' . collect($response->error->fields)->map(function($value, $key){
-                    return $key . " => " . $value;
-                })->implode("\n"));
+        if (isset($response->type) && $response->type == 'error') {
+            throw new IssueTrackerException($response->error->message.':'.collect($response->error->fields)->map(function ($value, $key) {
+                return $key.' => '.$value;
+            })->implode("\n"));
         }
+
         return $response;
     }
 

@@ -50,14 +50,14 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'       => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings'   => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can'        => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'apiAuth'    => Middleware\ApiAuth::class,
+        'auth'         => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth.basic'   => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings'     => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can'          => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'        => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'     => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'apiAuth'      => Middleware\ApiAuth::class,
         'apiAuthAgent' => Middleware\ApiAuthAgent::class,
-        'userLocale' => Middleware\UserLocale::class,
+        'userLocale'   => Middleware\UserLocale::class,
     ];
 }

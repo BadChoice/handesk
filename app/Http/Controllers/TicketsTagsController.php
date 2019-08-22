@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
 use App\Ticket;
 
 class TicketsTagsController extends Controller

@@ -38,7 +38,7 @@ class UsersController extends Controller
             'name'     => request('name'),
             'email'    => request('email'),
             'password' => Hash::make(request('password')),
-            'token'    => str_random(60)
+            'token'    => str_random(60),
         ]);
 
         return back();

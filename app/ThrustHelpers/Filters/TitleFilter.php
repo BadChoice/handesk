@@ -2,10 +2,8 @@
 
 namespace App\ThrustHelpers\Filters;
 
-use App\Ticket;
-use BadChoice\Thrust\Filters\TextFilter;
 use Illuminate\Http\Request;
-use BadChoice\Thrust\Filters\SelectFilter;
+use BadChoice\Thrust\Filters\TextFilter;
 
 class TitleFilter extends TextFilter
 {

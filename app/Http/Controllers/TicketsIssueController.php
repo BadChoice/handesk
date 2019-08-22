@@ -17,8 +17,9 @@ class TicketsIssueController extends Controller
         return back();
     }
 
-    private function validateSubjectAndSummary($ticket){
-        if (! $ticket->summary || ! $ticket->subject){
+    private function validateSubjectAndSummary($ticket)
+    {
+        if (! $ticket->summary || ! $ticket->subject) {
             throw new \Exception('No subject or summary defined');
         }
     }
