@@ -50,5 +50,5 @@ return [
     'thanksForTheRating' => 'Thank you!*',
     'rated'              => 'Rated*',
     'ticketType'         => 'Ticket types*',
-    'needSubject'       => "Subject needed*",
+    'needSubject'        => 'Subject needed*',
 ];

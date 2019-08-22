@@ -63,12 +63,12 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
         'google' => [
-            'driver' => 's3',
-            'key'    => env('GC_KEY'),
-            'secret' => env('GC_SECRET'),
-            'region' => env('GC_REGION'),
-            'bucket' => env('GC_BUCKET'),
-            'endpoint' => 'https://storage.googleapis.com'
+            'driver'   => 's3',
+            'key'      => env('GC_KEY'),
+            'secret'   => env('GC_SECRET'),
+            'region'   => env('GC_REGION'),
+            'bucket'   => env('GC_BUCKET'),
+            'endpoint' => 'https://storage.googleapis.com',
         ],
 
     ],

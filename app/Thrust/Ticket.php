@@ -2,7 +2,6 @@
 
 namespace App\Thrust;
 
-use App\ThrustHelpers\Filters\TitleFilter;
 use BadChoice\Thrust\Resource;
 use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Link;
@@ -10,6 +9,7 @@ use App\ThrustHelpers\Fields\Rating;
 use BadChoice\Thrust\Fields\Gravatar;
 use App\Repositories\TicketsIndexQuery;
 use App\ThrustHelpers\Actions\NewTicket;
+use App\ThrustHelpers\Filters\TitleFilter;
 use App\ThrustHelpers\Actions\ChangeStatus;
 use App\ThrustHelpers\Actions\MergeTickets;
 use App\ThrustHelpers\Filters\StatusFilter;

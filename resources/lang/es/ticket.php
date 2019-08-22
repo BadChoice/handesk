@@ -54,5 +54,5 @@ return [
     'thanksForTheRating' => '¡Muchas gracias!',
     'rated'              => 'Clasificado',
     'ticketType'         => 'Tipos de ticket',
-    'needSubject'       => "Asunto requerido",
+    'needSubject'        => 'Asunto requerido',
 ];
