@@ -64,6 +64,12 @@ class Ticket extends BaseModel
         return $this;
     }
 
+    public function updateSummary($subject, $summary)
+    {
+        $this->update(['subject' => $subject, 'summary' => $summary]);
+        return $this;
+    }
+
     public static function findWithPublicToken($public_token)
     {
         return self::where('public_token', $public_token)->firstOrFail();
@@ -313,8 +319,8 @@ class Ticket extends BaseModel
         $issue = $issueCreator->createIssue(
                 $repo[0],
                 $repo[1],
-                $this->title,
-                'Issue from ticket: '.route('tickets.show', $this)."   \n\r".$this->body
+                $this->subject ?? $this->title,
+                'Issue from ticket: '.route('tickets.show', $this)."   \n\r".($this->summary ?? $this->body)
         );
         $issueUrl = "https://bitbucket.org/{$repository}/issues/{$issue->id}";
         $this->addNote(auth()->user(), "Issue created {$issueUrl} with id #{$issue->id}");

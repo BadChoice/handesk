@@ -5,9 +5,9 @@
             {{ Form::close() }}
         </div>
     @else
-        <div class="mt4">
+        <div class="">
+            @include('components.ticket.escalate')
             @include('components.ticket.idea')
             @include('components.ticket.issue')
-            @include('components.ticket.escalate')
         </div>
     @endif
