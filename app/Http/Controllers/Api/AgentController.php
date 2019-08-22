@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Repositories\TicketsRepository;
-use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\TicketsRepository;
 
 class AgentController extends ApiController
 {
@@ -14,7 +13,8 @@ class AgentController extends ApiController
         if (Auth::attempt($credentials)) {
             return $this->respond(auth()->user());
         }
-        return $this->respondError("Invalid credentials");
+
+        return $this->respondError('Invalid credentials');
     }
 
     public function index()
@@ -23,5 +23,4 @@ class AgentController extends ApiController
             (new TicketsRepository)->all()->with('requester')->get()
         );
     }
-
 }

@@ -72,7 +72,6 @@ class TicketsController extends Controller
         $ticket->updateWith(request('requester'), request('priority'), request('type'))
                 ->updateSummary(request('subject'), request('summary'));
 
-
         return back();
     }
 }

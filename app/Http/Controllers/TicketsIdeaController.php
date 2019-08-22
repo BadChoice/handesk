@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Idea;
 use App\Ticket;
 
 class TicketsIdeaController extends Controller

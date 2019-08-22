@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
 use App\Ticket;
 use Illuminate\Http\Response;
 

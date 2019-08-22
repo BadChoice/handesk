@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\User;
 use Closure;
+use App\User;
 use Illuminate\Http\Response;
 
 class ApiAuthAgent
@@ -18,7 +18,7 @@ class ApiAuthAgent
      */
     public function handle($request, Closure $next)
     {
-        if(! request()->hasHeader('token')){
+        if (! request()->hasHeader('token')) {
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_FORBIDDEN);
         }
         $agent = User::where('token', request()->header('token'))->first();
@@ -26,6 +26,7 @@ class ApiAuthAgent
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_FORBIDDEN);
         }
         auth()->login($agent);
+
         return $next($request);
     }
 }
