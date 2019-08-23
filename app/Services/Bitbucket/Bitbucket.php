@@ -55,7 +55,7 @@ class Bitbucket implements IssueCreator
         $this->setAuth($issue);
 
         return $this->parseResponse(
-            $issue->comments()->create($account, $repoSlug, $id, $comment)
+            $issue->comments()->create($account, $repoSlug, $id, ["raw" => $comment])
         );
     }
 
