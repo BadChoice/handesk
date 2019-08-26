@@ -15,7 +15,7 @@ class AddTicketSummaryFields extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             $table->string('subject')->nullable();
-            $table->string('summary')->nullable();
+            $table->text('summary')->nullable();
         });
     }
 
