@@ -22,5 +22,6 @@ return [
         'Kds'           => 'revo-pos/revo-kds',
         'Revo Stock'    => 'revo-pos/revo-stock',
         'Revo Control'  => 'revo-pos/revo-control',
+        'Revo Display'  => 'revo-pos/revo-display',
     ],
 ];
