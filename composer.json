@@ -25,7 +25,7 @@
         "laravelcollective/html": "^5.4",
         "league/flysystem-aws-s3-v3": "^1.0",
         "patrickschur/language-detection": "^3.2",
-        "php-imap/php-imap": "^2.0",
+        "php-imap/php-imap": "^3.0",
         "predis/predis": "^1.1"
     },
     "require-dev": {
