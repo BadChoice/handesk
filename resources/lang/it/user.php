@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'you' => 'voi',
+    'name' => 'Nome',
+    'email' => 'E-mail',
+    'profile' => 'Profilo',
+    'language' => 'linguaggio',
+    'password' => 'Parola d\'ordine',
+    'oldPassword' => 'vecchia password',
+    'newPassword' => 'nuova password',
+    'confirmPassword' => 'conferma password',
+    'changePassword' => 'Cambia la password',
+    'ticketsSignature' => 'Firma dei ticket',
+    'notification' => 'Notifica | Notifiche',
+    'dailyTasksNotification' => 'Notifica di attività quotidiane',
+    'newTicketNotification' => 'Notifica di un nuovo ticket',
+    'ticketAssignedNotification' => 'Notifica assegnata ticket',
+    'ticketUpdatedNotification' => 'Notifica aggiornamento ticket',
+    'newLeadNotification' => 'Nuova notifica di lead',
+    'leadAssignedNotification' => 'Notifica assegnata al lead',
+    'newIdeaNotification' => 'Notifica di una nuova idea',
+    'mentionNotification' => 'Notifica di menzione',
+    'ticketRatedNotification' => 'Ticket valutato',
+    'newUser' => 'Nuovo utente',
+];
