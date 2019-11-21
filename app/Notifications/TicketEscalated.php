@@ -27,7 +27,7 @@ class TicketEscalated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        if (isset($notifiable->settings) && $notifiable->settings->ticket_assigned_notification == false) {
+        if (isset($notifiable->settings) && $notifiable->settings->escalated_ticket_notification == false) {
             return [];
         }
 

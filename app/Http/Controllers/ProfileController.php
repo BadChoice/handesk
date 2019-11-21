@@ -43,13 +43,14 @@ class ProfileController extends Controller
     private function notificationSettings(Request $request)
     {
         return [
-            'new_ticket_notification'      => $request->filled('new_ticket_notification'),
-            'ticket_assigned_notification' => $request->filled('ticket_assigned_notification'),
-            'ticket_updated_notification'  => $request->filled('ticket_updated_notification'),
-            'new_lead_notification'        => $request->filled('new_lead_notification'),
-            'lead_assigned_notification'   => $request->filled('lead_assigned_notification'),
-            'daily_tasks_notification'     => $request->filled('daily_tasks_notification'),
-            'mention_notification'         => $request->filled('mention_notification'),
+            'new_ticket_notification'           => $request->filled('new_ticket_notification'),
+            'ticket_assigned_notification'      => $request->filled('ticket_assigned_notification'),
+            'ticket_updated_notification'       => $request->filled('ticket_updated_notification'),
+            'new_lead_notification'             => $request->filled('new_lead_notification'),
+            'lead_assigned_notification'        => $request->filled('lead_assigned_notification'),
+            'daily_tasks_notification'          => $request->filled('daily_tasks_notification'),
+            'mention_notification'              => $request->filled('mention_notification'),
+            'escalated_ticket_notification'     => $request->filled('escalated_ticket_notification'),
         ];
     }
 }
