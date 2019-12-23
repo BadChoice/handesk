@@ -2,9 +2,9 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Resource;
-use BadChoice\Thrust\Fields\Text;
 use BadChoice\Thrust\Fields\Color;
+use BadChoice\Thrust\Fields\Text;
+use BadChoice\Thrust\Resource;
 
 class TicketType extends Resource
 {

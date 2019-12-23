@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Notification;
-use App\Services\Mentions;
 use App\Authenticatable\Admin;
-use App\Notifications\NewComment;
 use App\Notifications\CommentMention;
+use App\Notifications\NewComment;
+use App\Services\Mentions;
+use Notification;
 
 class Comment extends BaseModel
 {

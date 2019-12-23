@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use App\Authenticatable\Admin;
 use App\Authenticatable\Assistant;
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property string name

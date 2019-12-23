@@ -2,8 +2,8 @@
 
 namespace App\ThrustHelpers\Filters;
 
-use Illuminate\Http\Request;
 use BadChoice\Thrust\Filters\SelectFilter;
+use Illuminate\Http\Request;
 
 class EscalatedFilter extends SelectFilter
 {

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Ticket;
-use App\Settings;
-use App\Requester;
-use Illuminate\Http\Response;
 use App\Notifications\TicketCreated;
+use App\Requester;
+use App\Settings;
+use App\Ticket;
+use Illuminate\Http\Response;
 
 class TicketsController extends ApiController
 {

@@ -2,13 +2,13 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Resource;
+use App\ThrustHelpers\Actions\NewUser;
 use BadChoice\Thrust\Fields\Date;
-use BadChoice\Thrust\Fields\Link;
-use BadChoice\Thrust\Fields\Text;
 use BadChoice\Thrust\Fields\Email;
 use BadChoice\Thrust\Fields\HasMany;
-use App\ThrustHelpers\Actions\NewUser;
+use BadChoice\Thrust\Fields\Link;
+use BadChoice\Thrust\Fields\Text;
+use BadChoice\Thrust\Resource;
 
 class Agent extends Resource
 {

@@ -2,8 +2,8 @@
 
 namespace App\Jobs\EmailParsers;
 
-use App\Ticket;
 use App\Attachment;
+use App\Ticket;
 
 class NewTicketEmailParser
 {

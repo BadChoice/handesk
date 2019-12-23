@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\Auth;
 use App\Repositories\TicketsRepository;
+use Illuminate\Support\Facades\Auth;
 
 class AgentController extends ApiController
 {

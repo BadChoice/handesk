@@ -2,8 +2,8 @@
 
 namespace App\Services\Pop3;
 
-use App\User;
 use App\Ticket;
+use App\User;
 
 class IncomingMailCommentParser
 {

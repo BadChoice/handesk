@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Team;
-use App\User;
-use App\Ticket;
-use App\Kpi\Kpi;
-use Carbon\Carbon;
-use App\Kpi\RatedKpi;
-use App\Kpi\SolveKpi;
-use App\Kpi\ReopenedKpi;
 use App\Kpi\FirstReplyKpi;
+use App\Kpi\Kpi;
 use App\Kpi\OneTouchResolutionKpi;
+use App\Kpi\RatedKpi;
+use App\Kpi\ReopenedKpi;
+use App\Kpi\SolveKpi;
+use App\Team;
+use App\Ticket;
+use App\User;
+use Carbon\Carbon;
 
 class KpiRepository
 {

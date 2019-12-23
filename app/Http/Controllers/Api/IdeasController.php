@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Idea;
-use App\Settings;
 use App\Requester;
-use Illuminate\Http\Response;
 use App\Rules\ValidRepository;
+use App\Settings;
+use Illuminate\Http\Response;
 
 class IdeasController extends ApiController
 {

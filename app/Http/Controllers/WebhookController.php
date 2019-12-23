@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Authenticatable\Admin;
 use App\Idea;
 use App\TicketEvent;
-use App\Authenticatable\Admin;
 
 class WebhookController extends Controller
 {
@@ -14,16 +14,18 @@ class WebhookController extends Controller
         $repository      = request('repository')['full_name'];
         $newStatus       = request('issue')['state'];
         $comment         = request('comment')['content']['raw'];
-        $userDisplayName = request('comment')['user']['display_name'] ?? "Unknown";
+        $userDisplayName = request('comment')['user']['display_name'] ?? 'Unknown';
 
         if (! $issueId) {
             $payload         = json_decode(request()->getContent());
-            if (! $payload) { return response("ok"); }
+            if (! $payload) {
+                return response('ok');
+            }
             $issueId         = $payload->issue->id;
             $repository      = $payload->repository->full_name;
             $newStatus       = $payload->issue->state;
             $comment         = $payload->comment->content->raw;
-            $userDisplayName = $payload->comment->user->display_name ?? "Unknown";
+            $userDisplayName = $payload->comment->user->display_name ?? 'Unknown';
 //            dd($issueId, $repository, $newStatus, $comment);
         }
 

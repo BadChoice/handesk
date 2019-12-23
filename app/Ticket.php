@@ -2,19 +2,19 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use App\Authenticatable\Admin;
-use App\Services\IssueCreator;
-use App\Events\TicketCommented;
-use App\Notifications\RateTicket;
 use App\Authenticatable\Assistant;
+use App\Events\TicketCommented;
 use App\Events\TicketStatusUpdated;
-use Illuminate\Support\Facades\App;
-use App\Notifications\TicketCreated;
+use App\Notifications\RateTicket;
 use App\Notifications\TicketAssigned;
+use App\Notifications\TicketCreated;
 use App\Notifications\TicketEscalated;
+use App\Services\IssueCreator;
 use App\Services\TicketLanguageDetector;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
 
 class Ticket extends BaseModel
 {

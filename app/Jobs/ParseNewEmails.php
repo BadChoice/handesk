@@ -2,15 +2,15 @@
 
 namespace App\Jobs;
 
-use Illuminate\Bus\Queueable;
-use App\Services\Pop3\Mailbox;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
+use App\Jobs\EmailParsers\NewCommentEmailParser;
 use App\Jobs\EmailParsers\NewIdeaEmailParser;
 use App\Jobs\EmailParsers\NewTicketEmailParser;
-use App\Jobs\EmailParsers\NewCommentEmailParser;
+use App\Services\Pop3\Mailbox;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ParseNewEmails implements ShouldQueue
 {

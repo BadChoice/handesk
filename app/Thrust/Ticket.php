@@ -2,22 +2,22 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Resource;
-use BadChoice\Thrust\Fields\Date;
-use BadChoice\Thrust\Fields\Link;
-use App\ThrustHelpers\Fields\Rating;
-use BadChoice\Thrust\Fields\Gravatar;
 use App\Repositories\TicketsIndexQuery;
-use App\ThrustHelpers\Actions\NewTicket;
-use App\ThrustHelpers\Filters\TitleFilter;
+use App\ThrustHelpers\Actions\ChangePriority;
 use App\ThrustHelpers\Actions\ChangeStatus;
 use App\ThrustHelpers\Actions\MergeTickets;
-use App\ThrustHelpers\Filters\StatusFilter;
-use App\ThrustHelpers\Actions\ChangePriority;
-use App\ThrustHelpers\Filters\PriorityFilter;
-use App\ThrustHelpers\Filters\EscalatedFilter;
+use App\ThrustHelpers\Actions\NewTicket;
+use App\ThrustHelpers\Fields\Rating;
 use App\ThrustHelpers\Fields\TicketStatusField;
+use App\ThrustHelpers\Filters\EscalatedFilter;
+use App\ThrustHelpers\Filters\PriorityFilter;
+use App\ThrustHelpers\Filters\StatusFilter;
 use App\ThrustHelpers\Filters\TicketTypeFilter;
+use App\ThrustHelpers\Filters\TitleFilter;
+use BadChoice\Thrust\Fields\Date;
+use BadChoice\Thrust\Fields\Gravatar;
+use BadChoice\Thrust\Fields\Link;
+use BadChoice\Thrust\Resource;
 
 class Ticket extends Resource
 {

@@ -3,8 +3,8 @@
 namespace App;
 
 use App\Authenticatable\Admin;
-use App\Services\IssueCreator;
 use App\Notifications\IdeaCreated;
+use App\Services\IssueCreator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Idea extends BaseModel

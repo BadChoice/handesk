@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Lead;
 use App\Attachment;
+use App\Lead;
 
 class LeadStatusController extends Controller
 {

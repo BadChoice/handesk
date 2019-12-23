@@ -2,8 +2,8 @@
 
 namespace App\ThrustHelpers\Filters;
 
-use Illuminate\Http\Request;
 use BadChoice\Thrust\Filters\TextFilter;
+use Illuminate\Http\Request;
 
 class TitleFilter extends TextFilter
 {

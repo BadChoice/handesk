@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Events\TicketRated;
 use App\Kpi\Kpi;
 use App\Kpi\RatedKpi;
-use App\Events\TicketRated;
 
 class UpdateRatedKpi
 {

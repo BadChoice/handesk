@@ -1,9 +1,9 @@
 <?php
 
-use App\Team;
-use App\User;
-use App\Ticket;
 use App\Settings;
+use App\Team;
+use App\Ticket;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

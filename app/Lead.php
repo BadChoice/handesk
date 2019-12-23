@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use App\Notifications\LeadAssigned;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lead extends BaseModel
