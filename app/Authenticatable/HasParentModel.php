@@ -28,7 +28,7 @@ trait HasParentModel
         return Str::snake(class_basename($this->getParentClass())).'_'.$this->primaryKey;
     }
 
-    public function joiningTable($related)
+    public function joiningTable($related, $INSTANCE = null)
     {
         $models = [
             Str::snake(class_basename($related)),
