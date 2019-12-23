@@ -17,7 +17,7 @@ class AssistantTest extends TestCase
      */
     protected $assistant;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
 

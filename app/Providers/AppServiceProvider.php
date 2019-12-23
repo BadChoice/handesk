@@ -28,16 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Validator::replacer('old_password', function ($message, $attribute, $rule, $parameters) {
             return __('passwords.change_error');
         });
-    }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        app()->bind(IssueCreator::class, Bitbucket::class);
 
         Blade::directive('icon', function ($icon) {
             return icon($icon);
@@ -56,5 +47,15 @@ class AppServiceProvider extends ServiceProvider
                     echo {$data}->appends(array_except(request()->query(),['page']))->links();
                 } ?>";
         });
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        app()->bind(IssueCreator::class, Bitbucket::class);
     }
 }

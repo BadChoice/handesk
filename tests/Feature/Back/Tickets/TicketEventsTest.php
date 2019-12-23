@@ -16,7 +16,7 @@ class TicketEventsTest extends TestCase
     use RefreshDatabase;
     protected $agent;
 
-    public function setUp() {
+    public function setUp() : void{
         parent::setup();
         $this->agent = factory(User::class)->create();
         $this->actingAs($this->agent);
