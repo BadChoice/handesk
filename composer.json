@@ -31,7 +31,7 @@
     },
     "require-dev": {
         "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "classmap": [
