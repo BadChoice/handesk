@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\User;
+use Closure;
 use Illuminate\Http\Response;
 
 class ApiAuthAgent

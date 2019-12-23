@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Ticket;
 use App\Services\IssueCreator;
+use App\Ticket;
 
 class TicketsIssueController extends Controller
 {

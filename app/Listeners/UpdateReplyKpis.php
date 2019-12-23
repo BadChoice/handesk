@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Kpi\Kpi;
-use App\Kpi\FirstReplyKpi;
 use App\Events\TicketCommented;
+use App\Kpi\FirstReplyKpi;
+use App\Kpi\Kpi;
 use App\Kpi\OneTouchResolutionKpi;
 
 class UpdateReplyKpis

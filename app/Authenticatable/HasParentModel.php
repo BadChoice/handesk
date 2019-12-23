@@ -2,8 +2,8 @@
 
 namespace App\Authenticatable;
 
-use ReflectionClass;
 use Illuminate\Support\Str;
+use ReflectionClass;
 
 trait HasParentModel
 {

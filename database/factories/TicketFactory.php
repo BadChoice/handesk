@@ -1,8 +1,8 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Ticket;
 use App\Requester;
+use App\Ticket;
 
 $factory->define(Ticket::class, function (Faker\Generator $faker) {
     return [

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Ticket;
 use App\Attachment;
+use App\Ticket;
 
 class CommentsController extends Controller
 {

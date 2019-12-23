@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Ticket;
 use App\Repositories\TicketsIndexQuery;
 use App\Repositories\TicketsRepository;
+use App\Ticket;
 use BadChoice\Thrust\Controllers\ThrustController;
 
 class TicketsController extends Controller

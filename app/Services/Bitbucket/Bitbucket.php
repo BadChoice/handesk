@@ -3,10 +3,10 @@
 namespace App\Services\Bitbucket;
 
 use App\Services\IssueCreator;
-use Bitbucket\API\Repositories\Issues;
 use App\Services\IssueTrackerException;
 use Bitbucket\API\Authentication\Basic;
 use Bitbucket\API\Http\Listener\OAuth2Listener;
+use Bitbucket\API\Repositories\Issues;
 
 class Bitbucket implements IssueCreator
 {
@@ -55,7 +55,7 @@ class Bitbucket implements IssueCreator
         $this->setAuth($issue);
 
         return $this->parseResponse(
-            $issue->comments()->create($account, $repoSlug, $id, ["raw" => $comment])
+            $issue->comments()->create($account, $repoSlug, $id, ['raw' => $comment])
         );
     }
 

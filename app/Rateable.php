@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Events\TicketRated;
 use App\Authenticatable\Admin;
+use App\Events\TicketRated;
 use App\Notifications\TicketRatedNotification;
 
 trait Rateable

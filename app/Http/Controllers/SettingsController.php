@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Team;
 use App\Settings;
+use App\Team;
 
 class SettingsController extends Controller
 {

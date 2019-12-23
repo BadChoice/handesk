@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
 use App\User;
 use BadChoice\Thrust\Controllers\ThrustController;
+use Hash;
 
 class UsersController extends Controller
 {

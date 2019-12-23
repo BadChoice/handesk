@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Ticket;
-use App\Kpi\Kpi;
-use Carbon\Carbon;
-use App\Kpi\SolveKpi;
-use App\Kpi\ReopenedKpi;
 use App\Events\TicketStatusUpdated;
+use App\Kpi\Kpi;
+use App\Kpi\ReopenedKpi;
+use App\Kpi\SolveKpi;
+use App\Ticket;
+use Carbon\Carbon;
 
 class UpdateStatusKpis
 {

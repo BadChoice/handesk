@@ -2,11 +2,11 @@
 
 namespace App\Thrust;
 
-use BadChoice\Thrust\Resource;
-use BadChoice\Thrust\Fields\Link;
-use BadChoice\Thrust\Fields\Text;
 use BadChoice\Thrust\Fields\Email;
 use BadChoice\Thrust\Fields\Gravatar;
+use BadChoice\Thrust\Fields\Link;
+use BadChoice\Thrust\Fields\Text;
+use BadChoice\Thrust\Resource;
 
 class Requester extends Resource
 {

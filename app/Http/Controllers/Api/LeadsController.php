@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Lead;
+use App\Notifications\LeadCreated;
 use App\User;
 use Illuminate\Http\Response;
-use App\Notifications\LeadCreated;
 
 class LeadsController extends ApiController
 {

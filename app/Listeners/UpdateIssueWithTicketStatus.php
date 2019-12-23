@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Ticket;
-use App\Services\IssueCreator;
 use App\Events\TicketStatusUpdated;
+use App\Services\IssueCreator;
+use App\Ticket;
 
 class UpdateIssueWithTicketStatus
 {

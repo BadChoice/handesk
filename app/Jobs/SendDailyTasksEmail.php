@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
-use App\UserSettings;
 use App\Mail\DailyTasksMail;
+use App\UserSettings;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class SendDailyTasksEmail implements ShouldQueue
 {

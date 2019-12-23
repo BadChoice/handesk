@@ -3,9 +3,9 @@
 namespace App\ThrustHelpers\Actions;
 
 use App\Ticket;
-use Illuminate\Support\Collection;
 use BadChoice\Thrust\Actions\Action;
 use BadChoice\Thrust\Fields\Integer;
+use Illuminate\Support\Collection;
 
 class MergeTickets extends Action
 {

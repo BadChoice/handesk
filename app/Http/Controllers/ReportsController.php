@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Repositories\KpiRepository;
-use App\Thrust\Metrics\SolvedMetric;
+use App\Thrust\Metrics\NewTicketsByMonthMetric;
 use App\Thrust\Metrics\NewTicketsMetric;
-use App\Thrust\Metrics\TicketTypeMetric;
+use App\Thrust\Metrics\RatingAverageMetric;
+use App\Thrust\Metrics\SolvedMetric;
 use App\Thrust\Metrics\TeamTicketsMetric;
 use App\Thrust\Metrics\TicketsCountMetric;
-use App\Thrust\Metrics\RatingAverageMetric;
-use App\Thrust\Metrics\NewTicketsByMonthMetric;
+use App\Thrust\Metrics\TicketTypeMetric;
+use Carbon\Carbon;
 
 class ReportsController extends Controller
 {

@@ -3,8 +3,8 @@
 namespace App\ThrustHelpers\Filters;
 
 use App\Lead;
-use Illuminate\Http\Request;
 use BadChoice\Thrust\Filters\SelectFilter;
+use Illuminate\Http\Request;
 
 class LeadStatusFilter extends SelectFilter
 {

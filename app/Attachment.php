@@ -2,8 +2,8 @@
 
 namespace App;
 
-use PhpImap\IncomingMail;
 use Illuminate\Support\Facades\Storage;
+use PhpImap\IncomingMail;
 
 class Attachment extends BaseModel
 {

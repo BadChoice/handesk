@@ -3,8 +3,8 @@
 namespace App\ThrustHelpers\Filters;
 
 use App\TicketType;
-use Illuminate\Http\Request;
 use BadChoice\Thrust\Filters\SelectFilter;
+use Illuminate\Http\Request;
 
 class TicketTypeFilter extends SelectFilter
 {
