@@ -35,5 +35,5 @@
 
 
 @section('scripts')
-    @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "ideas", "object" => null])
+    @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "ideas", "object" => "{{$idea->id}}"])
 @endsection

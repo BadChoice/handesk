@@ -84,7 +84,7 @@ class IdeasApiTest extends TestCase
         ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $response->assertJsonFragment([
-            "error"
+            "error" => "The given data was invalid. in /Users/badchoice/git/web/handesk/vendor/laravel/framework/src/Illuminate/Validation/Validator.php:306"
         ]);
         $this->assertEquals(0, Idea::count() );
     }
@@ -96,7 +96,7 @@ class IdeasApiTest extends TestCase
         ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $response->assertJsonFragment([
-            "error"
+            "error" => "The given data was invalid. in /Users/badchoice/git/web/handesk/vendor/laravel/framework/src/Illuminate/Validation/Validator.php:306"
         ]);
         $this->assertEquals(0, Idea::count() );
     }
@@ -108,7 +108,7 @@ class IdeasApiTest extends TestCase
         ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
         $response->assertJsonFragment([
-            "error"
+            "error" => "The given data was invalid. in /Users/badchoice/git/web/handesk/vendor/laravel/framework/src/Illuminate/Validation/Validator.php:306"
         ]);
         $this->assertEquals(0, Idea::count() );
     }

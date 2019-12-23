@@ -36,6 +36,7 @@ class IdeaTest extends TestCase
 
     /** @test */
     public function can_show_an_idea(){
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create(["admin" => true]);
         $idea = factory(Idea::class)->create();
 
