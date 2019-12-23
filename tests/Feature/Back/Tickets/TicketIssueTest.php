@@ -34,7 +34,10 @@ class TicketIssueTest extends TestCase
     public function can_create_issue_from_ticket(){
         Notification::fake();
         $user   = factory(User::class)->states(["admin"])->create();
-        $ticket = factory(Ticket::class)->create();
+        $ticket = factory(Ticket::class)->create([
+            "subject" => "subject",
+            "summary" => "summary",
+        ]);
 
         $this->setIssueCreatorMock();
 
@@ -63,7 +66,10 @@ class TicketIssueTest extends TestCase
     public function issue_can_not_be_created_twice(){
         Notification::fake();
         $user   = factory(User::class)->states(["admin"])->create();
-        $ticket = factory(Ticket::class)->create();
+        $ticket = factory(Ticket::class)->create([
+            "subject" => "subject",
+            "summary" => "summary",
+        ]);
 
         $this->setIssueCreatorMock();
 
