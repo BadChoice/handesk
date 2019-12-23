@@ -29,6 +29,7 @@ class BitbucketWebhookTest extends TestCase
     /** @test */
     public function can_receive_a_resolved_issue_and_ticket_is_updated()
     {
+        $this->withoutExceptionHandling();
         Notification::fake();
         $payload = $this->getPayload(929, "revo-pos/revo-app", 'resolved');
 
@@ -41,7 +42,7 @@ class BitbucketWebhookTest extends TestCase
 
         $response->assertStatus(Response::HTTP_OK);
         $this->assertCount(2, $ticket->fresh()->commentsAndNotes);
-        $this->assertEquals("Issue status updated to resolved", $ticket->commentsAndNotes[1]->body);
+        $this->assertEquals("Issue status updated to resolved: ", $ticket->commentsAndNotes[1]->body);
     }
 
      /** @test */

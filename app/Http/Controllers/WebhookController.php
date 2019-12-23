@@ -10,7 +10,6 @@ class WebhookController extends Controller
 {
     public function store()
     {
-        //dd(request()->all());
         $issueId         = request('issue')['id'];
         $repository      = request('repository')['full_name'];
         $newStatus       = request('issue')['state'];
@@ -19,6 +18,7 @@ class WebhookController extends Controller
 
         if (! $issueId) {
             $payload         = json_decode(request()->getContent());
+            if (! $payload) { return response("ok"); }
             $issueId         = $payload->issue->id;
             $repository      = $payload->repository->full_name;
             $newStatus       = $payload->issue->state;
