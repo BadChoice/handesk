@@ -18,6 +18,9 @@ class RateTicket extends Notification
 
     public function via($notifiable)
     {
+        if (method_exists($notifiable, 'shouldBeNotified') && !$notifiable->shouldBeNotified() ){
+            return [];
+        }
         return ['mail'];
     }
 

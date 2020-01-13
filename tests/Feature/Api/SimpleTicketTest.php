@@ -87,8 +87,8 @@ class SimpleTicketTest extends TestCase
             "requester" => "",
         ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
-        $response->assertJsonFragment([
-            "error" => "The given data was invalid. in /Users/badchoice/git/web/handesk/vendor/laravel/framework/src/Illuminate/Validation/Validator.php:315"
+        $response->assertJsonStructure([
+            "error"
         ]);
         $this->assertEquals(0, Ticket::count() );
     }
@@ -99,8 +99,8 @@ class SimpleTicketTest extends TestCase
             "title" => "",
         ]),["token" => 'the-api-token']);
         $response->assertStatus( Response::HTTP_UNPROCESSABLE_ENTITY );
-        $response->assertJsonFragment([
-            "error" => "The given data was invalid. in /Users/badchoice/git/web/handesk/vendor/laravel/framework/src/Illuminate/Validation/Validator.php:315"
+        $response->assertJsonStructure([
+            "error"
         ]);
         $this->assertEquals(0, Ticket::count() );
     }

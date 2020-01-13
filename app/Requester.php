@@ -41,4 +41,8 @@ class Requester extends BaseModel
     {
         return $this->tickets()->where('status', '=', Ticket::STATUS_CLOSED);
     }
+
+    public function shouldBeNotified(){
+        return $this->no_reply == false;
+    }
 }

@@ -34,7 +34,9 @@ class NewComment extends Notification implements ShouldQueue
         if (isset($notifiable->settings) && $notifiable->settings->ticket_updated_notification == false) {
             return [];
         }
-
+        if (method_exists($notifiable, 'shouldBeNotified') && !$notifiable->shouldBeNotified() ){
+            return [];
+        }
         return (method_exists($notifiable, 'routeNotificationForSlack') && $notifiable->routeNotificationForSlack() != null) ? ['slack'] : ['mail'];
     }
 
