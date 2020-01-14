@@ -9,8 +9,11 @@
     });
 
     function onAddTag(tag){
+        if (! '{{ isset($object->id) }}'){
+            return;
+        }
         $.post({
-            url: "{{route("{$endpoint}.tags.store",$object)}}",
+            url: "{{url("{$endpoint}/" . ($object->id ?? '') . "/tags")}}",
             data: {
                 "_token": "{{ csrf_token() }}",
                 "tag": tag
@@ -19,8 +22,11 @@
     }
 
     function onRemoveTag(tag){
+        if (! '{{ isset($object->id) }}'){
+            return;
+        }
         $.ajax({
-            url: "{{ route("{$endpoint}.tags.store",$object)}}" + "/" + tag,
+            url: "{{url("{$endpoint}/" . ($object->id ?? '') . "/tags")}}" + '/' + tag,
             method : "DELETE",
             data:{
                 "_token" : "{{ csrf_token() }}",
