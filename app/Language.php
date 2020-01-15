@@ -25,7 +25,7 @@ class Language
             static::IT   => __('languages.it'),
             static::PTBR => __('languages.ptbr'),
             static::TR   => __('languages.tr'),
-            static::ZHCN => __('languages.zhcn')
+            static::ZHCN => __('languages.zhcn'),
         ];
     }
 

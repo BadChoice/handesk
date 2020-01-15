@@ -4,7 +4,7 @@ return [
     'team'                  => '团队',
     'member'                => '成员',
     'invitationLink'        => '邀请链接',
-    'invitationLinkDesc'    => "给您的用户发此链接，如果还没注册请用注册链接。",
+    'invitationLinkDesc'    => '给您的用户发此链接，如果还没注册请用注册链接。',
     'join'                  => '加入',
     'invitedTitle'          => '您被邀请加入:team团队',
     'invitedDesc'           => '加入到此团队，您会看到相关工单，也可以把工单分派给您的其他团队成员。',
