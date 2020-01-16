@@ -10,4 +10,5 @@ return [
     'nl'   => 'Nederlands',
     'ptbr' => 'Brazillian Portuguese',
     'tr'   => 'Turkish',
+    'zhcn' => 'Simplified Chinese',
 ];

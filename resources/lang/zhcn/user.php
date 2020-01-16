@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'you'                        => '您',
+    'name'                       => '名称',
+    'email'                      => '邮箱',
+    'profile'                    => '个人页面',
+    'language'                   => '语言',
+    'password'                   => '密码',
+    'oldPassword'                => '旧密码',
+    'newPassword'                => '新秘密啊',
+    'confirmPassword'            => '确认密码',
+    'changePassword'             => '重置密码',
+    'ticketsSignature'           => '工单签名',
+    'notification'               => '通知',
+    'dailyTasksNotification'     => '每日任务通知|',
+    'newTicketNotification'      => '每日工单通知',
+    'ticketAssignedNotification' => '工单被分配通知',
+    'ticketUpdatedNotification'  => '工单更新通知',
+    'newLeadNotification'        => '新线索通知',
+    'leadAssignedNotification'   => '线索分配通知',
+    'newIdeaNotification'        => '新想法通知',
+    'mentionNotification'        => '被提到通知',
+    'ticketRatedNotification'    => '工单被评价通知',
+    'newUser'                    => '新用户通知',
+];
