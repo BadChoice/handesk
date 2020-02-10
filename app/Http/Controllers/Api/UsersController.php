@@ -21,7 +21,7 @@ class UsersController extends ApiController
       $users=new User;
       $users->name=$request->get('name');
       $users->email=$request->get('email');
-      $users->password=bcrypt($request->get('password'));
+      $users->password=Hash::make($request->get('password'));
 
       $users->save();
 
