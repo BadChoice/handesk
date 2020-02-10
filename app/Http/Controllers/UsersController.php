@@ -1,53 +1,48 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\User;
-use BadChoice\Thrust\Controllers\ThrustController;
-use Hash;
+use App\Http\Requests\Api\UpdateUser;
+use App\RealWorld\Transformers\UserTransformer;
 
-class UsersController extends Controller
+class UsersController extends ApiController
 {
+    /**
+     * UserController constructor.
+     *
+     * @param UserTransformer $transformer
+     */
+    public function __construct(UserTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+
+        $this->middleware('auth.api');
+    }
+
+    /**
+     * Get the authenticated user.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
-        return (new ThrustController)->index('agent');
-        // $users = User::with('teams')->paginate(25);
-        // return view('users.index', ['users' => $users]);
+        return $this->respondWithTransformer(auth()->user());
     }
 
-    public function destroy(User $user)
+    /**
+     * Update the authenticated user and return the user if successful.
+     *
+     * @param UpdateUser $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateUser $request)
     {
-        $user->delete();
+        $user = auth()->user();
 
-        return back();
-    }
+        if ($request->has('user')) {
+            $user->update($request->get('user'));
+        }
 
-    public function create()
-    {
-        return view('users.create');
-    }
-
-    public function store()
-    {
-        $this->validate(request(), [
-            'name'     => 'required|min:3',
-            'email'    => 'required|email|unique:users',
-            'password' => 'required|min:8',
-        ]);
-        User::create([
-            'name'     => request('name'),
-            'email'    => request('email'),
-            'password' => Hash::make(request('password')),
-            'token'    => str_random(60),
-        ]);
-
-        return back();
-    }
-
-    public function impersonate(User $user)
-    {
-        auth()->loginUsingId($user->id);
-
-        return redirect()->route('tickets.index');
+        return $this->respondWithTransformer($user);
     }
 }

@@ -5,6 +5,8 @@ Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
     Route::post('tickets/{ticket}/comments', 'CommentsController@store');
     Route::post('tickets/{ticket}/assign', 'TicketAssignController@store');
     Route::post('teams', 'TeamController@store');
+    Route::get('users', 'UsersController@index');
+    Route::get('users/create', 'UsersController@store');
     Route::get('teams/{team}/tickets', 'TeamTicketsController@index');
     Route::get('teams/{team}/leads', 'TeamLeadsController@index');
 
