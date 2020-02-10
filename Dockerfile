@@ -1,10 +1,9 @@
-FROM php:7.1.7-fpm
+FROM php:7.2.0-fpm
 MAINTAINER Mofesola Babalola <me@mofesola.com>
 
-RUN apt update && apt install -y wget
-RUN wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - \
-        &&  sh -c 'echo "deb http://apt.newrelic.com/debian/ newrelic non-free" \
-           > /etc/apt/sources.list.d/newrelic.list'
+RUN apt update && apt install -y wget gnupg
+RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
 RUN apt update && apt install -y git \
                                  zip \
@@ -20,7 +19,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
         && docker-php-ext-install pdo pdo_mysql soap mbstring tokenizer xml imap
 
-RUN pecl install xdebug-2.5.0
+RUN pecl install xdebug-2.9.0
 
 RUN newrelic-install install
 COPY scripts/newrelic.ini /usr/local/etc/php/conf.d/
