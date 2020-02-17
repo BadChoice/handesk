@@ -15,19 +15,20 @@
         "badchoice/hurricane": "^1.0",
         "badchoice/thrust": "^0.4.1",
         "drewm/mailchimp-api": "^2.4",
+        "fideloper/proxy": "4.0",
         "fzaninotto/faker": "^1.4",
         "gentle/bitbucket-api": "dev-develop",
         "guzzlehttp/guzzle": "^6.3",
         "guzzlehttp/oauth-subscriber": "^0.3",
         "khill/fontawesomephp": "^1.0",
         "laravel/framework": "5.8.*",
+        "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8",
         "league/flysystem-aws-s3-v3": "^1.0",
         "patrickschur/language-detection": "^3.2",
         "php-imap/php-imap": "^2.0",
-        "predis/predis": "^1.1",
-        "fideloper/proxy" : "4.0"
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.2",
