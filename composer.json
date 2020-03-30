@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
+        "ext-imap": "*",
         "badchoice/hurricane": "^1.0",
         "badchoice/thrust": "^0.4.1",
         "drewm/mailchimp-api": "^2.4",
