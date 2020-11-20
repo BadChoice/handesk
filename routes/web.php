@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::resource('leads/{lead}/tags', 'LeadTagsController', ['only' => ['store', 'destroy'], 'as' => 'leads']);
     Route::resource('leads/{lead}/tasks', 'LeadTasksController', ['only' => ['index', 'store', 'update', 'destroy'], 'as' => 'leads']);
 
+    Route::get('attachments/{filename}', 'AttachmentsController@show')->name('attachments');
     Route::resource('tasks', 'TasksController', ['only' => ['index', 'update', 'destroy']]);
 
     Route::resource('teams', 'TeamsController');
