@@ -40,7 +40,7 @@ Its very simple, you just need to follow the standard Laravel installation
 git clone https://github.com/BadChoice/handesk.git
 cd handesk
 composer install
-# Setup your .env file to match you desired database
+# Setup your .env file to match your desired database
 php artisan key:generate
 php artisan migrate --seed
 php artisan storage:link #if you use the local driver
