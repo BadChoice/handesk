@@ -38,8 +38,8 @@ class TicketsController extends ApiController
 
         $ticket = Ticket::createAndNotify(
             request('requester'),
-            request('title'),
-            request('body'),
+            sanitizeJSInjection(request('title')),
+            sanitizeJSInjection(request('body')),
             request('tags')
         );
 
