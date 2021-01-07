@@ -92,7 +92,7 @@ class SimpleTicketTest extends TestCase
                 "name"  => "johndoe",
                 "email" => "john@doe.com"
             ],
-            "title"         => "App <script>is not working</script>",
+            "title"         => "App <script>is not working</script> >>>",
             "body"          => "I can't log in into the application<script>alert(1)</script>",
             "tags"          => ["xef"]
         ],["token" => 'the-api-token']);
@@ -106,8 +106,8 @@ class SimpleTicketTest extends TestCase
                 $this->assertEquals($requester->email, "john@doe.com");
                 $this->assertEquals( $ticket->requester_id, $requester->id);
             });
-            $this->assertEquals ( $ticket->title, "App <\script>is not working</\script>");
-            $this->assertEquals ( $ticket->body, "I can't log in into the application<\script>alert(1)</\script>");
+            $this->assertEquals ( $ticket->title, "App is not working >>>");
+            $this->assertEquals ( $ticket->body, "I can't log in into the applicationalert(1)");
             $this->assertTrue   ( $ticket->tags->pluck('name')->contains("xef") );
             $this->assertEquals( Ticket::STATUS_NEW, $ticket->status);
 
@@ -222,7 +222,7 @@ class SimpleTicketTest extends TestCase
         $response->assertJson   (["data" => ["id" => 2]]);
 
         $this->assertCount  (2, $ticket->comments);
-        $this->assertEquals ($ticket->comments[1]->body, "<\script> this is a comment </\script>");
+        $this->assertEquals ($ticket->comments[1]->body, " this is a comment ");
 
         //TODO: assert notifications
     }

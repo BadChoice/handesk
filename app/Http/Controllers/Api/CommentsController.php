@@ -9,7 +9,7 @@ class CommentsController extends ApiController
 {
     public function store(Ticket $ticket)
     {
-        $comment = $ticket->addComment(null, sanitizeJSInjection(request('body')), request('new_status'));
+    	$comment = $ticket->addComment(null, strip_tags(request('body')), request('new_status'));
         if (! $comment) {
             return $this->respond(['id' => null, 'message' => 'Can not create a comment with empty body'], Response::HTTP_OK);
         }

@@ -55,8 +55,3 @@ function toPercentage($value, $inverse = false)
 {
     return  ($inverse ? 1 - $value : $value) * 100;
 }
-
-function sanitizeJSInjection($text)
-{
-    return str_replace('/script>', '/\script>', str_replace('<script', '<\script', $text));
-}
