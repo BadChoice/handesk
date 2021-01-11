@@ -82,6 +82,51 @@ class SimpleTicketTest extends TestCase
     }
 
     /** @test */
+    public function can_create_a_ticket_with_js_injection(){
+        Notification::fake();
+        $admin      = factory(Admin::class)->create();
+        $nonAdmin   = factory(User::class)->create(["admin" => 0]);
+
+        $response = $this->post('api/tickets',[
+            "requester" => [
+                "name"  => "johndoe",
+                "email" => "john@doe.com"
+            ],
+            "title"         => "App <script>is not working</script> >>>",
+            "body"          => "I can't log in into the application<script>alert(1)</script>",
+            "tags"          => ["xef"]
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus( Response::HTTP_CREATED );
+        $response->assertJson(["data" => ["id" => 1]]);
+
+        tap( Ticket::first(), function($ticket) use($admin) {
+            tap( Requester::first(), function($requester) use ($ticket){
+                $this->assertEquals($requester->name, "johndoe");
+                $this->assertEquals($requester->email, "john@doe.com");
+                $this->assertEquals( $ticket->requester_id, $requester->id);
+            });
+            $this->assertEquals ( $ticket->title, "App is not working >>>");
+            $this->assertEquals ( $ticket->body, "I can't log in into the applicationalert(1)");
+            $this->assertTrue   ( $ticket->tags->pluck('name')->contains("xef") );
+            $this->assertEquals( Ticket::STATUS_NEW, $ticket->status);
+
+            Notification::assertSentTo(
+                [$admin],
+                TicketCreated::class,
+                function ($notification, $channels) use ($ticket) {
+                    return $notification->ticket->id === $ticket->id;
+                }
+            );
+        });
+
+
+        Notification::assertNotSentTo(
+            [$nonAdmin], TicketCreated::class
+        );
+    }
+
+    /** @test */
     public function requester_is_required(){
         $response = $this->post('api/tickets',$this->validParams([
             "requester" => "",
@@ -159,6 +204,25 @@ class SimpleTicketTest extends TestCase
 
         $this->assertCount  (2, $ticket->comments);
         $this->assertEquals ($ticket->comments[1]->body, "this is a comment");
+
+        //TODO: assert notifications
+    }
+
+    /** @test */
+    public function requester_can_comment_the_ticket_with_js_injection(){
+        Notification::fake();
+        $ticket = factory(Ticket::class)->create();
+        $ticket->comments()->create(["body" => "first comment", "new_status" => 1]);
+
+        $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "body" => "<script> this is a comment </script>"
+        ],["token" => 'the-api-token']);
+
+        $response->assertStatus ( Response::HTTP_CREATED );
+        $response->assertJson   (["data" => ["id" => 2]]);
+
+        $this->assertCount  (2, $ticket->comments);
+        $this->assertEquals ($ticket->comments[1]->body, " this is a comment ");
 
         //TODO: assert notifications
     }
