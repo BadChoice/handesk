@@ -148,4 +148,7 @@ return [
         'subject'               => 'subject',
         'message'               => 'message',
     ],
+    "emptyBodyComment"          => "Can not create a comment with empty body.",
+    "commentCreated"            => "Comment created.",
+    "ticketCommentInjection"    => "Error submitting comment. It is not being sent to the correct ticket.",
 ];
