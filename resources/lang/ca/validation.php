@@ -144,4 +144,5 @@ return [
     "emptyBodyComment"          => "No pots crear un comentari buit.",
     "commentCreated"            => "Comentari creat.",
     "ticketCommentInjection"    => "Error al enviar el comentari. No s'està guardant al ticket que toca.",
+    "solvedTicket"              => "Ticket solucionat.",
 ];

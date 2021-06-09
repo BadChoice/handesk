@@ -22,6 +22,10 @@ class CommentsController extends ApiController
 
     	$comment = $ticket->addComment(null, strip_tags(request('body')), request('new_status'));
 
+        if ( request('new_status') == $ticket::STATUS_SOLVED ) {
+            return $this->respond(['id' => null, 'message' => __('validation.solvedTicket')], Response::HTTP_CREATED);
+        }
+
         if (! $comment) {
             return $this->respond(['id' => null, 'message' => __('validation.emptyBodyComment')], Response::HTTP_BAD_REQUEST);
         }
