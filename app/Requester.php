@@ -19,7 +19,7 @@ class Requester extends BaseModel
 
     public static function validateTicketComment($requester, $ticketRequester)
     {
-        if (! ($requester["name"] == $ticketRequester->name && $requester["email"] == $ticketRequester->email)) {
+        if (! ($requester['name'] == $ticketRequester->name && $requester['email'] == $ticketRequester->email)) {
             throw new \Exception(__('validation.ticketCommentInjection'));
         }
     }
