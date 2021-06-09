@@ -17,11 +17,6 @@ class ApiController extends Controller
         return response(['error' => $error], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    protected function respondJSON($response)
-    {
-        return response()->json($response);
-    }
-
     public function callAction($method, $parameters)
     {
         try {

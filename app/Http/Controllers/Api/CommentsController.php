@@ -17,15 +17,15 @@ class CommentsController extends ApiController
         try {
             Requester::validateTicketComment(request("requester"), $ticketRequester);
         } catch (\Exception $e) {
-            return $this->respondJSON(['id' => null, 'message' => $e->getMessage(), 'statusCode' => Response::HTTP_BAD_REQUEST]);
+            return $this->respond(['id' => null, 'message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
     	$comment = $ticket->addComment(null, strip_tags(request('body')), request('new_status'));
 
         if (! $comment) {
-            return $this->respondJSON(['id' => null, 'message' => __('validation.emptyBodyComment'), 'statusCode' => Response::HTTP_NO_CONTENT]);
+            return $this->respond(['id' => null, 'message' => __('validation.emptyBodyComment')], Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->respondJSON(['id' => $comment->id, 'message' => __('validation.commentCreated'), 'statusCode' => Response::HTTP_CREATED]);
+        return $this->respond(['id' => $comment->id, 'message' => __('validation.commentCreated')], Response::HTTP_CREATED);
     }
 }
