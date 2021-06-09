@@ -140,8 +140,8 @@ return [
         'subject'               => 'asunto',
         'message'               => 'mensaje',
     ],
-    "emptyBodyComment"          => "No puedes crear un comentario vacio.",
-    "commentCreated"            => "Comentario creado.",
-    "ticketCommentInjection"    => "Error al enviar el comentario. No se está enviando al ticket que toca.",
-    "solvedTicket"              => "Ticket solucionado.",
+    'emptyBodyComment'          => 'No puedes crear un comentario vacio.',
+    'commentCreated'            => 'Comentario creado.',
+    'ticketCommentInjection'    => 'Error al enviar el comentario. No se está enviando al ticket que toca.',
+    'solvedTicket'              => 'Ticket solucionado.',
 ];

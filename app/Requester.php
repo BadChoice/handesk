@@ -19,7 +19,7 @@ class Requester extends BaseModel
 
     public static function validateTicketComment($requester, $ticketRequester)
     {
-        if ( ! ($requester["name"] == $ticketRequester->name && $requester["email"] == $ticketRequester->email) ) {
+        if (!($requester["name"] == $ticketRequester->name && $requester["email"] == $ticketRequester->email)) {
             throw new \Exception(__('validation.ticketCommentInjection'));
         }
     }
@@ -49,7 +49,8 @@ class Requester extends BaseModel
         return $this->tickets()->where('status', '=', Ticket::STATUS_CLOSED);
     }
 
-    public function shouldBeNotified(){
+    public function shouldBeNotified()
+    {
         return $this->no_reply == false;
     }
 }

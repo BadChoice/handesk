@@ -15,14 +15,14 @@ class CommentsController extends ApiController
 
         $ticketRequester = Requester::findOrFail($ticket->requester_id);
         try {
-            Requester::validateTicketComment(request("requester"), $ticketRequester);
+            Requester::validateTicketComment(request('requester'), $ticketRequester);
         } catch (\Exception $e) {
             return $this->respond(['id' => null, 'message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
-    	$comment = $ticket->addComment(null, strip_tags(request('body')), request('new_status'));
+        $comment = $ticket->addComment(null, strip_tags(request('body')), request('new_status'));
 
-        if ( request('new_status') == $ticket::STATUS_SOLVED ) {
+        if (request('new_status') == $ticket::STATUS_SOLVED) {
             return $this->respond(['id' => null, 'message' => __('validation.solvedTicket')], Response::HTTP_CREATED);
         }
 

@@ -141,7 +141,7 @@ return [
         'available'             => 'disponible',
         'size'                  => 'taille',
     ],
-    "emptyBodyComment"          => "Impossible de créer un commentaire avec un corps vide.",
-    "commentCreated"            => "Commentaire créé.",
-    "ticketCommentInjection"    => "Erreur lors de l'envoi du commentaire. Il n'est pas envoyé au bon ticket.",
+    'emptyBodyComment'          => 'Impossible de créer un commentaire avec un corps vide.',
+    'commentCreated'            => 'Commentaire créé.',
+    'ticketCommentInjection'    => 'Erreur lors de l\'envoi du commentaire. Il n\'est pas envoyé au bon ticket.',
 ];
