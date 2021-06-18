@@ -151,5 +151,5 @@ return [
     'emptyBodyComment'          => 'Can not create a comment with empty body.',
     'commentCreated'            => 'Comment created.',
     'ticketCommentInjection'    => 'Error submitting comment. It is not being sent to the correct ticket.',
-    'solvedTicket'              => 'ticket résolu.',
+    'solvedTicket'              => 'Ticket résolu.',
 ];
