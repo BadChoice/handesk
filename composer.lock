@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2313d66b459957f4b8966a0547cebb2",
+    "content-hash": "e5fb5251bb835c9149c3fc6a55536577",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2422,26 +2422,44 @@
         },
         {
             "name": "php-imap/php-imap",
-            "version": "2.2.5",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barbushin/php-imap.git",
-                "reference": "3be0a7e1fbd99c4fd35b3ae3e90b130d44520b5d"
+                "reference": "7ca3d19451bfe6de47186b52f4b266179a5858b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barbushin/php-imap/zipball/3be0a7e1fbd99c4fd35b3ae3e90b130d44520b5d",
-                "reference": "3be0a7e1fbd99c4fd35b3ae3e90b130d44520b5d",
+                "url": "https://api.github.com/repos/barbushin/php-imap/zipball/7ca3d19451bfe6de47186b52f4b266179a5858b9",
+                "reference": "7ca3d19451bfe6de47186b52f4b266179a5858b9",
                 "shasum": ""
             },
             "require": {
+                "ext-fileinfo": "*",
+                "ext-iconv": "*",
                 "ext-imap": "*",
-                "php": ">=5.3.0"
+                "ext-mbstring": "*",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "maglnet/composer-require-checker": "^2.0",
+                "paragonie/hidden-string": "^1.0",
+                "phpunit/phpunit": "^8.5",
+                "povils/phpmnd": "^2.2",
+                "psalm/plugin-phpunit": "^0.10.0",
+                "roave/security-advisories": "dev-master",
+                "sebastian/phpcpd": "^4.1",
+                "vimeo/psalm": "^3.11.5"
+            },
+            "suggest": {
+                "ext-fileinfo": "To facilitate IncomingMailAttachment::getFileInfo() auto-detection"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PhpImap\\": "src/PhpImap/"
+                    "PhpImap\\": "src/PhpImap"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2469,7 +2487,7 @@
                 "issues": "https://github.com/barbushin/php-imap/issues",
                 "source": "https://github.com/barbushin/php-imap/tree/master"
             },
-            "time": "2017-10-06T05:49:25+00:00"
+            "time": "2020-06-14T20:18:24+00:00"
         },
         {
             "name": "phpoption/phpoption",
