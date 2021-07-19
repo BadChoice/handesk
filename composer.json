@@ -16,7 +16,7 @@
         "badchoice/hurricane": "^1.0",
         "badchoice/thrust": "^0.4.1",
         "drewm/mailchimp-api": "^2.4",
-        "fideloper/proxy": "4.0",
+        "fideloper/proxy": "4.4.1",
         "fzaninotto/faker": "^1.4",
         "gentle/bitbucket-api": "dev-develop",
         "guzzlehttp/guzzle": "^6.3",
