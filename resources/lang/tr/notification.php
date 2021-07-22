@@ -16,4 +16,6 @@ return [
     'rateTicket'         => 'Talep Reytingi',
     'rateTicketDesc'     => 'Bu taleple ilgili geri bildirimlerinizi almak isteriz, iyileştirmeye devam edebilmemiz için reytingi tıklamanız yeterlidir!',
     'ticketRated'        => 'Talep Değerlendirildi',
+    'answerTicket'       => 'Add a comment by replying to this email or',
+    'answerTicketLink'   => 'view the ticket in Handesk',
 ];

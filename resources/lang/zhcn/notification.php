@@ -16,4 +16,6 @@ return [
     'rateTicket'         => '评级工单',
     'rateTicketDesc'     => '我们希望得到您对辞工单的看法，请给我们打分，让我们变得更加完善。',
     'ticketRated'        => '工单已被评价',
+    'answerTicket'       => 'Add a comment by replying to this email or',
+    'answerTicketLink'   => 'view the ticket in Handesk',
 ];

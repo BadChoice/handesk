@@ -16,4 +16,6 @@ return [
     'rateTicket'         => 'Avaliar ticket*',
     'rateTicketDesc'     => 'Gostaríamos muito de receber seus comentários sobre este ticket, basta clicar na classificação para continuar melhorando!*',
     'ticketRated'        => 'Ticket avaliado*',
+    'answerTicket'       => 'Adicione um comentário respondendo a este e-mail ou',
+    'answerTicketLink'   => 'ver o ingresso em Handesk',
 ];
