@@ -18,5 +18,5 @@ return [
     'ticketUpdatedNotification'  => 'Benachrichtigung bei Ticket-Aktualisierung',
     'newLeadNotification'        => 'Benachrichtigung bei neuem Lead',
     'leadAssignedNotification'   => 'Benachrichtigung bei Lead-Zuweisung',
-    'ticketRatedNotification'    => 'Ticket rated*',
+    'ticketRatedNotification'    => 'Ticket bewertet*',
 ];
