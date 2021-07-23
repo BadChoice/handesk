@@ -15,4 +15,6 @@ return [
     'rateTicket'         => 'Rate ticket*',
     'rateTicketDesc'     => 'We would love to get your feedback about this ticket, just click the rating so we can keep improving!*',
     'ticketRated'        => 'Ticket rated*',
+    'answerTicket'       => 'Ajoutez un commentaire en répondant à cet e-mail ou',
+    'answerTicketLink'   => 'voir le ticket dans Handesk',
 ];

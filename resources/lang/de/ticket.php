@@ -19,6 +19,7 @@ return [
     'updated'    => 'Aktualisiert',
     'update'     => 'Update',
     'comment'    => 'Kommentiert',
+    'commentAs'  => 'Kommentiert als:',
     'assign'     => 'Zugewiesen',
     'status'     => 'Status',
     'tag'        => 'Schlüsselwort|Schlüsselworte',

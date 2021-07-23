@@ -7,6 +7,6 @@ return [
     'onTouchResolutionRatio' => 'In einem Schritt gelöst Ratio',
     'reopenedRatio'          => 'Wiedereröffnungsratio',
     'filter'                 => 'Filter',
-    'averageRating'          => 'Average rating*',
-    'analytics'              => 'Analítiques*',
+    'averageRating'          => 'Durchschnittliche Bewertung*',
+    'analytics'              => 'Analyse*',
 ];

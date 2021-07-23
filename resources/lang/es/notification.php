@@ -16,4 +16,6 @@ return [
     'rateTicket'         => 'Clasifica el tiquet',
     'rateTicketDesc'     => 'Nos encantaría saber tu feedback sobre este tiquet. Simplemente pulsa sobre el número para ayudarnos a seguir mejorando!',
     'ticketRated'        => 'Tiquet clasificado',
+    'answerTicket'       => 'Añada un comentario respondiendo a este correo electrónico o',
+    'answerTicketLink'   => 'ver el ticket en Handesk',
 ];
