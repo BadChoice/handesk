@@ -23,6 +23,14 @@ Route::group(['prefix' => 'requester'], function () {
 
 Route::post('webhook/bitbucket', 'WebhookController@store');
 
+Route::group(['prefix' => 'product-backlogs'], function () {
+    Route::get('/list/{mode?}', 'ProductBacklogController@index')->name('product_backlogs.index');
+    Route::get('/show/{slug}', 'ProductBacklogController@show')->name('product_backlogs.show');
+    Route::get('/create', 'ProductBacklogController@create')->name('product_backlogs.create');
+    Route::post('/store', 'ProductBacklogController@store')->name('product_backlogs.store');
+    Route::get('/edit/{slug}', 'ProductBacklogController@edit')->name('product_backlogs.edit');
+    Route::post('/update/{slug}', 'ProductBacklogController@update')->name('product_backlogs.update');
+});
 Route::group(['middleware' => ['auth', 'userLocale']], function () {
     Route::get('profile', 'ProfileController@show')->name('profile.show');
     Route::put('profile', 'ProfileController@update')->name('profile.update');
