@@ -28,7 +28,7 @@ class RateTicket extends Notification
     {
         return (new MailMessage)
             ->subject(__('notification.rateTicket').": #{$this->ticket->id}: {$this->ticket->title}")
-            ->replyTo(config('mail.fetch.username'))
+            ->replyTo("itservices@servicecertainty.co.uk")
             ->view('emails.rateTicket', [
                     'title'   => __('notification.rateTicket'),
                     'ticket'  => $this->ticket,

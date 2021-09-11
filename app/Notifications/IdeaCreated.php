@@ -54,9 +54,7 @@ class IdeaCreated extends Notification implements ShouldQueue
                     'url'   => route('ideas.show', $this->idea),
                 ]
             );
-        if ($this->idea->requester->email) {
-            $mail->from($this->idea->requester->email, $this->idea->requester->name);
-        }
+        $mail->from("itservices@servicecertainty.co.uk");
 
         return $mail;
     }

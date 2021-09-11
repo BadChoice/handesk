@@ -45,16 +45,14 @@ class TicketCreated extends Notification implements ShouldQueue
     {
         $mail = (new MailMessage)
             ->subject(__('notification.newTicket').": #{$this->ticket->id}: {$this->ticket->title}")
-            ->replyTo(config('mail.fetch.username'))
+            ->replyTo("itservices@servicecertainty.co.uk")
             ->view('emails.ticket', [
                     'title'  => __('notification.newTicketCreated'),
                     'ticket' => $this->ticket,
                     'url'    => route('tickets.show', $this->ticket),
                 ]
             );
-        if ($this->ticket->requester->email) {
-            $mail->from($this->ticket->requester->email, $this->ticket->requester->name);
-        }
+        $mail->from("itservices@servicecertainty.co.uk");
 
         return $mail;
     }

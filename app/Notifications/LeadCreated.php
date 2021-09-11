@@ -44,7 +44,7 @@ class LeadCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->replyTo(config('mail.fetch.username'))
+                    ->replyTo("itservices@servicecertainty.co.uk")
                     ->view('emails.lead', [
                         'title' => __('notification.newLeadCreatedDesc'),
                         'lead'  => $this->lead,

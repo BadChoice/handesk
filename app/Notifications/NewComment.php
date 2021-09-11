@@ -51,7 +51,7 @@ class NewComment extends Notification implements ShouldQueue
     {
         $mail = (new MailMessage)
             ->subject(__('notification.ticketUpdated').": #{$this->ticket->id}: {$this->ticket->title}")
-            ->replyTo(config('mail.fetch.username'))
+            ->replyTo("itservices@servicecertainty.co.uk")
             ->view('emails.ticket', [
                     'title'   => __('notification.ticketUpdated'),
                     'ticket'  => $this->ticket,
@@ -59,9 +59,7 @@ class NewComment extends Notification implements ShouldQueue
                     'url'     => $notifiable instanceof Requester ? route('requester.tickets.show', $this->ticket->public_token) : route('tickets.show', $this->ticket),
                 ]
             );
-        if ($this->shouldUseAgentName()) {
-            $mail->from(config('mail.fetch.username'), $this->comment->author()->name);
-        }
+        $mail->from("itservices@servicecertainty.co.uk");
 
         return $mail;
     }

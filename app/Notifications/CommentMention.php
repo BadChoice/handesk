@@ -57,9 +57,7 @@ class CommentMention extends Notification implements ShouldQueue
                     'url'     => $notifiable instanceof Requester ? route('requester.tickets.show', $this->ticket->public_token) : route('tickets.show', $this->ticket),
                 ]
             );
-        if ($this->shouldUseAgentName()) {
-            $mail->from(config('mail.fetch.username'), $this->comment->author()->name);
-        }
+        $mail->from("itservices@servicecertainty.co.uk");
 
         return $mail;
     }

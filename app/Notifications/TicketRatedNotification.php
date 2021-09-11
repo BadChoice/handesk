@@ -37,7 +37,7 @@ class TicketRatedNotification extends Notification
     {
         return (new MailMessage)
             ->subject(__('notification.ticketRated').": #{$this->ticket->id}: {$this->ticket->title}")
-            ->replyTo(config('mail.fetch.username'))
+            ->replyTo("itservices@servicecertainty.co.uk")
             ->view('emails.ticketRated', [
                     'title'  => __('notification.ticketRated'),
                     'ticket' => $this->ticket,
