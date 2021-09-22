@@ -10,26 +10,26 @@ Check out the screenshots to see how nice it looks, and feel free to contribute 
 We will keep adding features as we need them, but our basic workflow is totally covered :D
 
 ## Features
-· Email polling (new tickets and tickets updates)
-· Email attachments as ticket attachments (using laravel storage driver)
-· API for creating/updating/fetching tickets/leads so you can display them into your main app
-· Instant email/slack notifications when tickets are created/updated
-· Everything is unlimited
-· Lead management (With its API as well)
-· Auto lead subscription to mailChimp based on its tags
-· Tickets reporting
-· Tickets internal notes
-· Tickets can be escalated, so assistants can comment on them to help the teams
-· Can merge tickets
-· Mention agents with @name so they get notified
-· Lead tasks, that can have a due date, and sending daily tasks email
-· Create issues to your code repository directly from the ticket
-· Updating the ticket automatically when an issue is marked as resolved
-· UI multi language support (default en, alternative ca, de, fr, es)
-· Roadmap module, you can create ideas that come from your customers or your own, give them deadlines and integrate them with your repository manager,
+- Email polling (new tickets and tickets updates)
+- Email attachments as ticket attachments (using laravel storage driver)
+- API for creating/updating/fetching tickets/leads so you can display them into your main app
+- Instant email/slack notifications when tickets are created/updated
+- Everything is unlimited
+- Lead management (With its API as well)
+- Auto lead subscription to mailChimp based on its tags
+- Tickets reporting
+- Tickets internal notes
+- Tickets can be escalated, so assistants can comment on them to help the teams
+- Can merge tickets
+- Mention agents with @name so they get notified
+- Lead tasks, that can have a due date, and sending daily tasks email
+- Create issues to your code repository directly from the ticket
+- Updating the ticket automatically when an issue is marked as resolved
+- UI multi language support (default en, alternative ca, de, fr, es)
+- Roadmap module, you can create ideas that come from your customers or your own, give them deadlines and integrate them with your repository manager,
 you can even create ideas from support tickets so you never lose track.
-· You can also create ideas by sending an email to you support accounts starting with `Idea:` it will create an idea instead of a ticket
-· Ticket rating, when a ticket is solved a rating email is sent to the customer (check config/handesk.php to disable it)
+- You can also create ideas by sending an email to you support accounts starting with `Idea:` it will create an idea instead of a ticket
+- Ticket rating, when a ticket is solved a rating email is sent to the customer (check config/handesk.php to disable it)
 
 > Follow us on twitter @codepassion to stay tuned
 
