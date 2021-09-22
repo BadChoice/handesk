@@ -31,7 +31,7 @@ you can even create ideas from support tickets so you never lose track.
 - You can also create ideas by sending an email to you support accounts starting with `Idea:` it will create an idea instead of a ticket
 - Ticket rating, when a ticket is solved a rating email is sent to the customer (check config/handesk.php to disable it)
 
-> Follow us on twitter @codepassion to stay tuned
+> Follow us on twitter [@codepassionapp(https://twitter.com/codepassionapp) to stay tuned
 
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation
@@ -133,6 +133,9 @@ And you can join with the following [invitation](https://handesk.slack.com/share
 Join in with the following link
 
 [Join handesk slack](https://join.slack.com/t/handesk/shared_invite/enQtMzg4MzE4ODcwNzg2LTlmZTk4NGRjZDA5N2ExYTI2ZDhhNzAyOThmMDM1YjgwZTMzZTQ5ZjkxNDVlNzIwY2ZkZWExN2U2NDUwNWFiOWU)
+
+Or you can follow me on twitter too
+[@codepassionapp(https://twitter.com/codepassionapp)
 
 ## Development
 We try to follow a TDD approach as well as some mixed functional CSS for the frontend.
