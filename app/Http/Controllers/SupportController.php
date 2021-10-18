@@ -28,6 +28,11 @@ class SupportController extends Controller
             $ticket->assignToTeam(request('team_id'));
         }
 
-        return back();
+        return redirect()->route('requester.newticketconfirmation');
+    }
+
+    public function confirmation()
+    {
+        return view('tickets.newcreateconfirmation');
     }
 }

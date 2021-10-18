@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get("newticket", "SupportController@create");
 Route::post("newticket/store", "SupportController@store")->name('requester.newticket');
-
+Route::get("newticket/confirmation", "SupportController@confirmation")->name('requester.newticketconfirmation');
 
 Route::group(['prefix' => 'requester'], function () {
     Route::get('tickets/{token}', 'RequesterTicketsController@show')->name('requester.tickets.show');
