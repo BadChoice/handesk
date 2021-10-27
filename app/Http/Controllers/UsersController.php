@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use BadChoice\Thrust\Controllers\ThrustController;
 use Hash;
+use Illuminate\Support\Str;
 
 class UsersController extends Controller
 {
@@ -38,7 +39,7 @@ class UsersController extends Controller
             'name'     => request('name'),
             'email'    => request('email'),
             'password' => Hash::make(request('password')),
-            'token'    => str_random(60),
+            'token'    => Str::random(60),
         ]);
 
         return back();

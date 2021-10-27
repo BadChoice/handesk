@@ -6,6 +6,7 @@ use App\Authenticatable\Admin;
 use App\Notifications\CommentMention;
 use App\Notifications\NewComment;
 use App\Services\Mentions;
+use Illuminate\Support\Arr;
 use Notification;
 
 class Comment extends BaseModel
@@ -34,7 +35,7 @@ class Comment extends BaseModel
 
     public function getAuthorAttribute()
     {
-        return array_only($this->author()->toArray(), ['name', 'email']);
+        return Arr::only($this->author()->toArray(), ['name', 'email']);
     }
 
     public function notifyNewComment()
