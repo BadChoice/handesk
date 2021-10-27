@@ -1,7 +1,7 @@
 <?php
 
 Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
-    Route::resource('tickets', 'TicketsController', ['except' => 'destroy', ['as' => 'api.tickets']]);
+    Route::resource('tickets', 'TicketsController', ['except' => 'destroy']);
     Route::post('tickets/{ticket}/comments', 'CommentsController@store');
     Route::post('tickets/{ticket}/assign', 'TicketAssignController@store');
     Route::post('users/create', 'UsersController@store');
@@ -17,6 +17,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
 
 Route::post('agent/login', 'Api\AgentController@login');
 Route::group(['namespace' => 'Api', 'prefix' => 'agent', 'middleware' => 'apiAuthAgent'], function () {
-    Route::resource('tickets', 'AgentController', ['only' => 'index', 'as' => 'api.agent.tickets']);//->name('agent.tickets');
+    Route::resource('tickets', 'AgentController', ['only' => 'index']);//->name('agent.tickets');
     Route::resource('tickets.comments', 'AgentTicketCommentsController', ['only' => ['index', 'store']]);
 });

@@ -193,12 +193,13 @@ class SimpleTicketTest extends TestCase
     public function requester_can_comment_the_ticket(){
         Notification::fake();
         $ticket = factory(Ticket::class)->create();
+        $requester = $ticket->requester;
         $ticket->comments()->create(["body" => "first comment", "new_status" => 1]);
 
         $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "requester" => $requester->toArray(),
             "body" => "this is a comment"
         ],["token" => 'the-api-token']);
-
         $response->assertStatus ( Response::HTTP_CREATED );
         $response->assertJson   (["data" => ["id" => 2]]);
 
@@ -212,9 +213,11 @@ class SimpleTicketTest extends TestCase
     public function requester_can_comment_the_ticket_with_js_injection(){
         Notification::fake();
         $ticket = factory(Ticket::class)->create();
+        $requester = $ticket->requester;
         $ticket->comments()->create(["body" => "first comment", "new_status" => 1]);
 
         $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "requester" => $requester->toArray(),
             "body" => "<script> this is a comment </script>"
         ],["token" => 'the-api-token']);
 
@@ -233,6 +236,7 @@ class SimpleTicketTest extends TestCase
         $ticket = factory(Ticket::class)->create(["status" => Ticket::STATUS_SOLVED]);
 
         $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "requester" => $ticket->requester->toArray(),
             "body" => "this is a comment"
         ],["token" => 'the-api-token']);
 

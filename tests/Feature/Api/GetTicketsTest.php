@@ -3,12 +3,10 @@
 namespace Tests\Feature;
 
 use App\Comment;
-use App\Notifications\TicketAssigned;
-use App\Notifications\TicketCreated;
 use App\Requester;
 use App\Ticket;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class GetTicketsTest extends TestCase
 {
