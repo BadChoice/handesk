@@ -13,5 +13,6 @@ class CloseSolvedTickets extends Command
     {
         dispatch(new \App\Jobs\CloseSolvedTickets());
         $this->info('Tickets closed');
+        return 0;
     }
 }

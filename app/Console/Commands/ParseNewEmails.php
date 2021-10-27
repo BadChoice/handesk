@@ -13,5 +13,6 @@ class ParseNewEmails extends Command
     {
         \App\Jobs\ParseNewEmails::dispatch();
         $this->info('Done');
+        return 0;
     }
 }

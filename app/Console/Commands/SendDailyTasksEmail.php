@@ -13,5 +13,6 @@ class SendDailyTasksEmail extends Command
     {
         dispatch(new \App\Jobs\SendDailyTasksEmail());
         $this->info('Daily tasks email sent');
+        return 0;
     }
 }

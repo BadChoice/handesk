@@ -17,6 +17,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
 
 Route::post('agent/login', 'Api\AgentController@login');
 Route::group(['namespace' => 'Api', 'prefix' => 'agent', 'middleware' => 'apiAuthAgent'], function () {
-    Route::resource('tickets', 'AgentController', ['only' => 'index']);
+    Route::resource('tickets', 'AgentController', ['only' => 'index']);//->name('agent.tickets');
     Route::resource('tickets.comments', 'AgentTicketCommentsController', ['only' => ['index', 'store']]);
 });
