@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2313d66b459957f4b8966a0547cebb2",
+    "content-hash": "2a8e8e5677583fd0d34d2b0e937b40fd",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2371,16 +2371,16 @@
         },
         {
             "name": "patrickschur/language-detection",
-            "version": "v3.4.2",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/patrickschur/language-detection.git",
-                "reference": "9d7a45118289939ef46d8a02763c7fec32eed7ba"
+                "reference": "2457cd130cb5d0f03d7c4337b1f1ca40dcc9de7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/patrickschur/language-detection/zipball/9d7a45118289939ef46d8a02763c7fec32eed7ba",
-                "reference": "9d7a45118289939ef46d8a02763c7fec32eed7ba",
+                "url": "https://api.github.com/repos/patrickschur/language-detection/zipball/2457cd130cb5d0f03d7c4337b1f1ca40dcc9de7b",
+                "reference": "2457cd130cb5d0f03d7c4337b1f1ca40dcc9de7b",
                 "shasum": ""
             },
             "require": {
@@ -2416,9 +2416,9 @@
             ],
             "support": {
                 "issues": "https://github.com/patrickschur/language-detection/issues",
-                "source": "https://github.com/patrickschur/language-detection/tree/v3.4.2"
+                "source": "https://github.com/patrickschur/language-detection/tree/master"
             },
-            "time": "2019-11-16T14:23:06+00:00"
+            "time": "2020-08-12T14:46:28+00:00"
         },
         {
             "name": "php-imap/php-imap",
