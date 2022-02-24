@@ -14,7 +14,7 @@
         "php": ">=7.0.0",
         "ext-imap": "*",
         "badchoice/hurricane": "^1.0",
-        "badchoice/thrust": "^0.4.1",
+        "badchoice/thrust": "^0.5.1",
         "drewm/mailchimp-api": "^2.4",
         "fideloper/proxy": "4.0",
         "fzaninotto/faker": "^1.4",
