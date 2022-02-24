@@ -21,7 +21,7 @@
         "gentle/bitbucket-api": "dev-develop",
         "guzzlehttp/guzzle": "^6.3",
         "guzzlehttp/oauth-subscriber": "^0.3",
-        "khill/fontawesomephp": "^1.0",
+        "khill/fontawesomephp": "^2.0",
         "laravel/framework": "5.8.*",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^1.0",
