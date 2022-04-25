@@ -11,7 +11,7 @@ return [
     'currentImpact'     => 'Impacto atual',
     'edit'              => 'Editar',
     'fromTicket'        => 'Notificação | Balde de ideias:
-Seu ingresso foi fechado como um problema e foi criado como uma ideia no nosso repositório de ideias.
+Seu ticket foi fechado como um problema e foi criado como uma ideia no nosso repositório de ideias.
 
 Todas as ideias serão analisadas por nossa equipe e avaliadas sua viabilidade.
 

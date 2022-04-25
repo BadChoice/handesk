@@ -6,7 +6,7 @@ return [
     'status'     => 'Status|Status',
     'all'        => 'Todos|Todos',
     'mine'       => 'Minha|Minhas',
-    'company'    => 'Compania',
+    'company'    => 'Companhia',
     'address'    => 'Endereço',
     'postalCode' => 'CEP',
     'username'   => 'Usuário',
