@@ -196,6 +196,10 @@ class SimpleTicketTest extends TestCase
         $ticket->comments()->create(["body" => "first comment", "new_status" => 1]);
 
         $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "requester" => [
+                "name" => $ticket->requester->name,
+                "email" => $ticket->requester->email
+            ],
             "body" => "this is a comment"
         ],["token" => 'the-api-token']);
 
@@ -215,6 +219,10 @@ class SimpleTicketTest extends TestCase
         $ticket->comments()->create(["body" => "first comment", "new_status" => 1]);
 
         $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "requester" => [
+                "name" => $ticket->requester->name,
+                "email" => $ticket->requester->email
+            ],
             "body" => "<script> this is a comment </script>"
         ],["token" => 'the-api-token']);
 
@@ -233,6 +241,10 @@ class SimpleTicketTest extends TestCase
         $ticket = factory(Ticket::class)->create(["status" => Ticket::STATUS_SOLVED]);
 
         $response = $this->post("api/tickets/{$ticket->id}/comments", [
+            "requester" => [
+                "name" => $ticket->requester->name,
+                "email" => $ticket->requester->email
+            ],
             "body" => "this is a comment"
         ],["token" => 'the-api-token']);
 
