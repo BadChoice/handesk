@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use Illuminate\Notifications\Messages\SlackMessage;
+use Illuminate\Support\Str;
 
 class BaseTicketSlackMessage extends SlackMessage
 {
@@ -32,7 +33,7 @@ class BaseTicketSlackMessage extends SlackMessage
             return;
         }
         $slackRoute = $route[1];
-        if (starts_with($slackRoute, '#') || starts_with($slackRoute, '@')) {
+        if (Str::startsWith($slackRoute, '#') || Str::startsWith($slackRoute, '@')) {
             $this->to($slackRoute);
         }
     }

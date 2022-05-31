@@ -18,6 +18,7 @@ use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Gravatar;
 use BadChoice\Thrust\Fields\Link;
 use BadChoice\Thrust\Resource;
+use Illuminate\Support\Arr;
 
 class Ticket extends Resource
 {
@@ -56,7 +57,7 @@ class Ticket extends Resource
 
     public function update($id, $newData)
     {
-        return parent::update($id, array_except($newData, ['created_at', 'updated_at']));
+        return parent::update($id, Arr::except($newData, ['created_at', 'updated_at']));
     }
 
     public function mainActions()
