@@ -10,11 +10,11 @@ class WebhookController extends Controller
 {
     public function store()
     {
-        $issueId         = request('issue')['id'];
-        $repository      = request('repository')['full_name'];
-        $newStatus       = request('issue')['state'];
-        $comment         = request('comment')['content']['raw'];
-        $userDisplayName = request('comment')['user']['display_name'] ?? 'Unknown';
+        $issueId         = request('issue.id');
+        $repository      = request('repository.full_name');
+        $newStatus       = request('issue.state');
+        $comment         = request('comment.content.raw');
+        $userDisplayName = request('comment.user.display_name', 'Unknown');
 
         if (! $issueId) {
             $payload         = json_decode(request()->getContent());

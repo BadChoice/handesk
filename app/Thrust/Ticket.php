@@ -18,6 +18,8 @@ use BadChoice\Thrust\Fields\Date;
 use BadChoice\Thrust\Fields\Gravatar;
 use BadChoice\Thrust\Fields\Link;
 use BadChoice\Thrust\Resource;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class Ticket extends Resource
 {
@@ -32,7 +34,7 @@ class Ticket extends Resource
             //Gravatar::make('requester.email')->withDefault('https://raw.githubusercontent.com/BadChoice/handesk/master/public/images/default-avatar.png'),
             TicketStatusField::make('id', ''),
             Link::make('title', __('ticket.subject'))->displayCallback(function ($ticket) {
-                return "#{$ticket->id} · ".str_limit($ticket->subject ?? $ticket->title, 25);
+                return "#{$ticket->id} · ".Str::limit($ticket->subject ?? $ticket->title, 25);
             })->route('tickets.show')->sortable(),
             Link::make('requester.id', trans_choice('ticket.requester', 1))->displayCallback(function ($ticket) {
                 return $ticket->requester->name ?? '--';
@@ -56,7 +58,7 @@ class Ticket extends Resource
 
     public function update($id, $newData)
     {
-        return parent::update($id, array_except($newData, ['created_at', 'updated_at']));
+        return parent::update($id, Arr::except($newData, ['created_at', 'updated_at']));
     }
 
     public function mainActions()

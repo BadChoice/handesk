@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Team;
+use Illuminate\Support\Str;
 
 class TeamsController extends Controller
 {
@@ -25,7 +26,7 @@ class TeamsController extends Controller
             'name'              => request('name'),
             'email'             => request('email'),
             'slack_webhook_url' => request('slack_webhook_url'),
-            'token'             => str_random(24),
+            'token'             => Str::random(24),
         ]);
 
         return redirect()->route('teams.index');
@@ -42,7 +43,7 @@ class TeamsController extends Controller
             'name'              => request('name'),
             'email'             => request('email'),
             'slack_webhook_url' => request('slack_webhook_url'),
-            'token'             => str_random(24),
+            'token'             => Str::random(24),
         ]);
 
         return redirect()->route('teams.index');

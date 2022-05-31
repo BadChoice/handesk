@@ -29,8 +29,8 @@ class TicketIdeaTest extends TestCase
         $response->assertStatus( Response::HTTP_FOUND );
         $this->assertEquals(Ticket::STATUS_SOLVED, $ticket->fresh()->status);
         $this->assertEquals(1, $ticket->fresh()->commentsAndNotes->count() );
-        $this->assertContains("Notification | Ideas bucket", $ticket->fresh()->commentsAndNotes->first()->body);
-        $this->assertContains("Idea created #1", $ticket->fresh()->events->first()->body);
+        $this->assertStringContainsString("Notification | Ideas bucket", $ticket->fresh()->commentsAndNotes->first()->body);
+        $this->assertStringContainsString("Idea created #1", $ticket->fresh()->events->first()->body);
         $this->assertEquals(1, Idea::count());
         $this->assertEquals(Idea::first()->title, $ticket->title);
         $this->assertEquals(Idea::first()->body, $ticket->body);
@@ -63,6 +63,6 @@ class TicketIdeaTest extends TestCase
         $response = $this->actingAs($user)->post("tickets/{$ticket->id}/idea");
 
         $response->assertStatus( Response::HTTP_FOUND );
-        $this->assertContains("Notificació | Banc d'Idees REVO", $ticket->fresh()->commentsAndNotes->first()->body);
+        $this->assertStringContainsString("Notificació | Banc d'Idees REVO", $ticket->fresh()->commentsAndNotes->first()->body);
     }
 }

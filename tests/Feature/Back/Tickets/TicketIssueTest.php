@@ -47,7 +47,7 @@ class TicketIssueTest extends TestCase
 
         $response->assertStatus( Response::HTTP_FOUND );
         $this->assertEquals(1, $ticket->fresh()->commentsAndNotes->count() );
-        $this->assertContains("#12", $ticket->fresh()->commentsAndNotes->first()->body);
+        $this->assertStringContainsString("#12", $ticket->fresh()->commentsAndNotes->first()->body);
     }
 
     /** @test */

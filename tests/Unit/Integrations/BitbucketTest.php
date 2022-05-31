@@ -11,13 +11,14 @@ class BitbucketTest extends TestCase
     /** @test */
     public function can_create_issue()
     {
-        $driver = config('issue.credentials.driver');
+        $driver = config('issues.credentials.driver');
         if (! $driver) {
             $this->markTestSkipped('Bitbucket not configured');
         }
 
-        $repo = 'revo-pos/revo-back';
-        $issue = (new Bitbucket)->createIssue($repo, 'test issue', 'this is a test issue');
+        // not added to config as this is only used for testing
+        $repo = env('BITBUCKET_REPOSITORY', 'revo-pos/revo-back');
+        $issue = (new Bitbucket)->createIssue($repo, 'test issue', 'this is a test issue', 'test');
         $this->assertTrue(is_numeric($issue->id));
     }
 }

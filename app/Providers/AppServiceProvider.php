@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('paginator', function ($data) {
             return "<?php  if ( method_exists({$data}, 'links') ) {
-                    echo {$data}->appends(array_except(request()->query(),['page']))->links();
+                    echo {$data}->appends(\Illuminate\Support\Arr::except(request()->query(),['page']))->links();
                 } ?>";
         });
     }
