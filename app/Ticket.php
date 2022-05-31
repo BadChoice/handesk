@@ -43,7 +43,7 @@ class Ticket extends BaseModel
             'public_token' => Str::random(24),
             'team_id'      => Settings::defaultTeamId(),
         ])->attachTags($tags);
-        tap(new TicketCreated($ticket), function ($newTicketNotification) use ($requester, $ticket) {
+        tap(new TicketCreated($ticket), function ($newTicketNotification) use ($ticket) {
             Admin::notifyAll($newTicketNotification);
             if ($ticket->team) {
                 $ticket->team->notify($newTicketNotification);
