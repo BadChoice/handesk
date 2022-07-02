@@ -1,4 +1,4 @@
-### Handesk
+# Handesk
 
 ## Description
 Handesk has been created by our need (At Revo Systems www.revo.works) to have a powerful yet simple Ticketing system, we needed a system that allowed us to
@@ -33,6 +33,7 @@ you can even create ideas from support tickets so you never lose track.
 
 > Follow us on twitter [@codepassionapp](https://twitter.com/codepassionapp) to stay tuned
 
+
 ## Installation
 Its very simple, you just need to follow the standard Laravel installation
 
@@ -65,7 +66,6 @@ Alternatively, you can use the following [docker setup](https://github.com/BadCh
 
 Open your `app/Console/Kernel.php` to update the schedulers as you want (comment them if not needed)
 Add the cron job `* * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1`
-
 
 ### Further configuration
 #### Email pulling
