@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'lead'       => 'Memimpin|Memimpin',
+    'newLead'    => 'Prospek Baru',
+    'status'     => 'Status|Status',
+    'all'        => 'Semua|Semua',
+    'mine'       => 'Milikku|Milikku',
+    'company'    => 'Perusahaan',
+    'address'    => 'Alamat',
+    'postalCode' => 'Kode Pos',
+    'username'   => 'Nama Pengguna',
+    'name'       => 'Nama',
+    'phone'      => 'Nomor Telp.',
+    'email'      => 'Email',
+    'city'       => 'Kota',
+    'country'    => 'Negara',
+
+    'new'            => 'Baru',
+    'visited'        => 'Mengunjungi',
+    'first-contact'  => 'Pertemuan pertama',
+    'completed'      => 'Terselesaikan',
+    'failed'         => 'Gagal',
+    'task'           => 'Tugas|Tugas-tugas',
+    'due'            => 'Jatuh tempo',
+    'complete'       => 'Selesai',
+    'todayTasks'     => 'Tugas hari ini',
+    'todayTasksDesc' => 'Ini adalah tugas yang Anda miliki untuk hari ini:',
+    'search'         => 'Cari',
+];
