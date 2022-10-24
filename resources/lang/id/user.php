@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'you'                            => 'kamu',   
+    'you'                            => 'Kamu',   
     'name'                           => 'Nama',
     'email'                          => 'Email',
     'profile'                        => 'Profil',

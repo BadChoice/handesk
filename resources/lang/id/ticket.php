@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'all'            =>'Semua',
+    'all'            => 'Semua',
     'ticket'         => 'Tiket|Tiket',
     'agent'          => 'Agen|Agen',
     'assigned'       => 'Ditugaskan',

@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'team'                      =>'Tim|Tim',
+    'team'                      => 'Tim|Tim',
     'member'                    => 'Anggota|Anggota',
     'invitationLink'            => 'Tautan undangan',
-    'invitationLinkDesc'        => "Undang lebih banyak agen ke tim ini dengan mengirimkan tautan ini, jika mereka belum memiliki akun Handesk, gunakan tautan pendaftaran",
+    'invitationLinkDesc'        => 'Undang lebih banyak agen ke tim ini dengan mengirimkan tautan ini, jika mereka belum memiliki akun Handesk, 
+gunakan tautan pendaftaran',
     'join'                      => 'Gabung',
     'invitedTitle'              => 'Anda diundang untuk bergabung dengan :team tim',
     'invitedDesc'               => 'Dengan bergabung dengan tim ini, Anda akan dapat melihat dan memperbarui tiket dukungannya, serta menetapkannya ke anggota tim lainnya',
