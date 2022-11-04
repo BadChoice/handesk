@@ -24,6 +24,7 @@ class TicketTest extends TestCase
 
     /** @test */
     public function can_see_tickets(){
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create(["admin" => true]);
         $user->tickets()->create(factory(Ticket::class)->make()->toArray());
 
@@ -208,7 +209,7 @@ class TicketTest extends TestCase
             "status" => Ticket::STATUS_OPEN,
             "team_id" => $team->id,
         ]);
-        
+
         $response->assertStatus(Response::HTTP_FOUND);
         $this->assertEquals(1, Ticket::count());
         tap(Ticket::first(), function($ticket) use($team){
