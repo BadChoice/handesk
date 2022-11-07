@@ -17,24 +17,24 @@
         "badchoice/thrust": "^0.5",
         "drewm/mailchimp-api": "^2.4",
         "fideloper/proxy": "^4.2",
-        "fzaninotto/faker": "^1.4",
-        "gentle/bitbucket-api": "dev-develop",
-        "guzzlehttp/guzzle": "^6.3",
-        "guzzlehttp/oauth-subscriber": "^0.3",
+        "fzaninotto/faker": "^1.5",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/oauth-subscriber": "^0.5",
         "khill/fontawesomephp": "^1.0",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
+        "laravel/helpers": "^1.5",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0",
+        "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "patrickschur/language-detection": "^3.2",
+        "patrickschur/language-detection": "^5.2",
         "php-imap/php-imap": "^2.0",
         "predis/predis": "^1.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "classmap": [
