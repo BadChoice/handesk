@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'you'                        => 'Kamu',
+    'name'                           => 'Nama',
+    'email'                          => 'Email',
+    'profile'                        => 'Profil',
+    'language'                       => 'Bahasa',
+    'password'                       => 'Kata Sandi',
+    'oldPassword'                    => 'Kata Sandi Lama',
+    'newPassword'                    => 'Kata Sandi Baru',
+    'confirmPassword'                => 'Konfirmasi Kata Sandi',
+    'changePassword'                 => 'Ubah Kata Sandi',
+    'ticketsSignature'               => 'Tanda tangan tiket',
+    'notification'                   => 'Pemberitahuan|Pemberitahuan',
+    'dailyTasksNotification'         => 'Pemberitahuan tugas harian',
+    'newTicketNotification'          => 'Pemberitahuan tiket baru',
+    'ticketAssignedNotification'     => 'Pemberitahuan tiket ditetapkan',
+    'ticketUpdatedNotification'      => 'Pemberitahuan tiket diperbarui',
+    'newLeadNotification'            => 'Pemberitahuan prospek baru',
+    'leadAssignedNotification'       => 'Pemberitahuan yang ditetapkan untuk prospek',
+    'newIdeaNotification'            => 'Pemberitahuan ide baru',
+    'mentionNotification'            => 'Sebutkan Notifikasi',
+    'ticketRatedNotification'        => 'Tiket dinilai',
+    'newUser'                        => 'Pengguna baru',
+];
