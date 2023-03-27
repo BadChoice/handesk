@@ -70,6 +70,8 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 # COPY NGINX CONFIGURATION
 COPY ./docker-config/nginx/nginx-site.conf /etc/nginx/sites-enabled/default
 COPY ./docker-config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./docker-config/supervisord.conf /etc/supervisord.conf
+COPY ./docker-config/supervisor.d /etc/supervisor.d
 COPY ./docker-config/entrypoint.sh /etc/entrypoint.sh
 
 #
