@@ -8,23 +8,12 @@ WORKDIR /usr/local/src/
 COPY composer.json composer.lock ./
 RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader --prefer-dist --no-dev --no-interaction
 
-RUN apt update && apt install -y git \
-                                 zip \
-                                 gettext \
-                                 newrelic-php5 \
-                                 libxml2-dev \
-                                 libc-client-dev \
-                                 libkrb5-dev \
-                                 openssl \
-                                 netcat
 #
 # BASE
 #
-FROM php:7.2-fpm as base
+FROM php:8.0-fpm as base
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-        && docker-php-ext-install pdo pdo_mysql soap mbstring tokenizer xml imap
 # ENV PATH
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
@@ -32,19 +21,16 @@ ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN echo "deb https://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
-RUN apt-get update && apt-get install -yq nginx cron git-core jq unzip vim zip pkg-config \
+RUN apt-get update && apt-get install -yq \
+  nginx cron git-core jq \
+  supervisor unzip vim zip pkg-config \
   libpq-dev libsqlite3-dev libzip-dev libcurl4-openssl-dev libssl-dev  \
   libjpeg-dev libpng-dev libwebp-dev libjpeg62-turbo-dev libfreetype6-dev apt-transport-https ca-certificates wget gnupg newrelic-php5 libkrb5-dev libxml2-dev netcat \
   && rm -rf /var/lib/apt/lists/* \
-  && pecl install mongodb \
-  && pecl install grpc \
-  && docker-php-ext-configure zip --with-libzip \
-  && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-  && docker-php-ext-configure gd --with-freetype-dir --with-png-dir --with-jpeg-dir --with-webp-dir \
-  && docker-php-ext-configure pcntl \
-  && docker-php-ext-enable mongodb \
-  && docker-php-ext-enable grpc \
-  && docker-php-ext-install exif gd mysqli opcache pdo_pgsql pdo_mysql zip pcntl fileinfo gettext iconv soap mbstring tokenizer xml imap
+  && pecl install redis \
+  && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ --with-webp=/usr/include/ \
+  && docker-php-ext-enable redis \
+  && docker-php-ext-install exif gd mysqli opcache pdo_pgsql pdo_mysql zip pcntl fileinfo gettext iconv soap mbstring tokenizer xml
 
 RUN newrelic-install install
 COPY scripts/newrelic.ini /usr/local/etc/php/conf.d/
@@ -94,10 +80,8 @@ FROM base as app
 # COPY SOURCE CODE AND CHANGE PERMISSION TO WWW-DATA
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --chown=www-data --from=composer /usr/local/src/vendor ./vendor
-COPY --chown=www-data --from=composer /usr/local/src/modules ./modules
 COPY --chown=www-data ./ ./
 
-RUN git submodule init && git submodule update
 RUN composer clearcache && composer dumpautoload
 
 EXPOSE 80
