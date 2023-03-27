@@ -33,7 +33,6 @@ RUN apt-get update && apt-get install -yq \
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN echo "deb https://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
-RUN newrelic-install install
 COPY scripts/newrelic.ini /usr/local/etc/php/conf.d/
 
 RUN { \
