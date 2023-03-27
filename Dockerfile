@@ -11,7 +11,7 @@ RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader --prefe
 #
 # BASE
 #
-FROM php:8.0-fpm as base
+FROM php:8.1-fpm as base
 
 # ENV PATH
 ENV php_conf /usr/local/etc/php-fpm.conf
