@@ -34,8 +34,6 @@ RUN apt-get update && apt-get install -yq \
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN echo "deb https://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
-COPY scripts/newrelic.ini /usr/local/etc/php/conf.d/
-
 RUN { \
     echo 'opcache.memory_consumption=512'; \
     echo 'opcache.interned_strings_buffer=8'; \
