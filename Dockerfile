@@ -1,7 +1,7 @@
 FROM php:7.2.0-fpm
 MAINTAINER Mofesola Babalola <me@mofesola.com>
 
-RUN apt update && apt install -y wget gnupg
+RUN apt update && apt install -y wget gnupg apt-transport-https ca-certificates
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN echo "deb https://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
