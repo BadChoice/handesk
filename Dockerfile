@@ -11,7 +11,7 @@ RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader --prefe
 #
 # BASE
 #
-FROM php:8.1-fpm as base
+FROM php:8.2-fpm as base
 
 # ENV PATH
 ENV php_conf /usr/local/etc/php-fpm.conf
@@ -25,9 +25,10 @@ RUN apt-get update && apt-get install -yq \
   libjpeg-dev libpng-dev libwebp-dev libjpeg62-turbo-dev libfreetype6-dev apt-transport-https ca-certificates wget gnupg \
   && rm -rf /var/lib/apt/lists/* \
   && pecl install redis \
+  && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
   && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ --with-webp=/usr/include/ \
   && docker-php-ext-enable redis \
-  && docker-php-ext-install exif gd mysqli opcache pdo_pgsql pdo_mysql zip pcntl fileinfo gettext iconv
+  && docker-php-ext-install exif gd mysqli opcache pdo_pgsql pdo_mysql zip pcntl fileinfo gettext iconv imap
 
 
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
