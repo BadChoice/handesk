@@ -13,13 +13,10 @@ RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader --prefe
 #
 FROM php:8.0-fpm as base
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 # ENV PATH
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
 ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
-RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
-RUN echo "deb https://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
 RUN apt-get update && apt-get install -yq \
   nginx cron git-core jq \
@@ -31,6 +28,10 @@ RUN apt-get update && apt-get install -yq \
   && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ --with-webp=/usr/include/ \
   && docker-php-ext-enable redis \
   && docker-php-ext-install exif gd mysqli opcache pdo_pgsql pdo_mysql zip pcntl fileinfo gettext iconv soap mbstring tokenizer xml
+
+
+RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+RUN echo "deb https://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
 
 RUN newrelic-install install
 COPY scripts/newrelic.ini /usr/local/etc/php/conf.d/
