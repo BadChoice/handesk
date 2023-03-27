@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -yq \
   nginx cron git-core jq \
   supervisor unzip vim zip pkg-config \
   libpq-dev libsqlite3-dev libzip-dev libcurl4-openssl-dev libssl-dev  \
-  libjpeg-dev libpng-dev libwebp-dev libjpeg62-turbo-dev libfreetype6-dev apt-transport-https ca-certificates wget gnupg libxml2-dev netcat \
+  libjpeg-dev libpng-dev libwebp-dev libjpeg62-turbo-dev libfreetype6-dev apt-transport-https ca-certificates wget gnupg libxml-dev \
   && rm -rf /var/lib/apt/lists/* \
   && pecl install redis \
   && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ --with-webp=/usr/include/ \
