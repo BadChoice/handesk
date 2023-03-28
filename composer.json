@@ -30,7 +30,8 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "patrickschur/language-detection": "^5.2",
         "php-imap/php-imap": "^2.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "sentry/sentry-laravel": "^3.3"
     },
     "require-dev": {
         "mockery/mockery": "^1.2",
@@ -72,6 +73,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
     }
 }
