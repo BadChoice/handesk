@@ -4,12 +4,6 @@
     </div>
     <img src="{{ url("/images/handesk_small.png") }}">
     @include('layouts.sidebar.tickets')
-    @if (config('handesk.leads'))
-        @include('layouts.sidebar.leads')
-    @endif
-    @if (config('handesk.roadmap'))
-        @include('layouts.sidebar.roadmap')
-    @endif
 
 
     @if (auth()->user()->can_see_reports)
