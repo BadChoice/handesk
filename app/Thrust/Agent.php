@@ -41,6 +41,12 @@ class Agent extends Resource
         return [];
     }
 
+    // Uncomment to hide edit and delete button 
+    // protected function editAndDeleteFields()
+    // {
+    //     return [];
+    // }
+
     public function canDelete($object)
     {
         return false;
