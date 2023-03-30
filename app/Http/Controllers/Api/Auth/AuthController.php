@@ -11,6 +11,13 @@ class AuthController extends Controller
 {
     use FormRequest;
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \App\Http\Requests\ExampleStoreRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $credentials = $this->buildCredentials($request->all());
@@ -19,6 +26,11 @@ class AuthController extends Controller
         return response($result);
     }
 
+    /**
+     * Profile info
+     *
+     * @return void
+     */
     public function me()
     {
         $user = Auth::user();
