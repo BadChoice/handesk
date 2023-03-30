@@ -82,8 +82,10 @@ FROM base as app
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --chown=www-data --from=composer /usr/local/src/vendor ./vendor
 COPY --chown=www-data ./ ./
+RUN chown -R www-data:www-data /var/www/html
 
 RUN composer clearcache && composer dumpautoload
+RUN php artisan passport:keys
 
 EXPOSE 80
 
