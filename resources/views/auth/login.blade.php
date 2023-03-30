@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="center text-center mt5" style="max-width:300px">
-            <img src="{{url("images/handesk_full.png")}}" class="w80">
+            <img src="{{url("images/ganjaran_logo_dark.png")}}" class="w80">
             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 

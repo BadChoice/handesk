@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
         <div class="center text-center mt5" style="max-width:300px">
-            <img src="{{url("images/handesk_full.png")}}" class="w80">
+            <img src="{{url("images/ganjaran_logo_dark.png")}}" class="w80">
             <div class="panel panel-default">
                 <div class="panel-heading">Reset Password</div>
 
