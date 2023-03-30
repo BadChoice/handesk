@@ -2,7 +2,7 @@
     <div class="show-mobile absolute ml2 mt-2 fs3">
         <span class="fs3 white" onclick="toggleSidebar()">X</span>
     </div>
-    <img src="{{ url("/images/handesk_small.png") }}">
+    <img src="{{ url("/images/ganjaran_logo.png") }}">
     @include('layouts.sidebar.tickets')
 
 
