@@ -15,10 +15,10 @@
                     @icon(clipboard) Copy to clipboard</button></td>
         </tr>
         {{ Form::open(["url" => route('settings.update',$settings), "method" => "PUT"]) }}
-        <tr>
+        {{-- <tr>
             <td>{{ __("team.slack_webhook_url") }}: </td>
             <td class="w60"><input class="w100" name="slack_webhook_url" value="{{$settings->slack_webhook_url}}"></td>
-        </tr>
+        </tr> --}}
         <tr>
             <td>{{ __("setting.default_team_id") }}: </td>
             <td class="w60">

@@ -30,7 +30,7 @@
                 <td> {{ $team->name }}</td>
                 <td> <a href="mailto:{{ $team->email }}">{{ $team->email }}</a></td>
                 <td> <a href="{{route('teams.agents',$team)}}">{{ $team->members->count() }}</a></td>
-                <td> @if($team->slack_webhook_url) @icon(check) @else @icon(times) @endif </td>
+                {{-- <td> @if($team->slack_webhook_url) @icon(check) @else @icon(times) @endif </td> --}}
                 @can('administrate', $team)
                     <td>
                         <a href="{{route('membership.store',$team->token)}}"> {{ __("team.invitationLink") }}</a>
