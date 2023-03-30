@@ -18,6 +18,9 @@
                 {{ Form::close() }}
                 </div>
             @else
+                <div class="float-right mt-2 mr4 ml-3">
+                    <button class="secondary"> @icon(bug) {{ __('ticket.needSubject') }}</button>
+                </div>
             @endif
         @endif
     @endif
