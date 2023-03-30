@@ -2,6 +2,7 @@
 
 Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
     Route::resource('tickets', 'TicketsController', ['except' => 'destroy']);
+    Route::get('ticket/detail/{id}', 'TicketsController@detail');
     Route::post('tickets/{ticket}/comments', 'CommentsController@store');
     Route::post('tickets/{ticket}/assign', 'TicketAssignController@store');
     Route::post('users/create', 'UsersController@store');

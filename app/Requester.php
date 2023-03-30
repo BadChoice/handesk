@@ -34,19 +34,19 @@ class Requester extends BaseModel
         return $this->hasMany(Idea::class);
     }
 
-    public function openTickets()
+    public function newTickets()
     {
-        return $this->tickets()->where('status', '<', Ticket::STATUS_SOLVED);
+        return $this->tickets()->where('status', '=', Ticket::STATUS_NEW);
     }
 
-    public function solvedTickets()
+    public function openTickets()
     {
-        return $this->tickets()->where('status', '=', Ticket::STATUS_SOLVED);
+        return $this->tickets()->where('status', '=', Ticket::STATUS_OPEN)->where('status', '=', Ticket::STATUS_PENDING);
     }
 
     public function closedTickets()
     {
-        return $this->tickets()->where('status', '=', Ticket::STATUS_CLOSED);
+        return $this->tickets()->where('status', '=', Ticket::STATUS_SOLVED)->where('status', '=', Ticket::STATUS_CLOSED)->where('status', '=', Ticket::STATUS_MERGED)->where('status', '=', Ticket::STATUS_SPAM);
     }
 
     public function shouldBeNotified()
