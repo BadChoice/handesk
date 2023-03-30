@@ -41,5 +41,5 @@
 
 
 @section('scripts')
-    @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => null])
+    {{-- @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => null]) --}}
 @endsection

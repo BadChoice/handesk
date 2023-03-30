@@ -46,7 +46,7 @@
 
 
 @section('scripts')
-    @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket])
+    {{-- @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => $ticket]) --}}
 
     <script>
         function setStatusAndSubmit(new_status){
