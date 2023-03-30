@@ -20,3 +20,15 @@ Route::group(['namespace' => 'Api', 'prefix' => 'agent', 'middleware' => 'apiAut
     Route::resource('tickets', 'AgentController', ['only' => 'index']);
     Route::resource('tickets.comments', 'AgentTicketCommentsController', ['only' => ['index', 'store']]);
 });
+
+/**
+ * Login Route
+ */
+Route::post('v1/login', 'Api\Auth\AuthController@login');
+
+/**
+ * Private Route
+ */
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+    Route::get('me', 'Api\Auth\AuthController@me');
+});

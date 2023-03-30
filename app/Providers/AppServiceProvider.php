@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -58,5 +59,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         app()->bind(IssueCreator::class, Bitbucket::class);
+
+        Passport::ignoreMigrations();
     }
 }
