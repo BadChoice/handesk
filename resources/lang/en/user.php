@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'you'                        => 'You',
-    'name'                       => 'Name',
+    'you'                        => 'Kamu',
+    'name'                       => 'Nama',
     'email'                      => 'Email',
     'profile'                    => 'Profile',
     'language'                   => 'Language',
@@ -22,5 +22,5 @@ return [
     'newIdeaNotification'        => 'New idea notification',
     'mentionNotification'        => 'Mention Notification',
     'ticketRatedNotification'    => 'Ticket rated',
-    'newUser'                    => 'New user',
+    'newUser'                    => 'Buat Agent Baru',
 ];

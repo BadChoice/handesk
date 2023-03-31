@@ -25,15 +25,15 @@
                     @endif
                 </div>
                 <div class="mh3 mb2">
-                    <button type="submit" class="uppercase ph5 w80">Login</button>
+                    <button type="submit" class="uppercase ph5 w80">Masuk</button>
                 </div>
                 <div class="mb3">
                     <input type="checkbox" class="" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                    Remember Me
+                    Ingat saya
                 </div>
 
                 <div>
-                    <a class="btn btn-link" href="{{ route('password.request') }}"> Forgot Your Password? </a>
+                    <a class="btn btn-link" href="{{ route('password.request') }}"> Lupa Password? </a>
                 </div>
             </form>
     </div>

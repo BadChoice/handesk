@@ -25,7 +25,7 @@ class Agent extends Resource
             HasMany::make('teams'),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
-            Link::make('id', 'impersonate')->route('users.impersonate')->icon('key'),
+            Link::make('id', 'Impersonate')->route('users.impersonate')->icon('key'),
         ];
     }
 

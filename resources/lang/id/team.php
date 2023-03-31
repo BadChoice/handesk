@@ -9,7 +9,7 @@ return [
     'invitedTitle'          => 'You are invited to join the :team team',
     'invitedDesc'           => 'By joining this team, you will be able to see and update its support tickets, as well as assign them to other team members',
     'register'              => 'Or send this link if the user has no Handesk account yet',
-    'new'                   => 'New',
+    'new'                   => 'Buat',
     'name'                  => 'Name',
     'email'                 => 'Email',
     'slack_webhook_url'     => 'Slack webhook url',

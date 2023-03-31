@@ -30,7 +30,7 @@
                 {{ Form::select("status", [
                     App\Ticket::STATUS_NEW      => __("ticket.new"),
                     App\Ticket::STATUS_OPEN     => __("ticket.open"),
-                    App\Ticket::STATUS_PENDING  => __("ticket.pending"),
+                    App\Ticket::STATUS_SOLVED   => __("ticket.solved"),
                 ]) }}
                 <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.createNew') }}</button> </td>
             </tr>
