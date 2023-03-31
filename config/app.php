@@ -182,6 +182,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Khill\FontAwesome\Laravel\FontAwesomeServiceProvider::class,
 
+        Laravel\Passport\PassportServiceProvider::class,
+        App\Providers\PassportServiceProvider::class,
+
     ],
 
     /*

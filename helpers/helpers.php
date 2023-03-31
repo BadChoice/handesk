@@ -55,3 +55,43 @@ function toPercentage($value, $inverse = false)
 {
     return  ($inverse ? 1 - $value : $value) * 100;
 }
+
+if(! function_exists('phone_to_62')){
+    /**
+     * Indonesian Format Phone Number
+     */
+    function phone_to_62($phone){
+        if(is_null($phone)) return;
+
+        if(strlen((string) $phone) <= 2) return null;
+
+        switch ($phone[0]) {
+            case '0':
+                return '62' . substr($phone, 1);
+                break;
+            case '8':
+                return '62' . $phone;
+                break;
+            case '6':
+                if($phone[1] == '2'){
+                    if($phone[2] == '0'){
+                        return '62' . substr($phone, 3);
+                    }else{
+                        return $phone;
+                    }
+                }
+                break;
+            case '+':
+                if($phone[1] == '6' && $phone[2] == '2'){
+                    if($phone[3] == '0'){
+                        return '62' . substr($phone, 4);
+                    }else{
+                        return substr($phone, 1);
+                    }
+                }
+                break;
+            default:
+                return $phone;
+        }
+    }
+}
