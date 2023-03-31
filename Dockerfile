@@ -84,8 +84,6 @@ COPY --chown=www-data --from=composer /usr/local/src/vendor ./vendor
 COPY --chown=www-data ./ ./
 
 RUN composer clearcache && composer dumpautoload
-RUN chown -R www-data:www-data /var/www/html
-RUN php artisan passport:keys
 
 EXPOSE 80
 
