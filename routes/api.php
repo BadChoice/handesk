@@ -2,17 +2,15 @@
 
 Route::group(['namespace' => 'Api', 'middleware' => 'apiAuth'], function () {
     Route::resource('tickets', 'TicketsController', ['except' => 'destroy']);
-    Route::get('ticket/detail/{id}', 'TicketsController@detail');
     Route::post('tickets/{ticket}/comments', 'CommentsController@store');
     Route::post('tickets/{ticket}/assign', 'TicketAssignController@store');
+    Route::get('users', 'UsersController@index');
     Route::post('users/create', 'UsersController@store');
     Route::post('teams', 'TeamController@store');
-    Route::get('users', 'UsersController@index');
     Route::get('teams/{team}/tickets', 'TeamTicketsController@index');
     Route::get('teams/{team}/leads', 'TeamLeadsController@index');
 
     Route::resource('leads', 'LeadsController', ['only' => 'store']);
-
     Route::resource('ideas', 'IdeasController', ['only' => ['store', 'index']]);
 });
 
@@ -30,6 +28,11 @@ Route::post('v1/login', 'Api\Auth\AuthController@login');
 /**
  * Private Route
  */
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
-    Route::get('me', 'Api\Auth\AuthController@me');
+Route::group(['namespace' => 'Api', 'prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+    // user detail
+    Route::get('me', 'Auth\AuthController@me');
+
+    // list ticket
+    Route::get('ticket/all', 'AgentTicketCommentsController@ticketAll');
+    Route::get('ticket/detail/{id}', 'AgentTicketCommentsController@detail');
 });

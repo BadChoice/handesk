@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Ticket;
 use Illuminate\Http\Response;
+use Auth;
 
 class AgentTicketCommentsController extends ApiController
 {
@@ -14,6 +15,31 @@ class AgentTicketCommentsController extends ApiController
         }
 
         return $this->respond($ticket->commentsAndNotes);
+    }
+
+    public function ticketAll() {
+        $user = Auth::user();
+        if(!$user) return $this->respondError("Agent Not Found");
+
+        if (request('status') == 'end') {
+            $tickets = $user->closedTickets;
+        } elseif (request('status') == 'open') {
+            $tickets = $user->openTickets;
+        } elseif (request('status') == 'new') {
+            $tickets = $user->newTickets;
+        } else {
+            $tickets = $user->tickets;
+        }
+
+        return $this->respond($tickets);
+    }
+
+    public function detail($id)
+    {
+        $ticket = Ticket::find($id);
+        if(!$ticket) return $this->respondError("Ticket Not Found");
+
+        return $this->respond($ticket);
     }
 
     public function store(Ticket $ticket)

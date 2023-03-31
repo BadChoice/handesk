@@ -30,6 +30,21 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class)->with('requester', 'user', 'team');
     }
 
+    public function newTickets()
+    {
+        return $this->tickets()->where('status', '=', Ticket::STATUS_NEW);
+    }
+
+    public function openTickets()
+    {
+        return $this->tickets()->where('status', '=', Ticket::STATUS_OPEN)->orWhere('status', '=', Ticket::STATUS_PENDING);
+    }
+
+    public function closedTickets()
+    {
+        return $this->tickets()->where('status', '=', Ticket::STATUS_SOLVED)->orWhere('status', '=', Ticket::STATUS_CLOSED)->orWhere('status', '=', Ticket::STATUS_MERGED)->orWhere('status', '=', Ticket::STATUS_SPAM);
+    }
+
     public function leads()
     {
         return $this->hasMany(Lead::class)->with('user', 'team');

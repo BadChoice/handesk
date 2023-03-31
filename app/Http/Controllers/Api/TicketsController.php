@@ -28,14 +28,6 @@ class TicketsController extends ApiController
         return $this->respond($tickets);
     }
 
-    public function detail($id)
-    {
-        $ticket = Ticket::find($id);
-        if(!$ticket) throw new \Exception('Ticket Not Found', 404);
-
-        return $this->respond($ticket);
-    }
-
     public function show(Ticket $ticket)
     {
         return $this->respond($ticket->load('requester', 'comments'));
