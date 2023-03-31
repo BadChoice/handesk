@@ -7,7 +7,7 @@ return [
     'assigned'   => 'Assigned',
     'workOrder'  => 'Work Orders',
     'myTickets'  => 'My Tickets',
-    'newTicket'  => 'New Ticket',
+    'newTicket'  => 'Buat Work Order Baru',
     'unassigned' => 'Belum Ditugaskan',
     'unanswered' => 'Unanswered',
     'archive'    => 'Archive',
