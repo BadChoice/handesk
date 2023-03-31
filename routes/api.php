@@ -35,4 +35,6 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1', 'middleware' => 'auth:api'
     // list ticket
     Route::get('ticket/all', 'AgentTicketCommentsController@ticketAll');
     Route::get('ticket/detail/{id}', 'AgentTicketCommentsController@detail');
+    Route::post('ticket/start-task/{id}', 'AgentTicketCommentsController@startTask');
+    Route::post('ticket/{id}/comments', 'AgentTicketCommentsController@report');
 });

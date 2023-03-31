@@ -32,17 +32,17 @@ class User extends Authenticatable
 
     public function newTickets()
     {
-        return $this->tickets()->where('status', '=', Ticket::STATUS_NEW);
+        return $this->tickets()->where('status', Ticket::STATUS_NEW);
     }
 
     public function openTickets()
     {
-        return $this->tickets()->where('status', '=', Ticket::STATUS_OPEN)->orWhere('status', '=', Ticket::STATUS_PENDING);
+        return $this->tickets()->whereIn('status', [Ticket::STATUS_OPEN, Ticket::STATUS_PENDING]);
     }
 
     public function closedTickets()
     {
-        return $this->tickets()->where('status', '=', Ticket::STATUS_SOLVED)->orWhere('status', '=', Ticket::STATUS_CLOSED)->orWhere('status', '=', Ticket::STATUS_MERGED)->orWhere('status', '=', Ticket::STATUS_SPAM);
+        return $this->tickets()->whereIn('status', [Ticket::STATUS_SOLVED, Ticket::STATUS_CLOSED, Ticket::STATUS_MERGED, Ticket::STATUS_SPAM]);
     }
 
     public function leads()
