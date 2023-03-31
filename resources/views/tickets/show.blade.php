@@ -13,6 +13,16 @@
         @include('components.ticket.header')
         @include('components.ticket.merged')
         <br>
+        <div class="description">
+            <table class="w50 no-padding">
+            <tr><td>{{ __('ticket.target') }}:</td><td>{{ $ticket->target }}</td></tr>
+            <tr><td>{{ __('ticket.position') }}:</td><td>{{ $ticket->position }}</td></tr>
+            <tr><td>{{ __('ticket.mobNumber') }}:</td><td>{{ $ticket->mob_number }}</td></tr>
+            <tr><td>{{ __('ticket.affiliation') }}:</td><td>{{ $ticket->affiliation }}</td></tr>
+            <tr><td>{{ __('ticket.location') }}:</td><td>{{ $ticket->location }}</td></tr>
+            <tr><td>{{ __('ticket.description') }}:</td><td>{{ $ticket->body }}</td></tr>
+            </table>
+        </div>
     </div>
 
 

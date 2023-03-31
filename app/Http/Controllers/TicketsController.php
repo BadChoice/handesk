@@ -39,10 +39,10 @@ class TicketsController extends Controller
         $this->validate(request(), [
             'requester' => 'required|array',
             'title'     => 'required|min:3',
-            'body'      => 'required',
+            // 'body'      => 'required',
             'team_id'   => 'nullable|exists:teams,id',
         ]);
-        $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request('tags'));
+        $ticket = Ticket::createAndNotify(request('requester'), request('title'), request('body'), request(), request('tags'));
         $ticket->updateStatus(request('status'));
 
         if (request('team_id')) {

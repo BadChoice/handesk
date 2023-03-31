@@ -22,9 +22,9 @@
             <tr><td class="w20">{{ __('ticket.position') }}: </td>     <td><input name="position" class="w100" required/></td></tr>
             <tr><td class="w20">{{ __('ticket.mobNumber') }}: </td>     <td><input name="mob_number" class="w100" required/></td></tr>
             <tr><td class="w20">{{ __('ticket.affiliation') }}: </td>     <td><input name="affiliation" class="w100" required/></td></tr>
-            <tr><td class="w20">{{ __('ticket.location') }}: </td>     <td><input name="location" class="w100" required/></td></tr>
+            <tr><td class="w20">{{ __('ticket.location') }}: </td>     <td><textarea name="location" required></textarea></td></tr>
             <!-- <tr><td>{{ trans_choice('ticket.tag', 2)}}: </td><td><input     name="tags" id="tags"/></td></tr> -->
-            <tr><td>{{ __('ticket.description')         }}: </td><td><textarea  name="description" required></textarea></td></tr>
+            <tr><td>{{ __('ticket.description') }}: </td><td><textarea  name="body" required></textarea></td></tr>
             <!-- @include('components.assignTeamField') -->
             <tr><td>{{ __('ticket.status') }}: </td><td>
                 {{ Form::select("status", [
