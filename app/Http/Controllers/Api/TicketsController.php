@@ -52,7 +52,7 @@ class TicketsController extends ApiController
             request('requester'),
             strip_tags(request('title')),
             strip_tags(request('body')),
-            request(),
+            request()->all(),
             request('tags')
         );
 
