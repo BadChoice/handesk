@@ -1,13 +1,12 @@
 <?php namespace App\Classes\Passport\Grants;
 
-use App\Classes\Passport\Helpers\Provider;
-use App\User;
 use Hash;
 use RuntimeException;
-use Psr\Http\Message\ServerRequestInterface;
 use League\OAuth2\Server\RequestEvent;
+use App\Classes\Passport\Helpers\Provider;
+use Laravel\Passport\Bridge\User;
+use Psr\Http\Message\ServerRequestInterface;
 use League\OAuth2\Server\Grant\AbstractGrant;
-use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\ResponseTypes\ResponseTypeInterface;
@@ -56,7 +55,7 @@ class PasswordGrant extends AbstractGrant
 
         // Validate user
         $user = $this->validateUser($request, $client);
-        $userId = $user?->id;
+        $userId = $user->getIdentifier();
         // Finalize the requested scopes
         $scopes = $this->scopeRepository->finalizeScopes($scopes, $this->getIdentifier(), $client, $userId);
 
@@ -86,35 +85,39 @@ class PasswordGrant extends AbstractGrant
         $username = $this->getRequestParameter('username', $request);
         if (is_null($username)) {
             throw OAuthServerException::invalidRequest('username');
-            throw new OAuthServerException('Gunakan username berupa email / no HP yang sesuai', $this->errorInvalidCode, $this->errorType);
         }
 
         $password = $this->getRequestParameter('password', $request);
-        $user = $this->getUserEntityByUserPhone(
-            $username,
-            $password,
-            $this->getIdentifier(),
-            $client
-        );
+        if (is_null($password)) {
+            throw OAuthServerException::invalidRequest('password');
+        }
+        
+        $user = $this->getUserEntityByUserEmail($username, $password);
 
         return $user;
     }
 
-    private function getUserEntityByUserPhone($email, $password, $grantType, ClientEntityInterface $clientEntity)
+    protected function getUserEntityByUserEmail($email, $password)
     {
-        $provider = config('auth.guards.api.provider');
-
-        if (is_null($model = config('auth.providers.'.$provider.'.model'))) {
-            throw new RuntimeException('Tidak dapat menentukan model autentikasi dari konfigurasi.');
+        if (is_null($model = config('auth.providers.users.model'))) {
+            throw new RuntimeException('Unable to determine user model from configuration.');
         }
 
-        $user = (new $model)->where('email', $email)->first();
-        
-        if ( is_null($user) || !Hash::check($password, $user->password) ) {
-            throw new OAuthServerException('Email/Kata Sandi tidak sesuai!', $this->errorInvalidCode, $this->errorType);
+        if (method_exists($model, 'findForPassport')) { // if you define the method in that model it will grab it from there other wise use email as key 
+            $user = (new $model)->findForPassport($email);
+        } else {
+            $user = (new $model)->where('email', $email)->first();
         }
 
-        return $user;
+        if ( is_null($user) ) {
+            throw new OAuthServerException('User belum terdaftar!', $this->errorInvalidCode, $this->errorType);
+        }
+
+        if ( !Hash::check($password, $user->password) ) {
+            throw new OAuthServerException('Kata Sandi tidak sesuai!', $this->errorInvalidCode, $this->errorType);
+        }
+
+        return new User($user->getAuthIdentifier());
     }
 
     /**
