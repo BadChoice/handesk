@@ -2,16 +2,22 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Session\TokenMismatchException;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Exception\Auth\UserNotFound;
+use Laravel\Passport\Exceptions\OAuthServerException;
+use Symfony\Component\CssSelector\Exception\InternalErrorException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -22,43 +28,62 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        AuthenticationException::class,
-        AuthorizationException::class,
-        HttpException::class,
-        ModelNotFoundException::class,
-        TokenMismatchException::class,
-        ValidationException::class,
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
-     * Convert an authentication exception into an unauthenticated response.
+     * Report or log an exception.
+     *
+     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+     *
+     * @param  Throwable  $e
+     * @return void
+     */
+    public function report(Throwable $e)
+    {
+        parent::report($e);
+    }
+
+    /**
+     * Convert an exception into an response.
      *
      * @param  Request  $request
-     * @param  Throwable  $exception
+     * @param  Throwable  $e
      * @return JsonResponse|RedirectResponse
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
-        if($exception instanceof AuthenticationException) {
+        if (
+            $e instanceof \Dotenv\Exception\ValidationException || 
+            $e instanceof BadRequestHttpException || 
+            $e instanceof OAuthServerException
+        ) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }elseif($e instanceof AuthenticationException) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
+        }else if ($e instanceof ModelNotFoundException) {
+            return response()->json(['error' => 'Model not found'], 404);
+        }else if ($e instanceof UserNotFound) {
+            return response()->json(['error' => 'User not found'], 404);
+        }else if ($e instanceof NotFoundResourceException || $e instanceof NotFoundHttpException) {
+            return response()->json(['error' => 'Resource not found'], 404);
+        }else if ($e instanceof MethodNotAllowedException || $e instanceof MethodNotAllowedHttpException) {
+            return response()->json(['error' => $e->getMessage()], 405);
+        }else if($e instanceof InternalErrorException) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }else if($e instanceof QueryException) {
+            return response()->json(['error' => $e->getMessage()], 504);
+        }else{
+            return parent::render($request, $e);
         }
 
-        if ($exception instanceof ModelNotFoundException) {
-            return response()->json(['error' => 'Resource not found'], 404);
-        }
-        
-        $exc = $exception->getStatusCode();
-        if ($exc != null) {
-            $msg = $exception->getMessage();
-            
-            if($msg == null){
-                if($exc == 404) $msg = 'Route not found';
-                if($exc == 500) $msg = 'Internal Server Error';
-            }
-            
-            return response()->json(['error' => $msg], $exc);
-        }
-        
-        return parent::render($request, $exception);
     }
 }
