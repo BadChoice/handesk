@@ -36,7 +36,7 @@ return [
     'createNew'          => 'Buat',
     'open'               => 'Berlangsung',
     'reopen'             => 'Reopen',
-    'pending'            => 'Menunggu Agent',
+    'pending'            => 'Menunggu Review',
     'solved'             => 'Selesai',
     'isSolvedQuestion'   => 'Sudah selesai?',
     'closed'             => 'Tutup',
