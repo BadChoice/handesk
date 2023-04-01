@@ -68,9 +68,14 @@ class AgentTicketCommentsController extends ApiController
             return $this->respondError("Ticket tidak ditemukan");
         }
         
+        /**
+         * FIXME: Sorry temporer comment
+         */
+        /*
         if (!$user->can('update', $ticket)) {
             return $this->respondError("Anda tidak memiliki akses ke tiket ini");
         }
+        */
         
         $validator = Validator::make(request()->all(), [
             'body' => 'required'
