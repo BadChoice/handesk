@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Attachment;
 use App\Ticket;
 use Illuminate\Http\Response;
 use Auth;
+use Validator;
 
 class AgentTicketCommentsController extends ApiController
 {
@@ -56,21 +58,46 @@ class AgentTicketCommentsController extends ApiController
 
     }
 
-    public function store(Ticket $ticket)
+    public function report($ticketId)
     {
-        if (! auth()->user()->can('update', $ticket)) {
-            return $this->respondError("You don't have access to this ticket");
+        $user = auth()->user();
+
+        $ticket = Ticket::where('id', $ticketId)->select('id')->first();
+
+        if (!$ticket) {
+            return $this->respondError("Ticket tidak ditemukan");
+        }
+        
+        if (!$user->can('update', $ticket)) {
+            return $this->respondError("Anda tidak memiliki akses ke tiket ini");
+        }
+        
+        $validator = Validator::make(request()->all(), [
+            'body' => 'required'
+        ], [
+            'required' => ':attribute wajib diisi'
+        ]);
+        
+        if($validator->fails()){
+            $errors = $validator->errors();
+            return $this->respondError($errors->first());
         }
 
         if (request('private')) {
-            $comment = $ticket->addNote(auth()->user(), request('body'));
+            $comment = $ticket->addNote($user, request('body'));
         } else {
-            $comment = $ticket->addComment(auth()->user(), request('body'), '1');
-        }
-        if (! $comment) {
-            return $this->respond(['id' => null, 'message' => 'Can not create a comment with empty body'], Response::HTTP_OK);
+            $comment = $ticket->addComment($user, request('body'), request('new_status', Ticket::STATUS_NEW));
         }
 
-        return $this->respond(['id' => $comment->id], Response::HTTP_CREATED);
+        if (request()->hasFile('attachment')) {
+            Attachment::storeAttachmentFromRequest(request(), $comment);
+        }
+
+        return $this->respond([
+            'body'       => $comment->body,
+            'new_status' => $comment->new_status,
+            'created_at' => $comment->created_at,
+            'author'     => $comment->author
+        ], Response::HTTP_CREATED);
     }
 }
