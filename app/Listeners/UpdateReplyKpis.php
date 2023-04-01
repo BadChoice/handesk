@@ -27,10 +27,10 @@ class UpdateReplyKpis
         if (! FirstReplyKpi::doesApply($event->ticket, $event->comment)) {
             return;
         }
-        $time = $event->ticket->created_at->diffInMinutes($event->comment->created_at);
-        FirstReplyKpi::obtain($event->ticket->created_at, $event->comment->user_id, Kpi::TYPE_USER)->addValue($time);
+        $time = $event?->ticket?->created_at?->diffInMinutes($event->comment->created_at);
+        FirstReplyKpi::obtain($event?->ticket?->created_at, $event?->comment?->user_id, Kpi::TYPE_USER)->addValue($time);
 
-        if (! $event->ticket->team_id) {
+        if (! $event->ticket?->team_id) {
             return;
         }
         FirstReplyKpi::obtain($event->ticket->created_at, $event->ticket->team_id, Kpi::TYPE_TEAM)->addValue($time);
