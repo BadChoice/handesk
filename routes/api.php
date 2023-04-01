@@ -23,6 +23,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1', 'middleware' => 'auth:api'
     Route::get('ticket/detail/{id}', 'AgentTicketCommentsController@detail');
     Route::post('ticket/start-task/{id}', 'AgentTicketCommentsController@startTask');
     Route::post('ticket/{id}/comments', 'AgentTicketCommentsController@report');
+    Route::get('ticket/{id}/comments', 'AgentTicketCommentsController@getCommentByTask');
 
 
     /**

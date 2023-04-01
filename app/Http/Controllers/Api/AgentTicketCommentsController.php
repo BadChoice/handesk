@@ -100,4 +100,29 @@ class AgentTicketCommentsController extends ApiController
             'author'     => $comment->author
         ], Response::HTTP_CREATED);
     }
+
+    public function getCommentByTask($taskId)
+    {
+        $ticket = Ticket::where('id', $taskId)->select('id')->first();
+
+        if(!$ticket){
+            return $this->respondError("Tiket / Tugas tidak ditemukan");
+        }
+
+        $comments = count($ticket->comments) <= 0 ? [] : $ticket->comments->map(function($item){
+            return array(
+                'id' => $item->id,
+                'body' => $item->body,
+                'created_at' => $item->created_at,
+                'attachments' => count($item->attachments) <= 0 ? [] : $item->attachments->map(function($file){
+                    return array(
+                        'id' => $file->id,
+                        'url' => \Storage::disk(config('filesystems.default'))->url("public/attachments/$file->path")
+                    );
+                })
+            );
+        });
+
+        return $this->respond($comments, Response::HTTP_OK);
+    }
 }
