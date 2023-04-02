@@ -91,7 +91,7 @@ class AgentTicketCommentsController extends ApiController
         if (request('private')) {
             $comment = $ticket->addNote($user, request('body'));
         } else {
-            $comment = $ticket->addComment($user, request('body'), request('new_status', Ticket::STATUS_SOLVED));
+            $comment = $ticket->addComment($user, request('body'), request('new_status', Ticket::STATUS_OPEN));
         }
 
         if (request()->hasFile('attachment')) {
