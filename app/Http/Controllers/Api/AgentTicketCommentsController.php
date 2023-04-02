@@ -119,6 +119,7 @@ class AgentTicketCommentsController extends ApiController
                 'id' => $item->id,
                 'body' => $item->body,
                 'created_at' => $item->created_at,
+                'author' => $item->author,
                 'attachments' => count($item->attachments) <= 0 ? [] : $item->attachments->map(function($file){
                     return array(
                         'id' => $file->id,
