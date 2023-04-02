@@ -62,7 +62,7 @@ class AgentTicketCommentsController extends ApiController
     {
         $user = auth()->user();
 
-        $ticket = Ticket::where('id', $ticketId)->select('id')->first();
+        $ticket = Ticket::where('id', $ticketId)->first();
 
         if (!$ticket) {
             return $this->respondError("Ticket tidak ditemukan");
