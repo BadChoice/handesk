@@ -19,7 +19,8 @@
         <table class="maxw600 no-padding">
             <tr><td class="w20">{{ __('ticket.subject') }}: </td>     <td><input name="title" class="w100" required/></td></tr>
             <tr><td class="w20">{{ __('ticket.target') }}: </td>     <td><input name="target" class="w100" required/></td></tr>
-            <tr><td class="w20">{{ __('ticket.position') }}: </td>     <td><input name="position" class="w100" required/></td></tr>
+            {{-- <tr><td class="w20">{{ __('ticket.position') }}: </td>     <td><input name="position" class="w100" required/></td></tr> --}}
+            <tr><td class="w20">{{ __('ticket.side') }}: </td>     <td><input name="side" class="w100" required/></td></tr>
             <tr><td class="w20">{{ __('ticket.mobNumber') }}: </td>     <td><input name="mob_number" class="w100" required/></td></tr>
             <tr><td class="w20">{{ __('ticket.affiliation') }}: </td>     <td><input name="affiliation" class="w100" required/></td></tr>
             <tr>

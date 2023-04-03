@@ -16,9 +16,12 @@
         <div class="description">
             <table class="w50 no-padding">
             <tr><td>{{ __('ticket.target') }}:</td><td>{{ $ticket->target }}</td></tr>
-            <tr><td>{{ __('ticket.position') }}:</td><td>{{ $ticket->position }}</td></tr>
+            {{-- <tr><td>{{ __('ticket.position') }}:</td><td>{{ $ticket->position }}</td></tr> --}}
+            <tr><td>{{ __('ticket.side') }}:</td><td>{{ $ticket->side }}</td></tr>
             <tr><td>{{ __('ticket.mobNumber') }}:</td><td>{{ $ticket->mob_number }}</td></tr>
             <tr><td>{{ __('ticket.affiliation') }}:</td><td>{{ $ticket->affiliation }}</td></tr>
+            <tr><td>{{ __('ticket.latitude') }}:</td><td>{{ $ticket->latitude }}</td></tr>
+            <tr><td>{{ __('ticket.longitude') }}:</td><td>{{ $ticket->longitude }}</td></tr>
             <tr><td>{{ __('ticket.location') }}:</td><td>{{ $ticket->location }}</td></tr>
             @if ($ticket->latitude != null && $ticket->longitude != null)
                 <tr>
