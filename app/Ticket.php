@@ -22,7 +22,7 @@ class Ticket extends BaseModel
     use SoftDeletes, Taggable, Assignable, Subscribable, Rateable;
 
     protected $fillable = [
-        'title', 'body', 'target', 'position', 'mob_number', 'affiliation', 'location', 'description', 'status',
+        'title', 'body', 'target', 'position', 'side', 'mob_number', 'affiliation', 'latitude', 'longitude', 'location', 'description', 'status',
         'public_token', 'team_id'
     ];
 
