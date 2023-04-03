@@ -38,6 +38,7 @@
         "sentry/sentry-laravel": "^3.3"
     },
     "require-dev": {
+        "andreaselia/laravel-api-to-postman": "^1.15",
         "mockery/mockery": "^1.2",
         "phpunit/phpunit": "^9.0"
     },
