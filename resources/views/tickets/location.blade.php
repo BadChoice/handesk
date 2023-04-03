@@ -7,9 +7,12 @@
 
 <div id="map"></div>
 
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+@if (empty(env('MAPKEY')))
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+@else
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap{{env('MAPKEY')}}" async defer></script>
+@endif
 
-{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWgtTQp-VIF8pBimvzx5yiiU4odw7eOME&callback=initMap" async defer></script> --}}
 
 <script type="text/javascript">
 // When the window has finished loading create our google map below
