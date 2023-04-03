@@ -23,9 +23,31 @@
             <tr><td class="w20">{{ __('ticket.side') }}: </td>     <td><input name="side" class="w100" required/></td></tr>
             <tr><td class="w20">{{ __('ticket.mobNumber') }}: </td>     <td><input name="mob_number" class="w100" required/></td></tr>
             <tr><td class="w20">{{ __('ticket.affiliation') }}: </td>     <td><input name="affiliation" class="w100" required/></td></tr>
-            <tr><td class="w20">{{ __('ticket.latitude') }}: </td>     <td><input name="latitude" class="w100" required/></td></tr>
-            <tr><td class="w20">{{ __('ticket.longitude') }}: </td>     <td><input name="longitude" class="w100" required/></td></tr>
-            <tr><td class="w20">{{ __('ticket.location') }}: </td>     <td><textarea name="location" required></textarea></td></tr>
+            <tr>
+                <td class="w20">{{ __('ticket.location') }}: </td>
+                <td>
+                    <textarea name="location" required></textarea>
+                    <br>
+                    <button class="btn btn-success" style="bottom: 10px;" data-toggle="modal" data-target="#mapModal">Update Lokasi map</button>
+                    <br>
+                    <div class="modal fade hidden" id="mapModal"  tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mapModalLabel">Drag untuk update Koordinat Lokasi
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div class="modal-body">
+                                    @include('tickets.location')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
             <!-- <tr><td>{{ trans_choice('ticket.tag', 2)}}: </td><td><input     name="tags" id="tags"/></td></tr> -->
             <tr><td>{{ __('ticket.description') }}: </td><td><textarea  name="body" required></textarea></td></tr>
             <!-- @include('components.assignTeamField') -->
@@ -38,11 +60,27 @@
                 <button class="uppercase ph3 ml1"> @icon(comment) {{ __('ticket.createNew') }}</button> </td>
             </tr>
         </table>
+
+        
+        {!! Form::text('latitude', null, ['class' => 'form-control untouch text-right hidden', 'autocomplete' => 'off', 'placeholder' => 'Masukkan Latitude', 'id' => 'lat']) !!}
+    
+        {!! Form::text('longitude', null, ['class' => 'form-control untouch text-left hidden', 'autocomplete' => 'off', 'placeholder' => 'Masukkan Longitude', 'id' => 'lng']) !!}
+
         {{ Form::close() }}
     </div>
+
+{{-- Modal for maps coordinate --}}
 @endsection
 
 
 @section('scripts')
-    {{-- @include('components.js.taggableInput', ["el" => "tags", "endpoint" => "tickets", "object" => null]) --}}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#location").click(function(){
+              $("#mapModal").modal('show');
+            });
+          });
+    </script>
 @endsection

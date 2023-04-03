@@ -23,6 +23,17 @@
             <tr><td>{{ __('ticket.latitude') }}:</td><td>{{ $ticket->latitude }}</td></tr>
             <tr><td>{{ __('ticket.longitude') }}:</td><td>{{ $ticket->longitude }}</td></tr>
             <tr><td>{{ __('ticket.location') }}:</td><td>{{ $ticket->location }}</td></tr>
+            @if ($ticket->latitude != null && $ticket->longitude != null)
+                <tr>
+                    <td colspan="2">
+                        @include('tickets.location', [
+                            'lat' => $ticket->latitude,
+                            'long' => $ticket->longitude,
+                            'drag' => false
+                        ])
+                    </td>
+                </tr>
+            @endif
             <tr><td>{{ __('ticket.description') }}:</td><td>{{ $ticket->body }}</td></tr>
             </table>
         </div>
