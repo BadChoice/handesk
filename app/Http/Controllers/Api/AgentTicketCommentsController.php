@@ -40,7 +40,7 @@ class AgentTicketCommentsController extends ApiController
 
     public function detail($id)
     {
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::with('requester', 'user', 'team')->find($id);
         if(!$ticket) return $this->respondError("Ticket Not Found");
 
         return $this->respond($ticket);
@@ -65,7 +65,7 @@ class AgentTicketCommentsController extends ApiController
         $ticket = Ticket::where('id', $ticketId)->first();
 
         if (!$ticket) {
-            return $this->respondError("Ticket tidak ditemukan");
+            return $this->respondError("Ticket Not Found");
         }
         
         /**
@@ -111,7 +111,7 @@ class AgentTicketCommentsController extends ApiController
         $ticket = Ticket::where('id', $taskId)->select('id')->first();
 
         if(!$ticket){
-            return $this->respondError("Tiket / Tugas tidak ditemukan");
+            return $this->respondError("Ticket Not Found");
         }
 
         $comments = count($ticket->comments) <= 0 ? [] : $ticket->comments->map(function($item){
