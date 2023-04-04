@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $guarded = ['admin', 'assistant'];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'token', 'updated_at'
     ];
 
     public function tickets()
