@@ -39,13 +39,12 @@
         </div>
     </div>
 
-
     @if( $ticket->canBeEdited() )
         @include('components.assignActions', ["endpoint" => "tickets", "object" => $ticket])
-        <div class="comment new-comment">
+        <div class="comment new-comment" style="background-color: #9fc5e8">
             {{ Form::open(["url" => route("comments.store", $ticket) , "files" => true, "id" => "comment-form"]) }}
             <textarea id="comment-text-area" name="body">@if(auth()->user()->settings->tickets_signature)&#13;&#13;{{ auth()->user()->settings->tickets_signature }}@endif</textarea>
-            @include('components.uploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
+            @include('components.multipleUploadAttachment', ["attachable" => $ticket, "type" => "tickets"])
             {{ Form::hidden('new_status', $ticket->status, ["id" => "new_status"]) }}
             @if($ticket->isEscalated() )
                 {{-- <button class="mt1 uppercase ph3"> @icon(comment) {{ __('ticket.note') }} </button> --}}
