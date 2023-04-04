@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Attachment;
 use App\Ticket;
+use DB;
 
 class CommentsController extends Controller
 {
@@ -11,15 +12,25 @@ class CommentsController extends Controller
     {
         $this->authorize('view', $ticket);
 
-        if (request('private')) {
-            $comment = $ticket->addNote(auth()->user(), request('body'));
-        } else {
-            $comment = $ticket->addComment(auth()->user(), request('body'), request('new_status'));
+        DB::beginTransaction();
+        try {
+            if (request('private')) {
+                $comment = $ticket->addNote(auth()->user(), request('body'));
+            } else {
+                $comment = $ticket->addComment(auth()->user(), request('body'), request('new_status'));
+            }
+    
+            if ($comment && request()->hasFile('attachments')) {
+                foreach (request('attachments') as $key => $value) {
+                    Attachment::storeAttachmentFromFile($value, $comment);
+                }
+            }
+    
+            DB::commit();
+            return redirect()->route('tickets.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
         }
-        if ($comment && request()->hasFile('attachment')) {
-            Attachment::storeAttachmentFromRequest(request(), $comment);
-        }
-
-        return redirect()->route('tickets.index');
     }
 }

@@ -12,6 +12,7 @@
                     <a href="{{ Storage::disk(config('filesystems.default'))->url("public/attachments/$attachment->path")}}" target="_blank">{{ $attachment->path }}</a>
                 @endif
             @endif
+            <br>
         @endforeach
     </div>
 @endif

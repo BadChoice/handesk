@@ -6,6 +6,7 @@ use App\Attachment;
 use App\Ticket;
 use Illuminate\Http\Response;
 use Auth;
+use DB;
 use Validator;
 
 class AgentTicketCommentsController extends ApiController
@@ -88,22 +89,32 @@ class AgentTicketCommentsController extends ApiController
             return $this->respondError($errors->first());
         }
 
-        if (request('private')) {
-            $comment = $ticket->addNote($user, request('body'));
-        } else {
-            $comment = $ticket->addComment($user, request('body'), request('new_status', Ticket::STATUS_PENDING));
-        }
+        DB::beginTransaction();
+        try {
+            if (request('private')) {
+                $comment = $ticket->addNote($user, request('body'));
+            } else {
+                $comment = $ticket->addComment($user, request('body'), request('new_status', Ticket::STATUS_PENDING));
+            }
+    
+            if ($comment && request()->hasFile('attachments')) {
+                foreach (request('attachments') as $key => $value) {
+                    Attachment::storeAttachmentFromFile($value, $comment);
+                }
+            }
 
-        if (request()->hasFile('attachment')) {
-            Attachment::storeAttachmentFromRequest(request(), $comment);
+            DB::commit();
+    
+            return $this->respond([
+                'body'       => $comment->body,
+                'new_status' => $comment->new_status,
+                'created_at' => $comment->created_at,
+                'author'     => $comment->author
+            ], Response::HTTP_CREATED);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
         }
-
-        return $this->respond([
-            'body'       => $comment->body,
-            'new_status' => $comment->new_status,
-            'created_at' => $comment->created_at,
-            'author'     => $comment->author
-        ], Response::HTTP_CREATED);
     }
 
     public function getCommentByTask($taskId)
