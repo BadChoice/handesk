@@ -16,7 +16,7 @@
     </div> --}}
 {{-- </div> --}}
 
-@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function(){
         $("#attachment-primary td button").on('click', function(){
@@ -37,4 +37,3 @@
 
     const deleteElement = (el) => el.closest('tr').remove();
 </script>
-@endsection
