@@ -119,17 +119,8 @@
     // Create the Google Map using our element and options defined above
     var map = new google.maps.Map(mapElement, mapOptions);
 
-    var icon = {
-      url: '{{url("images/logo.png")}}',
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(25, 25),
-    };
-
     new google.maps.Marker({
       map,
-      icon,
       position: coordinate,
       draggable:false
     })

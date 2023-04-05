@@ -114,14 +114,6 @@
     const input = document.getElementById("pac-input");
     const searchBox = new google.maps.places.SearchBox(input);
 
-    var icon = {
-      url: '{{url("images/logo.png")}}',
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(25, 25),
-    };
-
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     // Bias the SearchBox results towards current map's viewport.
     map.addListener("bounds_changed", () => {
@@ -159,7 +151,6 @@
         markers.push(
           new google.maps.Marker({
             map,
-            icon,
             title: place.name,
             position: place.geometry.location,
             draggable:false
@@ -186,7 +177,7 @@
       });
       
 
-      marker = new google.maps.Marker({ map: map, position: e.latLng, icon: icon });
+      marker = new google.maps.Marker({ map: map, position: e.latLng });
       markers.push(marker);
 
       handleEvent(e.latLng.lat(), e.latLng.lng());
