@@ -134,7 +134,8 @@ class AgentTicketCommentsController extends ApiController
                 'attachments' => count($item->attachments) <= 0 ? [] : $item->attachments->map(function($file){
                     return array(
                         'id' => $file->id,
-                        'url' => \Storage::disk(config('filesystems.default'))->url("public/attachments/$file->path")
+                        'url' => \Storage::disk(config('filesystems.default'))->url("public/attachments/$file->path"),
+                        'type' => $file->file_type
                     );
                 })
             );

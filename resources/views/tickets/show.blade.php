@@ -26,10 +26,9 @@
             @if ($ticket->latitude != null && $ticket->longitude != null)
                 <tr>
                     <td colspan="2">
-                        @include('tickets.location', [
+                        @include('tickets.location-show', [
                             'lat' => $ticket->latitude,
-                            'long' => $ticket->longitude,
-                            'drag' => false
+                            'long' => $ticket->longitude
                         ])
                     </td>
                 </tr>

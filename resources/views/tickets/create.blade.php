@@ -25,28 +25,11 @@
             <tr><td class="w20">{{ __('ticket.affiliation') }}: </td>     <td><input name="affiliation" class="w100" required/></td></tr>
             <tr>
                 <td class="w20">{{ __('ticket.location') }}: </td>
-                <td>
-                    <textarea name="location" required></textarea>
-                    <br>
-                    <button class="btn btn-success" style="bottom: 10px;" data-toggle="modal" data-target="#mapModal">Update Lokasi map</button>
-                    <br>
-                    <div class="modal fade hidden" id="mapModal"  tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="mapModalLabel">Drag untuk update Koordinat Lokasi
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div class="modal-body">
-                                    @include('tickets.location')
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
+                <td><textarea name="location" required></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="padding-bottom: 10px;">@include('tickets.location-create')</td>
             </tr>
             <!-- <tr><td>{{ trans_choice('ticket.tag', 2)}}: </td><td><input     name="tags" id="tags"/></td></tr> -->
             <tr><td>{{ __('ticket.description') }}: </td><td><textarea  name="body" required></textarea></td></tr>

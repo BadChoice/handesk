@@ -61,29 +61,37 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
-        if (
-            $e instanceof \Dotenv\Exception\ValidationException || 
-            $e instanceof BadRequestHttpException || 
-            $e instanceof OAuthServerException
-        ) {
-            return response()->json(['error' => $e->getMessage()], 400);
-        }elseif($e instanceof AuthenticationException) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }else if ($e instanceof ModelNotFoundException) {
-            return response()->json(['error' => 'Model not found'], 404);
-        }else if ($e instanceof UserNotFound) {
-            return response()->json(['error' => 'User not found'], 404);
-        }else if ($e instanceof NotFoundResourceException || $e instanceof NotFoundHttpException) {
-            return response()->json(['error' => 'Resource not found'], 404);
-        }else if ($e instanceof MethodNotAllowedException || $e instanceof MethodNotAllowedHttpException) {
-            return response()->json(['error' => $e->getMessage()], 405);
-        }else if($e instanceof InternalErrorException) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }else if($e instanceof QueryException) {
-            return response()->json(['error' => $e->getMessage()], 504);
-        }else{
-            return parent::render($request, $e);
-        }
+        $segments = $request->segments();
 
+        if(count($segments) > 1){
+            if($segments[0] == 'api' || ($segments[0] == 'oauth' && $segments[1] == 'token')){
+                
+                if (
+                    $e instanceof \Dotenv\Exception\ValidationException || 
+                    $e instanceof BadRequestHttpException || 
+                    $e instanceof OAuthServerException
+                ) {
+                    return response()->json(['error' => $e->getMessage()], 400);
+                }elseif($e instanceof AuthenticationException) {
+                    return response()->json(['error' => 'Unauthenticated.'], 401);
+                }else if ($e instanceof ModelNotFoundException) {
+                    return response()->json(['error' => 'Model not found'], 404);
+                }else if ($e instanceof UserNotFound) {
+                    return response()->json(['error' => 'User not found'], 404);
+                }else if ($e instanceof NotFoundResourceException || $e instanceof NotFoundHttpException) {
+                    return response()->json(['error' => 'Resource not found'], 404);
+                }else if ($e instanceof MethodNotAllowedException || $e instanceof MethodNotAllowedHttpException) {
+                    return response()->json(['error' => $e->getMessage()], 405);
+                }else if($e instanceof InternalErrorException) {
+                    return response()->json(['error' => $e->getMessage()], 500);
+                }else if($e instanceof QueryException) {
+                    return response()->json(['error' => $e->getMessage()], 504);
+                }else{
+                    return response()->json(['error' => $e->getMessage()], $e->getCode());
+                }
+            }
+        }
+        
+        return parent::render($request, $e);
     }
 }
