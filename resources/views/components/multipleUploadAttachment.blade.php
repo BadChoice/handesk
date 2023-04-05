@@ -1,20 +1,15 @@
-{{-- <div class="float-right"> --}}
-    <table style="width: 100px;" id="attachment-tb">
-        <tr id="attachment-primary">
-            <td>
-                <div>
-                    {{ Form::file('attachments[]') }}
-                </div>
-            </td>
-            <td>
-                <button type="button" style="margin-top: 8px">@icon(plus)</button>
-            </td>
-        </tr>
-    </table>
-    {{-- <div class="mt3 fs2">
-        <a id="upload-button" onClick="$('#attachment').click(); $('#upload-attachment').toggle(); $('#upload-button').hide()" class="pointer">@icon(paperclip) {{ __('ticket.attachFile') }}</a>
-    </div> --}}
-{{-- </div> --}}
+<table style="width: 100px;" id="attachment-tb">
+    <tr id="attachment-primary">
+        <td>
+            <div>
+                {{ Form::file('attachments[]') }}
+            </div>
+        </td>
+        <td>
+            <button type="button" style="margin-top: 8px">@icon(plus)</button>
+        </td>
+    </tr>
+</table>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
