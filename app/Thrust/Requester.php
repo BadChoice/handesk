@@ -21,7 +21,7 @@ class Requester extends Resource
             Gravatar::make('email')->sortable(),
             Text::make('name')->sortable(),
             Email::make('email')->sortable(),
-            Text::make('tickets_count')->sortable(),
+            Text::make('tickets_count')->onlyInIndex()->sortable(),
             Link::make('id')->icon('inbox')->link(url('tickets?requester_id={field}'))->onlyInIndex(),
         ];
     }

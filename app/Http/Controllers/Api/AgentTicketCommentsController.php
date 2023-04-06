@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Attachment;
 use App\Ticket;
 use Illuminate\Http\Response;
+use Auth;
+use DB;
+use Validator;
 
 class AgentTicketCommentsController extends ApiController
 {
@@ -16,21 +20,127 @@ class AgentTicketCommentsController extends ApiController
         return $this->respond($ticket->commentsAndNotes);
     }
 
-    public function store(Ticket $ticket)
+    public function ticketAll() {
+        $user = Auth::user();
+        if(!$user) return $this->respondError("Agent Not Found");
+
+        $tickets = $user->tickets;
+
+        if (request('status') == 'new') {
+            $tickets = $user->newTickets;
+        } 
+        if (request('status') == 'open') {
+            $tickets = $user->openTickets;
+        }
+        if (request('status') == 'end') {
+            $tickets = $user->closedTickets;
+        }
+
+        return $this->respond($tickets);
+    }
+
+    public function detail($id)
     {
-        if (! auth()->user()->can('update', $ticket)) {
-            return $this->respondError("You don't have access to this ticket");
+        $ticket = Ticket::with('requester', 'user', 'team')->find($id);
+        if(!$ticket) return $this->respondError("Ticket Not Found");
+
+        return $this->respond($ticket);
+    }
+
+    public function startTask($id)
+    {
+        $ticket = Ticket::find($id);
+        if(!$ticket) return $this->respondError("Ticket Not Found");
+
+        $ticket->status = '2';
+        $ticket->save();
+
+        return $this->respond($ticket);
+
+    }
+
+    public function report($ticketId)
+    {
+        $user = auth()->user();
+
+        $ticket = Ticket::where('id', $ticketId)->first();
+
+        if (!$ticket) {
+            return $this->respondError("Ticket Not Found");
+        }
+        
+        /**
+         * FIXME: Sorry temporer comment
+         */
+        /*
+        if (!$user->can('update', $ticket)) {
+            return $this->respondError("Anda tidak memiliki akses ke tiket ini");
+        }
+        */
+        
+        $validator = Validator::make(request()->all(), [
+            'body' => 'required'
+        ], [
+            'required' => ':attribute wajib diisi'
+        ]);
+        
+        if($validator->fails()){
+            $errors = $validator->errors();
+            return $this->respondError($errors->first());
         }
 
-        if (request('private')) {
-            $comment = $ticket->addNote(auth()->user(), request('body'));
-        } else {
-            $comment = $ticket->addComment(auth()->user(), request('body'), request('new_status'));
+        DB::beginTransaction();
+        try {
+            if (request('private')) {
+                $comment = $ticket->addNote($user, request('body'));
+            } else {
+                $comment = $ticket->addComment($user, request('body'), request('new_status', Ticket::STATUS_PENDING));
+            }
+    
+            if ($comment && request()->hasFile('attachments')) {
+                foreach (request('attachments') as $key => $value) {
+                    Attachment::storeAttachmentFromFile($value, $comment);
+                }
+            }
+
+            DB::commit();
+    
+            return $this->respond([
+                'body'       => $comment->body,
+                'new_status' => $comment->new_status,
+                'created_at' => $comment->created_at,
+                'author'     => $comment->author
+            ], Response::HTTP_CREATED);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
         }
-        if (! $comment) {
-            return $this->respond(['id' => null, 'message' => 'Can not create a comment with empty body'], Response::HTTP_OK);
+    }
+
+    public function getCommentByTask($taskId)
+    {
+        $ticket = Ticket::where('id', $taskId)->select('id')->first();
+
+        if(!$ticket){
+            return $this->respondError("Ticket Not Found");
         }
 
-        return $this->respond(['id' => $comment->id], Response::HTTP_CREATED);
+        $comments = count($ticket->comments) <= 0 ? [] : $ticket->comments->map(function($item){
+            return array(
+                'id' => $item->id,
+                'body' => $item->body,
+                'created_at' => $item->created_at,
+                'author' => $item->author,
+                'attachments' => count($item->attachments) <= 0 ? [] : $item->attachments->map(function($file){
+                    return array(
+                        'id' => $file->id,
+                        'url' => \Storage::disk(config('filesystems.default'))->url("public/attachments/$file->path"),
+                        'type' => $file->file_type
+                    );
+                })
+            );
+        });
+
+        return $this->respond($comments, Response::HTTP_OK);
     }
 }

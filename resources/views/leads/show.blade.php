@@ -18,7 +18,7 @@
     </div>
     @include('components.assignActions', ["endpoint" => "leads", "object" => $lead])
 
-    <div class="comment new-comment">
+    <div class="comment new-comment" style="background-color: #9fc5e8">
         {{ Form::open(["url" => route("leads.status.store",$lead), "files" => true, "id" => "comment-form"]) }}
         <textarea name="body"></textarea>
         <br>

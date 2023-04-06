@@ -4,7 +4,7 @@
         <a href="{{ url()->previous() }}">Agents</a>
     </div>
     <div class="comment description actions mb4">
-        <h3>New User</h3>
+        <h3>{{ __("user.newUser") }}</h3>
     </div>
     {{ Form::open(["url" => route('user.store')]) }}
     <table class="w50">

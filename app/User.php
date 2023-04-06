@@ -7,25 +7,42 @@ use App\Authenticatable\Assistant;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property string name
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens, HasFactory;
 
     protected $table = 'users';
 
     protected $guarded = ['admin', 'assistant'];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'token', 'updated_at'
     ];
 
     public function tickets()
     {
         return $this->hasMany(Ticket::class)->with('requester', 'user', 'team');
+    }
+
+    public function newTickets()
+    {
+        return $this->tickets()->where('status', Ticket::STATUS_NEW);
+    }
+
+    public function openTickets()
+    {
+        return $this->tickets()->whereIn('status', [Ticket::STATUS_OPEN, Ticket::STATUS_PENDING]);
+    }
+
+    public function closedTickets()
+    {
+        return $this->tickets()->whereIn('status', [Ticket::STATUS_SOLVED, Ticket::STATUS_CLOSED, Ticket::STATUS_MERGED, Ticket::STATUS_SPAM]);
     }
 
     public function leads()

@@ -32,4 +32,25 @@ class Attachment extends BaseModel
             unlink($mailAttachment->filePath);
         }
     }
+
+    public static function storeAttachmentFromFile($file, $attachable)
+    {
+        $path = str_replace(' ', '_', $attachable->id.'_'.$file->getClientOriginalName());
+        
+        $file_type = self::getFileType($file->getClientMimeType());
+
+        Storage::putFileAs('public/attachments/', $file, $path);
+        $attachable->attachments()->create(['path' => $path, 'file_type' => $file_type]);
+    }
+
+    public static function getFileType($str)
+    {
+        $extension = explode('/', $str);
+
+        if(count($extension) > 0){
+            return $extension[0];
+        }
+
+        return 'undefined';
+    }
 }

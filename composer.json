@@ -17,22 +17,28 @@
         "badchoice/thrust": "^0.5",
         "drewm/mailchimp-api": "^2.4",
         "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^3.0",
         "fzaninotto/faker": "^1.5",
         "guzzlehttp/guzzle": "^7.0.1",
         "guzzlehttp/oauth-subscriber": "^0.5",
         "khill/fontawesomephp": "^1.0",
+        "kreait/firebase-php": "^6.9",
         "laravel/framework": "^8.0",
         "laravel/helpers": "^1.5",
+        "laravel/passport": "^10.4",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
         "league/flysystem-aws-s3-v3": "^1.0",
+        "league/oauth2-server": "^8.4",
         "patrickschur/language-detection": "^5.2",
         "php-imap/php-imap": "^2.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^2.1",
+        "sentry/sentry-laravel": "^3.3"
     },
     "require-dev": {
+        "andreaselia/laravel-api-to-postman": "^1.15",
         "mockery/mockery": "^1.2",
         "phpunit/phpunit": "^9.0"
     },
@@ -72,6 +78,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
     }
 }

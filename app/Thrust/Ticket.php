@@ -34,7 +34,7 @@ class Ticket extends Resource
             //Gravatar::make('requester.email')->withDefault('https://raw.githubusercontent.com/BadChoice/handesk/master/public/images/default-avatar.png'),
             TicketStatusField::make('id', ''),
             Link::make('title', __('ticket.subject'))->displayCallback(function ($ticket) {
-                return "#{$ticket->id} · ".Str::limit($ticket->subject ?? $ticket->title, 25);
+                return "#{$ticket->id} · ".Str::limit($ticket->title, 25);
             })->route('tickets.show')->sortable(),
             Link::make('requester.id', trans_choice('ticket.requester', 1))->displayCallback(function ($ticket) {
                 return $ticket->requester->name ?? '--';
@@ -71,9 +71,9 @@ class Ticket extends Resource
     public function actions()
     {
         return [
-            new MergeTickets,
             new ChangeStatus,
-            new ChangePriority,
+            // new ChangePriority,
+            // new MergeTickets,
         ];
     }
 

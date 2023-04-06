@@ -45,6 +45,23 @@ class UsersController extends Controller
         return back();
     }
 
+    public function edit(User $user)
+    {
+        return view('users.edit', ['user' => $user]);
+    }
+
+    public function update(User $user)
+    {
+        $user->update([
+            'name'     => request('name'),
+            'email'    => request('email'),
+            'password' => Hash::make(request('password')),
+            'token'    => Str::random(60),
+        ]);
+
+        return redirect()->route('users.index');
+    }
+
     public function impersonate(User $user)
     {
         auth()->loginUsingId($user->id);

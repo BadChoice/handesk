@@ -13,12 +13,16 @@ class TicketsController extends ApiController
     public function index()
     {
         $requester = Requester::whereName(request('requester'))->orWhere('email', '=', request('requester'))->firstOrFail();
-        if (request('status') == 'solved') {
-            $tickets = $requester->solvedTickets;
-        } elseif (request('status') == 'closed') {
+        if(!$requester) throw new \Exception('Requester Not Found', 404);
+
+        if (request('status') == 'end') {
             $tickets = $requester->closedTickets;
-        } else {
+        } elseif (request('status') == 'open') {
             $tickets = $requester->openTickets;
+        } elseif (request('status') == 'new') {
+            $tickets = $requester->newTickets;
+        } else {
+            $tickets = $requester->tickets;
         }
 
         return $this->respond($tickets);
@@ -40,6 +44,7 @@ class TicketsController extends ApiController
             request('requester'),
             strip_tags(request('title')),
             strip_tags(request('body')),
+            request()->all(),
             request('tags')
         );
 

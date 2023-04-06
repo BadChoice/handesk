@@ -21,6 +21,11 @@ class Ticket extends BaseModel
 {
     use SoftDeletes, Taggable, Assignable, Subscribable, Rateable;
 
+    protected $fillable = [
+        'title', 'body', 'target', 'position', 'side', 'mob_number', 'affiliation', 'latitude', 'longitude', 'location', 'description', 'status',
+        'public_token', 'team_id'
+    ];
+
     const STATUS_NEW     = 1;
     const STATUS_OPEN    = 2;
     const STATUS_PENDING = 3;
@@ -34,15 +39,15 @@ class Ticket extends BaseModel
     const PRIORITY_HIGH      = 3;
     const PRIORITY_BLOCKER   = 4;
 
-    public static function createAndNotify($requester, $title, $body, $tags)
+    public static function createAndNotify($requester, string $title, string $body, array $additionalColumns, $tags)
     {
         $requester = Requester::findOrCreate($requester['name'] ?? 'Unknown', $requester['email'] ?? null);
-        $ticket    = $requester->tickets()->create([
+        $ticket    = $requester->tickets()->create(array_merge($additionalColumns, [
             'title'        => substr($title, 0, 190),
             'body'         => $body,
             'public_token' => Str::random(24),
             'team_id'      => Settings::defaultTeamId(),
-        ])->attachTags($tags);
+        ]));//->attachTags($tags);
         tap(new TicketCreated($ticket), function ($newTicketNotification) use ($ticket) {
             Admin::notifyAll($newTicketNotification);
             if ($ticket->team) {

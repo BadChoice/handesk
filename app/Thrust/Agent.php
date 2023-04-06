@@ -25,7 +25,7 @@ class Agent extends Resource
             HasMany::make('teams'),
             Date::make('created_at', __('ticket.requested'))->showInTimeAgo()->sortable(),
             Date::make('updated_at', __('ticket.updated'))->showInTimeAgo()->sortable(),
-            Link::make('id', 'impersonate')->route('users.impersonate')->icon('key'),
+            Link::make('id', 'Impersonate')->route('users.impersonate')->icon('key'),
         ];
     }
 
@@ -40,6 +40,12 @@ class Agent extends Resource
     {
         return [];
     }
+
+    // Uncomment to hide edit and delete button 
+    // protected function editAndDeleteFields()
+    // {
+    //     return [];
+    // }
 
     public function canDelete($object)
     {
