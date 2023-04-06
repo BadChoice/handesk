@@ -45,7 +45,7 @@ class AuthController extends Controller
         /**
          * Check User
          */
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->username)->first();
 
         if(!$user) return JsonResponse::badRequest('User belum terdaftar!');
 
