@@ -23,14 +23,18 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        $granTypeValue = array('password', 'refresh_token', 'personal_access', 'implicit', 'authorization_code', 'client_credentials');
+
         $rules = [
-            'username' => 'required|email',
-            'password' => 'required'
+            'username'   => 'required|email',
+            'grant_type' => 'required|in:'.implode(',', $granTypeValue),
+            'password'   => 'required'
         ];
 
         $messages = [
             'required' => ':attribute wajib diisi.',
             'email'    => ':attribute harus berupa email.',
+            'in'       => ':attribute tidak valid. Value yang tersedia saat ini adalah : password',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -51,7 +55,7 @@ class AuthController extends Controller
 
         if( !\Hash::check($request->password, $user->password) ) return JsonResponse::badRequest('Kata Sandi tidak sesuai!');
 
-        $credentials = $this->buildCredentials($request->all());
+        $credentials = $this->buildCredentials($request->all(), $request->grant_type);
         $result = $this->makeRequest($credentials);
          
         return response($result);
