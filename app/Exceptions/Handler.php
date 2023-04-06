@@ -65,7 +65,6 @@ class Handler extends ExceptionHandler
 
         if(count($segments) > 1){
             if($segments[0] == 'api' || ($segments[0] == 'oauth' && $segments[1] == 'token')){
-                
                 if (
                     $e instanceof \Dotenv\Exception\ValidationException || 
                     $e instanceof BadRequestHttpException || 

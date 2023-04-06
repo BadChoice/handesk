@@ -6,8 +6,9 @@ use App\Classes\Passport\Helpers\JsonResponse;
 use App\Classes\Passport\Traits\FormRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
 use Validator;
+use App\User;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -39,6 +40,16 @@ class AuthController extends Controller
             $error = $errors->first();
             return JsonResponse::badRequest($error);
         }
+
+        
+        /**
+         * Check User
+         */
+        $user = User::where('email', $request->email)->first();
+
+        if(!$user) return JsonResponse::badRequest('User belum terdaftar!');
+
+        if( !\Hash::check($request->password, $user->password) ) return JsonResponse::badRequest('Kata Sandi tidak sesuai!');
 
         $credentials = $this->buildCredentials($request->all());
         $result = $this->makeRequest($credentials);
