@@ -1,7 +1,10 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "repositories": [
@@ -11,30 +14,30 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": "^8.2",
         "ext-imap": "*",
         "badchoice/hurricane": "^1.0",
-        "badchoice/thrust": "^0.5",
+        "badchoice/thrust": "0.5.1",
         "drewm/mailchimp-api": "^2.4",
-        "fideloper/proxy": "^4.2",
-        "fzaninotto/faker": "^1.5",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "guzzlehttp/oauth-subscriber": "^0.5",
+        "guzzlehttp/guzzle": "^7.8.2",
+        "guzzlehttp/oauth-subscriber": "^0.8",
         "khill/fontawesomephp": "^1.0",
-        "laravel/framework": "^8.0",
-        "laravel/helpers": "^1.5",
-        "laravel/slack-notification-channel": "^2.0",
-        "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0",
-        "laravelcollective/html": "^6.0",
-        "league/flysystem-aws-s3-v3": "^1.0",
+        "laravel/framework": "^12.0",
+        "laravel/helpers": "^1.7",
+        "laravel/slack-notification-channel": "^3.0",
+        "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.6",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "patrickschur/language-detection": "^5.2",
-        "php-imap/php-imap": "^2.0",
-        "predis/predis": "^1.1"
+        "php-imap/php-imap": "^5.0",
+        "predis/predis": "^2.2",
+        "spatie/laravel-html": "^3.0"
     },
     "require-dev": {
-        "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^9.0"
+        "mockery/mockery": "^1.6",
+        "phpunit/phpunit": "^11.0",
+        "fakerphp/faker": "^1.23",
+        "nunomaduro/collision": "^8.0"
     },
     "autoload": {
         "classmap": [
